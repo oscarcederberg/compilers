@@ -1,0 +1,3 @@
+if alpha then
+    beta = 5
+fi

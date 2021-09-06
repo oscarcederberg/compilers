@@ -1,0 +1,5 @@
+if beta then
+    for alpha = 5.0 until 10.0 do
+        sigma = 500.0
+    od
+fi

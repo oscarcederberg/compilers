@@ -1,0 +1,5 @@
+for alpha = 0.0 until not not 5.0 do
+    if alpha then
+        beta = 4.0
+    fi
+od
