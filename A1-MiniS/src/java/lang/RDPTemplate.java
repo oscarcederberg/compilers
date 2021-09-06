@@ -1,4 +1,4 @@
-package parser;
+package lang;
 /**
 * Abstract base class for recursive decent parsers.
 * You should implement the parseProgram() method to parse a MiniS program.
