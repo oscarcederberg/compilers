@@ -1,0 +1,7 @@
+let sigma = 8.15 in
+    let alpha = 10.0 in
+        let beta = 5.2 in
+            sigma * beta * alpha * 2.22
+        end
+    end
+end
