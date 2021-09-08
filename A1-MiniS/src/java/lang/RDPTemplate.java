@@ -14,7 +14,7 @@ public abstract class RDPTemplate {
     public void parse(LangScanner scanner) {
         this.scanner = scanner;
         parseProgram();
-        accept(LangScanner.YYEOF); // Ensure all input is processed.
+        accept(LangParser.Terminals.EOF); // Ensure all input is processed.
     }
     protected abstract void parseProgram(); // TODO
     
@@ -28,6 +28,7 @@ public abstract class RDPTemplate {
     protected void accept() {
         try {
             currentToken = scanner.nextToken();
+            System.out.println(LangParser.Terminals.NAMES[currentToken.getId()]);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
