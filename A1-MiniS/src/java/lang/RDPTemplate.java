@@ -1,4 +1,8 @@
 package lang;
+
+import lang.ast.LangScanner;
+import lang.ast.LangParser.SyntaxError;
+import lang.ast.LangParser;
 /**
 * Abstract base class for recursive decent parsers.
 * You should implement the parseProgram() method to parse a MiniS program.
@@ -10,7 +14,7 @@ public abstract class RDPTemplate {
     public void parse(LangScanner scanner) {
         this.scanner = scanner;
         parseProgram();
-        accept(EOF); // Ensure all input is processed.
+        accept(LangScanner.YYEOF); // Ensure all input is processed.
     }
     protected abstract void parseProgram(); // TODO
     

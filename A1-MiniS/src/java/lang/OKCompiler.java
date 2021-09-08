@@ -8,7 +8,7 @@ import java.io.Reader;
 import lang.ast.LangParser;
 import lang.ast.LangParser.SyntaxError;
 import lang.ast.LangScanner;
-import lang.OKParser;
+
 public class OKCompiler {
 	public static void main(String args[]) {
 		if (args.length != 1) {
@@ -30,11 +30,8 @@ public class OKCompiler {
 		try {
 			parser.parse(scanner);
 			System.out.println("Valid syntax");
-		} catch (SyntaxError | beaver.Parser.Exception e) {
+		} catch (SyntaxError e) {
 			System.err.println("Syntax error: " + e.getMessage());
-			System.exit(1);
-		} catch (IOException e) {
-			e.printStackTrace();
 			System.exit(1);
 		}
 	}

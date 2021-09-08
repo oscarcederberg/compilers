@@ -19,38 +19,38 @@ public class LangParser extends beaver.Parser {
 
   public static class Terminals {
     public static final short EOF = 0;
-    public static final short FI = 1;
-    public static final short OD = 2;
+    public static final short OD = 1;
+    public static final short FI = 2;
     public static final short ID = 3;
-    public static final short DO = 4;
-    public static final short UNTIL = 5;
-    public static final short THEN = 6;
+    public static final short UNTIL = 4;
+    public static final short THEN = 5;
+    public static final short DO = 6;
     public static final short NOT = 7;
     public static final short NUMERAL = 8;
     public static final short IF = 9;
-    public static final short FOR = 10;
-    public static final short ASSIGN = 11;
+    public static final short ASSIGN = 10;
+    public static final short FOR = 11;
 
     public static final String[] NAMES = {
         "EOF",
-        "FI",
         "OD",
+        "FI",
         "ID",
-        "DO",
         "UNTIL",
         "THEN",
+        "DO",
         "NOT",
         "NUMERAL",
         "IF",
-        "FOR",
         "ASSIGN",
+        "FOR",
     };
   }
 
   private final Action[] actions = {
-    Action.RETURN, // [0] id =  ID (default action: return symbol 1)
-    Action.RETURN, // [1] stmt =  assign (default action: return symbol 1)
-    Action.RETURN, // [2] program =  stmt (default action: return symbol 1)
+    Action.RETURN, // [0] stmt =  ifStmt (default action: return symbol 1)
+    Action.RETURN, // [1] program =  stmt (default action: return symbol 1)
+    Action.RETURN, // [2] id =  ID (default action: return symbol 1)
     new Action() { // [3] GOAL =  program EOF
       public Symbol reduce(Symbol[] _symbols, int offset) {
         final Symbol program = _symbols[offset + 1];
@@ -87,15 +87,15 @@ public class LangParser extends beaver.Parser {
         }
       };
   static final ParsingTables PARSING_TABLES = new ParsingTables(
-    "U9oLLJjMmp0G7CLnGX8xFvFm3Ndq51IKD7HKL9Jmk007e0iKt883K746Mcv0om4e4$uH8zc" +
-    "A7TjoajqtqdezRpMELWeWhk32HnDjj03KK8OoXsYWWYhMK4T9Zia8D0Fm6FSPDx6XnnsEYk" +
-    "#IlwdvZkPLC51FKXjWvj0OJfKZO$8lczDv2v$hXjP5Pnc#$CslRwk3TOkU7#Nnl2YFdgNEj" +
-    "$9uNgH7VYbVGR#RYCt#gZgVokDvPblvEh5joTjqVYZFuUykg9FIYRrykfmePwzvT7OmUwiM" +
-    "TXiytMSjzdI7gWBkOCHWlX76yoFppeplQPvv0WJxNr8F#rj6nYfHFcscpxDv2z#9PfwqfVY" +
-    "s#hOwZM8zyzzLaAzaQnJoL$qk6zz9n3LpcnIiwrfq2aj#LPtbuZePdJaruleSXxVGUwfkFO" +
-    "$mYNtYa3WcJebpufAu9cw8E#AUU20UYIVYcNWXNeatuftWJITu5uk06107n15nGfmH5z7Qq" +
-    "n67KIXiRE94Rc9Yqglfzr7UZ#OsqK#z2nBn814FBJV1ybRdRoQufk0f5ppd9Vv#WYTQwFya" +
-    "dyzTzaU7EzBx1q0AfuG=");
+    "U9oLbJjImp0GXbTvnp5v4WYF43g6WeQQXewEXf8PQBa1NU06782McYimd883q5A6Dp7$hYN" +
+    "R4rbA8iqdZN$#h3RnhY1I5rId5MfIcxf4L0O1A8465QbA5Qf54og8fmUL8Xdol2hhGFj3#D" +
+    "VPB#eMcL6NjKGjwi0n54SQnnhHrDQy$Z#UwHvhoRcs$pTVJ$oSPzR$mpFTv#ckEDHtvFFDC" +
+    "zsJiURmV$7CqJzvfhkL3m$pVdrvRkIVIvkEV3vuvlp15N$R4T#LvuxZt7UUgAXGwYr4RTH1" +
+    "0uHI9otKT0TLtKETYaVNZq8rwy$4glY3n9zunL#KDKGdr8mZZHDPmzIfhRlyiOx#A5D5Qu4" +
+    "vTudusizvpellrLrnolxlPSK9$Fw5usH#1$D#lNdcn1Qzj6G#hlWLs#lDK$dEnJgw8NcdV6" +
+    "E5OA0xxG0SWHDm1Yx15RW6j#0Et8C7y0YUm3Du0Q$W3U2MK1NG1hjW7no2Ot0AplNPqp4M0" +
+    "yOa#worpt6STTLet66pFgtppTMTqOPwtyje8yTDiFW8q94A$QtmsobqUW5ThT2$IlxNDF7S" +
+    "GZrrSRVq$m682AUX");
 
   public LangParser() {
     super(PARSING_TABLES);

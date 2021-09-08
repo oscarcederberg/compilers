@@ -1,8 +1,6 @@
 package lang;
 
-import lang.RDPTtemplate; 
-
-public class OKParser extends RDPTtemplate {
+public class OKParser extends RDPTemplate {
 
     protected void parseProgram(){
         System.out.println("Hello, world!");
