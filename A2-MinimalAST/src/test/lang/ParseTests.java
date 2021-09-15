@@ -9,6 +9,9 @@ public class ParseTests {
 	private static final File TEST_DIRECTORY = new File("testfiles/parser");
 
 	@Test public void test1() {
-		Util.testValidSyntax(TEST_DIRECTORY, "1.in");
+		Util.testValidSyntax(TEST_DIRECTORY, "step1.in");
+	}
+	@Test public void test2() {
+		Util.testValidSyntax(TEST_DIRECTORY, "step2.in");
 	}
 }

@@ -9,17 +9,29 @@
 	}
 :};
 
-%terminals ID, INT, LPAR, RPAR, LBRACE, RBRACE;
+%terminals ID, INT, LPAR, RPAR, LBRACE, RBRACE, EQUALS, SEMICOLON, NUMERAL;
 
 %typeof program = "Program";
 %typeof functiondecl_list = "List";
 %typeof functiondecl = "FunctionDecl";
+%typeof stmt_list = "List";
+%typeof stmt = "Stmt";
 
 %goal program;
 
 program = functiondecl_list.l {: return new Program(l); :} ;
 
-functiondecl = INT ID LPAR RPAR LBRACE RBRACE {:return new FunctionDecl();:};
 functiondecl_list = 
 	functiondecl.d {:return new List().add(d); :}
-	| functiondecl_list.l functiondecl.d {: return l.add(d); :};
+	| functiondecl_list.l functiondecl.d {: return l.add(d); :}
+;
+functiondecl = INT ID.id LPAR RPAR LBRACE stmt_list.l RBRACE {:return new FunctionDecl(id, l);:};
+
+stmt_list = 
+	stmt.s {: return new List().add(s); :}
+	| stmt_list.l stmt.s {: return l.add(s); :}
+;
+stmt = 
+	INT ID.id {: return new IdDecl(id); :}
+	| ID.id EQUALS Expr.expr {: return new Assign(id, expr); :}
+;

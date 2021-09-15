@@ -1,5 +1,12 @@
 Program ::= FunctionDecl*;
 
+FunctionDecl ::= <ID> Stmt*;
 
-FunctionDecl ::= ;
+abstract Stmt;
+abstract Expr;
 
+IdDecl : Stmt ::= <ID>;
+Assign : Stmt ::= <ID> Expr;
+
+Numeral : Expr ::= <NUMERAL>;
+IdUse   : Expr ::= <ID>;

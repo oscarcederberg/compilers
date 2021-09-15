@@ -20,34 +20,42 @@ public class LangParser extends beaver.Parser {
   public static class Terminals {
     public static final short EOF = 0;
     public static final short INT = 1;
-    public static final short LBRACE = 2;
-    public static final short ID = 3;
-    public static final short RPAR = 4;
-    public static final short RBRACE = 5;
-    public static final short LPAR = 6;
+    public static final short ID = 2;
+    public static final short RBRACE = 3;
+    public static final short EQUALS = 4;
+    public static final short Expr = 5;
+    public static final short RPAR = 6;
+    public static final short LBRACE = 7;
+    public static final short LPAR = 8;
+    public static final short NUMERAL = 9;
+    public static final short SEMICOLON = 10;
 
     public static final String[] NAMES = {
         "EOF",
         "INT",
-        "LBRACE",
         "ID",
-        "RPAR",
         "RBRACE",
+        "EQUALS",
+        "Expr",
+        "RPAR",
+        "LBRACE",
         "LPAR",
+        "NUMERAL",
+        "SEMICOLON",
     };
   }
 
   private final Action[] actions = {
-    new Action() { // [0] functiondecl_list =  functiondecl
-      public Symbol reduce(Symbol[] _symbols, int offset) {
-        final FunctionDecl d = (FunctionDecl) _symbols[offset + 1].value;
-        return new List().add(d);
-      }
-    },
-    new Action() { // [1] program =  functiondecl_list
+    new Action() { // [0] program =  functiondecl_list
       public Symbol reduce(Symbol[] _symbols, int offset) {
         final List l = (List) _symbols[offset + 1].value;
         return new Program(l);
+      }
+    },
+    new Action() { // [1] functiondecl_list =  functiondecl
+      public Symbol reduce(Symbol[] _symbols, int offset) {
+        final FunctionDecl d = (FunctionDecl) _symbols[offset + 1].value;
+        return new List().add(d);
       }
     },
     new Action() { // [2] functiondecl_list =  functiondecl_list functiondecl
@@ -64,23 +72,54 @@ public class LangParser extends beaver.Parser {
         return program;
       }
     },
-    new Action() { // [4] functiondecl =  INT ID LPAR RPAR LBRACE RBRACE
+    new Action() { // [4] stmt_list =  stmt
+      public Symbol reduce(Symbol[] _symbols, int offset) {
+        final Stmt s = (Stmt) _symbols[offset + 1].value;
+        return new List().add(s);
+      }
+    },
+    new Action() { // [5] stmt_list =  stmt_list stmt
+      public Symbol reduce(Symbol[] _symbols, int offset) {
+        final List l = (List) _symbols[offset + 1].value;
+        final Stmt s = (Stmt) _symbols[offset + 2].value;
+        return l.add(s);
+      }
+    },
+    new Action() { // [6] functiondecl =  INT ID LPAR RPAR LBRACE stmt_list RBRACE
       public Symbol reduce(Symbol[] _symbols, int offset) {
         final Symbol INT = _symbols[offset + 1];
-        final Symbol ID = _symbols[offset + 2];
+        final Symbol id = _symbols[offset + 2];
         final Symbol LPAR = _symbols[offset + 3];
         final Symbol RPAR = _symbols[offset + 4];
         final Symbol LBRACE = _symbols[offset + 5];
-        final Symbol RBRACE = _symbols[offset + 6];
-        return new FunctionDecl();
+        final List l = (List) _symbols[offset + 6].value;
+        final Symbol RBRACE = _symbols[offset + 7];
+        return new FunctionDecl(id, l);
+      }
+    },
+    new Action() { // [7] stmt =  INT ID
+      public Symbol reduce(Symbol[] _symbols, int offset) {
+        final Symbol INT = _symbols[offset + 1];
+        final Symbol id = _symbols[offset + 2];
+        return new IdDecl(id);
+      }
+    },
+    new Action() { // [8] stmt =  ID EQUALS Expr
+      public Symbol reduce(Symbol[] _symbols, int offset) {
+        final Symbol id = _symbols[offset + 1];
+        final Symbol EQUALS = _symbols[offset + 2];
+        final Symbol expr = _symbols[offset + 3];
+        return new Assign(id, expr);
       }
     },
   };
 
   static final ParsingTables PARSING_TABLES = new ParsingTables(
-    "U9o5aCqEWZ0GXAU55WJrmDcRle29Lmy#WF6HzBb1kaw5r2u7dEJBPh8$RGR00oKi2kdXu06" +
-    "Xa2I1tPygvAfp8wECcTsetbljDSgroctLtY0335#jUQz1zVsPaQI5AqJoddPgqgzCbifPvT" +
-    "po9jcza5AB#Un9HmxaI4xaJ2xaIcxaFk$qp#bKYFKVyIsioJ4dmvmCgsLYbl$nQ3yQhBWe");
+    "U9oLahjH0q4G1T$jIJe92I7nSqa07vyg4i0c1NmyY02R00W0YmpmCKW5aD1dw4Lu#mvAizL" +
+    "hTCszshaQIM$ggAjQIRtuq5WJvHf5uCjgZ9FwJiOwriQkOcNiqkOEhDsnTcZjddPRxBIm#o" +
+    "uW5laK#i3sVkLJs7dCJVEXJPZbKzZFV5HfnBl7t1Ec7GR5958LHV6DAILhMnAsoErRsxEsi" +
+    "RPoRyjMTM4xRGccrq$iU$t4tIqIVYmvHtVQ$2bjzl8OJk0Kpk0SBk0Ihk0QRY1$TWyFy0XF" +
+    "y0mlyFgR#GwpMww$e1Qm$AyllzNjOMiDsC2A7SmazZ2nWHKajh9XrWIrfj#8QT8B");
 
   public LangParser() {
     super(PARSING_TABLES);
