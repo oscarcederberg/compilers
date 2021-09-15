@@ -1,1 +1,5 @@
-Program ::= <ID>;
+Program ::= FunctionDecl*;
+
+
+FunctionDecl ::= ;
+

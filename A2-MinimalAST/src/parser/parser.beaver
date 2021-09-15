@@ -9,10 +9,17 @@
 	}
 :};
 
-%terminals ID;
+%terminals ID, INT, LPAR, RPAR, LBRACE, RBRACE;
 
 %typeof program = "Program";
+%typeof functiondecl_list = "List";
+%typeof functiondecl = "FunctionDecl";
 
 %goal program;
 
-program = ID.id {: return new Program(id); :} ;
+program = functiondecl_list.l {: return new Program(l); :} ;
+
+functiondecl = INT ID LPAR RPAR LBRACE RBRACE {:return new FunctionDecl();:};
+functiondecl_list = 
+	functiondecl.d {:return new List().add(d); :}
+	| functiondecl_list.l functiondecl.d {: return l.add(d); :};

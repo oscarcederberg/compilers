@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="lang.TestDumpTree" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-09-15T14:14:14" hostname="DESKTOP-IN52LOL" time="0.032">
+  <properties/>
+  <testcase name="runTest[step1.in]" classname="lang.TestDumpTree" time="0.032"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
