@@ -16,6 +16,10 @@
 %typeof functiondecl = "FunctionDecl";
 %typeof stmt_list = "List";
 %typeof stmt = "Stmt";
+%typeof expr = "Expr";
+%typeof iddecl = "IdDecl";
+%typeof iduse = "IdUse";
+%typeof assign = "Assign";
 
 %goal program;
 
@@ -30,8 +34,14 @@ functiondecl = INT ID.id LPAR RPAR LBRACE stmt_list.l RBRACE {:return new Functi
 stmt_list = 
 	stmt.s {: return new List().add(s); :}
 	| stmt_list.l stmt.s {: return l.add(s); :}
+	| {:  return new List(); :}
 ;
 stmt = 
-	INT ID.id {: return new IdDecl(id); :}
-	| ID.id EQUALS Expr.expr {: return new Assign(id, expr); :}
+	INT ID.id SEMICOLON{: return new IdDecl(id); :}
+	| ID.id EQUALS expr.e SEMICOLON {: return new Assign(id, e); :}
+;
+
+expr =
+	NUMERAL.n {: return new Numeral(n); :}
+	| ID.id {: return new IdUse(id); :}
 ;

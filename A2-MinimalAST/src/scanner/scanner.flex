@@ -36,12 +36,14 @@ Numeral = [0-9]+
 {WhiteSpace}  { }
 
 // token definitions
-{Numeral}     { return sym(Terminals.NUMERAL);}
-"int"         { return sym(Terminals.INT);}   
-"("           { return sym(Terminals.LPAR);}  
-")"           { return sym(Terminals.RPAR);}  
-"{"           { return sym(Terminals.LBRACE);}  
-"}"           { return sym(Terminals.RBRACE);}   
+{Numeral}     { return sym(Terminals.NUMERAL); }
+"int"         { return sym(Terminals.INT); }   
+"("           { return sym(Terminals.LPAR); }  
+")"           { return sym(Terminals.RPAR); }  
+"{"           { return sym(Terminals.LBRACE); }  
+"}"           { return sym(Terminals.RBRACE); }
+"="           { return sym(Terminals.EQUALS); }
+";"           { return sym(Terminals.SEMICOLON); }   
 {ID}          { return sym(Terminals.ID); }
 <<EOF>>       { return sym(Terminals.EOF); }
 

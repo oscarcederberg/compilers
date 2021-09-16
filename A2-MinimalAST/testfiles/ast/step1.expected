@@ -1,4 +1,6 @@
 Program
   List
-    FunctionDecl
-    FunctionDecl
+    FunctionDecl ID="a"
+      List
+    FunctionDecl ID="b"
+      List
