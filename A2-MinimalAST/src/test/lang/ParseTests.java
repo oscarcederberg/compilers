@@ -40,4 +40,14 @@ public class ParseTests {
 	@Test public void test3_div() {
 		Util.testValidSyntax(TEST_DIRECTORY, "step3/div.in");
 	}
+	@Test public void test4_sample1() {
+		Util.testValidSyntax(TEST_DIRECTORY, "step4_sample1.in");
+	}
+	@Test public void test4_sample2() {
+		Util.testValidSyntax(TEST_DIRECTORY, "step4_sample2.in");
+	}
+	@Test public void test4_sample3() {
+		Util.testValidSyntax(TEST_DIRECTORY, "step4_sample3.in");
+	}
+	
 }

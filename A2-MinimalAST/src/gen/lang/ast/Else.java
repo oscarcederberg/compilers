@@ -5,16 +5,16 @@ import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 /**
  * @ast node
- * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/lang.ast:1
- * @astdecl Program : ASTNode ::= FunctionDecl*;
- * @production Program : {@link ASTNode} ::= <span class="component">{@link FunctionDecl}*</span>;
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/lang.ast:12
+ * @astdecl Else : Stmt ::= Stmt*;
+ * @production Else : {@link Stmt} ::= <span class="component">{@link Stmt}*</span>;
 
  */
-public class Program extends ASTNode<ASTNode> implements Cloneable {
+public class Else extends Stmt implements Cloneable {
   /**
    * @declaredat ASTNode:1
    */
-  public Program() {
+  public Else() {
     super();
   }
   /**
@@ -32,11 +32,11 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * @declaredat ASTNode:14
    */
   @ASTNodeAnnotation.Constructor(
-    name = {"FunctionDecl"},
-    type = {"List<FunctionDecl>"},
+    name = {"Stmt"},
+    type = {"List<Stmt>"},
     kind = {"List"}
   )
-  public Program(List<FunctionDecl> p0) {
+  public Else(List<Stmt> p0) {
     setChild(p0, 0);
   }
   /** @apilevel low-level 
@@ -62,16 +62,16 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
   /** @apilevel internal 
    * @declaredat ASTNode:37
    */
-  public Program clone() throws CloneNotSupportedException {
-    Program node = (Program) super.clone();
+  public Else clone() throws CloneNotSupportedException {
+    Else node = (Else) super.clone();
     return node;
   }
   /** @apilevel internal 
    * @declaredat ASTNode:42
    */
-  public Program copy() {
+  public Else copy() {
     try {
-      Program node = (Program) clone();
+      Else node = (Else) clone();
       node.parent = null;
       if (children != null) {
         node.children = (ASTNode[]) children.clone();
@@ -90,7 +90,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * @declaredat ASTNode:61
    */
   @Deprecated
-  public Program fullCopy() {
+  public Else fullCopy() {
     return treeCopyNoTransform();
   }
   /**
@@ -100,8 +100,8 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * @apilevel low-level
    * @declaredat ASTNode:71
    */
-  public Program treeCopyNoTransform() {
-    Program tree = (Program) copy();
+  public Else treeCopyNoTransform() {
+    Else tree = (Else) copy();
     if (children != null) {
       for (int i = 0; i < children.length; ++i) {
         ASTNode child = (ASTNode) children[i];
@@ -121,8 +121,8 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * @apilevel low-level
    * @declaredat ASTNode:91
    */
-  public Program treeCopy() {
-    Program tree = (Program) copy();
+  public Else treeCopy() {
+    Else tree = (Else) copy();
     if (children != null) {
       for (int i = 0; i < children.length; ++i) {
         ASTNode child = (ASTNode) getChild(i);
@@ -135,118 +135,118 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
     return tree;
   }
   /**
-   * Replaces the FunctionDecl list.
-   * @param list The new list node to be used as the FunctionDecl list.
+   * Replaces the Stmt list.
+   * @param list The new list node to be used as the Stmt list.
    * @apilevel high-level
    */
-  public Program setFunctionDeclList(List<FunctionDecl> list) {
+  public Else setStmtList(List<Stmt> list) {
     setChild(list, 0);
     return this;
   }
   /**
-   * Retrieves the number of children in the FunctionDecl list.
-   * @return Number of children in the FunctionDecl list.
+   * Retrieves the number of children in the Stmt list.
+   * @return Number of children in the Stmt list.
    * @apilevel high-level
    */
-  public int getNumFunctionDecl() {
-    return getFunctionDeclList().getNumChild();
+  public int getNumStmt() {
+    return getStmtList().getNumChild();
   }
   /**
-   * Retrieves the number of children in the FunctionDecl list.
+   * Retrieves the number of children in the Stmt list.
    * Calling this method will not trigger rewrites.
-   * @return Number of children in the FunctionDecl list.
+   * @return Number of children in the Stmt list.
    * @apilevel low-level
    */
-  public int getNumFunctionDeclNoTransform() {
-    return getFunctionDeclListNoTransform().getNumChildNoTransform();
+  public int getNumStmtNoTransform() {
+    return getStmtListNoTransform().getNumChildNoTransform();
   }
   /**
-   * Retrieves the element at index {@code i} in the FunctionDecl list.
+   * Retrieves the element at index {@code i} in the Stmt list.
    * @param i Index of the element to return.
-   * @return The element at position {@code i} in the FunctionDecl list.
+   * @return The element at position {@code i} in the Stmt list.
    * @apilevel high-level
    */
-  public FunctionDecl getFunctionDecl(int i) {
-    return (FunctionDecl) getFunctionDeclList().getChild(i);
+  public Stmt getStmt(int i) {
+    return (Stmt) getStmtList().getChild(i);
   }
   /**
-   * Check whether the FunctionDecl list has any children.
+   * Check whether the Stmt list has any children.
    * @return {@code true} if it has at least one child, {@code false} otherwise.
    * @apilevel high-level
    */
-  public boolean hasFunctionDecl() {
-    return getFunctionDeclList().getNumChild() != 0;
+  public boolean hasStmt() {
+    return getStmtList().getNumChild() != 0;
   }
   /**
-   * Append an element to the FunctionDecl list.
-   * @param node The element to append to the FunctionDecl list.
+   * Append an element to the Stmt list.
+   * @param node The element to append to the Stmt list.
    * @apilevel high-level
    */
-  public Program addFunctionDecl(FunctionDecl node) {
-    List<FunctionDecl> list = (parent == null) ? getFunctionDeclListNoTransform() : getFunctionDeclList();
+  public Else addStmt(Stmt node) {
+    List<Stmt> list = (parent == null) ? getStmtListNoTransform() : getStmtList();
     list.addChild(node);
     return this;
   }
   /** @apilevel low-level 
    */
-  public Program addFunctionDeclNoTransform(FunctionDecl node) {
-    List<FunctionDecl> list = getFunctionDeclListNoTransform();
+  public Else addStmtNoTransform(Stmt node) {
+    List<Stmt> list = getStmtListNoTransform();
     list.addChild(node);
     return this;
   }
   /**
-   * Replaces the FunctionDecl list element at index {@code i} with the new node {@code node}.
+   * Replaces the Stmt list element at index {@code i} with the new node {@code node}.
    * @param node The new node to replace the old list element.
    * @param i The list index of the node to be replaced.
    * @apilevel high-level
    */
-  public Program setFunctionDecl(FunctionDecl node, int i) {
-    List<FunctionDecl> list = getFunctionDeclList();
+  public Else setStmt(Stmt node, int i) {
+    List<Stmt> list = getStmtList();
     list.setChild(node, i);
     return this;
   }
   /**
-   * Retrieves the FunctionDecl list.
-   * @return The node representing the FunctionDecl list.
+   * Retrieves the Stmt list.
+   * @return The node representing the Stmt list.
    * @apilevel high-level
    */
-  @ASTNodeAnnotation.ListChild(name="FunctionDecl")
-  public List<FunctionDecl> getFunctionDeclList() {
-    List<FunctionDecl> list = (List<FunctionDecl>) getChild(0);
+  @ASTNodeAnnotation.ListChild(name="Stmt")
+  public List<Stmt> getStmtList() {
+    List<Stmt> list = (List<Stmt>) getChild(0);
     return list;
   }
   /**
-   * Retrieves the FunctionDecl list.
+   * Retrieves the Stmt list.
    * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the FunctionDecl list.
+   * @return The node representing the Stmt list.
    * @apilevel low-level
    */
-  public List<FunctionDecl> getFunctionDeclListNoTransform() {
-    return (List<FunctionDecl>) getChildNoTransform(0);
+  public List<Stmt> getStmtListNoTransform() {
+    return (List<Stmt>) getChildNoTransform(0);
   }
   /**
-   * @return the element at index {@code i} in the FunctionDecl list without
+   * @return the element at index {@code i} in the Stmt list without
    * triggering rewrites.
    */
-  public FunctionDecl getFunctionDeclNoTransform(int i) {
-    return (FunctionDecl) getFunctionDeclListNoTransform().getChildNoTransform(i);
+  public Stmt getStmtNoTransform(int i) {
+    return (Stmt) getStmtListNoTransform().getChildNoTransform(i);
   }
   /**
-   * Retrieves the FunctionDecl list.
-   * @return The node representing the FunctionDecl list.
+   * Retrieves the Stmt list.
+   * @return The node representing the Stmt list.
    * @apilevel high-level
    */
-  public List<FunctionDecl> getFunctionDecls() {
-    return getFunctionDeclList();
+  public List<Stmt> getStmts() {
+    return getStmtList();
   }
   /**
-   * Retrieves the FunctionDecl list.
+   * Retrieves the Stmt list.
    * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the FunctionDecl list.
+   * @return The node representing the Stmt list.
    * @apilevel low-level
    */
-  public List<FunctionDecl> getFunctionDeclsNoTransform() {
-    return getFunctionDeclListNoTransform();
+  public List<Stmt> getStmtsNoTransform() {
+    return getStmtListNoTransform();
   }
 
 }

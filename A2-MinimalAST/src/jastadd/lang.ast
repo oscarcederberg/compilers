@@ -1,12 +1,15 @@
 Program ::= FunctionDecl*;
 
-FunctionDecl ::= <ID> Stmt*;
+FunctionDecl ::= <ID> IdDecl* Stmt*;
 
 abstract Stmt;
 abstract Expr;
 
 IdDecl : Stmt ::= <ID>;
 Assign : Stmt ::= <ID> Expr;
+While : Stmt ::= Expr Stmt*;
+If : Stmt ::= Expr Stmt* [Else];
+Else : Stmt ::= Stmt*;
 
 IdUse : Expr ::= <ID>;
 Numeral : Expr ::= <NUMERAL>;
@@ -16,9 +19,9 @@ Sub : Expr ::= Left:Expr Right:Expr;
 Div : Expr ::= Left:Expr Right:Expr;
 Mod : Expr ::= Left:Expr Right:Expr;
 
-Equals : Expr ::= Left:Expr Right:Expr;
-NotEq : Expr ::= Left:Expr Right:Expr;
-LessThan : Expr ::= Left:Expr Right:Expr;
-LessEq : Expr ::= Left:Expr Right:Expr;
-MoreThan : Expr ::= Left:Expr Right:Expr;
-MoreEq : Expr ::= Left:Expr Right:Expr;
+Equals      : Expr ::= Left:Expr Right:Expr;
+NotEq       : Expr ::= Left:Expr Right:Expr;
+LessThan    : Expr ::= Left:Expr Right:Expr;
+LessEq      : Expr ::= Left:Expr Right:Expr;
+MoreThan    : Expr ::= Left:Expr Right:Expr;
+MoreEq      : Expr ::= Left:Expr Right:Expr;

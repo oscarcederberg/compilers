@@ -5,16 +5,16 @@ import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 /**
  * @ast node
- * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/lang.ast:16
- * @astdecl Add : Expr ::= Left:Expr Right:Expr;
- * @production Add : {@link Expr} ::= <span class="component">Left:{@link Expr}</span> <span class="component">Right:{@link Expr}</span>;
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/lang.ast:4
+ * @astdecl Param : ASTNode ::= IdUse;
+ * @production Param : {@link ASTNode} ::= <span class="component">{@link IdUse}</span>;
 
  */
-public class Add extends Expr implements Cloneable {
+public class Param extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @declaredat ASTNode:1
    */
-  public Add() {
+  public Param() {
     super();
   }
   /**
@@ -25,53 +25,52 @@ public class Add extends Expr implements Cloneable {
    * @declaredat ASTNode:10
    */
   public void init$Children() {
-    children = new ASTNode[2];
+    children = new ASTNode[1];
   }
   /**
    * @declaredat ASTNode:13
    */
   @ASTNodeAnnotation.Constructor(
-    name = {"Left", "Right"},
-    type = {"Expr", "Expr"},
-    kind = {"Child", "Child"}
+    name = {"IdUse"},
+    type = {"IdUse"},
+    kind = {"Child"}
   )
-  public Add(Expr p0, Expr p1) {
+  public Param(IdUse p0) {
     setChild(p0, 0);
-    setChild(p1, 1);
   }
   /** @apilevel low-level 
-   * @declaredat ASTNode:23
+   * @declaredat ASTNode:22
    */
   protected int numChildren() {
-    return 2;
+    return 1;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:27
+   * @declaredat ASTNode:26
    */
   public void flushAttrCache() {
     super.flushAttrCache();
 
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:32
+   * @declaredat ASTNode:31
    */
   public void flushCollectionCache() {
     super.flushCollectionCache();
 
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:37
+   * @declaredat ASTNode:36
    */
-  public Add clone() throws CloneNotSupportedException {
-    Add node = (Add) super.clone();
+  public Param clone() throws CloneNotSupportedException {
+    Param node = (Param) super.clone();
     return node;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:42
+   * @declaredat ASTNode:41
    */
-  public Add copy() {
+  public Param copy() {
     try {
-      Add node = (Add) clone();
+      Param node = (Param) clone();
       node.parent = null;
       if (children != null) {
         node.children = (ASTNode[]) children.clone();
@@ -87,10 +86,10 @@ public class Add extends Expr implements Cloneable {
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:61
+   * @declaredat ASTNode:60
    */
   @Deprecated
-  public Add fullCopy() {
+  public Param fullCopy() {
     return treeCopyNoTransform();
   }
   /**
@@ -98,10 +97,10 @@ public class Add extends Expr implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:71
+   * @declaredat ASTNode:70
    */
-  public Add treeCopyNoTransform() {
-    Add tree = (Add) copy();
+  public Param treeCopyNoTransform() {
+    Param tree = (Param) copy();
     if (children != null) {
       for (int i = 0; i < children.length; ++i) {
         ASTNode child = (ASTNode) children[i];
@@ -119,10 +118,10 @@ public class Add extends Expr implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:91
+   * @declaredat ASTNode:90
    */
-  public Add treeCopy() {
-    Add tree = (Add) copy();
+  public Param treeCopy() {
+    Param tree = (Param) copy();
     if (children != null) {
       for (int i = 0; i < children.length; ++i) {
         ASTNode child = (ASTNode) getChild(i);
@@ -135,58 +134,31 @@ public class Add extends Expr implements Cloneable {
     return tree;
   }
   /**
-   * Replaces the Left child.
-   * @param node The new node to replace the Left child.
+   * Replaces the IdUse child.
+   * @param node The new node to replace the IdUse child.
    * @apilevel high-level
    */
-  public Add setLeft(Expr node) {
+  public Param setIdUse(IdUse node) {
     setChild(node, 0);
     return this;
   }
   /**
-   * Retrieves the Left child.
-   * @return The current node used as the Left child.
+   * Retrieves the IdUse child.
+   * @return The current node used as the IdUse child.
    * @apilevel high-level
    */
-  @ASTNodeAnnotation.Child(name="Left")
-  public Expr getLeft() {
-    return (Expr) getChild(0);
+  @ASTNodeAnnotation.Child(name="IdUse")
+  public IdUse getIdUse() {
+    return (IdUse) getChild(0);
   }
   /**
-   * Retrieves the Left child.
+   * Retrieves the IdUse child.
    * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Left child.
+   * @return The current node used as the IdUse child.
    * @apilevel low-level
    */
-  public Expr getLeftNoTransform() {
-    return (Expr) getChildNoTransform(0);
-  }
-  /**
-   * Replaces the Right child.
-   * @param node The new node to replace the Right child.
-   * @apilevel high-level
-   */
-  public Add setRight(Expr node) {
-    setChild(node, 1);
-    return this;
-  }
-  /**
-   * Retrieves the Right child.
-   * @return The current node used as the Right child.
-   * @apilevel high-level
-   */
-  @ASTNodeAnnotation.Child(name="Right")
-  public Expr getRight() {
-    return (Expr) getChild(1);
-  }
-  /**
-   * Retrieves the Right child.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The current node used as the Right child.
-   * @apilevel low-level
-   */
-  public Expr getRightNoTransform() {
-    return (Expr) getChildNoTransform(1);
+  public IdUse getIdUseNoTransform() {
+    return (IdUse) getChildNoTransform(0);
   }
 
 }
