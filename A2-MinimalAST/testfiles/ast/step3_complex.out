@@ -1,0 +1,22 @@
+Program
+  List
+    FunctionDecl ID="c"
+      List
+        IdDecl ID="x"
+        IdDecl ID="j"
+    FunctionDecl ID="c"
+      List
+        IdDecl ID="x"
+        IdDecl ID="j"
+        Assign ID="x"
+          Add
+            Mult
+              Mult
+                Add
+                  Add
+                    Numeral NUMERAL="3"
+                    IdUse ID="j"
+                  Numeral NUMERAL="5"
+                Numeral NUMERAL="10"
+              IdUse ID="x"
+            Numeral NUMERAL="19"

@@ -43,7 +43,18 @@ Numeral = [0-9]+
 "{"           { return sym(Terminals.LBRACE); }  
 "}"           { return sym(Terminals.RBRACE); }
 "="           { return sym(Terminals.EQUALS); }
-";"           { return sym(Terminals.SEMICOLON); }   
+";"           { return sym(Terminals.SEMICOLON); }  
+"+"           { return sym(Terminals.PLUS); }  
+"*"           { return sym(Terminals.MULT); } 
+"-"           { return sym(Terminals.MINUS); }  
+"/"           { return sym(Terminals.DIV); } 
+"%"           { return sym(Terminals.MOD); } 
+"=="          { return sym(Terminals.EQ); }
+"!="          { return sym(Terminals.NOTEQ); }
+"<"           { return sym(Terminals.LESSTHAN); }
+"<="          { return sym(Terminals.LESSEQ); } 
+">"           { return sym(Terminals.MORETHAN); }
+">="          { return sym(Terminals.MOREEQ); } 
 {ID}          { return sym(Terminals.ID); }
 <<EOF>>       { return sym(Terminals.EOF); }
 

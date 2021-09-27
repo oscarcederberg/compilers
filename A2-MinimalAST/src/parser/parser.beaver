@@ -9,17 +9,38 @@
 	}
 :};
 
-%terminals ID, INT, LPAR, RPAR, LBRACE, RBRACE, EQUALS, SEMICOLON, NUMERAL;
+%terminals ID, NUMERAL, INT, LPAR, RPAR, LBRACE, RBRACE, SEMICOLON;
+%terminals EQUALS, PLUS, MULT, MINUS, DIV, MOD;
+%terminals EQ, NOTEQ, LESSTHAN, LESSEQ, MORETHAN, MOREEQ;
 
 %typeof program = "Program";
 %typeof functiondecl_list = "List";
 %typeof functiondecl = "FunctionDecl";
+%typeof opt_stmt_list = "List";
 %typeof stmt_list = "List";
 %typeof stmt = "Stmt";
-%typeof expr = "Expr";
 %typeof iddecl = "IdDecl";
 %typeof iduse = "IdUse";
 %typeof assign = "Assign";
+
+%typeof expr = "Expr";
+%typeof math_expr = "Expr";
+%typeof term = "Expr";
+%typeof factor = "Expr";
+%typeof exprfactor = "Expr";
+
+%typeof add	= "Add";
+%typeof mult = "Mult";
+%typeof mod = "Mod";
+%typeof div = "Div";
+
+%typeof numeralfactor = "Numeral";
+%typeof idfactor = "IdUse";
+
+%left PLUS, MULT, SUB, MOD;
+%right DIV;
+
+%nonassoc EQUALS, EQ, NOTEQ, LESSTHAN, LESSEQ, MORETHAN, MOREEQ;
 
 %goal program;
 
@@ -29,12 +50,16 @@ functiondecl_list =
 	functiondecl.d {:return new List().add(d); :}
 	| functiondecl_list.l functiondecl.d {: return l.add(d); :}
 ;
-functiondecl = INT ID.id LPAR RPAR LBRACE stmt_list.l RBRACE {:return new FunctionDecl(id, l);:};
 
-stmt_list = 
+functiondecl = INT ID.id LPAR RPAR LBRACE opt_stmt_list.l RBRACE {: return new FunctionDecl(id, l); :};
+
+opt_stmt_list =
+	stmt_list.l {: return l; :}
+	|	{: return new List(); :}
+;
+stmt_list =
 	stmt.s {: return new List().add(s); :}
 	| stmt_list.l stmt.s {: return l.add(s); :}
-	| {:  return new List(); :}
 ;
 stmt = 
 	INT ID.id SEMICOLON{: return new IdDecl(id); :}
@@ -42,6 +67,30 @@ stmt =
 ;
 
 expr =
-	NUMERAL.n {: return new Numeral(n); :}
-	| ID.id {: return new IdUse(id); :}
+	math_expr.e							{: return e; :}
+	| math_expr.l EQ math_expr.r		{: return new Equals(l, r); :}
+	| math_expr.l NOTEQ math_expr.r 	{: return new NotEq(l, r); :}
+	| math_expr.l LESSTHAN math_expr.r 	{: return new LessThan(l, r); :}
+	| math_expr.l LESSEQ math_expr.r 	{: return new LessEq(l, r); :}
+	| math_expr.l MORETHAN math_expr.r 	{: return new MoreThan(l, r); :}
+	| math_expr.l MOREEQ math_expr.r 	{: return new MoreEq(l, r); :}
+;
+
+math_expr =
+	 expr.e PLUS term.t {: return new Add(e,t); :}
+	| expr.e MINUS term.t {: return new Sub(e,t); :} 
+	| term.t {: return t; :}
+;
+
+term = 
+	term.t MULT factor.f 	{: return new Mult(t,f); :}
+	| term.t MOD factor.f 	{: return new Mod(t,f);:}
+	| factor.f DIV term.t 	{: return new Sub(f,t);:}
+ 	| factor.f 				{: return f; :}
+;
+
+factor =
+	ID.id {: return new IdUse(id); :}
+	| NUMERAL.n {: return new Numeral(n); :}
+	| LPAR expr.e RPAR {: return e; :}
 ;

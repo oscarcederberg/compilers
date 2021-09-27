@@ -1,0 +1,16 @@
+Program
+  List
+    FunctionDecl ID="n"
+      List
+        Assign ID="a"
+          Add
+            MoreThan
+              IdUse ID="b"
+              IdUse ID="c"
+            Numeral NUMERAL="10"
+        Assign ID="a"
+          Sub
+            IdUse ID="x"
+            Equals
+              IdUse ID="b"
+              IdUse ID="c"

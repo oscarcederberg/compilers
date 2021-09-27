@@ -8,5 +8,17 @@ abstract Expr;
 IdDecl : Stmt ::= <ID>;
 Assign : Stmt ::= <ID> Expr;
 
+IdUse : Expr ::= <ID>;
 Numeral : Expr ::= <NUMERAL>;
-IdUse   : Expr ::= <ID>;
+Add : Expr ::= Left:Expr Right:Expr;
+Mul : Expr ::= Left:Expr Right:Expr;
+Sub : Expr ::= Left:Expr Right:Expr;
+Div : Expr ::= Left:Expr Right:Expr;
+Mod : Expr ::= Left:Expr Right:Expr;
+
+Equals : Expr ::= Left:Expr Right:Expr;
+NotEq : Expr ::= Left:Expr Right:Expr;
+LessThan : Expr ::= Left:Expr Right:Expr;
+LessEq : Expr ::= Left:Expr Right:Expr;
+MoreThan : Expr ::= Left:Expr Right:Expr;
+MoreEq : Expr ::= Left:Expr Right:Expr;
