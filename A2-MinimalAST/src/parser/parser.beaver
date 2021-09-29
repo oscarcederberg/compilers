@@ -12,9 +12,10 @@
 %terminals ID, NUMERAL, INT, LPAR, RPAR, LBRACE, RBRACE, SEMICOLON, COMMA;
 %terminals EQUALS, PLUS, MULT, MINUS, DIV, MOD;
 %terminals EQ, NOTEQ, LESSTHAN, LESSEQ, MORETHAN, MOREEQ;
-%terminals WHILE, IF, ELSE;
+%terminals WHILE, IF, ELSE, RETURN;
 
 %typeof program = "Program";
+%typeof opt_functiondecl_list = "List";
 %typeof functiondecl_list = "List";
 %typeof functiondecl = "FunctionDecl";
 %typeof opt_stmt_list = "List";
@@ -22,6 +23,8 @@
 %typeof opt_param_list = "List";
 %typeof param_list = "List";
 %typeof param = "IdDecl";
+%typeof opt_arg_list = "List";
+%typeof arg_list = "List";
 %typeof stmt = "Stmt";
 %typeof iddecl = "IdDecl";
 %typeof iduse = "IdUse";
@@ -30,6 +33,8 @@
 %typeof if = "If";
 %typeof else = "Else";
 %typeof block = "List";
+%typeof functioncall = "FunctionCall";
+%typeof neg = "Neg";
 
 %typeof expr = "Expr";
 %typeof math_expr = "Expr";
@@ -44,6 +49,7 @@
 
 %typeof numeralfactor = "Numeral";
 %typeof idfactor = "IdUse";
+%typeof functionuse = "FunctionUse";
 
 %left PLUS, MULT, SUB, MOD, DIV;
 
@@ -51,7 +57,12 @@
 
 %goal program;
 
-program = functiondecl_list.l {: return new Program(l); :} ;
+program = opt_functiondecl_list.l {: return new Program(l); :} ;
+
+opt_functiondecl_list = 
+	functiondecl_list.l {: return l; :}
+	|	{: return new List(); :}
+;
 
 functiondecl_list = 
 	functiondecl.d {:return new List().add(d); :}
@@ -62,14 +73,24 @@ functiondecl = INT ID.id LPAR opt_param_list.pl RPAR block.sl {: return new Func
 
 opt_param_list = 
 	param_list.l {: return l; :}
-	|	{: return new List(); :};
-
-param_list =
-	param.s {: return new List().add(s); :}
-	| stmt_list.l COMMA stmt.s {: return l.add(s); :}
+	|	{: return new List(); :}
 ;
 
-param = INT ID.id {: return new IdDecl(id); :};
+param_list =
+	param.p {: return new List().add(p); :}
+	| param_list.l COMMA param.p {: return l.add(p); :}
+;
+
+param = INT ID.id {: return new IdDecl(id, new Opt()); :};
+
+opt_arg_list = 
+	arg_list.l {: return l; :}
+	|	{: return new List(); :};
+
+arg_list =
+	expr.e {: return new List().add(e); :}
+	| arg_list.l COMMA expr.e {: return l.add(e); :}
+;
 
 opt_stmt_list =
 	stmt_list.l {: return l; :}
@@ -80,11 +101,26 @@ stmt_list =
 	| stmt_list.l stmt.s {: return l.add(s); :}
 ;
 stmt = 
-	INT ID.id SEMICOLON{: return new IdDecl(id); :}
+	iddecl.id {: return id; :}
+	| while.w {: return w; :}
+	| if.s {: return s; :}
 	| ID.id EQUALS expr.e SEMICOLON {: return new Assign(id, e); :}
-	| WHILE LPAR expr.cond RPAR stmt.s {: return new While(cond, new List(s)); :}
+	| ID.id LPAR opt_arg_list.l RPAR SEMICOLON {: return new FunctionCall(id, l); :} 
+	| RETURN expr.e SEMICOLON {: return new Return(e); :}
+;
+
+iddecl =
+	INT ID.id SEMICOLON {: return new IdDecl(id, new Opt()); :}
+	| INT ID.id EQUALS expr.e SEMICOLON {: return new IdDecl(id, new Opt(e)); :}
+;
+
+while =
+	WHILE LPAR expr.cond RPAR stmt.s {: return new While(cond, new List(s)); :}
 	| WHILE LPAR expr.cond RPAR block.l {: return new While(cond,l); :}
-	| IF LPAR expr.cond RPAR stmt.s {: return new If(cond, new List(s), new Opt()); :}
+;
+
+if =
+	  IF LPAR expr.cond RPAR stmt.s {: return new If(cond, new List(s), new Opt()); :}
 	| IF LPAR expr.cond RPAR block.l {: return new If(cond, l, new Opt()); :}
 	| IF LPAR expr.cond RPAR block.l else.e {: return new If(cond, l, new Opt(e)); :}
 ;
@@ -115,6 +151,8 @@ term =
 factor =
 	ID.id {: return new IdUse(id); :}
 	| NUMERAL.n {: return new Numeral(n); :}
+	| ID.id LPAR opt_arg_list.l RPAR {: return new FunctionUse(id, l); :}
+	| MINUS factor.f {: return new Neg(f); :}
 	| LPAR expr.e RPAR {: return e; :}
 ;
 

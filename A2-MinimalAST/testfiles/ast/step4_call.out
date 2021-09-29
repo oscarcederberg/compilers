@@ -1,0 +1,8 @@
+Program
+  List
+    FunctionDecl ID="x"
+      List
+      List
+        FunctionCall ID="a"
+          List
+            Numeral NUMERAL="10"

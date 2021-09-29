@@ -5,19 +5,23 @@ FunctionDecl ::= <ID> IdDecl* Stmt*;
 abstract Stmt;
 abstract Expr;
 
-IdDecl : Stmt ::= <ID>;
+IdDecl : Stmt ::= <ID> [Expr];
 Assign : Stmt ::= <ID> Expr;
 While : Stmt ::= Expr Stmt*;
 If : Stmt ::= Expr Stmt* [Else];
 Else : Stmt ::= Stmt*;
+FunctionCall : Stmt ::= <ID> Expr*;
+Return : Stmt ::= Expr;
 
 IdUse : Expr ::= <ID>;
+FunctionUse: Expr ::= <ID> Expr*;
 Numeral : Expr ::= <NUMERAL>;
 Add : Expr ::= Left:Expr Right:Expr;
 Mul : Expr ::= Left:Expr Right:Expr;
 Sub : Expr ::= Left:Expr Right:Expr;
 Div : Expr ::= Left:Expr Right:Expr;
 Mod : Expr ::= Left:Expr Right:Expr;
+Neg : Expr ::= Expr; 
 
 Equals      : Expr ::= Left:Expr Right:Expr;
 NotEq       : Expr ::= Left:Expr Right:Expr;

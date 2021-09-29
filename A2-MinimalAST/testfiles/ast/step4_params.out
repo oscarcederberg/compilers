@@ -1,0 +1,11 @@
+Program
+  List
+    FunctionDecl ID="a"
+      List
+        IdDecl ID="n"
+          Opt
+      List
+        Assign ID="c"
+          Add
+            IdUse ID="n"
+            Numeral NUMERAL="10"

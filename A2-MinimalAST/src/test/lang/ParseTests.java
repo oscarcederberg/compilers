@@ -40,6 +40,8 @@ public class ParseTests {
 	@Test public void test3_div() {
 		Util.testValidSyntax(TEST_DIRECTORY, "step3/div.in");
 	}
+
+
 	@Test public void test4_sample1() {
 		Util.testValidSyntax(TEST_DIRECTORY, "step4_sample1.in");
 	}
@@ -50,4 +52,34 @@ public class ParseTests {
 		Util.testValidSyntax(TEST_DIRECTORY, "step4_sample3.in");
 	}
 	
+	@Test public void test4_ifelse() {
+		Util.testValidSyntax(TEST_DIRECTORY, "step4_ifelse.in");
+	}
+	@Test public void test4_params() {
+		Util.testValidSyntax(TEST_DIRECTORY, "step4_params.in");
+	}
+	@Test public void test4_return() {
+		Util.testValidSyntax(TEST_DIRECTORY, "step4_return.in");
+	}
+	@Test public void test4_while() {
+		Util.testValidSyntax(TEST_DIRECTORY, "step4_while.in");
+	}
+	@Test public void test4_call() {
+		Util.testValidSyntax(TEST_DIRECTORY, "step4_call.in");
+	}
+	@Test public void test4_function_use() {
+		Util.testValidSyntax(TEST_DIRECTORY, "step4_function_use.in");
+	}
+	@Test public void test4_iddeclassign() {
+		Util.testValidSyntax(TEST_DIRECTORY, "step4_iddeclassign.in");
+	}
+	@Test public void test0_empty() {
+		Util.testValidSyntax(TEST_DIRECTORY, "step0_empty.in");
+	}
+
+	/*
+	@Test public void test4_xx() {
+		Util.testValidSyntax(TEST_DIRECTORY, "step4_xx.in");
+	}
+	*/
 }

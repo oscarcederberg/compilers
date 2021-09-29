@@ -4,6 +4,7 @@ Program
       List
       List
         IdDecl ID="x"
+          Opt
         Assign ID="x"
           Mod
             Mod

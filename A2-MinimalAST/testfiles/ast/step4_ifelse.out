@@ -1,0 +1,25 @@
+Program
+  List
+    FunctionDecl ID="a"
+      List
+      List
+        If
+          MoreThan
+            IdUse ID="b"
+            IdUse ID="c"
+          List
+            Assign ID="d"
+              IdUse ID="e"
+          Opt
+        If
+          LessThan
+            IdUse ID="b"
+            IdUse ID="c"
+          List
+            Assign ID="a"
+              IdUse ID="b"
+          Opt
+            Else
+              List
+                Assign ID="b"
+                  Numeral NUMERAL="10"

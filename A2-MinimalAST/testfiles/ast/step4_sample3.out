@@ -1,0 +1,43 @@
+Program
+  List
+    FunctionDecl ID="main"
+      List
+      List
+        IdDecl ID="a"
+          Opt
+        IdDecl ID="b"
+          Opt
+        Assign ID="a"
+          FunctionUse ID="read"
+            List
+        Assign ID="b"
+          FunctionUse ID="read"
+            List
+        FunctionCall ID="print"
+          List
+            FunctionUse ID="gcd1"
+              List
+                IdUse ID="a"
+                IdUse ID="b"
+        FunctionCall ID="print"
+          List
+            FunctionUse ID="gcd2"
+              List
+                IdUse ID="a"
+                IdUse ID="b"
+        IdDecl ID="diff"
+          Opt
+            Sub
+              FunctionUse ID="gcd1"
+                List
+                  IdUse ID="a"
+                  IdUse ID="b"
+              FunctionUse ID="gcd2"
+                List
+                  IdUse ID="a"
+                  IdUse ID="b"
+        FunctionCall ID="print"
+          List
+            IdUse ID="diff"
+        Return
+          Numeral NUMERAL="0"

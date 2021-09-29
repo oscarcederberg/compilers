@@ -5,7 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 /**
  * @ast node
- * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/lang.ast:10
+ * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:10
  * @astdecl While : Stmt ::= Expr Stmt*;
  * @production While : {@link Stmt} ::= <span class="component">{@link Expr}</span> <span class="component">{@link Stmt}*</span>;
 

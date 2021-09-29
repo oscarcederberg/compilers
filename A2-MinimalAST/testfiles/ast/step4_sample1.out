@@ -1,0 +1,32 @@
+Program
+  List
+    FunctionDecl ID="gcd1"
+      List
+        IdDecl ID="a"
+          Opt
+        IdDecl ID="b"
+          Opt
+      List
+        While
+          NotEq
+            IdUse ID="a"
+            IdUse ID="b"
+          List
+            If
+              MoreThan
+                IdUse ID="a"
+                IdUse ID="b"
+              List
+                Assign ID="a"
+                  Sub
+                    IdUse ID="a"
+                    IdUse ID="b"
+              Opt
+                Else
+                  List
+                    Assign ID="b"
+                      Sub
+                        IdUse ID="b"
+                        IdUse ID="a"
+        Return
+          IdUse ID="a"

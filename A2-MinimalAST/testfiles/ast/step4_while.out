@@ -1,0 +1,12 @@
+Program
+  List
+    FunctionDecl ID="a"
+      List
+      List
+        While
+          LessThan
+            Numeral NUMERAL="10"
+            Numeral NUMERAL="30"
+          List
+            Assign ID="b"
+              IdUse ID="c"

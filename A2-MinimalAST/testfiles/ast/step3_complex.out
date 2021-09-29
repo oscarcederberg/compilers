@@ -4,12 +4,16 @@ Program
       List
       List
         IdDecl ID="x"
+          Opt
         IdDecl ID="j"
+          Opt
     FunctionDecl ID="c"
       List
       List
         IdDecl ID="x"
+          Opt
         IdDecl ID="j"
+          Opt
         Assign ID="x"
           Add
             Mult

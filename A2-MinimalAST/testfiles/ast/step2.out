@@ -4,7 +4,9 @@ Program
       List
       List
         IdDecl ID="x"
+          Opt
         IdDecl ID="y"
+          Opt
         Assign ID="x"
           Numeral NUMERAL="5"
         Assign ID="y"
