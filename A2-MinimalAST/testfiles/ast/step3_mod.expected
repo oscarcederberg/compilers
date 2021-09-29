@@ -2,7 +2,6 @@ Program
   List
     FunctionDecl ID="main"
       List
-      List
         IdDecl ID="x"
         Assign ID="x"
           Mod

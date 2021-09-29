@@ -2,7 +2,6 @@ Program
   List
     FunctionDecl ID="main"
       List
-      List
         Assign ID="x"
           Sub
             Sub

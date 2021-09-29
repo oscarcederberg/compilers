@@ -2,6 +2,7 @@ Program
   List
     FunctionDecl ID="a"
       List
+      List
         Assign ID="x"
           Add
             Numeral NUMERAL="5"

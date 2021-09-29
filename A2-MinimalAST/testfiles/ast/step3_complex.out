@@ -2,9 +2,11 @@ Program
   List
     FunctionDecl ID="c"
       List
+      List
         IdDecl ID="x"
         IdDecl ID="j"
     FunctionDecl ID="c"
+      List
       List
         IdDecl ID="x"
         IdDecl ID="j"

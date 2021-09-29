@@ -2,7 +2,6 @@ Program
   List
     FunctionDecl ID="n"
       List
-      List
         Assign ID="a"
           Add
             MoreThan

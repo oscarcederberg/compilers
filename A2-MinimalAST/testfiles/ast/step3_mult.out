@@ -2,6 +2,7 @@ Program
   List
     FunctionDecl ID="n"
       List
+      List
         Assign ID="j"
           Mult
             Numeral NUMERAL="3"

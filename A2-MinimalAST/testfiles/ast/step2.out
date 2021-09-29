@@ -2,6 +2,7 @@ Program
   List
     FunctionDecl ID="a"
       List
+      List
         IdDecl ID="x"
         IdDecl ID="y"
         Assign ID="x"
