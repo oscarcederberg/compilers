@@ -6,3 +6,7 @@
 5. if/else                          testad
 6. while                            testad
 7. negation
+
+abstrakta typer kan ha children i ast:en
+byt ut Stmt* mot block i ast:en
+binops i ast:en!
