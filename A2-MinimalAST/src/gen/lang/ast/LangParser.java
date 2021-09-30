@@ -458,48 +458,49 @@ public class LangParser extends beaver.Parser {
         return new FunctionCall(id, l);
       }
     },
-    new Action() { // [52] if =  IF LPAR expr RPAR block block
+    new Action() { // [52] if =  IF LPAR expr RPAR block ELSE block
       public Symbol reduce(Symbol[] _symbols, int offset) {
         final Symbol IF = _symbols[offset + 1];
         final Symbol LPAR = _symbols[offset + 2];
         final Expr cond = (Expr) _symbols[offset + 3].value;
         final Symbol RPAR = _symbols[offset + 4];
         final Block l = (Block) _symbols[offset + 5].value;
-        final Block e = (Block) _symbols[offset + 6].value;
+        final Symbol ELSE = _symbols[offset + 6];
+        final Block e = (Block) _symbols[offset + 7].value;
         return new If(cond, l, new Opt(e));
       }
     },
   };
 
   static final ParsingTables PARSING_TABLES = new ParsingTables(
-    "U9pjcakC54KOn$ypExl3y7wuWBFiBhlBihiyTaLP115yWA8Ye23Y2nKIu#Ec5m$6QBmO4o$" +
-    "6c7Zmua4JJyQBcdWm7amCe83oaeU0WB3WYYWeY53#gx#QxPfNRrSncQm9zUNtrJTLzU#lkh" +
-    "fxfgTdWCmMfL2BD4OWXV58eWwZKACsOJGc88kRK8ycDAC57MX3AnhGYFkGLPVPtitsbEdfC" +
-    "VLYKzzcwjjDlHJtOnZZPLYD9QplnHr1prs1lplmzmH#UU1N17ubCWDwgH$01kfrMSNPFSnP" +
-    "FC9PPB6UqUECMDIbe5$Neda2WnRrx#1ZYZGNy#jOcd$Sys2ukqHTm4XdpNd1gOnnpS8SVzE" +
-    "DTHIDyyZpb#1Kd5UDvHftYJedE6dEvjUnofJ0JnvuFH6JSAtwCpBF7w6NI2moprI7EUNAD4" +
-    "mtKITfZwNfyiWpmrsYpeHU8h58qKptF9WTOyoiWjUbZ#dlKPjGfqClaLYavhVGIoGMELUFO" +
-    "whwLR$sWjrQQ9RekZXRBYZprA$Shc6WpC5SpCVrk06zkB5eRgVKAUsnGDTsQw5PlIVLIUq5" +
-    "kxNGh4G#wzQd#hGNxDRGS3CMOj6LvS4jWuwujQZ5PtzEg1DIsosvrkBHldcqHXrtdDilePT" +
-    "8B59qPwpPvESv5dg9n295dcjmLLCzZVFvTbGTrLwmMmljokTM5SsQMAFoYZeIUed4AZwtjU" +
-    "vpmuFk4lKptJf7pM71gJpaE5wNalSKPSQQ#rrrI1tINiWLtHfQqUVFF7MGOmm3PKxatEQfd" +
-    "pZU45jpWECDiJNxETuGJwFsgNtQ2tPhQ2NMO2$766BFxKUEDyJKF1hPMxAeFMgFzeBTMcXM" +
-    "xswrMtl1RYqqgtUNsgMzOBSMcjMxK#tKNh1R2ytQeSVSry3hMjWHUed48lFul5Sz6MjKNb4" +
-    "$X5uYiPA3S$lpVUWb4elCirrjrrwmMmlDwjqMUed48lDi3Rr4Of6Qxq8laLYavbl1fQWjeP" +
-    "T8B5ApEVGIYK6V4#qyIr9a1hzTTl7ROZU$3JQZ2Lb#usv1A#i6dg#DwE0vb6KxJ7jge6Vm6" +
-    "a6SHLjGJpSzqJvHj9rcj2aMwlNpGfd5G1JqG0Kbd9iQjEGqBYNCuwvnobFdeQbncLLEev$G" +
-    "EceIhbayyzHKAO$pgb4poKFZCpUVyosHhq06mp428okkyJb74qY6QWoBf$78upMtmBkjGMH" +
-    "l6KsCkM5o1UPMDOt7CKtchWQahTPH68qn68jn68y9l5#enqIhDrsydKhaAQT1dSFSVFQdMk" +
-    "lcasVGjIuyGptpmEMCatTTl$SGMJdtznt7Qy7dCwjQrznLJLKrpkTRjQxjQcc6yhNWCpUVp" +
-    "n$F#zwgt2kNNEioOytzhjSvMaOJERV$eMP8h87FUL31$HaI6f$hrETQgDPxLSNs9#gkodD$" +
-    "l3wpFF9KI#FzFAGoS#FzyCPNmyTt#ldPNBA2F4DU8##HJyacSfotpmdII7h9Al8iuRZ46#G" +
-    "pieFq0yaqcK8MahNaES8noNV9vsGtEGFKZ23jP35PGruWRv8FoLTaBpa7f3AaYombwycBv2" +
-    "to4VcQ72GNWDe9P3PPHZQGbyWxv6Fo3Jb2BW5raqWFMKwU8Y#JjyadP3Cv1gIvhsckIPfha" +
-    "bv9k2PfxckQQvBccgItaJvWM8eqaVbaDNcQl4xU9r#GhUGqaE4#P5h98hAEF4#u9faFo9Vw" +
-    "EF3Gx2S7Ng4h1yl1Cks7IR$r#hGLdo#ZkPYBcRwsp9YpfZzZwb6crlzagxV7ydK3QONy1g1" +
-    "$2z3$9DB$PUo6$CRJQxPvcR7#9QBHqYuebP$jYwFM8mfgbvXwZQddnz1iZF#KV4YNtc3rP$" +
-    "9JO0QP7TH97ebay3#iBhwUHQRnTHTgUCJgqC7s5hPfEaYdYHj8O$2aND1FpPkfqR$wT5BVm" +
-    "ZZBUchGba1RCAQ6cdpijWQBB6b1YcTERK2MyLJMJOQse5$trQ7dFoNlvOi=");
+    "U9pjcakC54KOn$ypExlDiBoHXxFi6rYMfoYB888FK5G4b1NnXOh4#BZfnOCn6Y$6n8in9Xw" +
+    "yUD34a$6Y9fuyc1XGUSZx8I1lS4KK54Ge$zLVpNJDx4nlLx6Ph0drvVTLpLVrdw#wkdkwfs" +
+    "U0x36bK8i0zSXW5DAemr3Kg0qOXj78uHQCGHEQqOeEjACD3MZ40yYfAupFP3nZUcQPUf6fx" +
+    "p3rdQPUWWSnYEsbM8N5hE$7NM7FFQ6$D$JtXNvPw9U7VWMo1RtK3#4PwdLPoTazobaynbda" +
+    "i9Qj9zbYKPV3VbsBvYdqMTI$VO$ffRbKN2VI$EEU1uFT9UeYXZXhBWXEPRXh5kRucsw4esY" +
+    "aHvw$1AVYl6eirxbBr7d1INEkk4vK9eH#VE7rM8p3zUhFs3n$H5vQOh5vMXpcb2yJCTcqff" +
+    "19YJIT7dcckalKsSXBIonMDCqz3sOa63Ezv7NvVVfxt5keCv6NbbYivhV8IqiiTguU#rJrg" +
+    "1xj1JjQQfReXYJlN5Bcgb$vleP2cOqvc8SRSHEwS7ElkPrMfxN7V5tRqLApUa#fKzeBThJK" +
+    "h4G#wtPIdTHUiAEHuLOimCAhouFR#XnnUw#8p$QSK2UajYFvQ7c5r$PGeuuxpkrOvAKb5Yk" +
+    "wEz5iYlCSZRoqn695dcjmJLCzZVFnTaGTqLwmewLszNEhYgOxqQYYeWv7NbfY$JwtrUvpmy" +
+    "Fk4lKBtHf7pI71gJpYE5wNilSK5SQQ#rrrK1tKNiWN7Osir$LdhZh0COP2cHqxjxdgPuut9" +
+    "DRivtX3Oiq#ZZSaqwYzQg$sWXsDhCmQxE4OG#AvxUPuGqBDux6zPOlQfNPfBzZHKhDwTwgT" +
+    "sWjsjDIitXrgX$Q27IqrgtUxsgwzO4TBpTgW9zpNmEjSs1PvQOd5vl7vh7ewqQYYedwAlBJ" +
+    "4AWhMSSpMSEJMWcQhM6oUBMgBze8TBJMhTtFafIKMcsTJvAKb5glvCVBI4elL$22u5FLzvA" +
+    "Kb5YloUNwmCVBI4eC#ZYRnoCgGgVn6siblc3Fv3R8PJSZnMtehsbWty1XlH0UFknpZCF5Ce" +
+    "QVl6c4xX$Qmdcnwudsgr$iqersnKA#VCSei2gsm1oeiqTnKdoMlSIbH7dUDKvuw3qsDowpo" +
+    "6lrKrr6JSitYcQUcIdcSLusQSHuQdxdv76#fOWMo68nw3EbtZSynca8wKcDGCer77g#vXTv" +
+    "j3M9xAsWIp0tZ#s5kLTDuxDDq$cn0O4M7OXY6OmH6OXH6ytet1cEjtg3t#$H7daeQr3dCpM" +
+    "TxghLkFddwNElI8zGp3roFEDvXUts6oCgvV#uudWi#rwngdNFND5NLE1zlrJgtgwKPoEU2p" +
+    "znyhZ#UzxrLkLSkkzOLnfhxNQzZj88cTcx$Gys0M0EVuw0VjsT0Q7pEKvzpeLgVLVssFN5t" +
+    "LPxRutNDyiXJBOttyn37F3xF3ohauJtq#ZUYHtxwcTiSifmyJzua7v8lo0PodBVSAT98kiX" +
+    "AyWBXkDJRv4koZVG0wO1C80l8Ql8YuPZq1#GhifES1MhgoIIoY7IJbyaxv1Fo3Tb3pWEPBE" +
+    "aaIyXQyWfvbtnAlYK7o4MWTZIPGPQITUHLyZxvZ7n73fFBGDquCeii8y#IryXxv7EoaHm50" +
+    "cvhm3K9k2R12i8r2RYj0TSau9e4cyb9O526D95vP1LvZhn5FY9Vaqta393bDcJRo4AoXhn4" +
+    "k2RPZmct8xjRxmlkddra$#jqbM0vK25#YFHOhyzOxGiLD9VoRQQlhJ3cdEdFcdgegVM$viR" +
+    "OO$cwWRH1Vc$GlpleVotf$qtEXFoUr6NUymhR#bUFHaixlrn#nXV5hKSSr2usTNV2yVDClT" +
+    "xzgVa0BLtXFfZ6QyXKCYEiqzmVwV2VNvryFPrCvEjEr72$rQ63yLR6D1raYcataCRmERkWd" +
+    "xatKwD$Pvf2VIlRETOjOIo5zd1C3JN5sB46YnnfHOR7Jsr8ZkqMras6zh1VzmMOzH$YTnnA");
 
   public LangParser() {
     super(PARSING_TABLES);

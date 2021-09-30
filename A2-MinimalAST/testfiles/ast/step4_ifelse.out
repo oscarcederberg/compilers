@@ -2,24 +2,27 @@ Program
   List
     FunctionDecl ID="a"
       List
-      List
-        If
-          MoreThan
-            IdUse ID="b"
-            IdUse ID="c"
-          List
-            Assign ID="d"
-              IdUse ID="e"
-          Opt
-        If
-          LessThan
-            IdUse ID="b"
-            IdUse ID="c"
-          List
-            Assign ID="a"
+      Block
+        List
+          If
+            MoreThan
               IdUse ID="b"
-          Opt
-            Else
+              IdUse ID="c"
+            Block
               List
-                Assign ID="b"
-                  Numeral NUMERAL="10"
+                Assign ID="d"
+                  IdUse ID="e"
+            Opt
+          If
+            LessThan
+              IdUse ID="b"
+              IdUse ID="c"
+            Block
+              List
+                Assign ID="a"
+                  IdUse ID="b"
+            Opt
+              Block
+                List
+                  Assign ID="b"
+                    Numeral NUMERAL="10"

@@ -118,7 +118,7 @@ while =
 if =
 	  IF LPAR expr.cond RPAR stmt.s {: return new If(cond, new Block(new List(s)), new Opt()); :}
 	| IF LPAR expr.cond RPAR block.l {: return new If(cond, l, new Opt()); :}
-	| IF LPAR expr.cond RPAR block.l block.e {: return new If(cond, l, new Opt(e)); :}
+	| IF LPAR expr.cond RPAR block.l ELSE block.e {: return new If(cond, l, new Opt(e)); :}
 ;
 
 expr =
