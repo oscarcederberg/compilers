@@ -1,0 +1,31 @@
+Program
+  List
+    FunctionDecl ID="main"
+      List
+      Block
+        List
+          Assign ID="a"
+            Numeral NUMERAL="5"
+          Assign ID="abc"
+            Sub
+              Mult
+                FunctionUse ID="test"
+                  List
+                    IdUse ID="a"
+                    Numeral NUMERAL="5"
+                Numeral NUMERAL="6"
+              FunctionUse ID="test"
+                List
+                  Numeral NUMERAL="5"
+                  Numeral NUMERAL="5"
+    FunctionDecl ID="test"
+      List
+        IdDecl ID="a"
+          Opt
+        IdDecl ID="b"
+          Opt
+      Block
+        List
+          Assign ID="abc"
+            FunctionUse ID="main"
+              List

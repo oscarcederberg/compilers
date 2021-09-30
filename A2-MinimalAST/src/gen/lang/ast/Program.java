@@ -5,12 +5,19 @@ import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:1
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/lang.ast:1
  * @astdecl Program : ASTNode ::= FunctionDecl*;
  * @production Program : {@link ASTNode} ::= <span class="component">{@link FunctionDecl}*</span>;
 
  */
 public class Program extends ASTNode<ASTNode> implements Cloneable {
+  /**
+   * @aspect Visitor
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/Visitor.jrag:26
+   */
+  public Object accept(Visitor visitor, Object data) {
+		return visitor.visit(this, data);
+	}
   /**
    * @declaredat ASTNode:1
    */
