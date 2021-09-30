@@ -2,9 +2,10 @@ Program
   List
     FunctionDecl ID="a"
       List
-      List
-        IdDecl ID="b"
-          Opt
-            Add
-              IdUse ID="c"
-              Numeral NUMERAL="10"
+      Block
+        List
+          IdDecl ID="b"
+            Opt
+              Add
+                IdUse ID="c"
+                Numeral NUMERAL="10"

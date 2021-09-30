@@ -2,12 +2,13 @@ Program
   List
     FunctionDecl ID="a"
       List
-      List
-        IdDecl ID="x"
-          Opt
-        IdDecl ID="y"
-          Opt
-        Assign ID="x"
-          Numeral NUMERAL="5"
-        Assign ID="y"
-          IdUse ID="x"
+      Block
+        List
+          IdDecl ID="x"
+            Opt
+          IdDecl ID="y"
+            Opt
+          Assign ID="x"
+            Numeral NUMERAL="5"
+          Assign ID="y"
+            IdUse ID="x"

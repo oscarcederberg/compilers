@@ -2,8 +2,9 @@ Program
   List
     FunctionDecl ID="a"
       List
-      List
-        Return
-          Add
-            IdUse ID="j"
-            Numeral NUMERAL="10"
+      Block
+        List
+          Return
+            Add
+              IdUse ID="j"
+              Numeral NUMERAL="10"

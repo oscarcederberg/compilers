@@ -5,12 +5,12 @@ import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:30
- * @astdecl MoreThan : Expr ::= Left:Expr Right:Expr;
- * @production MoreThan : {@link Expr} ::= <span class="component">Left:{@link Expr}</span> <span class="component">Right:{@link Expr}</span>;
+ * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:32
+ * @astdecl MoreThan : BinOp ::= Left:Expr Right:Expr;
+ * @production MoreThan : {@link BinOp};
 
  */
-public class MoreThan extends Expr implements Cloneable {
+public class MoreThan extends BinOp implements Cloneable {
   /**
    * @declaredat ASTNode:1
    */

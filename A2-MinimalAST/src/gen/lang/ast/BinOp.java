@@ -5,16 +5,16 @@ import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:25
- * @astdecl Mod : BinOp ::= Left:Expr Right:Expr;
- * @production Mod : {@link BinOp};
+ * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:16
+ * @astdecl BinOp : Expr ::= Left:Expr Right:Expr;
+ * @production BinOp : {@link Expr} ::= <span class="component">Left:{@link Expr}</span> <span class="component">Right:{@link Expr}</span>;
 
  */
-public class Mod extends BinOp implements Cloneable {
+public abstract class BinOp extends Expr implements Cloneable {
   /**
    * @declaredat ASTNode:1
    */
-  public Mod() {
+  public BinOp() {
     super();
   }
   /**
@@ -35,7 +35,7 @@ public class Mod extends BinOp implements Cloneable {
     type = {"Expr", "Expr"},
     kind = {"Child", "Child"}
   )
-  public Mod(Expr p0, Expr p1) {
+  public BinOp(Expr p0, Expr p1) {
     setChild(p0, 0);
     setChild(p1, 1);
   }
@@ -62,24 +62,9 @@ public class Mod extends BinOp implements Cloneable {
   /** @apilevel internal 
    * @declaredat ASTNode:37
    */
-  public Mod clone() throws CloneNotSupportedException {
-    Mod node = (Mod) super.clone();
+  public BinOp clone() throws CloneNotSupportedException {
+    BinOp node = (BinOp) super.clone();
     return node;
-  }
-  /** @apilevel internal 
-   * @declaredat ASTNode:42
-   */
-  public Mod copy() {
-    try {
-      Mod node = (Mod) clone();
-      node.parent = null;
-      if (children != null) {
-        node.children = (ASTNode[]) children.clone();
-      }
-      return node;
-    } catch (CloneNotSupportedException e) {
-      throw new Error("Error: clone not supported for " + getClass().getName());
-    }
   }
   /**
    * Create a deep copy of the AST subtree at this node.
@@ -87,59 +72,33 @@ public class Mod extends BinOp implements Cloneable {
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:61
+   * @declaredat ASTNode:48
    */
   @Deprecated
-  public Mod fullCopy() {
-    return treeCopyNoTransform();
-  }
+  public abstract BinOp fullCopy();
   /**
    * Create a deep copy of the AST subtree at this node.
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:71
+   * @declaredat ASTNode:56
    */
-  public Mod treeCopyNoTransform() {
-    Mod tree = (Mod) copy();
-    if (children != null) {
-      for (int i = 0; i < children.length; ++i) {
-        ASTNode child = (ASTNode) children[i];
-        if (child != null) {
-          child = child.treeCopyNoTransform();
-          tree.setChild(child, i);
-        }
-      }
-    }
-    return tree;
-  }
+  public abstract BinOp treeCopyNoTransform();
   /**
    * Create a deep copy of the AST subtree at this node.
    * The subtree of this node is traversed to trigger rewrites before copy.
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:91
+   * @declaredat ASTNode:64
    */
-  public Mod treeCopy() {
-    Mod tree = (Mod) copy();
-    if (children != null) {
-      for (int i = 0; i < children.length; ++i) {
-        ASTNode child = (ASTNode) getChild(i);
-        if (child != null) {
-          child = child.treeCopy();
-          tree.setChild(child, i);
-        }
-      }
-    }
-    return tree;
-  }
+  public abstract BinOp treeCopy();
   /**
    * Replaces the Left child.
    * @param node The new node to replace the Left child.
    * @apilevel high-level
    */
-  public Mod setLeft(Expr node) {
+  public BinOp setLeft(Expr node) {
     setChild(node, 0);
     return this;
   }
@@ -166,7 +125,7 @@ public class Mod extends BinOp implements Cloneable {
    * @param node The new node to replace the Right child.
    * @apilevel high-level
    */
-  public Mod setRight(Expr node) {
+  public BinOp setRight(Expr node) {
     setChild(node, 1);
     return this;
   }

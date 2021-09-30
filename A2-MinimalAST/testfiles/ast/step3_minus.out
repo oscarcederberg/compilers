@@ -2,16 +2,17 @@ Program
   List
     FunctionDecl ID="main"
       List
-      List
-        Assign ID="x"
-          Sub
+      Block
+        List
+          Assign ID="x"
             Sub
-              Add
-                Sub
-                  Numeral NUMERAL="1"
-                  Numeral NUMERAL="2"
-                Numeral NUMERAL="3"
-              Numeral NUMERAL="4"
-            Mult
-              Numeral NUMERAL="5"
-              Numeral NUMERAL="6"
+              Sub
+                Add
+                  Sub
+                    Numeral NUMERAL="1"
+                    Numeral NUMERAL="2"
+                  Numeral NUMERAL="3"
+                Numeral NUMERAL="4"
+              Mult
+                Numeral NUMERAL="5"
+                Numeral NUMERAL="6"

@@ -2,7 +2,9 @@ Program
   List
     FunctionDecl ID="a"
       List
-      List
+      Block
+        List
     FunctionDecl ID="b"
       List
-      List
+      Block
+        List

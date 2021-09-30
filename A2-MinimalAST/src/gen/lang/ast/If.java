@@ -5,9 +5,9 @@ import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:11
- * @astdecl If : Stmt ::= Expr Stmt* [Else];
- * @production If : {@link Stmt} ::= <span class="component">{@link Expr}</span> <span class="component">{@link Stmt}*</span> <span class="component">[{@link Else}]</span>;
+ * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:12
+ * @astdecl If : Stmt ::= Expr Block [Else:Block];
+ * @production If : {@link Stmt} ::= <span class="component">{@link Expr}</span> <span class="component">{@link Block}</span> <span class="component">[Else:{@link Block}]</span>;
 
  */
 public class If extends Stmt implements Cloneable {
@@ -26,51 +26,50 @@ public class If extends Stmt implements Cloneable {
    */
   public void init$Children() {
     children = new ASTNode[3];
-    setChild(new List(), 1);
     setChild(new Opt(), 2);
   }
   /**
-   * @declaredat ASTNode:15
+   * @declaredat ASTNode:14
    */
   @ASTNodeAnnotation.Constructor(
-    name = {"Expr", "Stmt", "Else"},
-    type = {"Expr", "List<Stmt>", "Opt<Else>"},
-    kind = {"Child", "List", "Opt"}
+    name = {"Expr", "Block", "Else"},
+    type = {"Expr", "Block", "Opt<Block>"},
+    kind = {"Child", "Child", "Opt"}
   )
-  public If(Expr p0, List<Stmt> p1, Opt<Else> p2) {
+  public If(Expr p0, Block p1, Opt<Block> p2) {
     setChild(p0, 0);
     setChild(p1, 1);
     setChild(p2, 2);
   }
   /** @apilevel low-level 
-   * @declaredat ASTNode:26
+   * @declaredat ASTNode:25
    */
   protected int numChildren() {
     return 3;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:30
+   * @declaredat ASTNode:29
    */
   public void flushAttrCache() {
     super.flushAttrCache();
 
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:35
+   * @declaredat ASTNode:34
    */
   public void flushCollectionCache() {
     super.flushCollectionCache();
 
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:40
+   * @declaredat ASTNode:39
    */
   public If clone() throws CloneNotSupportedException {
     If node = (If) super.clone();
     return node;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:45
+   * @declaredat ASTNode:44
    */
   public If copy() {
     try {
@@ -90,7 +89,7 @@ public class If extends Stmt implements Cloneable {
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:64
+   * @declaredat ASTNode:63
    */
   @Deprecated
   public If fullCopy() {
@@ -101,7 +100,7 @@ public class If extends Stmt implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:74
+   * @declaredat ASTNode:73
    */
   public If treeCopyNoTransform() {
     If tree = (If) copy();
@@ -122,7 +121,7 @@ public class If extends Stmt implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:94
+   * @declaredat ASTNode:93
    */
   public If treeCopy() {
     If tree = (If) copy();
@@ -165,118 +164,31 @@ public class If extends Stmt implements Cloneable {
     return (Expr) getChildNoTransform(0);
   }
   /**
-   * Replaces the Stmt list.
-   * @param list The new list node to be used as the Stmt list.
+   * Replaces the Block child.
+   * @param node The new node to replace the Block child.
    * @apilevel high-level
    */
-  public If setStmtList(List<Stmt> list) {
-    setChild(list, 1);
+  public If setBlock(Block node) {
+    setChild(node, 1);
     return this;
   }
   /**
-   * Retrieves the number of children in the Stmt list.
-   * @return Number of children in the Stmt list.
+   * Retrieves the Block child.
+   * @return The current node used as the Block child.
    * @apilevel high-level
    */
-  public int getNumStmt() {
-    return getStmtList().getNumChild();
+  @ASTNodeAnnotation.Child(name="Block")
+  public Block getBlock() {
+    return (Block) getChild(1);
   }
   /**
-   * Retrieves the number of children in the Stmt list.
-   * Calling this method will not trigger rewrites.
-   * @return Number of children in the Stmt list.
-   * @apilevel low-level
-   */
-  public int getNumStmtNoTransform() {
-    return getStmtListNoTransform().getNumChildNoTransform();
-  }
-  /**
-   * Retrieves the element at index {@code i} in the Stmt list.
-   * @param i Index of the element to return.
-   * @return The element at position {@code i} in the Stmt list.
-   * @apilevel high-level
-   */
-  public Stmt getStmt(int i) {
-    return (Stmt) getStmtList().getChild(i);
-  }
-  /**
-   * Check whether the Stmt list has any children.
-   * @return {@code true} if it has at least one child, {@code false} otherwise.
-   * @apilevel high-level
-   */
-  public boolean hasStmt() {
-    return getStmtList().getNumChild() != 0;
-  }
-  /**
-   * Append an element to the Stmt list.
-   * @param node The element to append to the Stmt list.
-   * @apilevel high-level
-   */
-  public If addStmt(Stmt node) {
-    List<Stmt> list = (parent == null) ? getStmtListNoTransform() : getStmtList();
-    list.addChild(node);
-    return this;
-  }
-  /** @apilevel low-level 
-   */
-  public If addStmtNoTransform(Stmt node) {
-    List<Stmt> list = getStmtListNoTransform();
-    list.addChild(node);
-    return this;
-  }
-  /**
-   * Replaces the Stmt list element at index {@code i} with the new node {@code node}.
-   * @param node The new node to replace the old list element.
-   * @param i The list index of the node to be replaced.
-   * @apilevel high-level
-   */
-  public If setStmt(Stmt node, int i) {
-    List<Stmt> list = getStmtList();
-    list.setChild(node, i);
-    return this;
-  }
-  /**
-   * Retrieves the Stmt list.
-   * @return The node representing the Stmt list.
-   * @apilevel high-level
-   */
-  @ASTNodeAnnotation.ListChild(name="Stmt")
-  public List<Stmt> getStmtList() {
-    List<Stmt> list = (List<Stmt>) getChild(1);
-    return list;
-  }
-  /**
-   * Retrieves the Stmt list.
+   * Retrieves the Block child.
    * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the Stmt list.
+   * @return The current node used as the Block child.
    * @apilevel low-level
    */
-  public List<Stmt> getStmtListNoTransform() {
-    return (List<Stmt>) getChildNoTransform(1);
-  }
-  /**
-   * @return the element at index {@code i} in the Stmt list without
-   * triggering rewrites.
-   */
-  public Stmt getStmtNoTransform(int i) {
-    return (Stmt) getStmtListNoTransform().getChildNoTransform(i);
-  }
-  /**
-   * Retrieves the Stmt list.
-   * @return The node representing the Stmt list.
-   * @apilevel high-level
-   */
-  public List<Stmt> getStmts() {
-    return getStmtList();
-  }
-  /**
-   * Retrieves the Stmt list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the Stmt list.
-   * @apilevel low-level
-   */
-  public List<Stmt> getStmtsNoTransform() {
-    return getStmtListNoTransform();
+  public Block getBlockNoTransform() {
+    return (Block) getChildNoTransform(1);
   }
   /**
    * Replaces the optional node for the Else child. This is the <code>Opt</code>
@@ -284,7 +196,7 @@ public class If extends Stmt implements Cloneable {
    * @param opt The new node to be used as the optional node for the Else child.
    * @apilevel low-level
    */
-  public If setElseOpt(Opt<Else> opt) {
+  public If setElseOpt(Opt<Block> opt) {
     setChild(opt, 2);
     return this;
   }
@@ -293,7 +205,7 @@ public class If extends Stmt implements Cloneable {
    * @param node The new node to be used as the Else child.
    * @apilevel high-level
    */
-  public If setElse(Else node) {
+  public If setElse(Block node) {
     getElseOpt().setChild(node, 0);
     return this;
   }
@@ -310,8 +222,8 @@ public class If extends Stmt implements Cloneable {
    * @return The Else child, if it exists. Returns {@code null} otherwise.
    * @apilevel low-level
    */
-  public Else getElse() {
-    return (Else) getElseOpt().getChild(0);
+  public Block getElse() {
+    return (Block) getElseOpt().getChild(0);
   }
   /**
    * Retrieves the optional node for the Else child. This is the <code>Opt</code> node containing the child Else, not the actual child!
@@ -319,8 +231,8 @@ public class If extends Stmt implements Cloneable {
    * @apilevel low-level
    */
   @ASTNodeAnnotation.OptChild(name="Else")
-  public Opt<Else> getElseOpt() {
-    return (Opt<Else>) getChild(2);
+  public Opt<Block> getElseOpt() {
+    return (Opt<Block>) getChild(2);
   }
   /**
    * Retrieves the optional node for child Else. This is the <code>Opt</code> node containing the child Else, not the actual child!
@@ -328,8 +240,8 @@ public class If extends Stmt implements Cloneable {
    * @return The optional node for child Else.
    * @apilevel low-level
    */
-  public Opt<Else> getElseOptNoTransform() {
-    return (Opt<Else>) getChildNoTransform(2);
+  public Opt<Block> getElseOptNoTransform() {
+    return (Opt<Block>) getChildNoTransform(2);
   }
 
 }

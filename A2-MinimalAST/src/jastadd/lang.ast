@@ -1,31 +1,33 @@
 Program ::= FunctionDecl*;
+Block ::= Stmt*;
 
-FunctionDecl ::= <ID> IdDecl* Stmt*;
+FunctionDecl ::= <ID> IdDecl* Block;
 
 abstract Stmt;
 abstract Expr;
 
 IdDecl : Stmt ::= <ID> [Expr];
 Assign : Stmt ::= <ID> Expr;
-While : Stmt ::= Expr Stmt*;
-If : Stmt ::= Expr Stmt* [Else];
-Else : Stmt ::= Stmt*;
+While : Stmt ::= Expr Block;
+If : Stmt ::= Expr Block [Else:Block];
 FunctionCall : Stmt ::= <ID> Expr*;
 Return : Stmt ::= Expr;
+
+abstract BinOp : Expr ::= Left:Expr Right:Expr;
 
 IdUse : Expr ::= <ID>;
 FunctionUse: Expr ::= <ID> Expr*;
 Numeral : Expr ::= <NUMERAL>;
-Add : Expr ::= Left:Expr Right:Expr;
-Mul : Expr ::= Left:Expr Right:Expr;
-Sub : Expr ::= Left:Expr Right:Expr;
-Div : Expr ::= Left:Expr Right:Expr;
-Mod : Expr ::= Left:Expr Right:Expr;
+Add : BinOp; 
+Mul : BinOp;
+Sub : BinOp;
+Div : BinOp;
+Mod : BinOp;
 Neg : Expr ::= Expr; 
 
-Equals      : Expr ::= Left:Expr Right:Expr;
-NotEq       : Expr ::= Left:Expr Right:Expr;
-LessThan    : Expr ::= Left:Expr Right:Expr;
-LessEq      : Expr ::= Left:Expr Right:Expr;
-MoreThan    : Expr ::= Left:Expr Right:Expr;
-MoreEq      : Expr ::= Left:Expr Right:Expr;
+Equals      : BinOp; 
+NotEq       : BinOp;
+LessThan    : BinOp;
+LessEq      : BinOp;
+MoreThan    : BinOp;
+MoreEq      : BinOp;

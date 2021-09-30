@@ -4,8 +4,9 @@ Program
       List
         IdDecl ID="n"
           Opt
-      List
-        Assign ID="c"
-          Add
-            IdUse ID="n"
-            Numeral NUMERAL="10"
+      Block
+        List
+          Assign ID="c"
+            Add
+              IdUse ID="n"
+              Numeral NUMERAL="10"

@@ -5,9 +5,9 @@ import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:3
- * @astdecl FunctionDecl : ASTNode ::= <ID:String> IdDecl* Stmt*;
- * @production FunctionDecl : {@link ASTNode} ::= <span class="component">&lt;ID:{@link String}&gt;</span> <span class="component">{@link IdDecl}*</span> <span class="component">{@link Stmt}*</span>;
+ * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:4
+ * @astdecl FunctionDecl : ASTNode ::= <ID:String> IdDecl* Block;
+ * @production FunctionDecl : {@link ASTNode} ::= <span class="component">&lt;ID:{@link String}&gt;</span> <span class="component">{@link IdDecl}*</span> <span class="component">{@link Block}</span>;
 
  */
 public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
@@ -27,58 +27,57 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
   public void init$Children() {
     children = new ASTNode[2];
     setChild(new List(), 0);
-    setChild(new List(), 1);
   }
   /**
-   * @declaredat ASTNode:15
+   * @declaredat ASTNode:14
    */
   @ASTNodeAnnotation.Constructor(
-    name = {"ID", "IdDecl", "Stmt"},
-    type = {"String", "List<IdDecl>", "List<Stmt>"},
-    kind = {"Token", "List", "List"}
+    name = {"ID", "IdDecl", "Block"},
+    type = {"String", "List<IdDecl>", "Block"},
+    kind = {"Token", "List", "Child"}
   )
-  public FunctionDecl(String p0, List<IdDecl> p1, List<Stmt> p2) {
+  public FunctionDecl(String p0, List<IdDecl> p1, Block p2) {
     setID(p0);
     setChild(p1, 0);
     setChild(p2, 1);
   }
   /**
-   * @declaredat ASTNode:25
+   * @declaredat ASTNode:24
    */
-  public FunctionDecl(beaver.Symbol p0, List<IdDecl> p1, List<Stmt> p2) {
+  public FunctionDecl(beaver.Symbol p0, List<IdDecl> p1, Block p2) {
     setID(p0);
     setChild(p1, 0);
     setChild(p2, 1);
   }
   /** @apilevel low-level 
-   * @declaredat ASTNode:31
+   * @declaredat ASTNode:30
    */
   protected int numChildren() {
     return 2;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:35
+   * @declaredat ASTNode:34
    */
   public void flushAttrCache() {
     super.flushAttrCache();
 
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:40
+   * @declaredat ASTNode:39
    */
   public void flushCollectionCache() {
     super.flushCollectionCache();
 
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:45
+   * @declaredat ASTNode:44
    */
   public FunctionDecl clone() throws CloneNotSupportedException {
     FunctionDecl node = (FunctionDecl) super.clone();
     return node;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:50
+   * @declaredat ASTNode:49
    */
   public FunctionDecl copy() {
     try {
@@ -98,7 +97,7 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:69
+   * @declaredat ASTNode:68
    */
   @Deprecated
   public FunctionDecl fullCopy() {
@@ -109,7 +108,7 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:79
+   * @declaredat ASTNode:78
    */
   public FunctionDecl treeCopyNoTransform() {
     FunctionDecl tree = (FunctionDecl) copy();
@@ -130,7 +129,7 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:99
+   * @declaredat ASTNode:98
    */
   public FunctionDecl treeCopy() {
     FunctionDecl tree = (FunctionDecl) copy();
@@ -300,118 +299,31 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
     return getIdDeclListNoTransform();
   }
   /**
-   * Replaces the Stmt list.
-   * @param list The new list node to be used as the Stmt list.
+   * Replaces the Block child.
+   * @param node The new node to replace the Block child.
    * @apilevel high-level
    */
-  public FunctionDecl setStmtList(List<Stmt> list) {
-    setChild(list, 1);
+  public FunctionDecl setBlock(Block node) {
+    setChild(node, 1);
     return this;
   }
   /**
-   * Retrieves the number of children in the Stmt list.
-   * @return Number of children in the Stmt list.
+   * Retrieves the Block child.
+   * @return The current node used as the Block child.
    * @apilevel high-level
    */
-  public int getNumStmt() {
-    return getStmtList().getNumChild();
+  @ASTNodeAnnotation.Child(name="Block")
+  public Block getBlock() {
+    return (Block) getChild(1);
   }
   /**
-   * Retrieves the number of children in the Stmt list.
-   * Calling this method will not trigger rewrites.
-   * @return Number of children in the Stmt list.
-   * @apilevel low-level
-   */
-  public int getNumStmtNoTransform() {
-    return getStmtListNoTransform().getNumChildNoTransform();
-  }
-  /**
-   * Retrieves the element at index {@code i} in the Stmt list.
-   * @param i Index of the element to return.
-   * @return The element at position {@code i} in the Stmt list.
-   * @apilevel high-level
-   */
-  public Stmt getStmt(int i) {
-    return (Stmt) getStmtList().getChild(i);
-  }
-  /**
-   * Check whether the Stmt list has any children.
-   * @return {@code true} if it has at least one child, {@code false} otherwise.
-   * @apilevel high-level
-   */
-  public boolean hasStmt() {
-    return getStmtList().getNumChild() != 0;
-  }
-  /**
-   * Append an element to the Stmt list.
-   * @param node The element to append to the Stmt list.
-   * @apilevel high-level
-   */
-  public FunctionDecl addStmt(Stmt node) {
-    List<Stmt> list = (parent == null) ? getStmtListNoTransform() : getStmtList();
-    list.addChild(node);
-    return this;
-  }
-  /** @apilevel low-level 
-   */
-  public FunctionDecl addStmtNoTransform(Stmt node) {
-    List<Stmt> list = getStmtListNoTransform();
-    list.addChild(node);
-    return this;
-  }
-  /**
-   * Replaces the Stmt list element at index {@code i} with the new node {@code node}.
-   * @param node The new node to replace the old list element.
-   * @param i The list index of the node to be replaced.
-   * @apilevel high-level
-   */
-  public FunctionDecl setStmt(Stmt node, int i) {
-    List<Stmt> list = getStmtList();
-    list.setChild(node, i);
-    return this;
-  }
-  /**
-   * Retrieves the Stmt list.
-   * @return The node representing the Stmt list.
-   * @apilevel high-level
-   */
-  @ASTNodeAnnotation.ListChild(name="Stmt")
-  public List<Stmt> getStmtList() {
-    List<Stmt> list = (List<Stmt>) getChild(1);
-    return list;
-  }
-  /**
-   * Retrieves the Stmt list.
+   * Retrieves the Block child.
    * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the Stmt list.
+   * @return The current node used as the Block child.
    * @apilevel low-level
    */
-  public List<Stmt> getStmtListNoTransform() {
-    return (List<Stmt>) getChildNoTransform(1);
-  }
-  /**
-   * @return the element at index {@code i} in the Stmt list without
-   * triggering rewrites.
-   */
-  public Stmt getStmtNoTransform(int i) {
-    return (Stmt) getStmtListNoTransform().getChildNoTransform(i);
-  }
-  /**
-   * Retrieves the Stmt list.
-   * @return The node representing the Stmt list.
-   * @apilevel high-level
-   */
-  public List<Stmt> getStmts() {
-    return getStmtList();
-  }
-  /**
-   * Retrieves the Stmt list.
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The node representing the Stmt list.
-   * @apilevel low-level
-   */
-  public List<Stmt> getStmtsNoTransform() {
-    return getStmtListNoTransform();
+  public Block getBlockNoTransform() {
+    return (Block) getChildNoTransform(1);
   }
 
 }

@@ -5,7 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:8
+ * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:9
  * @astdecl IdDecl : Stmt ::= <ID:String> [Expr];
  * @production IdDecl : {@link Stmt} ::= <span class="component">&lt;ID:{@link String}&gt;</span> <span class="component">[{@link Expr}]</span>;
 

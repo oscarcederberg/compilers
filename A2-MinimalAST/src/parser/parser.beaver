@@ -15,24 +15,24 @@
 %terminals WHILE, IF, ELSE, RETURN;
 
 %typeof program = "Program";
+%typeof block = "Block";
 %typeof opt_functiondecl_list = "List";
 %typeof functiondecl_list = "List";
 %typeof functiondecl = "FunctionDecl";
 %typeof opt_stmt_list = "List";
 %typeof stmt_list = "List";
+%typeof stmt = "Stmt";
 %typeof opt_param_list = "List";
 %typeof param_list = "List";
 %typeof param = "IdDecl";
 %typeof opt_arg_list = "List";
 %typeof arg_list = "List";
-%typeof stmt = "Stmt";
 %typeof iddecl = "IdDecl";
 %typeof iduse = "IdUse";
 %typeof assign = "Assign";
 %typeof while = "While";
 %typeof if = "If";
 %typeof else = "Else";
-%typeof block = "List";
 %typeof functioncall = "FunctionCall";
 %typeof neg = "Neg";
 
@@ -51,10 +51,6 @@
 %typeof idfactor = "IdUse";
 %typeof functionuse = "FunctionUse";
 
-%left PLUS, MULT, SUB, MOD, DIV;
-
-%nonassoc EQUALS, EQ, NOTEQ, LESSTHAN, LESSEQ, MORETHAN, MOREEQ;
-
 %goal program;
 
 program = opt_functiondecl_list.l {: return new Program(l); :} ;
@@ -69,7 +65,7 @@ functiondecl_list =
 	| functiondecl_list.l functiondecl.d {: return l.add(d); :}
 ;
 
-functiondecl = INT ID.id LPAR opt_param_list.pl RPAR block.sl {: return new FunctionDecl(id, pl, sl); :};
+functiondecl = INT ID.id LPAR opt_param_list.pl RPAR block.b {: return new FunctionDecl(id, pl, b); :};
 
 opt_param_list = 
 	param_list.l {: return l; :}
@@ -115,14 +111,14 @@ iddecl =
 ;
 
 while =
-	WHILE LPAR expr.cond RPAR stmt.s {: return new While(cond, new List(s)); :}
+	WHILE LPAR expr.cond RPAR stmt.s {: return new While(cond, new Block(new List(s))); :}
 	| WHILE LPAR expr.cond RPAR block.l {: return new While(cond,l); :}
 ;
 
 if =
-	  IF LPAR expr.cond RPAR stmt.s {: return new If(cond, new List(s), new Opt()); :}
+	  IF LPAR expr.cond RPAR stmt.s {: return new If(cond, new Block(new List(s)), new Opt()); :}
 	| IF LPAR expr.cond RPAR block.l {: return new If(cond, l, new Opt()); :}
-	| IF LPAR expr.cond RPAR block.l else.e {: return new If(cond, l, new Opt(e)); :}
+	| IF LPAR expr.cond RPAR block.l block.e {: return new If(cond, l, new Opt(e)); :}
 ;
 
 expr =
@@ -136,8 +132,8 @@ expr =
 ;
 
 math_expr =
-	 expr.e PLUS term.t {: return new Add(e,t); :}
-	| expr.e MINUS term.t {: return new Sub(e,t); :} 
+	 math_expr.e PLUS term.t {: return new Add(e,t); :}
+	| math_expr.e MINUS term.t {: return new Sub(e,t); :} 
 	| term.t {: return t; :}
 ;
 
@@ -157,7 +153,7 @@ factor =
 ;
 
 block = 
-	LBRACE opt_stmt_list.l RBRACE {: return l; :};
+	LBRACE opt_stmt_list.l RBRACE {: return new Block(l); :};
 
 else =
 	ELSE stmt.s	{: return new Else(new List(s)); :}

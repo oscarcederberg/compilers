@@ -5,7 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:18
+ * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:20
  * @astdecl Numeral : Expr ::= <NUMERAL:String>;
  * @production Numeral : {@link Expr} ::= <span class="component">&lt;NUMERAL:{@link String}&gt;</span>;
 
