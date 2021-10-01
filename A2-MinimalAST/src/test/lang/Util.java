@@ -16,12 +16,19 @@ import java.util.Scanner;
 
 import lang.ast.LangParser;
 import lang.ast.LangScanner;
+import lang.ast.Program;
 
 /** Utility methods for running tests. */
 public final class Util {
   private static String SYS_LINE_SEP = System.getProperty("line.separator");
 
   private Util() { }
+
+  public static Program getProgram(File file) throws IOException, beaver.Parser.Exception{  
+    LangScanner scanner = new LangScanner(new FileReader(file));
+    LangParser parser = new LangParser();
+    return (Program) parser.parse(scanner);
+  }
 
   /**
    * Parses the given file

@@ -14,3 +14,4 @@ binops i ast:en!
 
 # Lab 3
 1. Lägga till tester för MSN (ny mapp/testfil)
+2. Skapa tester till PrettyPrint

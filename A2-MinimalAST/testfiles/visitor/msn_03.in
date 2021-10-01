@@ -1,0 +1,13 @@
+//depth = 0
+int test(){
+    //depth = 1
+    if(a == b){
+        //depth = 2
+        int a = 0;
+        while(a){
+            //depth = 3
+            int x = (10-1);
+            int y = a*2;
+        }
+    }
+}

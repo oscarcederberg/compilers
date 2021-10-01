@@ -8,20 +8,19 @@ import lang.ast.*;
 public class MSNVisitor extends TraversingVisitor {
 	public static int result(ASTNode n) {
 		MSNVisitor v = new MSNVisitor();	
-        return (int) n.accept(v, 0);
-	}
-
+        return (Integer) n.accept(v, 0);
+	}	
 
 	protected Object visitChildren(ASTNode node, Object data) {
-		int maxDepth = 0;
+		int maxDepth = (Integer) data;
 		for (int i = 0; i < node.getNumChild(); ++i) {
-            int depth = (int) node.getChild(i).accept(this, data);
+            int depth = (Integer) node.getChild(i).accept(this, data);
 			maxDepth = Math.max(maxDepth, depth);
 		}
-		return data;
+		return maxDepth;
 	}
 
 	public Object visit(Block node, Object data) { 
-		return visitChildren(node, (int) data + 1); 
+		return (Integer) visitChildren(node, (Integer) data + 1); 
 	}
 }
