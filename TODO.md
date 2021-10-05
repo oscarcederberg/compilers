@@ -13,5 +13,4 @@ byt ut Stmt* mot block i ast:en
 binops i ast:en!
 
 # Lab 3
-1. Lägga till tester för MSN (ny mapp/testfil)
-2. Skapa tester till PrettyPrint
+1. Name analysis (skilja på function och id?)

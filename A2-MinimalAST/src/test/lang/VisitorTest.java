@@ -27,5 +27,4 @@ public class VisitorTest {
         Assert.assertEquals(msn, MSNVisitor.result(Util.getProgram(new File(TEST_DIRECTORY, file))));
     }
 
-    
 }

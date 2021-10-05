@@ -5,15 +5,31 @@ import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:4
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/lang.ast:4
  * @astdecl FunctionDecl : ASTNode ::= <ID:String> IdDecl* Block;
  * @production FunctionDecl : {@link ASTNode} ::= <span class="component">&lt;ID:{@link String}&gt;</span> <span class="component">{@link IdDecl}*</span> <span class="component">{@link Block}</span>;
 
  */
 public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
+   * @aspect PrettyPrint
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/PrettyPrint.jrag:28
+   */
+  public void prettyPrint(PrintStream out, String ind) {
+        out.print("int ");
+        out.print(getID());
+        out.print("(");
+        for (int i = 0; i < getNumIdDecl(); i++){
+            if(i != 0) out.print(", ");
+            out.print("int ");
+            out.print(getIdDecl(i).getID());
+        }
+        out.print(") ");
+        getBlock().prettyPrint(out, ind);
+	}
+  /**
    * @aspect Visitor
-   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/Visitor.jrag:30
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/Visitor.jrag:30
    */
   public Object accept(Visitor visitor, Object data) {
 		return visitor.visit(this, data);

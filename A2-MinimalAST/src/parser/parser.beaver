@@ -10,7 +10,7 @@
 :};
 
 %terminals ID, NUMERAL, INT, LPAR, RPAR, LBRACE, RBRACE, SEMICOLON, COMMA;
-%terminals EQUALS, PLUS, MULT, MINUS, DIV, MOD;
+%terminals EQUALS, PLUS, MUL, MINUS, DIV, MOD;
 %terminals EQ, NOTEQ, LESSTHAN, LESSEQ, MORETHAN, MOREEQ;
 %terminals WHILE, IF, ELSE, RETURN;
 
@@ -43,7 +43,7 @@
 %typeof exprfactor = "Expr";
 
 %typeof add	= "Add";
-%typeof mult = "Mult";
+%typeof mul = "Mul";
 %typeof mod = "Mod";
 %typeof div = "Div";
 
@@ -138,7 +138,7 @@ math_expr =
 ;
 
 term = 
-	term.t MULT factor.f 	{: return new Mult(t,f); :}
+	term.t MUL factor.f 	{: return new Mul(t,f); :}
 	| term.t MOD factor.f 	{: return new Mod(t,f); :}
 	| term.t DIV factor.f 	{: return new Div(t,f); :}
  	| factor.f 				{: return f; :}

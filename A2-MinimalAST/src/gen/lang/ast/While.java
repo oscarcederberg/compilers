@@ -5,12 +5,22 @@ import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:11
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/lang.ast:11
  * @astdecl While : Stmt ::= Expr Block;
  * @production While : {@link Stmt} ::= <span class="component">{@link Expr}</span> <span class="component">{@link Block}</span>;
 
  */
 public class While extends Stmt implements Cloneable {
+  /**
+   * @aspect PrettyPrint
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/PrettyPrint.jrag:57
+   */
+  public void prettyPrint(PrintStream out, String ind){
+        out.print("while (");
+        getExpr().prettyPrint(out, ind);
+        out.print(") ");
+        getBlock().prettyPrint(out, ind);
+    }
   /**
    * @declaredat ASTNode:1
    */

@@ -1,0 +1,25 @@
+int main(int a, int b){
+    if(a != b){
+        while(a < b){
+            a = a + 1;
+            print();
+        }
+        return a*10;
+    }else{
+        int c = 10 + max(a,b+10);
+    }
+}
+
+int print(){
+    //do nothing
+    return 0;
+}
+
+int max(int first, int second){
+    if(first > second){
+        return first;
+    }
+    else{
+        return second;
+    }
+}

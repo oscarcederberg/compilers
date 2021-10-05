@@ -9,7 +9,7 @@ import java.lang.reflect.InvocationTargetException;
  * have a visit method.
  * @ast interface
  * @aspect Visitor
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/Visitor.jrag:6
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/Visitor.jrag:6
  */
 public interface Visitor {
 

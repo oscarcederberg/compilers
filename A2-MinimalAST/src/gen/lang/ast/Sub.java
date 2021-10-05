@@ -5,12 +5,21 @@ import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:23
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/lang.ast:23
  * @astdecl Sub : BinOp ::= Left:Expr Right:Expr;
  * @production Sub : {@link BinOp};
 
  */
 public class Sub extends BinOp implements Cloneable {
+  /**
+   * @aspect PrettyPrint
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/PrettyPrint.jrag:117
+   */
+  public void prettyPrint(PrintStream out, String ind) {
+        getLeft().prettyPrint(out, ind);
+        out.print(" - ");
+        getRight().prettyPrint(out, ind);
+    }
   /**
    * @declaredat ASTNode:1
    */

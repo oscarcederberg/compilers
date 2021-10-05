@@ -18,8 +18,8 @@ aspect PrettyPrint {
 	}
 	public void Block.prettyPrint(PrintStream out, String ind) {
         out.println("{");
-        out.print(ind);
         for (ASTNode stmt : getStmtList()) {
+            out.print(ind+"    ");
 		    stmt.prettyPrint(out, ind+"    ");
 	    }
         out.print(ind);
@@ -27,11 +27,12 @@ aspect PrettyPrint {
 	}
 	public void FunctionDecl.prettyPrint(PrintStream out, String ind) {
         out.print("int ");
-        getID().prettyPrint();
+        out.print(getID());
         out.print("(");
         for (int i = 0; i < getNumIdDecl(); i++){
             if(i != 0) out.print(", ");
-            getIdDecl(i).prettyPrint(out, ind);
+            out.print("int ");
+            out.print(getIdDecl(i).getID());
         }
         out.print(") ");
         getBlock().prettyPrint(out, ind);
@@ -39,7 +40,6 @@ aspect PrettyPrint {
     
     //Statements
     public void IdDecl.prettyPrint(PrintStream out, String ind){
-        out.print(ind);
         out.print("int ");
         out.print(getID());
         if(hasExpr()){
@@ -49,43 +49,42 @@ aspect PrettyPrint {
         out.println(";");
     }
     public void Assign.prettyPrint(PrintStream out, String ind){
-        out.print(ind);
         out.print(getID());
         out.print(" = ");
         getExpr().prettyPrint(out, ind);
         out.println(";");
     }
-
     public void While.prettyPrint(PrintStream out, String ind){
-        out.print(ind);
         out.print("while (");
         getExpr().prettyPrint(out, ind);
         out.print(") ");
         getBlock().prettyPrint(out, ind);
     }
-    
-    public void While.prettyPrint(PrintStream out, String ind){
-        out.print("while(");
-        getExpr().prettyPrint(out,ind);
-        out.print(")");
-        getBlock().prettyPrint(out,ind);
-    }
     public void If.prettyPrint(PrintStream out, String ind){
-        out.print(ind);
-        out.print("if(");
+        out.print("if (");
         getExpr().prettyPrint(out,ind);
-        out.print(")");
+        out.print(") ");
         getBlock().prettyPrint(out,ind);
         if(hasElse()){
-            out.println();
             out.print(ind);
+            out.print("else ");
             getElse().prettyPrint(out,ind);
         }
     }
-    ublic void Return.prettyPrint(PrintStream out, String ind){
-        out.print(ind);
+    public void FunctionCall.prettyPrint(PrintStream out, String ind){
+        out.print(getID());
+        out.print("(");
+        for(int i = 0; i < getNumExpr(); i++){
+            if(i != 0)
+                out.print(", ");
+            getExpr(i).prettyPrint(out, ind);
+        }
+        out.println(");");
+    }
+    public void Return.prettyPrint(PrintStream out, String ind){
         out.print("return ");
         getExpr().prettyPrint(out,ind);
+        out.println(";");
     }
 
     //Math expressions
@@ -95,13 +94,12 @@ aspect PrettyPrint {
     public void FunctionUse.prettyPrint(PrintStream out, String ind){
         out.print(getID());
         out.print("(");
-        for(int i = 0; i < getNumExpr(): i++){
+        for(int i = 0; i < getNumExpr(); i++){
             if(i != 0)
                 out.print(", ");
             getExpr(i).prettyPrint(out, ind);
         }
         out.print(")");
-        
     }
     public void Numeral.prettyPrint(PrintStream out, String ind) {
         out.print(getNUMERAL());
@@ -163,6 +161,4 @@ aspect PrettyPrint {
         out.print(" >= ");
         getRight().prettyPrint(out, ind);
     }
-
-
 }

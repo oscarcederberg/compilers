@@ -52,7 +52,7 @@ Comment = "//" [^\n\r]* [\n\r]?
 ";"           { return sym(Terminals.SEMICOLON); }  
 ","           { return sym(Terminals.COMMA); }
 "+"           { return sym(Terminals.PLUS); }  
-"*"           { return sym(Terminals.MULT); } 
+"*"           { return sym(Terminals.MUL); } 
 "-"           { return sym(Terminals.MINUS); }  
 "/"           { return sym(Terminals.DIV); } 
 "%"           { return sym(Terminals.MOD); } 

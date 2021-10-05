@@ -8,7 +8,7 @@ Program
             Numeral NUMERAL="5"
           Assign ID="abc"
             Sub
-              Mult
+              Mul
                 FunctionUse ID="test"
                   List
                     IdUse ID="a"

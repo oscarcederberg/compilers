@@ -730,7 +730,7 @@ public final class LangScanner extends beaver.Scanner {
             // fall through
           case 32: break;
           case 6:
-            { return sym(Terminals.MULT);
+            { return sym(Terminals.MUL);
             }
             // fall through
           case 33: break;

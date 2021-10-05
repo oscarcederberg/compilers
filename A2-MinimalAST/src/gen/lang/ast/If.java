@@ -5,12 +5,27 @@ import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:12
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/lang.ast:12
  * @astdecl If : Stmt ::= Expr Block [Else:Block];
  * @production If : {@link Stmt} ::= <span class="component">{@link Expr}</span> <span class="component">{@link Block}</span> <span class="component">[Else:{@link Block}]</span>;
 
  */
 public class If extends Stmt implements Cloneable {
+  /**
+   * @aspect PrettyPrint
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/PrettyPrint.jrag:63
+   */
+  public void prettyPrint(PrintStream out, String ind){
+        out.print("if (");
+        getExpr().prettyPrint(out,ind);
+        out.print(") ");
+        getBlock().prettyPrint(out,ind);
+        if(hasElse()){
+            out.print(ind);
+            out.print("else ");
+            getElse().prettyPrint(out,ind);
+        }
+    }
   /**
    * @declaredat ASTNode:1
    */

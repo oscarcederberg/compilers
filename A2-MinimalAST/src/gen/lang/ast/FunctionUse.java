@@ -5,12 +5,26 @@ import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:19
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/lang.ast:19
  * @astdecl FunctionUse : Expr ::= <ID:String> Expr*;
  * @production FunctionUse : {@link Expr} ::= <span class="component">&lt;ID:{@link String}&gt;</span> <span class="component">{@link Expr}*</span>;
 
  */
 public class FunctionUse extends Expr implements Cloneable {
+  /**
+   * @aspect PrettyPrint
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/PrettyPrint.jrag:94
+   */
+  public void prettyPrint(PrintStream out, String ind){
+        out.print(getID());
+        out.print("(");
+        for(int i = 0; i < getNumExpr(); i++){
+            if(i != 0)
+                out.print(", ");
+            getExpr(i).prettyPrint(out, ind);
+        }
+        out.print(")");
+    }
   /**
    * @declaredat ASTNode:1
    */
