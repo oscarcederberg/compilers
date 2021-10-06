@@ -54,29 +54,75 @@ aspect NameAnalysis {
 	 * @param err where to write error messages
 	 */
 	public void Program.checkNames(PrintStream err) {
-		SymbolTable symbols = new SymbolTable();
-		for (FunctionDecl child : getFunctionDecls()) {
-			int name 
-			if()
-			child.checkNames(err, symbols);
-		}
+		SymbolTable vars = new SymbolTable();
+		SymbolTable funcs = new SymbolTable();
+		
+		super.checkNames(err,vars,funcs);
 	}
 
 	/**
 	 * @param err where to write error messages
 	 * @param symbols symbol table
 	 */
-	public void ASTNode.checkNames(PrintStream err, SymbolTable symbols) {
+	public void ASTNode.checkNames(PrintStream err, SymbolTable vars, SymbolTable funcs) {
     	for (ASTNode child : astChildren()) {
-		  child.checkNames(err, symbols);
+		  child.checkNames(err, vars, funcs);
 		}
 	}
 
+	public void Block.checkNames(PrintStream err, SymbolTable vars, SymbolTable funcs){
+		vars = vars.push();
+		funcs = funcs.push();
+		super.checkNames(err,vars,funcs);
+	}
 
-	Program FunctionDecl IdDecl Assign 
+	// Uses of func symbol table
+	public void FunctionDecl.checkNames(PrintStream err, SymbolTable vars, SymbolTable funcs) {
+		if (!funcs.declare(getID())) {
+			err.format("Error at line %d: symbol \'%s\' is already declared!", getLine(), getID());
+			err.println();
+		}
+		
+		super.checkNames(err,vars,funcs);
+	}	
+	public void FunctionCall.checkNames(PrintStream err, SymbolTable vars, SymbolTable funcs) {
+		if (!funcs.lookup(getID())) {
+			err.format("Error at line %d: symbol \'%s\' has not been declared before this use!", getLine(), getID());
+			err.println();
+		}	
+		super.checkNames(err,vars,funcs);
+	}
+	public void FunctionUse.checkNames(PrintStream err, SymbolTable vars, SymbolTable funcs) {
+		if (!funcs.lookup(getID())) {
+			err.format("Error at line %d: symbol \'%s\' has not been declared before this use!", getLine(), getID());
+			err.println();
+		}
+		super.checkNames(err,vars,funcs);
+	}
 
-	FunctionCall IdUse FunctionUse
-
+	// Uses of vars symbol table
+	public void IdDecl.checkNames(PrintStream err, SymbolTable vars, SymbolTable funcs) {
+		if (!vars.declare(getID())) {
+			err.format("Error at line %d: symbol \'%s\' is already declared!", getLine(), getID());
+			err.println();
+		}
+		super.checkNames(err,vars,funcs);
+	}
+	public void Assign.checkNames(PrintStream err, SymbolTable vars, SymbolTable funcs) {
+		if (!vars.lookup(getID())) {
+			err.format("Error at line %d: symbol \'%s\' has not been declared before this use!", getLine(), getID());
+			err.println();
+		}
+		super.checkNames(err,vars,funcs);
+	}
+	public void IdUse.checkNames(PrintStream err, SymbolTable vars, SymbolTable funcs) {
+		if (!vars.lookup(getID())) {
+			err.format("Error at line %d: symbol \'%s\' has not been declared before this use!", getLine(), getID());
+			err.println();
+		}
+		super.checkNames(err,vars,funcs);
+	}
+	
 	/*
 	public void Binding.checkNames(PrintStream err, SymbolTable symbols) {
 		getExpr().checkNames(err, symbols.push());

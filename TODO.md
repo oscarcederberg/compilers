@@ -13,4 +13,4 @@ byt ut Stmt* mot block i ast:en
 binops i ast:en!
 
 # Lab 3
-1. Name analysis (skilja på function och id?)
+3.3 i assigmnet 3. tack.

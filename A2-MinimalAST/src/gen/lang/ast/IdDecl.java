@@ -1,19 +1,32 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.5 */
 package lang.ast;
 import java.io.PrintStream;
+import java.util.Set;
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/lang.ast:9
+ * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:9
  * @astdecl IdDecl : Stmt ::= <ID:String> [Expr];
  * @production IdDecl : {@link Stmt} ::= <span class="component">&lt;ID:{@link String}&gt;</span> <span class="component">[{@link Expr}]</span>;
 
  */
 public class IdDecl extends Stmt implements Cloneable {
   /**
+   * @aspect NameAnalysis
+   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/NameAnalysis.jrag:104
+   */
+  public void checkNames(PrintStream err, SymbolTable vars, SymbolTable funcs) {
+		if (!vars.declare(getID())) {
+			err.format("Error at line %d: symbol \'%s\' is already declared!", getLine(), getID());
+			err.println();
+		}
+		super.checkNames(err,vars,funcs);
+	}
+  /**
    * @aspect PrettyPrint
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/PrettyPrint.jrag:42
+   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/PrettyPrint.jrag:42
    */
   public void prettyPrint(PrintStream out, String ind){
         out.print("int ");

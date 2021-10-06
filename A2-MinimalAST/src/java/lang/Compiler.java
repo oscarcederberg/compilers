@@ -10,9 +10,6 @@ import lang.ast.Program;
 import lang.ast.LangParser;
 import lang.ast.LangScanner;
 
-/**
- * Dumps the parsed Abstract Syntax Tree of a Calc program.
- */
 public class Compiler {
 	/**
 	 * Entry point

@@ -1,11 +1,13 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.5 */
 package lang.ast;
 import java.io.PrintStream;
+import java.util.Set;
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/lang.ast:6
+ * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:6
  * @astdecl Stmt : ASTNode;
  * @production Stmt : {@link ASTNode};
 
@@ -13,7 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect Visitor
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/Visitor.jrag:36
+   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/Visitor.jrag:36
    */
   public Object accept(Visitor visitor, Object data) {
 		return visitor.visit(this, data);

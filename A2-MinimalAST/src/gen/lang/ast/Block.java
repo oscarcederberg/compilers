@@ -1,19 +1,37 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.5 */
 package lang.ast;
 import java.io.PrintStream;
+import java.util.Set;
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/lang.ast:2
+ * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:2
  * @astdecl Block : ASTNode ::= Stmt*;
  * @production Block : {@link ASTNode} ::= <span class="component">{@link Stmt}*</span>;
 
  */
 public class Block extends ASTNode<ASTNode> implements Cloneable {
   /**
+   * @aspect NameAnalysis
+   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/NameAnalysis.jrag:73
+   */
+  public void checkNames(PrintStream err, SymbolTable vars, SymbolTable funcs){
+		vars = vars.push();
+		funcs = funcs.push();
+		super.checkNames(err,vars,funcs);
+	}
+  /**
+   * @aspect Visitor
+   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/Visitor.jrag:33
+   */
+  public Object accept(Visitor visitor, Object data) {
+		return visitor.visit(this, data);
+	}
+  /**
    * @aspect PrettyPrint
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/PrettyPrint.jrag:19
+   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/PrettyPrint.jrag:19
    */
   public void prettyPrint(PrintStream out, String ind) {
         out.println("{");
@@ -23,13 +41,6 @@ public class Block extends ASTNode<ASTNode> implements Cloneable {
 	    }
         out.print(ind);
         out.println("}");
-	}
-  /**
-   * @aspect Visitor
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/Visitor.jrag:33
-   */
-  public Object accept(Visitor visitor, Object data) {
-		return visitor.visit(this, data);
 	}
   /**
    * @declaredat ASTNode:1

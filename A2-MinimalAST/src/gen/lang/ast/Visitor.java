@@ -1,15 +1,17 @@
 package lang.ast;
 
 import java.io.PrintStream;
+import java.util.Set;
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashSet;
 
 /**
  * Visitor interface for MinimalC language. Each concrete node type must
  * have a visit method.
  * @ast interface
  * @aspect Visitor
- * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/Visitor.jrag:6
+ * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/Visitor.jrag:6
  */
 public interface Visitor {
 
