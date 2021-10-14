@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="lang.TestMinValue" tests="6" skipped="0" failures="0" errors="0" timestamp="2021-10-06T15:13:34" hostname="COMFY" time="0.006">
+<testsuite name="lang.TestMinValue" tests="6" skipped="0" failures="0" errors="0" timestamp="2021-10-13T14:28:59" hostname="DESKTOP-IN52LOL" time="0.007">
   <properties/>
-  <testcase name="globalMin" classname="lang.TestMinValue" time="0.004"/>
+  <testcase name="globalMin" classname="lang.TestMinValue" time="0.005"/>
   <testcase name="nbrOfMinValues1" classname="lang.TestMinValue" time="0.0"/>
   <testcase name="nbrOfMinValues2" classname="lang.TestMinValue" time="0.0"/>
   <testcase name="nbrOfMinValues3" classname="lang.TestMinValue" time="0.0"/>
   <testcase name="localMin" classname="lang.TestMinValue" time="0.0"/>
-  <testcase name="isMinValue" classname="lang.TestMinValue" time="0.001"/>
+  <testcase name="isMinValue" classname="lang.TestMinValue" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

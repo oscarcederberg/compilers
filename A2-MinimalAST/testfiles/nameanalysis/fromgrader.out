@@ -1,0 +1,5 @@
+Error at line 22: symbol 'read' has not been declared before this use!
+Error at line 23: symbol 'read' has not been declared before this use!
+Error at line 24: symbol 'print' has not been declared before this use!
+Error at line 25: symbol 'print' has not been declared before this use!
+Error at line 27: symbol 'print' has not been declared before this use!
