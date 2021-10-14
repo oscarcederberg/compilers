@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:33
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/lang.ast:33
  * @astdecl MoreEq : BinOp ::= Left:Expr Right:Expr;
  * @production MoreEq : {@link BinOp};
 
@@ -15,7 +15,7 @@ import java.util.HashSet;
 public class MoreEq extends BinOp implements Cloneable {
   /**
    * @aspect PrettyPrint
-   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/PrettyPrint.jrag:159
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/PrettyPrint.jrag:159
    */
   public void prettyPrint(PrintStream out, String ind) {
         getLeft().prettyPrint(out, ind);

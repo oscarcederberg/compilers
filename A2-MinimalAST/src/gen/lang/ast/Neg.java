@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:26
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/lang.ast:26
  * @astdecl Neg : Expr ::= Expr;
  * @production Neg : {@link Expr} ::= <span class="component">{@link Expr}</span>;
 

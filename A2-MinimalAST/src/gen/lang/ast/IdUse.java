@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:18
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/lang.ast:18
  * @astdecl IdUse : Expr ::= <ID:String>;
  * @production IdUse : {@link Expr} ::= <span class="component">&lt;ID:{@link String}&gt;</span>;
 
@@ -15,7 +15,7 @@ import java.util.HashSet;
 public class IdUse extends Expr implements Cloneable {
   /**
    * @aspect NameAnalysis
-   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/NameAnalysis.jrag:118
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/NameAnalysis.jrag:126
    */
   public void checkNames(PrintStream err, SymbolTable vars, SymbolTable funcs) {
 		if (!vars.lookup(getID())) {
@@ -26,7 +26,7 @@ public class IdUse extends Expr implements Cloneable {
 	}
   /**
    * @aspect PrettyPrint
-   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/PrettyPrint.jrag:91
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/PrettyPrint.jrag:91
    */
   public void prettyPrint(PrintStream out, String ind){
         out.print(getID());

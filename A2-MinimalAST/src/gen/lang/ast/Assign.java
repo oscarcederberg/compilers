@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:10
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/lang.ast:10
  * @astdecl Assign : Stmt ::= <ID:String> Expr;
  * @production Assign : {@link Stmt} ::= <span class="component">&lt;ID:{@link String}&gt;</span> <span class="component">{@link Expr}</span>;
 
@@ -15,7 +15,7 @@ import java.util.HashSet;
 public class Assign extends Stmt implements Cloneable {
   /**
    * @aspect NameAnalysis
-   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/NameAnalysis.jrag:111
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/NameAnalysis.jrag:119
    */
   public void checkNames(PrintStream err, SymbolTable vars, SymbolTable funcs) {
 		if (!vars.lookup(getID())) {
@@ -26,7 +26,7 @@ public class Assign extends Stmt implements Cloneable {
 	}
   /**
    * @aspect PrettyPrint
-   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/PrettyPrint.jrag:51
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/PrettyPrint.jrag:51
    */
   public void prettyPrint(PrintStream out, String ind){
         out.print(getID());

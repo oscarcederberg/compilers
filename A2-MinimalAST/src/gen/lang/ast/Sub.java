@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:23
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/lang.ast:23
  * @astdecl Sub : BinOp ::= Left:Expr Right:Expr;
  * @production Sub : {@link BinOp};
 
@@ -15,7 +15,7 @@ import java.util.HashSet;
 public class Sub extends BinOp implements Cloneable {
   /**
    * @aspect PrettyPrint
-   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/PrettyPrint.jrag:117
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/PrettyPrint.jrag:117
    */
   public void prettyPrint(PrintStream out, String ind) {
         getLeft().prettyPrint(out, ind);

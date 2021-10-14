@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:1
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/lang.ast:1
  * @astdecl Program : ASTNode ::= FunctionDecl*;
  * @production Program : {@link ASTNode} ::= <span class="component">{@link FunctionDecl}*</span>;
 
@@ -16,29 +16,32 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @param err where to write error messages
    * @aspect NameAnalysis
-   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/NameAnalysis.jrag:56
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/NameAnalysis.jrag:60
    */
   public void checkNames(PrintStream err) {
 		SymbolTable vars = new SymbolTable();
 		SymbolTable funcs = new SymbolTable();
 		
+		funcs.declare("print");
+		funcs.declare("read");
+		
 		super.checkNames(err,vars,funcs);
 	}
   /**
-   * @aspect Visitor
-   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/Visitor.jrag:26
-   */
-  public Object accept(Visitor visitor, Object data) {
-		return visitor.visit(this, data);
-	}
-  /**
    * @aspect PrettyPrint
-   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/PrettyPrint.jrag:14
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/PrettyPrint.jrag:14
    */
   public void prettyPrint(PrintStream out, String ind) {
 	    for (ASTNode child : astChildren()) {
 		    child.prettyPrint(out, ind);
 	    }
+	}
+  /**
+   * @aspect Visitor
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/Visitor.jrag:26
+   */
+  public Object accept(Visitor visitor, Object data) {
+		return visitor.visit(this, data);
 	}
   /**
    * @declaredat ASTNode:1

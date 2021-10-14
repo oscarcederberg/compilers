@@ -31,14 +31,18 @@ aspect NameAnalysis {
 		 * @return true if name was not already declared
 		 */
 		public boolean declare(String name) {
-			return names.add(name);
+			boolean temp = names.add(name);
+			if(!temp) System.exit(1);
+			return temp;
 		}
 
 		/**
 		 * @return true if name has been declared
 		 */
 		public boolean lookup(String name) {
-			return names.contains(name) || tail.lookup(name);
+			boolean temp = names.contains(name) || tail.lookup(name);
+			if (!temp) System.exit(1);
+			return temp;
 		}
 
 		/**
@@ -56,6 +60,9 @@ aspect NameAnalysis {
 	public void Program.checkNames(PrintStream err) {
 		SymbolTable vars = new SymbolTable();
 		SymbolTable funcs = new SymbolTable();
+		
+		funcs.declare("print");
+		funcs.declare("read");
 		
 		super.checkNames(err,vars,funcs);
 	}
@@ -82,6 +89,7 @@ aspect NameAnalysis {
 			err.format("Error at line %d: symbol \'%s\' is already declared!", getLine(), getID());
 			err.println();
 		}
+		vars = vars.push();
 		
 		super.checkNames(err,vars,funcs);
 	}	

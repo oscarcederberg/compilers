@@ -14,7 +14,7 @@ import java.util.HashSet;
 public class Opt<T extends ASTNode> extends ASTNode<T> implements Cloneable {
   /**
    * @aspect Visitor
-   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/Visitor.jrag:22
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/Visitor.jrag:22
    */
   public Object accept(Visitor visitor, Object data) {
 		return visitor.visit(this, data);

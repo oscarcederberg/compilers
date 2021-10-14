@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:9
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/lang.ast:9
  * @astdecl IdDecl : Stmt ::= <ID:String> [Expr];
  * @production IdDecl : {@link Stmt} ::= <span class="component">&lt;ID:{@link String}&gt;</span> <span class="component">[{@link Expr}]</span>;
 
@@ -15,7 +15,7 @@ import java.util.HashSet;
 public class IdDecl extends Stmt implements Cloneable {
   /**
    * @aspect NameAnalysis
-   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/NameAnalysis.jrag:104
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/NameAnalysis.jrag:112
    */
   public void checkNames(PrintStream err, SymbolTable vars, SymbolTable funcs) {
 		if (!vars.declare(getID())) {
@@ -26,7 +26,7 @@ public class IdDecl extends Stmt implements Cloneable {
 	}
   /**
    * @aspect PrettyPrint
-   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/PrettyPrint.jrag:42
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/PrettyPrint.jrag:42
    */
   public void prettyPrint(PrintStream out, String ind){
         out.print("int ");

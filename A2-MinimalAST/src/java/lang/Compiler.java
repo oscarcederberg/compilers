@@ -32,7 +32,8 @@ public class Compiler {
 			LangScanner scanner = new LangScanner(new FileReader(filename));
 			LangParser parser = new LangParser();
 			Program program = (Program) parser.parse(scanner);
-			program.prettyPrint(System.out);	
+			program.checkNames(System.err);
+	
             DrAST_root_node = program; //Enable debugging with DrAST
 			//System.out.println(program.dumpTree());
 		} catch (FileNotFoundException e) {

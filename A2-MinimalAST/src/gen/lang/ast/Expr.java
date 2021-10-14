@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/lang.ast:7
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/lang.ast:7
  * @astdecl Expr : ASTNode;
  * @production Expr : {@link ASTNode};
 
@@ -15,7 +15,7 @@ import java.util.HashSet;
 public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect Visitor
-   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A2-MinimalAST/src/jastadd/Visitor.jrag:39
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A2-MinimalAST/src/jastadd/Visitor.jrag:39
    */
   public Object accept(Visitor visitor, Object data) {
 		return visitor.visit(this, data);
