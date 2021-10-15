@@ -1,0 +1,38 @@
+import java.util.Set;
+import java.util.HashSet;
+
+aspect NameAnalysis {
+	//IdUse.decl() looks upwards after its ID.
+	syn IdDecl IdUse.decl() = lookup(getID());
+	//IdUse inherits lookup from above
+	inh IdDecl IdUse.lookup(String s);
+	
+	//If a Stmt that is a subclass to a Block calls lookup, a localLookup is done inside the Block. If it fails to find the ID, it continues upwards.
+	eq Block.getStmt(int index).lookup(String s) {
+		IdDecl d = localLookup(s, index);
+		if (d != null) return d;
+		return lookup(s);
+	}
+
+	//Block inherits lookup from above
+	inh IdDecl Block.lookup(String s);
+
+	//If a Block-subclass to Program calls lookup, it will fail (As we're clearly entering the "Program space")
+	eq Program.getBlock().lookup(String s){
+		return null;
+	}
+	
+	//localLookup checks all Stmts (until index), and checks if any of them is an IdDecl that declares the ID of the name s
+	syn IdDecl Block.localLookup(String s, int index){
+        for(int i = 0 ; i < index; i++) {
+			Stmt stmt = Block.getStmt(i);
+			if(stmt instanceof IdDecl){
+				IdDecl d = (IdDecl) stmt;
+				if(d.getID().equals(s)){
+					return d;
+				}
+			}
+		}
+		return null;
+	}
+}

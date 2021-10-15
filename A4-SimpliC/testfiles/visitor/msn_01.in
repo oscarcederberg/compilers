@@ -1,0 +1,5 @@
+//depth = 0
+int test(){
+    //depth = 1
+    int a = 30198385;
+}

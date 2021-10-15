@@ -14,3 +14,6 @@ binops i ast:en!
 
 # Lab 3
 3.3 i assigmnet 3. tack.
+
+# Lab 4
+Fixa UnkownDecl. Fixa Name Analysis för funktioner.

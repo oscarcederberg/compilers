@@ -25,6 +25,11 @@ aspect NameAnalysis {
 
 	inh IdDecl IdDecl.lookup(String name);
 	syn boolean IdDecl.isMultiDeclared() = lookup(getID()) != this;
+
+	syn boolean Program.circ() {
+		System.out.println("Entering circ");
+		return !circ();
+	}
 }
 
 aspect CircularDefinitions {

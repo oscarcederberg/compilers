@@ -1,0 +1,22 @@
+Program
+  List
+    FunctionDecl ID="main"
+      List
+      Block
+        List
+          Assign ID="x"
+            Add
+              Div
+                Div
+                  Div
+                    IdUse ID="a"
+                    IdUse ID="b"
+                  Numeral NUMERAL="3"
+                Numeral NUMERAL="2"
+              Div
+                Div
+                  Numeral NUMERAL="1"
+                  Div
+                    Numeral NUMERAL="4"
+                    Numeral NUMERAL="3"
+                Numeral NUMERAL="2"

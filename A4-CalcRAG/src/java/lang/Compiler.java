@@ -31,7 +31,10 @@ public class Compiler {
 			LangScanner scanner = new LangScanner(new FileReader(filename));
 			LangParser parser = new LangParser();
 			Program program = (Program) parser.parse(scanner);
-			program.prettyPrint(System.out);
+			
+			//System.out.println(program.circ()); <- CAUSES RUNTIMEEXCEPTION
+
+			//program.prettyPrint(System.out);
 			if (!program.errors().isEmpty()) {
 				System.err.println();
 				System.err.println("Errors: ");
