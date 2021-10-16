@@ -2,37 +2,58 @@ import java.util.Set;
 import java.util.HashSet;
 
 aspect NameAnalysis {
-	//IdUse.decl() looks upwards after its ID.
-	syn IdDecl IdUse.decl() = lookup(getID());
-	//IdUse inherits lookup from above
-	inh IdDecl IdUse.lookup(String s);
+	/*
+	 *		Variables
+	 */
 	
-	//If a Stmt that is a subclass to a Block calls lookup, a localLookup is done inside the Block. If it fails to find the ID, it continues upwards.
+	syn IdDecl VariableUse.decl() = lookup(getID());
+	inh IdDecl VariableUse.lookup(String s);
+	
+	/*
+	 *		Functions
+	 */
+
+	inh IdDecl FunctionUse.lookup(String s);
+	inh IdDecl FunctionCall.lookup(String s);
+	syn IdDecl FunctionUse.decl() = lookup(getID());
+	syn IdDecl FunctionCall.decl() = lookup(getID());
+
+
 	eq Block.getStmt(int index).lookup(String s) {
 		IdDecl d = localLookup(s, index);
-		if (d != null) return d;
-		return lookup(s);
+		if (!d.isUnkown()) return d;
+		return lookup(s); // run lookup on parent
 	}
 
 	//Block inherits lookup from above
 	inh IdDecl Block.lookup(String s);
 
-	//If a Block-subclass to Program calls lookup, it will fail (As we're clearly entering the "Program space")
-	eq Program.getBlock().lookup(String s){
-		return null;
+	eq Program.getBlock().lookup(String s) {
+		for(FunctionDecl funcs : getFunctionDecls()) {
+			//parameter variables
+			for(VariableDecl param : getVariableDecls()) {
+				if (param.getIdDecl().getID().equals(s)){
+					return param;
+				}
+			}
+			//function name
+			if(funcs.getIdDecl().getID().equals(s)){
+				return decl;
+			}
+		}
+		return unknownDecl();
 	}
 	
-	//localLookup checks all Stmts (until index), and checks if any of them is an IdDecl that declares the ID of the name s
 	syn IdDecl Block.localLookup(String s, int index){
         for(int i = 0 ; i < index; i++) {
 			Stmt stmt = Block.getStmt(i);
-			if(stmt instanceof IdDecl){
-				IdDecl d = (IdDecl) stmt;
-				if(d.getID().equals(s)){
+			if(stmt instanceof VariableDecl){
+				VariableDecl d = (VariableDecl) stmt;
+				if(d.getIdDecl().getID().equals(s)){
 					return d;
 				}
 			}
 		}
-		return null;
+		return unknownDecl();
 	}
 }

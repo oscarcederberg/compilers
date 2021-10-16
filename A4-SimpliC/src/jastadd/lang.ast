@@ -2,12 +2,19 @@ Program ::= FunctionDecl*;
 Block ::= Stmt*;
 
 FunctionDecl ::= <ID> IdDecl* Block;
+UnkownFuncDecl : FunctionDecl;
 
 abstract Stmt;
 abstract Expr;
 
+//BREAKING CHANGE TODO STUFF BELOW
+// IdDecl :: = <ID>;
+// FunctionDecl :: IdDecl IdDecl* Block;
+// VariableDecl : Stmt ::= IdDecl [Expr];
+// ... osv+
+
 IdDecl : Stmt ::= <ID> [Expr];
-UnkownDecl : IdDecl;
+UnkownIdDecl : IdDecl;
 Assign : Stmt ::= <ID> Expr;
 While : Stmt ::= Expr Block;
 If : Stmt ::= Expr Block [Else:Block];

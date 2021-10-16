@@ -16,4 +16,6 @@ binops i ast:en!
 3.3 i assigmnet 3. tack.
 
 # Lab 4
-Fixa UnkownDecl. Fixa Name Analysis för funktioner.
+1. Fixa UnkownDecl. Fixa Name Analysis för funktioner.
+2. Uppdatera AST och parser med nya typer (IdDecl är children till FunctionDecl och VariableDecl (BREAKING CHANGE!!!!!))
+3. Error Collecting :)
