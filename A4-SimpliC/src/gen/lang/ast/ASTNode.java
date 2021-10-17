@@ -601,7 +601,7 @@ protected boolean unknownDecl_visited = false;
   }
 
   /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:22
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:23
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookup
    */

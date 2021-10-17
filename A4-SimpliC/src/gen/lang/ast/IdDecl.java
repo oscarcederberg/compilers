@@ -68,25 +68,26 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
     isMultiDeclared_reset();
     isUnknown_reset();
     lookup_String_reset();
+    lookup_String_reset();
     isFunction_reset();
     isVariable_reset();
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:37
+   * @declaredat ASTNode:38
    */
   public void flushCollectionCache() {
     super.flushCollectionCache();
 
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:42
+   * @declaredat ASTNode:43
    */
   public IdDecl clone() throws CloneNotSupportedException {
     IdDecl node = (IdDecl) super.clone();
     return node;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:47
+   * @declaredat ASTNode:48
    */
   public IdDecl copy() {
     try {
@@ -106,7 +107,7 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:66
+   * @declaredat ASTNode:67
    */
   @Deprecated
   public IdDecl fullCopy() {
@@ -117,7 +118,7 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:76
+   * @declaredat ASTNode:77
    */
   public IdDecl treeCopyNoTransform() {
     IdDecl tree = (IdDecl) copy();
@@ -138,7 +139,7 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:96
+   * @declaredat ASTNode:97
    */
   public IdDecl treeCopy() {
     IdDecl tree = (IdDecl) copy();
@@ -209,10 +210,10 @@ protected boolean isMultiDeclared_visited = false;
   /**
    * @attribute syn
    * @aspect NameAnalysis
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:61
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:60
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:61")
+  @ASTNodeAnnotation.Source(aspect="NameAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:60")
   public boolean isMultiDeclared() {
     ASTState state = state();
     if (isMultiDeclared_computed) {
@@ -375,7 +376,7 @@ protected boolean isVariable_visited = false;
 
   /** @apilevel internal */
   protected void collect_contributors_Program_errors(Program _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Errors.jrag:58
+    // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Errors.jrag:66
     if (isMultiDeclared()) {
       {
         Program target = (Program) (program());

@@ -285,10 +285,10 @@ protected java.util.Set localLookup_String_int_visited;
   /**
    * @attribute syn
    * @aspect NameAnalysis
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:48
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:46
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:48")
+  @ASTNodeAnnotation.Source(aspect="NameAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:46")
   public IdDecl localLookup(String s, int index) {
     java.util.List _parameters = new java.util.ArrayList(2);
     _parameters.add(s);
@@ -312,7 +312,7 @@ protected java.util.Set localLookup_String_int_visited;
   }
   /** @apilevel internal */
   private IdDecl localLookup_compute(String s, int index) {
-          for(int i = 0 ; i < index; i++) {
+          for(int i = 0 ; i <= index; i++) {
   			Stmt stmt = getStmt(i);
   			if(stmt instanceof VariableDecl){
   				VariableDecl d = (VariableDecl) stmt;
@@ -360,12 +360,12 @@ protected java.util.Set lookup_String_visited;
   protected java.util.Map lookup_String_values;
 
   /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:17
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:18
    * @apilevel internal
    */
   public IdDecl Define_lookup(ASTNode _callerNode, ASTNode _childNode, String s) {
     if (_callerNode == getStmtListNoTransform()) {
-      // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:22
+      // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:23
       int index = _callerNode.getIndexOfChild(_childNode);
       {
       		IdDecl d = localLookup(s, index);
@@ -378,7 +378,7 @@ protected java.util.Set lookup_String_visited;
     }
   }
   /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:17
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:18
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookup
    */

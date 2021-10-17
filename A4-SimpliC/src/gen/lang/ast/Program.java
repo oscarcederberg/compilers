@@ -342,22 +342,20 @@ protected boolean unknownDecl_visited = false;
     return true;
   }
   /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:17
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:18
    * @apilevel internal
    */
   public IdDecl Define_lookup(ASTNode _callerNode, ASTNode _childNode, String s) {
     if (_callerNode == getFunctionDeclListNoTransform()) {
       // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:32
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      int index = _callerNode.getIndexOfChild(_childNode);
       {
-      		for(FunctionDecl func : getFunctionDecls()) {
-      			//parameter variables
-      			for(VariableDecl param : func.getVariableDecls()) {
-      				if (param.getIdDecl().getID().equals(s)){
-      					return param.getIdDecl();
-      				}
+      		for(VariableDecl decl : getFunctionDecl(index).getVariableDecls()){
+      			if(decl.getIdDecl().getID().equals(s)){
+      				return decl.getIdDecl();
       			}
-      			//function name
+      		}
+      		for(FunctionDecl func : getFunctionDecls()) {
       			if(func.getIdDecl().getID().equals(s)){
       				return func.getIdDecl();
       			}
@@ -371,7 +369,7 @@ protected boolean unknownDecl_visited = false;
     }
   }
   /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:17
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:18
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookup
    */

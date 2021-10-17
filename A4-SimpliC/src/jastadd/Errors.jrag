@@ -31,6 +31,10 @@ aspect Errors {
 
 
 aspect ErrorContributions {
+	Assign contributes error("symbol '" + getID() + "' is not declared")
+		when decl().isUnknown()
+		to Program.errors() for program();
+
 	VariableUse contributes error("symbol '" + getID() + "' is not declared")
 		when decl().isUnknown()
 		to Program.errors() for program();
@@ -41,6 +45,10 @@ aspect ErrorContributions {
 
 	FunctionCall contributes error("symbol '" + getID() + "' is not declared")
 		when decl().isUnknown()
+		to Program.errors() for program();
+	
+	Assign contributes error("symbol '" + getID() + "' is not declared as a variable")
+		when !decl().isUnknown() && !decl().isVariable()
 		to Program.errors() for program();
 	
 	VariableUse contributes error("symbol '" + getID() + "' is not declared as a variable")
