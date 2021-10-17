@@ -11,7 +11,7 @@ import beaver.Parser.Exception;
 public class VisitorTest {
 	private static final File TEST_DIRECTORY = new File("testfiles/visitor");
     
-
+/* Legacy of minimalc (lab2)
 	@Test public void msn_01() throws IOException, Exception{
         testMSN("msn_01.in", 1);
 	}
@@ -25,6 +25,6 @@ public class VisitorTest {
     private void testMSN(String file, int msn) throws IOException, Exception{
 		Util.testValidSyntax(TEST_DIRECTORY, file);
         Assert.assertEquals(msn, MSNVisitor.result(Util.getProgram(new File(TEST_DIRECTORY, file))));
-    }
+    }*/
 
 }

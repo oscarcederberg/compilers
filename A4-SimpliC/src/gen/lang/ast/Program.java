@@ -69,10 +69,11 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
+    predefinedFunctions_reset();
     unknownDecl_reset();
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:32
+   * @declaredat ASTNode:33
    */
   public void flushCollectionCache() {
     super.flushCollectionCache();
@@ -83,14 +84,14 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
     contributorMap_Program_errors = null;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:41
+   * @declaredat ASTNode:42
    */
   public Program clone() throws CloneNotSupportedException {
     Program node = (Program) super.clone();
     return node;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:46
+   * @declaredat ASTNode:47
    */
   public Program copy() {
     try {
@@ -110,7 +111,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:65
+   * @declaredat ASTNode:66
    */
   @Deprecated
   public Program fullCopy() {
@@ -121,7 +122,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:75
+   * @declaredat ASTNode:76
    */
   public Program treeCopyNoTransform() {
     Program tree = (Program) copy();
@@ -142,7 +143,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:95
+   * @declaredat ASTNode:96
    */
   public Program treeCopy() {
     Program tree = (Program) copy();
@@ -287,6 +288,52 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_Program_
   }
 
 /** @apilevel internal */
+protected boolean predefinedFunctions_visited = false;
+  /** @apilevel internal */
+  private void predefinedFunctions_reset() {
+    predefinedFunctions_computed = false;
+    
+    predefinedFunctions_value = null;
+    predefinedFunctions_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean predefinedFunctions_computed = false;
+
+  /** @apilevel internal */
+  protected List<FunctionDecl> predefinedFunctions_value;
+
+  /**
+   * @attribute syn
+   * @aspect NameAnalysis
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:67
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
+  @ASTNodeAnnotation.Source(aspect="NameAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:67")
+  public List<FunctionDecl> predefinedFunctions() {
+    ASTState state = state();
+    if (predefinedFunctions_computed) {
+      return predefinedFunctions_value;
+    }
+    if (predefinedFunctions_visited) {
+      throw new RuntimeException("Circular definition of attribute Program.predefinedFunctions().");
+    }
+    predefinedFunctions_visited = true;
+    state().enterLazyAttribute();
+    predefinedFunctions_value = predefinedFunctions_compute();
+    predefinedFunctions_value.setParent(this);
+    predefinedFunctions_computed = true;
+    state().leaveLazyAttribute();
+    predefinedFunctions_visited = false;
+    return predefinedFunctions_value;
+  }
+  /** @apilevel internal */
+  private List<FunctionDecl> predefinedFunctions_compute() {
+  		List<FunctionDecl> list = new List<FunctionDecl>();
+  		list.add(new FunctionDecl(new IdDecl("print"), new List(), new Block(new List())));
+  		list.add(new FunctionDecl(new IdDecl("read"), new List(), new Block(new List())));
+  		return list;
+  	}
+/** @apilevel internal */
 protected boolean unknownDecl_visited = false;
   /** @apilevel internal */
   private void unknownDecl_reset() {
@@ -356,6 +403,11 @@ protected boolean unknownDecl_visited = false;
       			}
       		}
       		for(FunctionDecl func : getFunctionDecls()) {
+      			if(func.getIdDecl().getID().equals(s)){
+      				return func.getIdDecl();
+      			}
+      		}
+      		for(FunctionDecl func : predefinedFunctions()){
       			if(func.getIdDecl().getID().equals(s)){
       				return func.getIdDecl();
       			}
