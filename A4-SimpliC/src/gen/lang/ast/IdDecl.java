@@ -2,40 +2,25 @@
 package lang.ast;
 import java.io.PrintStream;
 import java.util.Set;
+import java.util.TreeSet;
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A4-SimpliC/src/jastadd/lang.ast:9
- * @astdecl IdDecl : Stmt ::= <ID:String> [Expr];
- * @production IdDecl : {@link Stmt} ::= <span class="component">&lt;ID:{@link String}&gt;</span> <span class="component">[{@link Expr}]</span>;
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:4
+ * @astdecl IdDecl : ASTNode ::= <ID:String>;
+ * @production IdDecl : {@link ASTNode} ::= <span class="component">&lt;ID:{@link String}&gt;</span>;
 
  */
-public class IdDecl extends Stmt implements Cloneable {
-  /**
-   * @aspect NameAnalysis
-   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A4-SimpliC/src/jastadd/NameAnalysis.jrag:112
-   */
-  public void checkNames(PrintStream err, SymbolTable vars, SymbolTable funcs) {
-		if (!vars.declare(getID())) {
-			err.format("Error at line %d: symbol \'%s\' is already declared!", getLine(), getID());
-			err.println();
-		}
-		super.checkNames(err,vars,funcs);
-	}
+public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect PrettyPrint
-   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A4-SimpliC/src/jastadd/PrettyPrint.jrag:42
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/PrettyPrint.jrag:28
    */
-  public void prettyPrint(PrintStream out, String ind){
-        out.print("int ");
-        out.print(getID());
-        if(hasExpr()){
-            out.print(" = ");
-            getExpr().prettyPrint(out, ind);
-        }
-        out.println(";");
+  public void prettyPrint(PrintStream out, String ind) {
+       out.print("int ");
+       out.print(getID());    
     }
   /**
    * @declaredat ASTNode:1
@@ -51,40 +36,40 @@ public class IdDecl extends Stmt implements Cloneable {
    * @declaredat ASTNode:10
    */
   public void init$Children() {
-    children = new ASTNode[1];
-    setChild(new Opt(), 0);
   }
   /**
-   * @declaredat ASTNode:14
+   * @declaredat ASTNode:12
    */
   @ASTNodeAnnotation.Constructor(
-    name = {"ID", "Expr"},
-    type = {"String", "Opt<Expr>"},
-    kind = {"Token", "Opt"}
+    name = {"ID"},
+    type = {"String"},
+    kind = {"Token"}
   )
-  public IdDecl(String p0, Opt<Expr> p1) {
+  public IdDecl(String p0) {
     setID(p0);
-    setChild(p1, 0);
   }
   /**
-   * @declaredat ASTNode:23
+   * @declaredat ASTNode:20
    */
-  public IdDecl(beaver.Symbol p0, Opt<Expr> p1) {
+  public IdDecl(beaver.Symbol p0) {
     setID(p0);
-    setChild(p1, 0);
   }
   /** @apilevel low-level 
-   * @declaredat ASTNode:28
+   * @declaredat ASTNode:24
    */
   protected int numChildren() {
-    return 1;
+    return 0;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:32
+   * @declaredat ASTNode:28
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-
+    isMultiDeclared_reset();
+    isUnknown_reset();
+    lookup_String_reset();
+    isFunction_reset();
+    isVariable_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:37
@@ -208,58 +193,208 @@ public class IdDecl extends Stmt implements Cloneable {
   public String getID() {
     return tokenString_ID != null ? tokenString_ID : "";
   }
+/** @apilevel internal */
+protected boolean isMultiDeclared_visited = false;
+  /** @apilevel internal */
+  private void isMultiDeclared_reset() {
+    isMultiDeclared_computed = false;
+    isMultiDeclared_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean isMultiDeclared_computed = false;
+
+  /** @apilevel internal */
+  protected boolean isMultiDeclared_value;
+
   /**
-   * Replaces the optional node for the Expr child. This is the <code>Opt</code>
-   * node containing the child Expr, not the actual child!
-   * @param opt The new node to be used as the optional node for the Expr child.
-   * @apilevel low-level
+   * @attribute syn
+   * @aspect NameAnalysis
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:61
    */
-  public IdDecl setExprOpt(Opt<Expr> opt) {
-    setChild(opt, 0);
-    return this;
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="NameAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:61")
+  public boolean isMultiDeclared() {
+    ASTState state = state();
+    if (isMultiDeclared_computed) {
+      return isMultiDeclared_value;
+    }
+    if (isMultiDeclared_visited) {
+      throw new RuntimeException("Circular definition of attribute IdDecl.isMultiDeclared().");
+    }
+    isMultiDeclared_visited = true;
+    state().enterLazyAttribute();
+    isMultiDeclared_value = lookup(getID()) != this;
+    isMultiDeclared_computed = true;
+    state().leaveLazyAttribute();
+    isMultiDeclared_visited = false;
+    return isMultiDeclared_value;
+  }
+/** @apilevel internal */
+protected boolean isUnknown_visited = false;
+  /** @apilevel internal */
+  private void isUnknown_reset() {
+    isUnknown_computed = false;
+    isUnknown_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean isUnknown_computed = false;
+
+  /** @apilevel internal */
+  protected boolean isUnknown_value;
+
+  /**
+   * @attribute syn
+   * @aspect UnknownDecl
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:6
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="UnknownDecl", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:6")
+  public boolean isUnknown() {
+    ASTState state = state();
+    if (isUnknown_computed) {
+      return isUnknown_value;
+    }
+    if (isUnknown_visited) {
+      throw new RuntimeException("Circular definition of attribute IdDecl.isUnknown().");
+    }
+    isUnknown_visited = true;
+    state().enterLazyAttribute();
+    isUnknown_value = false;
+    isUnknown_computed = true;
+    state().leaveLazyAttribute();
+    isUnknown_visited = false;
+    return isUnknown_value;
   }
   /**
-   * Replaces the (optional) Expr child.
-   * @param node The new node to be used as the Expr child.
-   * @apilevel high-level
+   * @attribute inh
+   * @aspect NameAnalysis
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:5
    */
-  public IdDecl setExpr(Expr node) {
-    getExprOpt().setChild(node, 0);
-    return this;
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="NameAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:5")
+  public IdDecl lookup(String s) {
+    Object _parameters = s;
+    if (lookup_String_visited == null) lookup_String_visited = new java.util.HashSet(4);
+    if (lookup_String_values == null) lookup_String_values = new java.util.HashMap(4);
+    ASTState state = state();
+    if (lookup_String_values.containsKey(_parameters)) {
+      return (IdDecl) lookup_String_values.get(_parameters);
+    }
+    if (lookup_String_visited.contains(_parameters)) {
+      throw new RuntimeException("Circular definition of attribute IdDecl.lookup(String).");
+    }
+    lookup_String_visited.add(_parameters);
+    state().enterLazyAttribute();
+    IdDecl lookup_String_value = getParent().Define_lookup(this, null, s);
+    lookup_String_values.put(_parameters, lookup_String_value);
+    state().leaveLazyAttribute();
+    lookup_String_visited.remove(_parameters);
+    return lookup_String_value;
   }
-  /**
-   * Check whether the optional Expr child exists.
-   * @return {@code true} if the optional Expr child exists, {@code false} if it does not.
-   * @apilevel high-level
-   */
-  public boolean hasExpr() {
-    return getExprOpt().getNumChild() != 0;
+/** @apilevel internal */
+protected java.util.Set lookup_String_visited;
+  /** @apilevel internal */
+  private void lookup_String_reset() {
+    lookup_String_values = null;
+    lookup_String_visited = null;
   }
+  /** @apilevel internal */
+  protected java.util.Map lookup_String_values;
+
   /**
-   * Retrieves the (optional) Expr child.
-   * @return The Expr child, if it exists. Returns {@code null} otherwise.
-   * @apilevel low-level
+   * @attribute inh
+   * @aspect UnknownDecl
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:9
    */
-  public Expr getExpr() {
-    return (Expr) getExprOpt().getChild(0);
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="UnknownDecl", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:9")
+  public boolean isFunction() {
+    ASTState state = state();
+    if (isFunction_computed) {
+      return isFunction_value;
+    }
+    if (isFunction_visited) {
+      throw new RuntimeException("Circular definition of attribute IdDecl.isFunction().");
+    }
+    isFunction_visited = true;
+    state().enterLazyAttribute();
+    isFunction_value = getParent().Define_isFunction(this, null);
+    isFunction_computed = true;
+    state().leaveLazyAttribute();
+    isFunction_visited = false;
+    return isFunction_value;
   }
-  /**
-   * Retrieves the optional node for the Expr child. This is the <code>Opt</code> node containing the child Expr, not the actual child!
-   * @return The optional node for child the Expr child.
-   * @apilevel low-level
-   */
-  @ASTNodeAnnotation.OptChild(name="Expr")
-  public Opt<Expr> getExprOpt() {
-    return (Opt<Expr>) getChild(0);
+/** @apilevel internal */
+protected boolean isFunction_visited = false;
+  /** @apilevel internal */
+  private void isFunction_reset() {
+    isFunction_computed = false;
+    isFunction_visited = false;
   }
+  /** @apilevel internal */
+  protected boolean isFunction_computed = false;
+
+  /** @apilevel internal */
+  protected boolean isFunction_value;
+
   /**
-   * Retrieves the optional node for child Expr. This is the <code>Opt</code> node containing the child Expr, not the actual child!
-   * <p><em>This method does not invoke AST transformations.</em></p>
-   * @return The optional node for child Expr.
-   * @apilevel low-level
+   * @attribute inh
+   * @aspect UnknownDecl
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:10
    */
-  public Opt<Expr> getExprOptNoTransform() {
-    return (Opt<Expr>) getChildNoTransform(0);
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="UnknownDecl", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:10")
+  public boolean isVariable() {
+    ASTState state = state();
+    if (isVariable_computed) {
+      return isVariable_value;
+    }
+    if (isVariable_visited) {
+      throw new RuntimeException("Circular definition of attribute IdDecl.isVariable().");
+    }
+    isVariable_visited = true;
+    state().enterLazyAttribute();
+    isVariable_value = getParent().Define_isVariable(this, null);
+    isVariable_computed = true;
+    state().leaveLazyAttribute();
+    isVariable_visited = false;
+    return isVariable_value;
+  }
+/** @apilevel internal */
+protected boolean isVariable_visited = false;
+  /** @apilevel internal */
+  private void isVariable_reset() {
+    isVariable_computed = false;
+    isVariable_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean isVariable_computed = false;
+
+  /** @apilevel internal */
+  protected boolean isVariable_value;
+
+  /** @apilevel internal */
+  protected void collect_contributors_Program_errors(Program _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
+    // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Errors.jrag:58
+    if (isMultiDeclared()) {
+      {
+        Program target = (Program) (program());
+        java.util.Set<ASTNode> contributors = _map.get(target);
+        if (contributors == null) {
+          contributors = new java.util.LinkedHashSet<ASTNode>();
+          _map.put((ASTNode) target, contributors);
+        }
+        contributors.add(this);
+      }
+    }
+    super.collect_contributors_Program_errors(_root, _map);
+  }
+  /** @apilevel internal */
+  protected void contributeTo_Program_errors(Set<ErrorMessage> collection) {
+    super.contributeTo_Program_errors(collection);
+    if (isMultiDeclared()) {
+      collection.add(error("symbol '" + getID() + "' is already declared!"));
+    }
   }
 
 }

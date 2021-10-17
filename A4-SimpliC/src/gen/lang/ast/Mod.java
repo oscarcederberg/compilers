@@ -2,12 +2,13 @@
 package lang.ast;
 import java.io.PrintStream;
 import java.util.Set;
+import java.util.TreeSet;
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A4-SimpliC/src/jastadd/lang.ast:25
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:27
  * @astdecl Mod : BinOp ::= Left:Expr Right:Expr;
  * @production Mod : {@link BinOp};
 
@@ -15,7 +16,7 @@ import java.util.HashSet;
 public class Mod extends BinOp implements Cloneable {
   /**
    * @aspect PrettyPrint
-   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A4-SimpliC/src/jastadd/PrettyPrint.jrag:127
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/PrettyPrint.jrag:128
    */
   public void prettyPrint(PrintStream out, String ind) {
         getLeft().prettyPrint(out, ind);

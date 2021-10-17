@@ -1,20 +1,14 @@
 Program ::= FunctionDecl*;
 Block ::= Stmt*;
 
-FunctionDecl ::= <ID> IdDecl* Block;
-UnkownFuncDecl : FunctionDecl;
+IdDecl ::= <ID>;
+UnknownDecl : IdDecl;
+FunctionDecl ::= IdDecl VariableDecl* Block;
 
 abstract Stmt;
 abstract Expr;
 
-//BREAKING CHANGE TODO STUFF BELOW
-// IdDecl :: = <ID>;
-// FunctionDecl :: IdDecl IdDecl* Block;
-// VariableDecl : Stmt ::= IdDecl [Expr];
-// ... osv+
-
-IdDecl : Stmt ::= <ID> [Expr];
-UnkownIdDecl : IdDecl;
+VariableDecl : Stmt ::= IdDecl [Expr];
 Assign : Stmt ::= <ID> Expr;
 While : Stmt ::= Expr Block;
 If : Stmt ::= Expr Block [Else:Block];
@@ -23,7 +17,7 @@ Return : Stmt ::= Expr;
 
 abstract BinOp : Expr ::= Left:Expr Right:Expr;
 
-IdUse : Expr ::= <ID>;
+VariableUse : Expr ::= <ID>;
 FunctionUse: Expr ::= <ID> Expr*;
 Numeral : Expr ::= <NUMERAL>;
 Add : BinOp; 

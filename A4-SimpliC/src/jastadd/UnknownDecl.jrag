@@ -1,16 +1,18 @@
 aspect UnknownDecl {
-	syn nta UnknownDecl Program.unknownDecl() = UnknownDecl decl = new UnknownDecl("<unknown>");
+	syn nta UnknownDecl Program.unknownDecl() = new UnknownDecl("<unknown>");
 	inh UnknownDecl ASTNode.unknownDecl();
 	eq Program.getChild().unknownDecl() = unknownDecl();
 	
 	syn boolean IdDecl.isUnknown() = false;
-	eq UnknownIdDecl.isUnknown() = true;
+	eq UnknownDecl.isUnknown() = true;
 
 	inh boolean IdDecl.isFunction();
 	inh boolean IdDecl.isVariable();
 	
 	eq FunctionDecl.getIdDecl().isFunction() = true;
 	eq VariableDecl.getIdDecl().isFunction() = false;
+	eq Program.unknownDecl().isFunction() = false;
 	eq FunctionDecl.getIdDecl().isVariable() = false;
 	eq VariableDecl.getIdDecl().isVariable() = true;
+	eq Program.unknownDecl().isVariable() = false;
 }

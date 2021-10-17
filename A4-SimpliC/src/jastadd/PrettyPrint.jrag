@@ -25,23 +25,24 @@ aspect PrettyPrint {
         out.print(ind);
         out.println("}");
 	}
+    public void IdDecl.prettyPrint(PrintStream out, String ind) {
+       out.print("int ");
+       out.print(getID());    
+    }
 	public void FunctionDecl.prettyPrint(PrintStream out, String ind) {
-        out.print("int ");
-        out.print(getID());
+        getIdDecl().prettyPrint(out, ind);
         out.print("(");
-        for (int i = 0; i < getNumIdDecl(); i++){
+        for (int i = 0; i < getNumVariableDecl(); i++){
             if(i != 0) out.print(", ");
-            out.print("int ");
-            out.print(getIdDecl(i).getID());
+            getVariableDecl(i).getIdDecl().prettyPrint(out, ind);
         }
         out.print(") ");
         getBlock().prettyPrint(out, ind);
 	}
     
     //Statements
-    public void IdDecl.prettyPrint(PrintStream out, String ind){
-        out.print("int ");
-        out.print(getID());
+    public void VariableDecl.prettyPrint(PrintStream out, String ind){
+        getIdDecl().prettyPrint(out, ind);
         if(hasExpr()){
             out.print(" = ");
             getExpr().prettyPrint(out, ind);
@@ -88,7 +89,7 @@ aspect PrettyPrint {
     }
 
     //Math expressions
-    public void IdUse.prettyPrint(PrintStream out, String ind){
+    public void VariableUse.prettyPrint(PrintStream out, String ind){
         out.print(getID());
     } 
     public void FunctionUse.prettyPrint(PrintStream out, String ind){

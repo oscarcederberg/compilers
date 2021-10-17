@@ -2,31 +2,21 @@
 package lang.ast;
 import java.io.PrintStream;
 import java.util.Set;
+import java.util.TreeSet;
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A4-SimpliC/src/jastadd/lang.ast:10
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:12
  * @astdecl Assign : Stmt ::= <ID:String> Expr;
  * @production Assign : {@link Stmt} ::= <span class="component">&lt;ID:{@link String}&gt;</span> <span class="component">{@link Expr}</span>;
 
  */
 public class Assign extends Stmt implements Cloneable {
   /**
-   * @aspect NameAnalysis
-   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A4-SimpliC/src/jastadd/NameAnalysis.jrag:119
-   */
-  public void checkNames(PrintStream err, SymbolTable vars, SymbolTable funcs) {
-		if (!vars.lookup(getID())) {
-			err.format("Error at line %d: symbol \'%s\' has not been declared before this use!", getLine(), getID());
-			err.println();
-		}
-		super.checkNames(err,vars,funcs);
-	}
-  /**
    * @aspect PrettyPrint
-   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A4-SimpliC/src/jastadd/PrettyPrint.jrag:51
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/PrettyPrint.jrag:52
    */
   public void prettyPrint(PrintStream out, String ind){
         out.print(getID());

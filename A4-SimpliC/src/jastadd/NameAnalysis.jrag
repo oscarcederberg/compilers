@@ -2,6 +2,7 @@ import java.util.Set;
 import java.util.HashSet;
 
 aspect NameAnalysis {
+	inh IdDecl IdDecl.lookup(String s);
 	/*
 	 *		Variables
 	 */
@@ -18,27 +19,27 @@ aspect NameAnalysis {
 	syn IdDecl FunctionUse.decl() = lookup(getID());
 	syn IdDecl FunctionCall.decl() = lookup(getID());
 
-
 	eq Block.getStmt(int index).lookup(String s) {
 		IdDecl d = localLookup(s, index);
-		if (!d.isUnkown()) return d;
+		if (!d.isUnknown()) return d;
 		return lookup(s); // run lookup on parent
 	}
 
+	eq Program.getChild().lookup(String s) = unknownDecl();
 	//Block inherits lookup from above
 	inh IdDecl Block.lookup(String s);
 
-	eq Program.getBlock().lookup(String s) {
-		for(FunctionDecl funcs : getFunctionDecls()) {
+	eq Program.getFunctionDecl().lookup(String s) {
+		for(FunctionDecl func : getFunctionDecls()) {
 			//parameter variables
-			for(VariableDecl param : getVariableDecls()) {
+			for(VariableDecl param : func.getVariableDecls()) {
 				if (param.getIdDecl().getID().equals(s)){
-					return param;
+					return param.getIdDecl();
 				}
 			}
 			//function name
-			if(funcs.getIdDecl().getID().equals(s)){
-				return decl;
+			if(func.getIdDecl().getID().equals(s)){
+				return func.getIdDecl();
 			}
 		}
 		return unknownDecl();
@@ -46,14 +47,16 @@ aspect NameAnalysis {
 	
 	syn IdDecl Block.localLookup(String s, int index){
         for(int i = 0 ; i < index; i++) {
-			Stmt stmt = Block.getStmt(i);
+			Stmt stmt = getStmt(i);
 			if(stmt instanceof VariableDecl){
 				VariableDecl d = (VariableDecl) stmt;
 				if(d.getIdDecl().getID().equals(s)){
-					return d;
+					return d.getIdDecl();
 				}
 			}
 		}
 		return unknownDecl();
 	}
+
+	syn boolean IdDecl.isMultiDeclared() = lookup(getID()) != this;
 }

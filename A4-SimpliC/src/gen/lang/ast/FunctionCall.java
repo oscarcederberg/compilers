@@ -2,31 +2,21 @@
 package lang.ast;
 import java.io.PrintStream;
 import java.util.Set;
+import java.util.TreeSet;
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /home/knos/repos/work/p021-oscar-kasper/A4-SimpliC/src/jastadd/lang.ast:13
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:15
  * @astdecl FunctionCall : Stmt ::= <ID:String> Expr*;
  * @production FunctionCall : {@link Stmt} ::= <span class="component">&lt;ID:{@link String}&gt;</span> <span class="component">{@link Expr}*</span>;
 
  */
 public class FunctionCall extends Stmt implements Cloneable {
   /**
-   * @aspect NameAnalysis
-   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A4-SimpliC/src/jastadd/NameAnalysis.jrag:96
-   */
-  public void checkNames(PrintStream err, SymbolTable vars, SymbolTable funcs) {
-		if (!funcs.lookup(getID())) {
-			err.format("Error at line %d: symbol \'%s\' has not been declared before this use!", getLine(), getID());
-			err.println();
-		}	
-		super.checkNames(err,vars,funcs);
-	}
-  /**
    * @aspect PrettyPrint
-   * @declaredat /home/knos/repos/work/p021-oscar-kasper/A4-SimpliC/src/jastadd/PrettyPrint.jrag:74
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/PrettyPrint.jrag:75
    */
   public void prettyPrint(PrintStream out, String ind){
         out.print(getID());
@@ -85,24 +75,25 @@ public class FunctionCall extends Stmt implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-
+    decl_reset();
+    lookup_String_reset();
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:37
+   * @declaredat ASTNode:38
    */
   public void flushCollectionCache() {
     super.flushCollectionCache();
 
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:42
+   * @declaredat ASTNode:43
    */
   public FunctionCall clone() throws CloneNotSupportedException {
     FunctionCall node = (FunctionCall) super.clone();
     return node;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:47
+   * @declaredat ASTNode:48
    */
   public FunctionCall copy() {
     try {
@@ -122,7 +113,7 @@ public class FunctionCall extends Stmt implements Cloneable {
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:66
+   * @declaredat ASTNode:67
    */
   @Deprecated
   public FunctionCall fullCopy() {
@@ -133,7 +124,7 @@ public class FunctionCall extends Stmt implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:76
+   * @declaredat ASTNode:77
    */
   public FunctionCall treeCopyNoTransform() {
     FunctionCall tree = (FunctionCall) copy();
@@ -154,7 +145,7 @@ public class FunctionCall extends Stmt implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:96
+   * @declaredat ASTNode:97
    */
   public FunctionCall treeCopy() {
     FunctionCall tree = (FunctionCall) copy();
@@ -322,6 +313,118 @@ public class FunctionCall extends Stmt implements Cloneable {
    */
   public List<Expr> getExprsNoTransform() {
     return getExprListNoTransform();
+  }
+/** @apilevel internal */
+protected boolean decl_visited = false;
+  /** @apilevel internal */
+  private void decl_reset() {
+    decl_computed = false;
+    
+    decl_value = null;
+    decl_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean decl_computed = false;
+
+  /** @apilevel internal */
+  protected IdDecl decl_value;
+
+  /**
+   * @attribute syn
+   * @aspect NameAnalysis
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:20
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="NameAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:20")
+  public IdDecl decl() {
+    ASTState state = state();
+    if (decl_computed) {
+      return decl_value;
+    }
+    if (decl_visited) {
+      throw new RuntimeException("Circular definition of attribute FunctionCall.decl().");
+    }
+    decl_visited = true;
+    state().enterLazyAttribute();
+    decl_value = lookup(getID());
+    decl_computed = true;
+    state().leaveLazyAttribute();
+    decl_visited = false;
+    return decl_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect NameAnalysis
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:18
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="NameAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:18")
+  public IdDecl lookup(String s) {
+    Object _parameters = s;
+    if (lookup_String_visited == null) lookup_String_visited = new java.util.HashSet(4);
+    if (lookup_String_values == null) lookup_String_values = new java.util.HashMap(4);
+    ASTState state = state();
+    if (lookup_String_values.containsKey(_parameters)) {
+      return (IdDecl) lookup_String_values.get(_parameters);
+    }
+    if (lookup_String_visited.contains(_parameters)) {
+      throw new RuntimeException("Circular definition of attribute FunctionCall.lookup(String).");
+    }
+    lookup_String_visited.add(_parameters);
+    state().enterLazyAttribute();
+    IdDecl lookup_String_value = getParent().Define_lookup(this, null, s);
+    lookup_String_values.put(_parameters, lookup_String_value);
+    state().leaveLazyAttribute();
+    lookup_String_visited.remove(_parameters);
+    return lookup_String_value;
+  }
+/** @apilevel internal */
+protected java.util.Set lookup_String_visited;
+  /** @apilevel internal */
+  private void lookup_String_reset() {
+    lookup_String_values = null;
+    lookup_String_visited = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map lookup_String_values;
+
+  /** @apilevel internal */
+  protected void collect_contributors_Program_errors(Program _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
+    // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Errors.jrag:42
+    if (decl().isUnknown()) {
+      {
+        Program target = (Program) (program());
+        java.util.Set<ASTNode> contributors = _map.get(target);
+        if (contributors == null) {
+          contributors = new java.util.LinkedHashSet<ASTNode>();
+          _map.put((ASTNode) target, contributors);
+        }
+        contributors.add(this);
+      }
+    }
+    // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Errors.jrag:54
+    if (!decl().isUnknown() && !decl().isFunction()) {
+      {
+        Program target = (Program) (program());
+        java.util.Set<ASTNode> contributors = _map.get(target);
+        if (contributors == null) {
+          contributors = new java.util.LinkedHashSet<ASTNode>();
+          _map.put((ASTNode) target, contributors);
+        }
+        contributors.add(this);
+      }
+    }
+    super.collect_contributors_Program_errors(_root, _map);
+  }
+  /** @apilevel internal */
+  protected void contributeTo_Program_errors(Set<ErrorMessage> collection) {
+    super.contributeTo_Program_errors(collection);
+    if (decl().isUnknown()) {
+      collection.add(error("symbol '" + getID() + "' is not declared"));
+    }
+    if (!decl().isUnknown() && !decl().isFunction()) {
+      collection.add(error("symbol '" + getID() + "' is not declared as a function"));
+    }
   }
 
 }
