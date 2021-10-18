@@ -1,35 +1,38 @@
 Program
   List
-    FunctionDecl ID="gcd1"
+    FunctionDecl
+      IdDecl ID="gcd1"
       List
-        IdDecl ID="a"
+        VariableDecl
+          IdDecl ID="a"
           Opt
-        IdDecl ID="b"
+        VariableDecl
+          IdDecl ID="b"
           Opt
       Block
         List
           While
             NotEq
-              IdUse ID="a"
-              IdUse ID="b"
+              VariableUse ID="a"
+              VariableUse ID="b"
             Block
               List
                 If
                   MoreThan
-                    IdUse ID="a"
-                    IdUse ID="b"
+                    VariableUse ID="a"
+                    VariableUse ID="b"
                   Block
                     List
                       Assign ID="a"
                         Sub
-                          IdUse ID="a"
-                          IdUse ID="b"
+                          VariableUse ID="a"
+                          VariableUse ID="b"
                   Opt
                     Block
                       List
                         Assign ID="b"
                           Sub
-                            IdUse ID="b"
-                            IdUse ID="a"
+                            VariableUse ID="b"
+                            VariableUse ID="a"
           Return
-            IdUse ID="a"
+            VariableUse ID="a"

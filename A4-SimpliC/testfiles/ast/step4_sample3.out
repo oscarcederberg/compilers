@@ -1,12 +1,15 @@
 Program
   List
-    FunctionDecl ID="main"
+    FunctionDecl
+      IdDecl ID="main"
       List
       Block
         List
-          IdDecl ID="a"
+          VariableDecl
+            IdDecl ID="a"
             Opt
-          IdDecl ID="b"
+          VariableDecl
+            IdDecl ID="b"
             Opt
           Assign ID="a"
             FunctionUse ID="read"
@@ -18,27 +21,28 @@ Program
             List
               FunctionUse ID="gcd1"
                 List
-                  IdUse ID="a"
-                  IdUse ID="b"
+                  VariableUse ID="a"
+                  VariableUse ID="b"
           FunctionCall ID="print"
             List
               FunctionUse ID="gcd2"
                 List
-                  IdUse ID="a"
-                  IdUse ID="b"
-          IdDecl ID="diff"
+                  VariableUse ID="a"
+                  VariableUse ID="b"
+          VariableDecl
+            IdDecl ID="diff"
             Opt
               Sub
                 FunctionUse ID="gcd1"
                   List
-                    IdUse ID="a"
-                    IdUse ID="b"
+                    VariableUse ID="a"
+                    VariableUse ID="b"
                 FunctionUse ID="gcd2"
                   List
-                    IdUse ID="a"
-                    IdUse ID="b"
+                    VariableUse ID="a"
+                    VariableUse ID="b"
           FunctionCall ID="print"
             List
-              IdUse ID="diff"
+              VariableUse ID="diff"
           Return
             Numeral NUMERAL="0"

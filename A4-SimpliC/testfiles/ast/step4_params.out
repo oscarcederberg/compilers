@@ -1,12 +1,14 @@
 Program
   List
-    FunctionDecl ID="a"
+    FunctionDecl
+      IdDecl ID="a"
       List
-        IdDecl ID="n"
+        VariableDecl
+          IdDecl ID="n"
           Opt
       Block
         List
           Assign ID="c"
             Add
-              IdUse ID="n"
+              VariableUse ID="n"
               Numeral NUMERAL="10"
