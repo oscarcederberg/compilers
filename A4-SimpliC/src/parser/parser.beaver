@@ -71,7 +71,7 @@ functiondecl_list =
 	| functiondecl_list.l functiondecl.d {: return l.add(d); :}
 ;
 
-functiondecl = INT iddecl.id LPAR opt_param_list.pl RPAR block.b {: return new FunctionDecl(id, pl, b); :};
+functiondecl = INT iddecl.id LPAR opt_param_list.pl RPAR block.b {: return new FunctionDecl(new IntType(), id, pl, b); :};
 
 opt_param_list = 
 	param_list.l {: return l; :}
@@ -112,8 +112,8 @@ stmt =
 ;
 
 variabledecl =
-	INT iddecl.id SEMICOLON {: return new VariableDecl(id, new Opt()); :}
-	| INT iddecl.id EQUALS expr.e SEMICOLON {: return new VariableDecl(id, new Opt(e)); :}
+	INT iddecl.id SEMICOLON {: return new VariableDecl(new IntType(), id, new Opt()); :}
+	| INT iddecl.id EQUALS expr.e SEMICOLON {: return new VariableDecl(new IntType(), id, new Opt(e)); :}
 ;
 
 while =

@@ -3,12 +3,13 @@ Block ::= Stmt*;
 
 IdDecl ::= <ID>;
 UnknownDecl : IdDecl;
-FunctionDecl ::= IdDecl VariableDecl* Block;
+FunctionDecl ::= Type IdDecl VariableDecl* Block;
+UnkownFunction : FunctionDecl;
 
 abstract Stmt;
 abstract Expr;
 
-VariableDecl : Stmt ::= IdDecl [Expr];
+VariableDecl : Stmt ::= Type IdDecl [Expr];
 Assign : Stmt ::= <ID> Expr;
 While : Stmt ::= Expr Block;
 If : Stmt ::= Expr Block [Else:Block];
@@ -20,6 +21,7 @@ abstract BinOp : Expr ::= Left:Expr Right:Expr;
 VariableUse : Expr ::= <ID>;
 FunctionUse: Expr ::= <ID> Expr*;
 Numeral : Expr ::= <NUMERAL>;
+
 Add : BinOp; 
 Mul : BinOp;
 Sub : BinOp;
