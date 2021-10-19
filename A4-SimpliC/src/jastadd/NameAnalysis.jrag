@@ -68,7 +68,7 @@ aspect NameAnalysis {
 
 	syn nta List<FunctionDecl> Program.predefinedFunctions() {
 		List<FunctionDecl> list = new List<FunctionDecl>();
-		list.add(new FunctionDecl(new IdDecl("print"), new List(), new Block(new List())));
+		list.add(new FunctionDecl(new IdDecl("print"), new List(new VariableDecl(new IdDecl("input"), new Opt())), new Block(new List())));
 		list.add(new FunctionDecl(new IdDecl("read"), new List(), new Block(new List())));
 		return list;
 	}

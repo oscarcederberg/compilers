@@ -188,10 +188,10 @@ protected boolean isUnknown_visited = false;
   /**
    * @attribute syn
    * @aspect UnknownDecl
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:7
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:11
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnknownDecl", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:6")
+  @ASTNodeAnnotation.Source(aspect="UnknownDecl", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:10")
   public boolean isUnknown() {
     ASTState state = state();
     if (isUnknown_computed) {

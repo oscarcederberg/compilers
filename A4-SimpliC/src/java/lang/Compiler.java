@@ -9,6 +9,7 @@ import beaver.Parser.Exception;
 import lang.ast.Program;
 import lang.ast.LangParser;
 import lang.ast.LangScanner;
+import lang.ast.ErrorMessage;
 
 public class Compiler {
 	/**
@@ -32,7 +33,10 @@ public class Compiler {
 			LangScanner scanner = new LangScanner(new FileReader(filename));
 			LangParser parser = new LangParser();
 			Program program = (Program) parser.parse(scanner);
-	
+			for (ErrorMessage m : program.errors()) {
+				System.out.println(m);
+			}
+			if(!program.errors().isEmpty()) System.exit(1);
             DrAST_root_node = program; //Enable debugging with DrAST
 			//System.out.println(program.dumpTree());
 		} catch (FileNotFoundException e) {

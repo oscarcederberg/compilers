@@ -71,7 +71,7 @@ functiondecl_list =
 	| functiondecl_list.l functiondecl.d {: return l.add(d); :}
 ;
 
-functiondecl = INT iddecl.id LPAR opt_param_list.pl RPAR block.b {: return new FunctionDecl(new IntType(), id, pl, b); :};
+functiondecl = INT iddecl.id LPAR opt_param_list.pl RPAR block.b {: return new FunctionDecl(id, pl, b); :};
 
 opt_param_list = 
 	param_list.l {: return l; :}
@@ -112,8 +112,8 @@ stmt =
 ;
 
 variabledecl =
-	INT iddecl.id SEMICOLON {: return new VariableDecl(new IntType(), id, new Opt()); :}
-	| INT iddecl.id EQUALS expr.e SEMICOLON {: return new VariableDecl(new IntType(), id, new Opt(e)); :}
+	INT iddecl.id SEMICOLON {: return new VariableDecl(id, new Opt()); :}
+	| INT iddecl.id EQUALS expr.e SEMICOLON {: return new VariableDecl(id, new Opt(e)); :}
 ;
 
 while =
@@ -122,7 +122,7 @@ while =
 ;
 
 if =
-	  IF LPAR expr.cond RPAR stmt.s {: return new If(cond, new Block(new List(s)), new Opt()); :}
+	IF LPAR expr.cond RPAR stmt.s {: return new If(cond, new Block(new List(s)), new Opt()); :}
 	| IF LPAR expr.cond RPAR block.l {: return new If(cond, l, new Opt()); :}
 	| IF LPAR expr.cond RPAR block.l ELSE block.e {: return new If(cond, l, new Opt(e)); :}
 ;
@@ -138,7 +138,7 @@ expr =
 ;
 
 math_expr =
-	 math_expr.e PLUS term.t {: return new Add(e,t); :}
+	math_expr.e PLUS term.t {: return new Add(e,t); :}
 	| math_expr.e MINUS term.t {: return new Sub(e,t); :} 
 	| term.t {: return t; :}
 ;

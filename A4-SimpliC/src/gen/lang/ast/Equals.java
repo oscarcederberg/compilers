@@ -8,7 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:30
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:32
  * @astdecl Equals : BinOp ::= Left:Expr Right:Expr;
  * @production Equals : {@link BinOp};
 
@@ -62,7 +62,7 @@ public class Equals extends BinOp implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-    type_reset();
+    expectedType_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:32
@@ -201,42 +201,42 @@ public class Equals extends BinOp implements Cloneable {
     return (Expr) getChildNoTransform(1);
   }
 /** @apilevel internal */
-protected boolean type_visited = false;
+protected boolean expectedType_visited = false;
   /** @apilevel internal */
-  private void type_reset() {
-    type_computed = false;
+  private void expectedType_reset() {
+    expectedType_computed = false;
     
-    type_value = null;
-    type_visited = false;
+    expectedType_value = null;
+    expectedType_visited = false;
   }
   /** @apilevel internal */
-  protected boolean type_computed = false;
+  protected boolean expectedType_computed = false;
 
   /** @apilevel internal */
-  protected Type type_value;
+  protected Type expectedType_value;
 
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:17
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:28
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:15")
-  public Type type() {
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:27")
+  public Type expectedType() {
     ASTState state = state();
-    if (type_computed) {
-      return type_value;
+    if (expectedType_computed) {
+      return expectedType_value;
     }
-    if (type_visited) {
-      throw new RuntimeException("Circular definition of attribute Expr.type().");
+    if (expectedType_visited) {
+      throw new RuntimeException("Circular definition of attribute Expr.expectedType().");
     }
-    type_visited = true;
+    expectedType_visited = true;
     state().enterLazyAttribute();
-    type_value = boolType();
-    type_computed = true;
+    expectedType_value = boolType();
+    expectedType_computed = true;
     state().leaveLazyAttribute();
-    type_visited = false;
-    return type_value;
+    expectedType_visited = false;
+    return expectedType_value;
   }
 
 }

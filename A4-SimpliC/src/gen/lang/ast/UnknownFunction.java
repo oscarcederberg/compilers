@@ -8,37 +8,16 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:6
- * @astdecl FunctionDecl : ASTNode ::= IdDecl VariableDecl* Block;
- * @production FunctionDecl : {@link ASTNode} ::= <span class="component">{@link IdDecl}</span> <span class="component">{@link VariableDecl}*</span> <span class="component">{@link Block}</span>;
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:7
+ * @astdecl UnknownFunction : FunctionDecl ::= IdDecl VariableDecl* Block;
+ * @production UnknownFunction : {@link FunctionDecl};
 
  */
-public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
-  /**
-   * @aspect PrettyPrint
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/PrettyPrint.jrag:32
-   */
-  public void prettyPrint(PrintStream out, String ind) {
-        getIdDecl().prettyPrint(out, ind);
-        out.print("(");
-        for (int i = 0; i < getNumVariableDecl(); i++){
-            if(i != 0) out.print(", ");
-            getVariableDecl(i).getIdDecl().prettyPrint(out, ind);
-        }
-        out.print(") ");
-        getBlock().prettyPrint(out, ind);
-	}
-  /**
-   * @aspect Visitor
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Visitor.jrag:34
-   */
-  public Object accept(Visitor visitor, Object data) {
-		return visitor.visit(this, data);
-	}
+public class UnknownFunction extends FunctionDecl implements Cloneable {
   /**
    * @declaredat ASTNode:1
    */
-  public FunctionDecl() {
+  public UnknownFunction() {
     super();
   }
   /**
@@ -60,7 +39,7 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
     type = {"IdDecl", "List<VariableDecl>", "Block"},
     kind = {"Child", "List", "Child"}
   )
-  public FunctionDecl(IdDecl p0, List<VariableDecl> p1, Block p2) {
+  public UnknownFunction(IdDecl p0, List<VariableDecl> p1, Block p2) {
     setChild(p0, 0);
     setChild(p1, 1);
     setChild(p2, 2);
@@ -88,16 +67,16 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
   /** @apilevel internal 
    * @declaredat ASTNode:39
    */
-  public FunctionDecl clone() throws CloneNotSupportedException {
-    FunctionDecl node = (FunctionDecl) super.clone();
+  public UnknownFunction clone() throws CloneNotSupportedException {
+    UnknownFunction node = (UnknownFunction) super.clone();
     return node;
   }
   /** @apilevel internal 
    * @declaredat ASTNode:44
    */
-  public FunctionDecl copy() {
+  public UnknownFunction copy() {
     try {
-      FunctionDecl node = (FunctionDecl) clone();
+      UnknownFunction node = (UnknownFunction) clone();
       node.parent = null;
       if (children != null) {
         node.children = (ASTNode[]) children.clone();
@@ -116,7 +95,7 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    * @declaredat ASTNode:63
    */
   @Deprecated
-  public FunctionDecl fullCopy() {
+  public UnknownFunction fullCopy() {
     return treeCopyNoTransform();
   }
   /**
@@ -126,8 +105,8 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    * @apilevel low-level
    * @declaredat ASTNode:73
    */
-  public FunctionDecl treeCopyNoTransform() {
-    FunctionDecl tree = (FunctionDecl) copy();
+  public UnknownFunction treeCopyNoTransform() {
+    UnknownFunction tree = (UnknownFunction) copy();
     if (children != null) {
       for (int i = 0; i < children.length; ++i) {
         ASTNode child = (ASTNode) children[i];
@@ -147,8 +126,8 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    * @apilevel low-level
    * @declaredat ASTNode:93
    */
-  public FunctionDecl treeCopy() {
-    FunctionDecl tree = (FunctionDecl) copy();
+  public UnknownFunction treeCopy() {
+    UnknownFunction tree = (UnknownFunction) copy();
     if (children != null) {
       for (int i = 0; i < children.length; ++i) {
         ASTNode child = (ASTNode) getChild(i);
@@ -165,7 +144,7 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    * @param node The new node to replace the IdDecl child.
    * @apilevel high-level
    */
-  public FunctionDecl setIdDecl(IdDecl node) {
+  public UnknownFunction setIdDecl(IdDecl node) {
     setChild(node, 0);
     return this;
   }
@@ -192,7 +171,7 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    * @param list The new list node to be used as the VariableDecl list.
    * @apilevel high-level
    */
-  public FunctionDecl setVariableDeclList(List<VariableDecl> list) {
+  public UnknownFunction setVariableDeclList(List<VariableDecl> list) {
     setChild(list, 1);
     return this;
   }
@@ -235,14 +214,14 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    * @param node The element to append to the VariableDecl list.
    * @apilevel high-level
    */
-  public FunctionDecl addVariableDecl(VariableDecl node) {
+  public UnknownFunction addVariableDecl(VariableDecl node) {
     List<VariableDecl> list = (parent == null) ? getVariableDeclListNoTransform() : getVariableDeclList();
     list.addChild(node);
     return this;
   }
   /** @apilevel low-level 
    */
-  public FunctionDecl addVariableDeclNoTransform(VariableDecl node) {
+  public UnknownFunction addVariableDeclNoTransform(VariableDecl node) {
     List<VariableDecl> list = getVariableDeclListNoTransform();
     list.addChild(node);
     return this;
@@ -253,7 +232,7 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    * @param i The list index of the node to be replaced.
    * @apilevel high-level
    */
-  public FunctionDecl setVariableDecl(VariableDecl node, int i) {
+  public UnknownFunction setVariableDecl(VariableDecl node, int i) {
     List<VariableDecl> list = getVariableDeclList();
     list.setChild(node, i);
     return this;
@@ -306,7 +285,7 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    * @param node The new node to replace the Block child.
    * @apilevel high-level
    */
-  public FunctionDecl setBlock(Block node) {
+  public UnknownFunction setBlock(Block node) {
     setChild(node, 2);
     return this;
   }
@@ -344,7 +323,7 @@ protected boolean isUnknown_visited = false;
   /**
    * @attribute syn
    * @aspect UnknownDecl
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:13
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:14
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
   @ASTNodeAnnotation.Source(aspect="UnknownDecl", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:13")
@@ -358,95 +337,11 @@ protected boolean isUnknown_visited = false;
     }
     isUnknown_visited = true;
     state().enterLazyAttribute();
-    isUnknown_value = false;
+    isUnknown_value = true;
     isUnknown_computed = true;
     state().leaveLazyAttribute();
     isUnknown_visited = false;
     return isUnknown_value;
-  }
-  /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:18
-   * @apilevel internal
-   */
-  public Type Define_type(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getIdDeclNoTransform()) {
-      // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:37
-      return intType();
-    }
-    else {
-      return getParent().Define_type(this, _callerNode);
-    }
-  }
-  /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:18
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute type
-   */
-  protected boolean canDefine_type(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:16
-   * @apilevel internal
-   */
-  public boolean Define_isFunction(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getIdDeclNoTransform()) {
-      // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:20
-      return true;
-    }
-    else {
-      return getParent().Define_isFunction(this, _callerNode);
-    }
-  }
-  /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:16
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute isFunction
-   */
-  protected boolean canDefine_isFunction(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:17
-   * @apilevel internal
-   */
-  public boolean Define_isVariable(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getIdDeclNoTransform()) {
-      // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:23
-      return false;
-    }
-    else {
-      return getParent().Define_isVariable(this, _callerNode);
-    }
-  }
-  /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:17
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute isVariable
-   */
-  protected boolean canDefine_isVariable(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:18
-   * @apilevel internal
-   */
-  public FunctionDecl Define_function(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getIdDeclNoTransform()) {
-      // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:26
-      return this;
-    }
-    else {
-      return getParent().Define_function(this, _callerNode);
-    }
-  }
-  /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:18
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute function
-   */
-  protected boolean canDefine_function(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
   }
 
 }

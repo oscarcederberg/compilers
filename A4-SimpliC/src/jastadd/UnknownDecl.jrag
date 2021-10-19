@@ -3,9 +3,9 @@ aspect UnknownDecl {
 	inh UnknownDecl ASTNode.unknownDecl();
 	eq Program.getChild().unknownDecl() = unknownDecl();
 	
-	syn nta UnknownFunction Program.unkownFunction() = new UnknownFunction(unkownType(), unkownDecl(), new List(), new Block(new List()));
-	inh UnknownDecl ASTNode.unkownFunction();
-	eq Program.getChild().unknownFunction()) = unknownFunction();
+	syn nta UnknownFunction Program.unknownFunction() = new UnknownFunction(unknownDecl(), new List(), new Block(new List()));
+	inh UnknownFunction ASTNode.unknownFunction();
+	eq Program.getChild().unknownFunction() = unknownFunction();
 	
 	syn boolean IdDecl.isUnknown() = false;
 	eq UnknownDecl.isUnknown() = true;
@@ -24,6 +24,6 @@ aspect UnknownDecl {
 	eq VariableDecl.getIdDecl().isVariable() = true;
 	eq Program.unknownDecl().isVariable() = false;
 	eq FunctionDecl.getIdDecl().function() = this;
-	eq VariableDecl.getIdDecl().function() = unkownFunction();
-	eq Program.unkownDecl().function() = unkownFunction();
+	eq VariableDecl.getIdDecl().function() = unknownFunction();
+	eq Program.unknownDecl().function() = unknownFunction();
 }

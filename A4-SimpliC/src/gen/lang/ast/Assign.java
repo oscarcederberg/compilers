@@ -8,7 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:12
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:13
  * @astdecl Assign : Stmt ::= <ID:String> Expr;
  * @production Assign : {@link Stmt} ::= <span class="component">&lt;ID:{@link String}&gt;</span> <span class="component">{@link Expr}</span>;
 
@@ -296,6 +296,27 @@ protected java.util.Set lookup_String_visited;
   /** @apilevel internal */
   protected java.util.Map lookup_String_values;
 
+  /**
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:18
+   * @apilevel internal
+   */
+  public Type Define_type(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getExprNoTransform()) {
+      // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:20
+      return intType();
+    }
+    else {
+      return getParent().Define_type(this, _callerNode);
+    }
+  }
+  /**
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:18
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute type
+   */
+  protected boolean canDefine_type(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
   /** @apilevel internal */
   protected void collect_contributors_Program_errors(Program _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
     // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Errors.jrag:34

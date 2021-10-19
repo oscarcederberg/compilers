@@ -8,7 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:11
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:12
  * @astdecl VariableDecl : Stmt ::= IdDecl [Expr];
  * @production VariableDecl : {@link Stmt} ::= <span class="component">{@link IdDecl}</span> <span class="component">[{@link Expr}]</span>;
 
@@ -231,12 +231,37 @@ public class VariableDecl extends Stmt implements Cloneable {
     return (Opt<Expr>) getChildNoTransform(1);
   }
   /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:9
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:18
+   * @apilevel internal
+   */
+  public Type Define_type(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getIdDeclNoTransform()) {
+      // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:36
+      return intType();
+    }
+    else if (_callerNode == getExprOptNoTransform()) {
+      // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:19
+      return intType();
+    }
+    else {
+      return getParent().Define_type(this, _callerNode);
+    }
+  }
+  /**
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:18
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute type
+   */
+  protected boolean canDefine_type(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:16
    * @apilevel internal
    */
   public boolean Define_isFunction(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getIdDeclNoTransform()) {
-      // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:13
+      // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:21
       return false;
     }
     else {
@@ -244,7 +269,7 @@ public class VariableDecl extends Stmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:9
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:16
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isFunction
    */
@@ -252,12 +277,12 @@ public class VariableDecl extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:10
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:17
    * @apilevel internal
    */
   public boolean Define_isVariable(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getIdDeclNoTransform()) {
-      // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:16
+      // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:24
       return true;
     }
     else {
@@ -265,11 +290,32 @@ public class VariableDecl extends Stmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:10
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:17
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isVariable
    */
   protected boolean canDefine_isVariable(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:18
+   * @apilevel internal
+   */
+  public FunctionDecl Define_function(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getIdDeclNoTransform()) {
+      // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:27
+      return unknownFunction();
+    }
+    else {
+      return getParent().Define_function(this, _callerNode);
+    }
+  }
+  /**
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:18
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute function
+   */
+  protected boolean canDefine_function(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
 

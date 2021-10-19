@@ -8,7 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:21
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:22
  * @astdecl FunctionUse : Expr ::= <ID:String> Expr*;
  * @production FunctionUse : {@link Expr} ::= <span class="component">&lt;ID:{@link String}&gt;</span> <span class="component">{@link Expr}*</span>;
 
@@ -414,6 +414,18 @@ protected java.util.Set lookup_String_visited;
         contributors.add(this);
       }
     }
+    // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Errors.jrag:70
+    if (!decl().function().isUnknown() && getNumExpr() != decl().function().getNumVariableDecl()) {
+      {
+        Program target = (Program) (program());
+        java.util.Set<ASTNode> contributors = _map.get(target);
+        if (contributors == null) {
+          contributors = new java.util.LinkedHashSet<ASTNode>();
+          _map.put((ASTNode) target, contributors);
+        }
+        contributors.add(this);
+      }
+    }
     super.collect_contributors_Program_errors(_root, _map);
   }
   /** @apilevel internal */
@@ -424,6 +436,9 @@ protected java.util.Set lookup_String_visited;
     }
     if (!decl().isUnknown() && !decl().isFunction()) {
       collection.add(error("symbol '" + getID() + "' is not declared as a function"));
+    }
+    if (!decl().function().isUnknown() && getNumExpr() != decl().function().getNumVariableDecl()) {
+      collection.add(error("symbol '" + getID() + "' has wrong argument count"));
     }
   }
 

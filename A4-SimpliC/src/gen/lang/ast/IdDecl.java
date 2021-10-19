@@ -73,28 +73,29 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
   public void flushAttrCache() {
     super.flushAttrCache();
     isMultiDeclared_reset();
-    type_reset();
     isUnknown_reset();
     lookup_String_reset();
+    type_reset();
     isFunction_reset();
     isVariable_reset();
+    function_reset();
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:38
+   * @declaredat ASTNode:39
    */
   public void flushCollectionCache() {
     super.flushCollectionCache();
 
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:43
+   * @declaredat ASTNode:44
    */
   public IdDecl clone() throws CloneNotSupportedException {
     IdDecl node = (IdDecl) super.clone();
     return node;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:48
+   * @declaredat ASTNode:49
    */
   public IdDecl copy() {
     try {
@@ -114,7 +115,7 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:67
+   * @declaredat ASTNode:68
    */
   @Deprecated
   public IdDecl fullCopy() {
@@ -125,7 +126,7 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:77
+   * @declaredat ASTNode:78
    */
   public IdDecl treeCopyNoTransform() {
     IdDecl tree = (IdDecl) copy();
@@ -146,7 +147,7 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:97
+   * @declaredat ASTNode:98
    */
   public IdDecl treeCopy() {
     IdDecl tree = (IdDecl) copy();
@@ -238,44 +239,6 @@ protected boolean isMultiDeclared_visited = false;
     return isMultiDeclared_value;
   }
 /** @apilevel internal */
-protected boolean type_visited = false;
-  /** @apilevel internal */
-  private void type_reset() {
-    type_computed = false;
-    
-    type_value = null;
-    type_visited = false;
-  }
-  /** @apilevel internal */
-  protected boolean type_computed = false;
-
-  /** @apilevel internal */
-  protected Type type_value;
-
-  /**
-   * @attribute syn
-   * @aspect TypeAnalysis
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:14
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:14")
-  public Type type() {
-    ASTState state = state();
-    if (type_computed) {
-      return type_value;
-    }
-    if (type_visited) {
-      throw new RuntimeException("Circular definition of attribute IdDecl.type().");
-    }
-    type_visited = true;
-    state().enterLazyAttribute();
-    type_value = intType();
-    type_computed = true;
-    state().leaveLazyAttribute();
-    type_visited = false;
-    return type_value;
-  }
-/** @apilevel internal */
 protected boolean isUnknown_visited = false;
   /** @apilevel internal */
   private void isUnknown_reset() {
@@ -291,10 +254,10 @@ protected boolean isUnknown_visited = false;
   /**
    * @attribute syn
    * @aspect UnknownDecl
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:6
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:10
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnknownDecl", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:6")
+  @ASTNodeAnnotation.Source(aspect="UnknownDecl", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:10")
   public boolean isUnknown() {
     ASTState state = state();
     if (isUnknown_computed) {
@@ -349,11 +312,49 @@ protected java.util.Set lookup_String_visited;
 
   /**
    * @attribute inh
-   * @aspect UnknownDecl
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:9
+   * @aspect TypeAnalysis
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:35
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="UnknownDecl", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:9")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:35")
+  public Type type() {
+    ASTState state = state();
+    if (type_computed) {
+      return type_value;
+    }
+    if (type_visited) {
+      throw new RuntimeException("Circular definition of attribute IdDecl.type().");
+    }
+    type_visited = true;
+    state().enterLazyAttribute();
+    type_value = getParent().Define_type(this, null);
+    type_computed = true;
+    state().leaveLazyAttribute();
+    type_visited = false;
+    return type_value;
+  }
+/** @apilevel internal */
+protected boolean type_visited = false;
+  /** @apilevel internal */
+  private void type_reset() {
+    type_computed = false;
+    
+    type_value = null;
+    type_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean type_computed = false;
+
+  /** @apilevel internal */
+  protected Type type_value;
+
+  /**
+   * @attribute inh
+   * @aspect UnknownDecl
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:16
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="UnknownDecl", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:16")
   public boolean isFunction() {
     ASTState state = state();
     if (isFunction_computed) {
@@ -386,10 +387,10 @@ protected boolean isFunction_visited = false;
   /**
    * @attribute inh
    * @aspect UnknownDecl
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:10
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:17
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="UnknownDecl", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:10")
+  @ASTNodeAnnotation.Source(aspect="UnknownDecl", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:17")
   public boolean isVariable() {
     ASTState state = state();
     if (isVariable_computed) {
@@ -419,9 +420,47 @@ protected boolean isVariable_visited = false;
   /** @apilevel internal */
   protected boolean isVariable_value;
 
+  /**
+   * @attribute inh
+   * @aspect UnknownDecl
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:18
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="UnknownDecl", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:18")
+  public FunctionDecl function() {
+    ASTState state = state();
+    if (function_computed) {
+      return function_value;
+    }
+    if (function_visited) {
+      throw new RuntimeException("Circular definition of attribute IdDecl.function().");
+    }
+    function_visited = true;
+    state().enterLazyAttribute();
+    function_value = getParent().Define_function(this, null);
+    function_computed = true;
+    state().leaveLazyAttribute();
+    function_visited = false;
+    return function_value;
+  }
+/** @apilevel internal */
+protected boolean function_visited = false;
+  /** @apilevel internal */
+  private void function_reset() {
+    function_computed = false;
+    
+    function_value = null;
+    function_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean function_computed = false;
+
+  /** @apilevel internal */
+  protected FunctionDecl function_value;
+
   /** @apilevel internal */
   protected void collect_contributors_Program_errors(Program _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Errors.jrag:66
+    // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Errors.jrag:74
     if (isMultiDeclared()) {
       {
         Program target = (Program) (program());

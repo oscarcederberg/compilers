@@ -3,23 +3,23 @@ Block ::= Stmt*;
 
 IdDecl ::= <ID>;
 UnknownDecl : IdDecl;
-FunctionDecl ::= Type IdDecl VariableDecl* Block;
-UnkownFunction : FunctionDecl;
+FunctionDecl ::= IdDecl VariableDecl* Block;
+UnknownFunction : FunctionDecl;
 
 abstract Stmt;
 abstract Expr;
 
-VariableDecl : Stmt ::= Type IdDecl [Expr];
-Assign : Stmt ::= <ID> Expr;
+VariableDecl : Stmt ::= IdDecl [Expr];
+Assign : Stmt ::= <ID> Expr; //VariableUse
 While : Stmt ::= Expr Block;
 If : Stmt ::= Expr Block [Else:Block];
-FunctionCall : Stmt ::= <ID> Expr*;
+FunctionCall : Stmt ::= <ID> Expr*; //VariableUse
 Return : Stmt ::= Expr;
 
 abstract BinOp : Expr ::= Left:Expr Right:Expr;
 
 VariableUse : Expr ::= <ID>;
-FunctionUse: Expr ::= <ID> Expr*;
+FunctionUse: Expr ::= <ID> Expr*; //VariableUse
 Numeral : Expr ::= <NUMERAL>;
 
 Add : BinOp; 

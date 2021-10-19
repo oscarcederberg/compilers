@@ -63,11 +63,23 @@ aspect ErrorContributions {
 		when !decl().isUnknown() && !decl().isFunction()
 		to Program.errors() for program();
 	
-	FunctionCall contributes error("symbol '" + getID() + "' has wrong argument count");
-		when !function().isUnknown() && getNumVariableDecl() != function().getNumVariableDecl()
+	FunctionCall contributes error("symbol '" + getID() + "' has wrong argument count")
+		when !decl().function().isUnknown() && getNumExpr() != decl().function().getNumVariableDecl()
 		to Program.errors() for program();
 	
-	IdDecl contributes error("symbol '" + getID() + "' is already declared!")
+	FunctionUse contributes error("symbol '" + getID() + "' has wrong argument count")
+		when !decl().function().isUnknown() && getNumExpr() != decl().function().getNumVariableDecl()
+		to Program.errors() for program();
+	
+		IdDecl contributes error("symbol '" + getID() + "' is already declared!")
 		when isMultiDeclared()
 		to Program.errors() for program();
+
+	BinOp contributes error("mismatched types")
+		when !getLeft().expectedType().compatibleWith(getRight().expectedType())
+		to Program.errors() for program();
+
+	Expr contributes error("does not match expected type")
+		when expectedType() != type()
+		to Program.errors() for program();		
 }

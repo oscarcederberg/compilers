@@ -8,7 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:15
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:16
  * @astdecl FunctionCall : Stmt ::= <ID:String> Expr*;
  * @production FunctionCall : {@link Stmt} ::= <span class="component">&lt;ID:{@link String}&gt;</span> <span class="component">{@link Expr}*</span>;
 
@@ -388,6 +388,28 @@ protected java.util.Set lookup_String_visited;
   /** @apilevel internal */
   protected java.util.Map lookup_String_values;
 
+  /**
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:18
+   * @apilevel internal
+   */
+  public Type Define_type(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getExprListNoTransform()) {
+      // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:21
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return intType();
+    }
+    else {
+      return getParent().Define_type(this, _callerNode);
+    }
+  }
+  /**
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:18
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute type
+   */
+  protected boolean canDefine_type(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
   /** @apilevel internal */
   protected void collect_contributors_Program_errors(Program _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
     // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Errors.jrag:46
@@ -414,6 +436,18 @@ protected java.util.Set lookup_String_visited;
         contributors.add(this);
       }
     }
+    // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Errors.jrag:66
+    if (!decl().function().isUnknown() && getNumExpr() != decl().function().getNumVariableDecl()) {
+      {
+        Program target = (Program) (program());
+        java.util.Set<ASTNode> contributors = _map.get(target);
+        if (contributors == null) {
+          contributors = new java.util.LinkedHashSet<ASTNode>();
+          _map.put((ASTNode) target, contributors);
+        }
+        contributors.add(this);
+      }
+    }
     super.collect_contributors_Program_errors(_root, _map);
   }
   /** @apilevel internal */
@@ -424,6 +458,9 @@ protected java.util.Set lookup_String_visited;
     }
     if (!decl().isUnknown() && !decl().isFunction()) {
       collection.add(error("symbol '" + getID() + "' is not declared as a function"));
+    }
+    if (!decl().function().isUnknown() && getNumExpr() != decl().function().getNumVariableDecl()) {
+      collection.add(error("symbol '" + getID() + "' has wrong argument count"));
     }
   }
 

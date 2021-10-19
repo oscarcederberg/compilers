@@ -2,30 +2,38 @@ aspect TypeAnalysis{
 	syn nta UnknownType Program.unknownType() = new UnknownType();
     inh UnknownType ASTNode.unknownType();
 	eq Program.getChild().unknownType() = unknownType();
+	syn nta IntType Program.intType() = new IntType();
+    inh IntType ASTNode.intType();
+	eq Program.getChild().intType() = intType();
+	syn nta BoolType Program.boolType() = new BoolType();
+    inh BoolType ASTNode.boolType();
+	eq Program.getChild().boolType() = boolType();
 
-    syn boolean Type.isUnkown() = false;
-    eq UnkownType.isUnknown() = true;
+    syn boolean Type.isUnknown() = false;
+    eq UnknownType.isUnknown() = true;
 
     syn boolean Type.compatibleWith(Type t) = this.isUnknown() || t.isUnknown() || this.equals(t);
     eq UnknownType.compatibleWith(Type t) = true; 
 
-    syn Type Expr.type();
-    eq VariableUse.type() = decl.type();
-    eq FunctionUse.type() = decl.type();
+    inh Type Expr.type();
+    eq VariableDecl.getExpr().type() = intType();
+    eq Assign.getExpr().type() = intType();
+    eq FunctionCall.getExpr().type() = intType();
+    eq If.getExpr().type() = boolType();
+    eq While.getExpr().type() = boolType();
+    eq Return.getExpr().type() = intType();
+    eq Expr.getChild().type() = intType();
+
+    syn Type Expr.expectedType() = intType(); 
+    eq Equals.expectedType() = boolType(); 
+    eq NotEq.expectedType() = boolType(); 
+    eq LessThan.expectedType() = boolType(); 
+    eq LessEq.expectedType() = boolType(); 
+    eq MoreThan.expectedType() = boolType(); 
+    eq MoreEq.expectedType() = boolType(); 
 
     inh Type IdDecl.type();
-    eq VariableDecl.getIdDecl().type() = getType();
-    eq FunctionDecl.getIdDecl().type() = getType();
-    eq Program.unkownDecl().type() = unkownType();
-
-    syn boolean Expr.compatibleTypes();
-    eq BinOp.compatibleTypes() = 
-        getLeft().type().isUnkown() || 
-        getRight().type().isUnkown() ||
-        (getLeft().type().equals(getRight().type() && getLeft.type() instanceof IntType));
-    
-    eq Equals.compatibleTypes() = getLeft().type().compatibleWith(getRight().type());
-    eq NotEq.compatibleTypes()  = getLeft().type().compatibleWith(getRight().type());
-
-    eq Assign.compatibleTypes() = 
+    eq VariableDecl.getIdDecl().type() = intType();
+    eq FunctionDecl.getIdDecl().type() = intType();
+    eq Program.unknownDecl().type() = unknownType();
 }
