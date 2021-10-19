@@ -26,6 +26,9 @@ public interface Visitor {
 		public Object visit(Program node, Object data);
 
 		 
+		public Object visit(IdDecl node, Object data);
+
+		 
 		public Object visit(FunctionDecl node, Object data);
 
 		 

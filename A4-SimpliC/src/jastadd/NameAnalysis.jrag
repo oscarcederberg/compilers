@@ -30,17 +30,20 @@ aspect NameAnalysis {
 	inh IdDecl Block.lookup(String s);
 
 	eq Program.getFunctionDecl(int index).lookup(String s) {
+		
+		//Has to be first for isMultideclared to work
+		for(FunctionDecl func : predefinedFunctions()){
+			if(func.getIdDecl().getID().equals(s)){
+				return func.getIdDecl();
+			}
+		}
+
 		for(VariableDecl decl : getFunctionDecl(index).getVariableDecls()){
 			if(decl.getIdDecl().getID().equals(s)){
 				return decl.getIdDecl();
 			}
 		}
 		for(FunctionDecl func : getFunctionDecls()) {
-			if(func.getIdDecl().getID().equals(s)){
-				return func.getIdDecl();
-			}
-		}
-		for(FunctionDecl func : predefinedFunctions()){
 			if(func.getIdDecl().getID().equals(s)){
 				return func.getIdDecl();
 			}
@@ -61,7 +64,6 @@ aspect NameAnalysis {
 		return unknownDecl();
 	}
 
-	inh IdDecl IdDecl.lookup(String s);
 	syn boolean IdDecl.isMultiDeclared() = lookup(getID()) != this;
 
 	syn nta List<FunctionDecl> Program.predefinedFunctions() {
@@ -70,5 +72,4 @@ aspect NameAnalysis {
 		list.add(new FunctionDecl(new IdDecl("read"), new List(), new Block(new List())));
 		return list;
 	}
-
 }

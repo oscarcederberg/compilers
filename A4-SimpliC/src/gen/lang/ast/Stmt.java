@@ -16,7 +16,7 @@ import java.util.HashSet;
 public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect Visitor
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Visitor.jrag:36
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Visitor.jrag:40
    */
   public Object accept(Visitor visitor, Object data) {
 		return visitor.visit(this, data);

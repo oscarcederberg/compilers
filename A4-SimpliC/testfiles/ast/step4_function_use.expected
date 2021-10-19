@@ -1,6 +1,7 @@
 Program
   List
-    FunctionDecl ID="main"
+    FunctionDecl
+      IdDecl ID="main"
       List
       Block
         List
@@ -11,18 +12,21 @@ Program
               Mul
                 FunctionUse ID="test"
                   List
-                    IdUse ID="a"
+                    VariableUse ID="a"
                     Numeral NUMERAL="5"
                 Numeral NUMERAL="6"
               FunctionUse ID="test"
                 List
                   Numeral NUMERAL="5"
                   Numeral NUMERAL="5"
-    FunctionDecl ID="test"
+    FunctionDecl
+      IdDecl ID="test"
       List
-        IdDecl ID="a"
+        VariableDecl
+          IdDecl ID="a"
           Opt
-        IdDecl ID="b"
+        VariableDecl
+          IdDecl ID="b"
           Opt
       Block
         List

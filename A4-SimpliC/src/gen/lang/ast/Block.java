@@ -29,7 +29,7 @@ public class Block extends ASTNode<ASTNode> implements Cloneable {
 	}
   /**
    * @aspect Visitor
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Visitor.jrag:33
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Visitor.jrag:37
    */
   public Object accept(Visitor visitor, Object data) {
 		return visitor.visit(this, data);
@@ -285,10 +285,10 @@ protected java.util.Set localLookup_String_int_visited;
   /**
    * @attribute syn
    * @aspect NameAnalysis
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:51
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:54
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:51")
+  @ASTNodeAnnotation.Source(aspect="NameAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:54")
   public IdDecl localLookup(String s, int index) {
     java.util.List _parameters = new java.util.ArrayList(2);
     _parameters.add(s);

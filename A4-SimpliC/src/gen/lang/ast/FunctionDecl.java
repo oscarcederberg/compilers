@@ -30,7 +30,7 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
 	}
   /**
    * @aspect Visitor
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Visitor.jrag:30
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Visitor.jrag:34
    */
   public Object accept(Visitor visitor, Object data) {
 		return visitor.visit(this, data);

@@ -8,23 +8,16 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:9
- * @astdecl Expr : ASTNode;
- * @production Expr : {@link ASTNode};
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:38
+ * @astdecl Type : ASTNode;
+ * @production Type : {@link ASTNode};
 
  */
-public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
-  /**
-   * @aspect Visitor
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Visitor.jrag:43
-   */
-  public Object accept(Visitor visitor, Object data) {
-		return visitor.visit(this, data);
-	}
+public abstract class Type extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @declaredat ASTNode:1
    */
-  public Expr() {
+  public Type() {
     super();
   }
   /**
@@ -47,7 +40,7 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-    type_reset();
+
   }
   /** @apilevel internal 
    * @declaredat ASTNode:22
@@ -59,8 +52,8 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
   /** @apilevel internal 
    * @declaredat ASTNode:27
    */
-  public Expr clone() throws CloneNotSupportedException {
-    Expr node = (Expr) super.clone();
+  public Type clone() throws CloneNotSupportedException {
+    Type node = (Type) super.clone();
     return node;
   }
   /**
@@ -72,7 +65,7 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
    * @declaredat ASTNode:38
    */
   @Deprecated
-  public abstract Expr fullCopy();
+  public abstract Type fullCopy();
   /**
    * Create a deep copy of the AST subtree at this node.
    * The copy is dangling, i.e. has no parent.
@@ -80,7 +73,7 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
    * @apilevel low-level
    * @declaredat ASTNode:46
    */
-  public abstract Expr treeCopyNoTransform();
+  public abstract Type treeCopyNoTransform();
   /**
    * Create a deep copy of the AST subtree at this node.
    * The subtree of this node is traversed to trigger rewrites before copy.
@@ -89,44 +82,6 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
    * @apilevel low-level
    * @declaredat ASTNode:54
    */
-  public abstract Expr treeCopy();
-/** @apilevel internal */
-protected boolean type_visited = false;
-  /** @apilevel internal */
-  private void type_reset() {
-    type_computed = false;
-    
-    type_value = null;
-    type_visited = false;
-  }
-  /** @apilevel internal */
-  protected boolean type_computed = false;
-
-  /** @apilevel internal */
-  protected Type type_value;
-
-  /**
-   * @attribute syn
-   * @aspect TypeAnalysis
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:15
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:15")
-  public Type type() {
-    ASTState state = state();
-    if (type_computed) {
-      return type_value;
-    }
-    if (type_visited) {
-      throw new RuntimeException("Circular definition of attribute Expr.type().");
-    }
-    type_visited = true;
-    state().enterLazyAttribute();
-    type_value = intType();
-    type_computed = true;
-    state().leaveLazyAttribute();
-    type_visited = false;
-    return type_value;
-  }
+  public abstract Type treeCopy();
 
 }

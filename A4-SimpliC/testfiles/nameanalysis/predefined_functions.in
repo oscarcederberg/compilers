@@ -1,0 +1,14 @@
+int main() {
+    read();
+    return 0;
+}
+
+int print(){
+    //not allowed
+    return 1;
+}
+
+int read(){
+    //also not allowed
+    return 1;   
+}

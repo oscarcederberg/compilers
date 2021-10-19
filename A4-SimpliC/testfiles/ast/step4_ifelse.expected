@@ -1,26 +1,27 @@
 Program
   List
-    FunctionDecl ID="a"
+    FunctionDecl
+      IdDecl ID="a"
       List
       Block
         List
           If
             MoreThan
-              IdUse ID="b"
-              IdUse ID="c"
+              VariableUse ID="b"
+              VariableUse ID="c"
             Block
               List
                 Assign ID="d"
-                  IdUse ID="e"
+                  VariableUse ID="e"
             Opt
           If
             LessThan
-              IdUse ID="b"
-              IdUse ID="c"
+              VariableUse ID="b"
+              VariableUse ID="c"
             Block
               List
                 Assign ID="a"
-                  IdUse ID="b"
+                  VariableUse ID="b"
             Opt
               Block
                 List

@@ -1,26 +1,29 @@
 Program
   List
-    FunctionDecl ID="gcd2"
+    FunctionDecl
+      IdDecl ID="gcd2"
       List
-        IdDecl ID="a"
+        VariableDecl
+          IdDecl ID="a"
           Opt
-        IdDecl ID="b"
+        VariableDecl
+          IdDecl ID="b"
           Opt
       Block
         List
           If
             Equals
-              IdUse ID="b"
+              VariableUse ID="b"
               Numeral NUMERAL="0"
             Block
               List
                 Return
-                  IdUse ID="a"
+                  VariableUse ID="a"
             Opt
           Return
             FunctionUse ID="gcd2"
               List
-                IdUse ID="b"
+                VariableUse ID="b"
                 Mod
-                  IdUse ID="a"
-                  IdUse ID="b"
+                  VariableUse ID="a"
+                  VariableUse ID="b"

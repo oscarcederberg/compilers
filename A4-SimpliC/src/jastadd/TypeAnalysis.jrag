@@ -1,0 +1,30 @@
+aspect TypeAnalysis{
+    syn boolean Type.compatibleType(Type other);
+    eq boolean UnkownType.compatibleType(Type other) = true;
+    eq boolean IntType.compatibleType(Type other) = this == other;
+    eq boolean BoolType.compatibleType(Type other) = this == other;
+
+	syn nta UnknownType Program.unknownType() = new UnknownType();
+    syn nta IntType Program.intType() = new IntType(); 
+    syn nta BoolType Program.boolType() = new BoolType(); 
+	
+    inh UnknownType ASTNode.unknownType();
+	inh IntType ASTNode.intType();
+	inh BoolType ASTNode.boolType();
+
+	eq Program.getChild().unknownType() = unknownType();
+	eq Program.getChild().intType() = intType();
+	eq Program.getChild().boolType() = boolType();
+
+    syn Type IdDecl.type() = intType();
+    syn Type Expr.type() = intType(); // Default
+
+    eq Equals.type() = boolType();
+    eq NotEq.type() = boolType();
+    eq LessThan.type() = boolType();
+    eq LessEq.type() = boolType();
+    eq MoreThan.type() = boolType();
+    eq MoreEq.type() = boolType();
+
+    syn Type Expr.expectedType() = intType();
+}

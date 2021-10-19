@@ -8,22 +8,16 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @astdecl Opt : ASTNode;
- * @production Opt : {@link ASTNode};
+ * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:40
+ * @astdecl BoolType : Type;
+ * @production BoolType : {@link Type};
 
  */
-public class Opt<T extends ASTNode> extends ASTNode<T> implements Cloneable {
-  /**
-   * @aspect Visitor
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Visitor.jrag:23
-   */
-  public Object accept(Visitor visitor, Object data) {
-		return visitor.visit(this, data);
-	}
+public class BoolType extends Type implements Cloneable {
   /**
    * @declaredat ASTNode:1
    */
-  public Opt() {
+  public BoolType() {
     super();
   }
   /**
@@ -35,39 +29,39 @@ public class Opt<T extends ASTNode> extends ASTNode<T> implements Cloneable {
    */
   public void init$Children() {
   }
-  /**
-   * @declaredat ASTNode:12
+  /** @apilevel low-level 
+   * @declaredat ASTNode:13
    */
-  public Opt(T opt) {
-    setChild(opt, 0);
+  protected int numChildren() {
+    return 0;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:16
+   * @declaredat ASTNode:17
    */
   public void flushAttrCache() {
     super.flushAttrCache();
 
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:21
+   * @declaredat ASTNode:22
    */
   public void flushCollectionCache() {
     super.flushCollectionCache();
 
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:26
+   * @declaredat ASTNode:27
    */
-  public Opt<T> clone() throws CloneNotSupportedException {
-    Opt node = (Opt) super.clone();
+  public BoolType clone() throws CloneNotSupportedException {
+    BoolType node = (BoolType) super.clone();
     return node;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:31
+   * @declaredat ASTNode:32
    */
-  public Opt<T> copy() {
+  public BoolType copy() {
     try {
-      Opt node = (Opt) clone();
+      BoolType node = (BoolType) clone();
       node.parent = null;
       if (children != null) {
         node.children = (ASTNode[]) children.clone();
@@ -83,10 +77,10 @@ public class Opt<T extends ASTNode> extends ASTNode<T> implements Cloneable {
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:50
+   * @declaredat ASTNode:51
    */
   @Deprecated
-  public Opt<T> fullCopy() {
+  public BoolType fullCopy() {
     return treeCopyNoTransform();
   }
   /**
@@ -94,10 +88,10 @@ public class Opt<T extends ASTNode> extends ASTNode<T> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:60
+   * @declaredat ASTNode:61
    */
-  public Opt<T> treeCopyNoTransform() {
-    Opt tree = (Opt) copy();
+  public BoolType treeCopyNoTransform() {
+    BoolType tree = (BoolType) copy();
     if (children != null) {
       for (int i = 0; i < children.length; ++i) {
         ASTNode child = (ASTNode) children[i];
@@ -115,10 +109,10 @@ public class Opt<T extends ASTNode> extends ASTNode<T> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:80
+   * @declaredat ASTNode:81
    */
-  public Opt<T> treeCopy() {
-    Opt tree = (Opt) copy();
+  public BoolType treeCopy() {
+    BoolType tree = (BoolType) copy();
     if (children != null) {
       for (int i = 0; i < children.length; ++i) {
         ASTNode child = (ASTNode) getChild(i);

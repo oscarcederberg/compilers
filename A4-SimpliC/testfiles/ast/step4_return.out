@@ -1,10 +1,11 @@
 Program
   List
-    FunctionDecl ID="a"
+    FunctionDecl
+      IdDecl ID="a"
       List
       Block
         List
           Return
             Add
-              IdUse ID="j"
+              VariableUse ID="j"
               Numeral NUMERAL="10"

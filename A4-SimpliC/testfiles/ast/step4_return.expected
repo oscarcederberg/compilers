@@ -1,3 +1,11 @@
-int a (){
-    return j + 10;
-}
+Program
+  List
+    FunctionDecl
+      IdDecl ID="a"
+      List
+      Block
+        List
+          Return
+            Add
+              VariableUse ID="j"
+              Numeral NUMERAL="10"

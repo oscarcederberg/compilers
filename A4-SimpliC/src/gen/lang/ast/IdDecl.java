@@ -23,6 +23,13 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
        out.print(getID());    
     }
   /**
+   * @aspect Visitor
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Visitor.jrag:31
+   */
+  public Object accept(Visitor visitor, Object data) {
+		return visitor.visit(this, data);
+	}
+  /**
    * @declaredat ASTNode:1
    */
   public IdDecl() {
@@ -66,8 +73,8 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
   public void flushAttrCache() {
     super.flushAttrCache();
     isMultiDeclared_reset();
+    type_reset();
     isUnknown_reset();
-    lookup_String_reset();
     lookup_String_reset();
     isFunction_reset();
     isVariable_reset();
@@ -210,10 +217,10 @@ protected boolean isMultiDeclared_visited = false;
   /**
    * @attribute syn
    * @aspect NameAnalysis
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:65
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:67
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:65")
+  @ASTNodeAnnotation.Source(aspect="NameAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:67")
   public boolean isMultiDeclared() {
     ASTState state = state();
     if (isMultiDeclared_computed) {
@@ -229,6 +236,44 @@ protected boolean isMultiDeclared_visited = false;
     state().leaveLazyAttribute();
     isMultiDeclared_visited = false;
     return isMultiDeclared_value;
+  }
+/** @apilevel internal */
+protected boolean type_visited = false;
+  /** @apilevel internal */
+  private void type_reset() {
+    type_computed = false;
+    
+    type_value = null;
+    type_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean type_computed = false;
+
+  /** @apilevel internal */
+  protected Type type_value;
+
+  /**
+   * @attribute syn
+   * @aspect TypeAnalysis
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:14
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:14")
+  public Type type() {
+    ASTState state = state();
+    if (type_computed) {
+      return type_value;
+    }
+    if (type_visited) {
+      throw new RuntimeException("Circular definition of attribute IdDecl.type().");
+    }
+    type_visited = true;
+    state().enterLazyAttribute();
+    type_value = intType();
+    type_computed = true;
+    state().leaveLazyAttribute();
+    type_visited = false;
+    return type_value;
   }
 /** @apilevel internal */
 protected boolean isUnknown_visited = false;

@@ -25,7 +25,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
 	}
   /**
    * @aspect Visitor
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Visitor.jrag:26
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Visitor.jrag:27
    */
   public Object accept(Visitor visitor, Object data) {
 		return visitor.visit(this, data);
@@ -70,10 +70,13 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
   public void flushAttrCache() {
     super.flushAttrCache();
     predefinedFunctions_reset();
+    unknownType_reset();
+    intType_reset();
+    boolType_reset();
     unknownDecl_reset();
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:33
+   * @declaredat ASTNode:36
    */
   public void flushCollectionCache() {
     super.flushCollectionCache();
@@ -84,14 +87,14 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
     contributorMap_Program_errors = null;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:42
+   * @declaredat ASTNode:45
    */
   public Program clone() throws CloneNotSupportedException {
     Program node = (Program) super.clone();
     return node;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:47
+   * @declaredat ASTNode:50
    */
   public Program copy() {
     try {
@@ -111,7 +114,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:66
+   * @declaredat ASTNode:69
    */
   @Deprecated
   public Program fullCopy() {
@@ -122,7 +125,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:76
+   * @declaredat ASTNode:79
    */
   public Program treeCopyNoTransform() {
     Program tree = (Program) copy();
@@ -143,7 +146,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:96
+   * @declaredat ASTNode:99
    */
   public Program treeCopy() {
     Program tree = (Program) copy();
@@ -305,10 +308,10 @@ protected boolean predefinedFunctions_visited = false;
   /**
    * @attribute syn
    * @aspect NameAnalysis
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:67
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:69
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="NameAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:67")
+  @ASTNodeAnnotation.Source(aspect="NameAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:69")
   public List<FunctionDecl> predefinedFunctions() {
     ASTState state = state();
     if (predefinedFunctions_computed) {
@@ -333,6 +336,123 @@ protected boolean predefinedFunctions_visited = false;
   		list.add(new FunctionDecl(new IdDecl("read"), new List(), new Block(new List())));
   		return list;
   	}
+/** @apilevel internal */
+protected boolean unknownType_visited = false;
+  /** @apilevel internal */
+  private void unknownType_reset() {
+    unknownType_computed = false;
+    
+    unknownType_value = null;
+    unknownType_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean unknownType_computed = false;
+
+  /** @apilevel internal */
+  protected UnknownType unknownType_value;
+
+  /**
+   * @attribute syn
+   * @aspect TypeAnalysis
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:2
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:2")
+  public UnknownType unknownType() {
+    ASTState state = state();
+    if (unknownType_computed) {
+      return unknownType_value;
+    }
+    if (unknownType_visited) {
+      throw new RuntimeException("Circular definition of attribute Program.unknownType().");
+    }
+    unknownType_visited = true;
+    state().enterLazyAttribute();
+    unknownType_value = new UnknownType();
+    unknownType_value.setParent(this);
+    unknownType_computed = true;
+    state().leaveLazyAttribute();
+    unknownType_visited = false;
+    return unknownType_value;
+  }
+/** @apilevel internal */
+protected boolean intType_visited = false;
+  /** @apilevel internal */
+  private void intType_reset() {
+    intType_computed = false;
+    
+    intType_value = null;
+    intType_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean intType_computed = false;
+
+  /** @apilevel internal */
+  protected IntType intType_value;
+
+  /**
+   * @attribute syn
+   * @aspect TypeAnalysis
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:3
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:3")
+  public IntType intType() {
+    ASTState state = state();
+    if (intType_computed) {
+      return intType_value;
+    }
+    if (intType_visited) {
+      throw new RuntimeException("Circular definition of attribute Program.intType().");
+    }
+    intType_visited = true;
+    state().enterLazyAttribute();
+    intType_value = new IntType();
+    intType_value.setParent(this);
+    intType_computed = true;
+    state().leaveLazyAttribute();
+    intType_visited = false;
+    return intType_value;
+  }
+/** @apilevel internal */
+protected boolean boolType_visited = false;
+  /** @apilevel internal */
+  private void boolType_reset() {
+    boolType_computed = false;
+    
+    boolType_value = null;
+    boolType_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean boolType_computed = false;
+
+  /** @apilevel internal */
+  protected BoolType boolType_value;
+
+  /**
+   * @attribute syn
+   * @aspect TypeAnalysis
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:4
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:4")
+  public BoolType boolType() {
+    ASTState state = state();
+    if (boolType_computed) {
+      return boolType_value;
+    }
+    if (boolType_visited) {
+      throw new RuntimeException("Circular definition of attribute Program.boolType().");
+    }
+    boolType_visited = true;
+    state().enterLazyAttribute();
+    boolType_value = new BoolType();
+    boolType_value.setParent(this);
+    boolType_computed = true;
+    state().leaveLazyAttribute();
+    boolType_visited = false;
+    return boolType_value;
+  }
 /** @apilevel internal */
 protected boolean unknownDecl_visited = false;
   /** @apilevel internal */
@@ -397,17 +517,20 @@ protected boolean unknownDecl_visited = false;
       // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:32
       int index = _callerNode.getIndexOfChild(_childNode);
       {
+      		
+      		//Has to be first for isMultideclared to work
+      		for(FunctionDecl func : predefinedFunctions()){
+      			if(func.getIdDecl().getID().equals(s)){
+      				return func.getIdDecl();
+      			}
+      		}
+      
       		for(VariableDecl decl : getFunctionDecl(index).getVariableDecls()){
       			if(decl.getIdDecl().getID().equals(s)){
       				return decl.getIdDecl();
       			}
       		}
       		for(FunctionDecl func : getFunctionDecls()) {
-      			if(func.getIdDecl().getID().equals(s)){
-      				return func.getIdDecl();
-      			}
-      		}
-      		for(FunctionDecl func : predefinedFunctions()){
       			if(func.getIdDecl().getID().equals(s)){
       				return func.getIdDecl();
       			}
@@ -426,6 +549,54 @@ protected boolean unknownDecl_visited = false;
    * @return {@code true} if this node has an equation for the inherited attribute lookup
    */
   protected boolean canDefine_lookup(ASTNode _callerNode, ASTNode _childNode, String s) {
+    return true;
+  }
+  /**
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:6
+   * @apilevel internal
+   */
+  public UnknownType Define_unknownType(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return unknownType();
+  }
+  /**
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:6
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute unknownType
+   */
+  protected boolean canDefine_unknownType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:7
+   * @apilevel internal
+   */
+  public IntType Define_intType(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return intType();
+  }
+  /**
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:7
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute intType
+   */
+  protected boolean canDefine_intType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:8
+   * @apilevel internal
+   */
+  public BoolType Define_boolType(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return boolType();
+  }
+  /**
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:8
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute boolType
+   */
+  protected boolean canDefine_boolType(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**

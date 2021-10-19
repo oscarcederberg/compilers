@@ -33,3 +33,9 @@ LessThan    : BinOp;
 LessEq      : BinOp;
 MoreThan    : BinOp;
 MoreEq      : BinOp;
+
+//Type Analysis
+abstract Type;
+IntType: Type;
+BoolType: Type;
+UnknownType: Type;

@@ -62,7 +62,7 @@ public class LessThan extends BinOp implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-
+    type_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:32
@@ -199,6 +199,44 @@ public class LessThan extends BinOp implements Cloneable {
    */
   public Expr getRightNoTransform() {
     return (Expr) getChildNoTransform(1);
+  }
+/** @apilevel internal */
+protected boolean type_visited = false;
+  /** @apilevel internal */
+  private void type_reset() {
+    type_computed = false;
+    
+    type_value = null;
+    type_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean type_computed = false;
+
+  /** @apilevel internal */
+  protected Type type_value;
+
+  /**
+   * @attribute syn
+   * @aspect TypeAnalysis
+   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:19
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:15")
+  public Type type() {
+    ASTState state = state();
+    if (type_computed) {
+      return type_value;
+    }
+    if (type_visited) {
+      throw new RuntimeException("Circular definition of attribute Expr.type().");
+    }
+    type_visited = true;
+    state().enterLazyAttribute();
+    type_value = boolType();
+    type_computed = true;
+    state().leaveLazyAttribute();
+    type_visited = false;
+    return type_value;
   }
 
 }

@@ -1,6 +1,7 @@
 Program
   List
-    FunctionDecl ID="a"
+    FunctionDecl
+      IdDecl ID="a"
       List
       Block
         List
@@ -11,4 +12,4 @@ Program
             Block
               List
                 Assign ID="b"
-                  IdUse ID="c"
+                  VariableUse ID="c"
