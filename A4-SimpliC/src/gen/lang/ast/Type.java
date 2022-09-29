@@ -8,7 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:40
+ * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/lang.ast:40
  * @astdecl Type : ASTNode;
  * @production Type : {@link ASTNode};
 
@@ -100,10 +100,10 @@ protected boolean isUnknown_visited = false;
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:12
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:12
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:12")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:12")
   public boolean isUnknown() {
     ASTState state = state();
     if (isUnknown_computed) {
@@ -133,10 +133,10 @@ protected java.util.Set compatibleWith_Type_visited;
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:15
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:15
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:15")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:15")
   public boolean compatibleWith(Type t) {
     Object _parameters = t;
     if (compatibleWith_Type_visited == null) compatibleWith_Type_visited = new java.util.HashSet(4);

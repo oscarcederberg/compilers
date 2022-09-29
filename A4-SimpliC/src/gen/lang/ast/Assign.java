@@ -8,7 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:13
+ * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/lang.ast:13
  * @astdecl Assign : Stmt ::= <ID:String> Expr;
  * @production Assign : {@link Stmt} ::= <span class="component">&lt;ID:{@link String}&gt;</span> <span class="component">{@link Expr}</span>;
 
@@ -16,7 +16,7 @@ import java.util.HashSet;
 public class Assign extends Stmt implements Cloneable {
   /**
    * @aspect PrettyPrint
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/PrettyPrint.jrag:52
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/PrettyPrint.jrag:52
    */
   public void prettyPrint(PrintStream out, String ind){
         out.print(getID());
@@ -240,10 +240,10 @@ protected boolean decl_visited = false;
   /**
    * @attribute syn
    * @aspect NameAnalysis
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:9
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/NameAnalysis.jrag:9
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:9")
+  @ASTNodeAnnotation.Source(aspect="NameAnalysis", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/NameAnalysis.jrag:9")
   public IdDecl decl() {
     ASTState state = state();
     if (decl_computed) {
@@ -263,10 +263,10 @@ protected boolean decl_visited = false;
   /**
    * @attribute inh
    * @aspect NameAnalysis
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:10
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/NameAnalysis.jrag:10
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="NameAnalysis", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/NameAnalysis.jrag:10")
+  @ASTNodeAnnotation.Source(aspect="NameAnalysis", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/NameAnalysis.jrag:10")
   public IdDecl lookup(String s) {
     Object _parameters = s;
     if (lookup_String_visited == null) lookup_String_visited = new java.util.HashSet(4);
@@ -297,12 +297,12 @@ protected java.util.Set lookup_String_visited;
   protected java.util.Map lookup_String_values;
 
   /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:18
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:18
    * @apilevel internal
    */
   public Type Define_type(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getExprNoTransform()) {
-      // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:20
+      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:20
       return intType();
     }
     else {
@@ -310,7 +310,7 @@ protected java.util.Set lookup_String_visited;
     }
   }
   /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:18
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:18
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute type
    */
@@ -319,7 +319,7 @@ protected java.util.Set lookup_String_visited;
   }
   /** @apilevel internal */
   protected void collect_contributors_Program_errors(Program _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Errors.jrag:34
+    // @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/Errors.jrag:34
     if (decl().isUnknown()) {
       {
         Program target = (Program) (program());
@@ -331,7 +331,7 @@ protected java.util.Set lookup_String_visited;
         contributors.add(this);
       }
     }
-    // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Errors.jrag:50
+    // @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/Errors.jrag:50
     if (!decl().isUnknown() && !decl().isVariable()) {
       {
         Program target = (Program) (program());

@@ -8,7 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:42
+ * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/lang.ast:42
  * @astdecl BoolType : Type;
  * @production BoolType : {@link Type};
 

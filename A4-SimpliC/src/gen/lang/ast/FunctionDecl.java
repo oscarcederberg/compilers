@@ -8,15 +8,22 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:6
+ * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/lang.ast:6
  * @astdecl FunctionDecl : ASTNode ::= IdDecl VariableDecl* Block;
  * @production FunctionDecl : {@link ASTNode} ::= <span class="component">{@link IdDecl}</span> <span class="component">{@link VariableDecl}*</span> <span class="component">{@link Block}</span>;
 
  */
 public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
+   * @aspect Visitor
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/Visitor.jrag:34
+   */
+  public Object accept(Visitor visitor, Object data) {
+		return visitor.visit(this, data);
+	}
+  /**
    * @aspect PrettyPrint
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/PrettyPrint.jrag:32
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/PrettyPrint.jrag:32
    */
   public void prettyPrint(PrintStream out, String ind) {
         getIdDecl().prettyPrint(out, ind);
@@ -27,13 +34,6 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
         }
         out.print(") ");
         getBlock().prettyPrint(out, ind);
-	}
-  /**
-   * @aspect Visitor
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Visitor.jrag:34
-   */
-  public Object accept(Visitor visitor, Object data) {
-		return visitor.visit(this, data);
 	}
   /**
    * @declaredat ASTNode:1
@@ -344,10 +344,10 @@ protected boolean isUnknown_visited = false;
   /**
    * @attribute syn
    * @aspect UnknownDecl
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:13
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/UnknownDecl.jrag:13
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnknownDecl", declaredAt="/mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:13")
+  @ASTNodeAnnotation.Source(aspect="UnknownDecl", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/UnknownDecl.jrag:13")
   public boolean isUnknown() {
     ASTState state = state();
     if (isUnknown_computed) {
@@ -365,12 +365,12 @@ protected boolean isUnknown_visited = false;
     return isUnknown_value;
   }
   /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:18
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:18
    * @apilevel internal
    */
   public Type Define_type(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getIdDeclNoTransform()) {
-      // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:37
+      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:37
       return intType();
     }
     else {
@@ -378,7 +378,7 @@ protected boolean isUnknown_visited = false;
     }
   }
   /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:18
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:18
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute type
    */
@@ -386,12 +386,12 @@ protected boolean isUnknown_visited = false;
     return true;
   }
   /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:16
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/UnknownDecl.jrag:16
    * @apilevel internal
    */
   public boolean Define_isFunction(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getIdDeclNoTransform()) {
-      // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:20
+      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/UnknownDecl.jrag:20
       return true;
     }
     else {
@@ -399,7 +399,7 @@ protected boolean isUnknown_visited = false;
     }
   }
   /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:16
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/UnknownDecl.jrag:16
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isFunction
    */
@@ -407,12 +407,12 @@ protected boolean isUnknown_visited = false;
     return true;
   }
   /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:17
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/UnknownDecl.jrag:17
    * @apilevel internal
    */
   public boolean Define_isVariable(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getIdDeclNoTransform()) {
-      // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:23
+      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/UnknownDecl.jrag:23
       return false;
     }
     else {
@@ -420,7 +420,7 @@ protected boolean isUnknown_visited = false;
     }
   }
   /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:17
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/UnknownDecl.jrag:17
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isVariable
    */
@@ -428,12 +428,12 @@ protected boolean isUnknown_visited = false;
     return true;
   }
   /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:18
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/UnknownDecl.jrag:18
    * @apilevel internal
    */
   public FunctionDecl Define_function(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getIdDeclNoTransform()) {
-      // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:26
+      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/UnknownDecl.jrag:26
       return this;
     }
     else {
@@ -441,7 +441,7 @@ protected boolean isUnknown_visited = false;
     }
   }
   /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/UnknownDecl.jrag:18
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/UnknownDecl.jrag:18
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute function
    */

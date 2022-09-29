@@ -9,24 +9,24 @@ import java.util.HashSet;
 /**
  * @ast class
  * @aspect Errors
- * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Errors.jrag:5
+ * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/Errors.jrag:5
  */
 public class ErrorMessage extends java.lang.Object implements Comparable<ErrorMessage> {
   /**
    * @aspect Errors
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Errors.jrag:6
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/Errors.jrag:6
    */
   
 		protected final String message;
   /**
    * @aspect Errors
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Errors.jrag:7
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/Errors.jrag:7
    */
   
 		protected final int lineNumber;
   /**
    * @aspect Errors
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Errors.jrag:8
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/Errors.jrag:8
    */
   
 		public ErrorMessage(String message, int lineNumber) {
@@ -35,7 +35,7 @@ public class ErrorMessage extends java.lang.Object implements Comparable<ErrorMe
 		}
   /**
    * @aspect Errors
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Errors.jrag:12
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/Errors.jrag:12
    */
   
 		public int compareTo(ErrorMessage other) {
@@ -46,7 +46,7 @@ public class ErrorMessage extends java.lang.Object implements Comparable<ErrorMe
 		}
   /**
    * @aspect Errors
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Errors.jrag:18
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/Errors.jrag:18
    */
   
 		public String toString() {

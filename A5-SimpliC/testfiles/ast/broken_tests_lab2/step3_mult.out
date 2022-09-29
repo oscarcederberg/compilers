@@ -1,0 +1,10 @@
+Program
+  List
+    FunctionDecl ID="n"
+      List
+      Block
+        List
+          Assign ID="j"
+            Mult
+              Numeral NUMERAL="3"
+              Numeral NUMERAL="3"

@@ -1,0 +1,10 @@
+Program
+  List
+    FunctionDecl ID="a"
+      List
+      Block
+        List
+    FunctionDecl ID="b"
+      List
+      Block
+        List

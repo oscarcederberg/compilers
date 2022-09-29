@@ -8,7 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:19
+ * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/lang.ast:19
  * @astdecl BinOp : Expr ::= Left:Expr Right:Expr;
  * @production BinOp : {@link Expr} ::= <span class="component">Left:{@link Expr}</span> <span class="component">Right:{@link Expr}</span>;
 
@@ -152,7 +152,7 @@ public abstract class BinOp extends Expr implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_Program_errors(Program _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Errors.jrag:78
+    // @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/Errors.jrag:78
     if (!getLeft().expectedType().compatibleWith(getRight().expectedType())) {
       {
         Program target = (Program) (program());

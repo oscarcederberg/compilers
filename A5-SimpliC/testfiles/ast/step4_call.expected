@@ -1,0 +1,10 @@
+Program
+  List
+    FunctionDecl
+      IdDecl ID="x"
+      List
+      Block
+        List
+          FunctionCall ID="a"
+            List
+              Numeral NUMERAL="10"

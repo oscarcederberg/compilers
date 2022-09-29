@@ -8,7 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 /**
  * @ast node
- * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/lang.ast:15
+ * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/lang.ast:15
  * @astdecl If : Stmt ::= Expr Block [Else:Block];
  * @production If : {@link Stmt} ::= <span class="component">{@link Expr}</span> <span class="component">{@link Block}</span> <span class="component">[Else:{@link Block}]</span>;
 
@@ -16,7 +16,7 @@ import java.util.HashSet;
 public class If extends Stmt implements Cloneable {
   /**
    * @aspect PrettyPrint
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/PrettyPrint.jrag:64
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/PrettyPrint.jrag:64
    */
   public void prettyPrint(PrintStream out, String ind){
         out.print("if (");
@@ -262,12 +262,12 @@ public class If extends Stmt implements Cloneable {
     return (Opt<Block>) getChildNoTransform(2);
   }
   /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:18
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:18
    * @apilevel internal
    */
   public Type Define_type(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getExprNoTransform()) {
-      // @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:22
+      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:22
       return boolType();
     }
     else {
@@ -275,7 +275,7 @@ public class If extends Stmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:18
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/TypeAnalysis.jrag:18
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute type
    */

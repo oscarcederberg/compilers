@@ -1,0 +1,11 @@
+int a(int b){
+    int b = 10;
+    
+    int c = 281;
+    int c = 391-31;
+    return c;
+}
+
+int a(){
+    return 20;
+}

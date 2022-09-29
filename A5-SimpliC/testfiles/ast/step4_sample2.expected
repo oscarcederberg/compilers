@@ -1,0 +1,29 @@
+Program
+  List
+    FunctionDecl
+      IdDecl ID="gcd2"
+      List
+        VariableDecl
+          IdDecl ID="a"
+          Opt
+        VariableDecl
+          IdDecl ID="b"
+          Opt
+      Block
+        List
+          If
+            Equals
+              VariableUse ID="b"
+              Numeral NUMERAL="0"
+            Block
+              List
+                Return
+                  VariableUse ID="a"
+            Opt
+          Return
+            FunctionUse ID="gcd2"
+              List
+                VariableUse ID="b"
+                Mod
+                  VariableUse ID="a"
+                  VariableUse ID="b"

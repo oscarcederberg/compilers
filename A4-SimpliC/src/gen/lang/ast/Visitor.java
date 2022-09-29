@@ -12,7 +12,7 @@ import java.util.HashSet;
  * have a visit method.
  * @ast interface
  * @aspect Visitor
- * @declaredat /mnt/d/coursework/edan65-compilers/assignments/A4-SimpliC/src/jastadd/Visitor.jrag:6
+ * @declaredat /home/knos/repos/education/p021-oscar-kasper/A4-SimpliC/src/jastadd/Visitor.jrag:6
  */
 public interface Visitor {
 
