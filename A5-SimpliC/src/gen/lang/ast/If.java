@@ -16,6 +16,17 @@ import java.util.HashSet;
  */
 public class If extends Stmt implements Cloneable {
   /**
+   * @aspect Interpreter
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:68
+   */
+  public void eval(ActivationRecord actrec) {
+        if (getExpr().eval(actrec) == 1) {
+            getBlock().eval(actrec);
+        } else if (hasElse()) {
+            getElse().eval(actrec);
+        }
+    }
+  /**
    * @aspect PrettyPrint
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/PrettyPrint.jrag:64
    */

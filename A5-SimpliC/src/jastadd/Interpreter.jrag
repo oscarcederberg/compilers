@@ -33,10 +33,14 @@ aspect Interpreter {
     }
 
     public int FunctionDecl.eval(ActivationRecord actrec) {
-        for (Stmt stmt : getBlock().getStmtList()) {
+        getBlock().eval(actrec);
+        return 0;
+    }
+
+    public void Block.eval(ActivationRecord actrec) {
+        for (Stmt stmt : getStmtList()) {
             stmt.eval(actrec);
         }
-        return 0;
     }
 
     // abstract public void Stmt.eval(ActivationRecord actrec) {}
@@ -55,6 +59,18 @@ aspect Interpreter {
     public void Assign.eval(ActivationRecord actrec) {
         int result = getExpr().eval(actrec);
         actrec.put(getID(), result);
+    }
+    public void While.eval(ActivationRecord actrec) {
+        while (getExpr().eval(actrec) == 1) {
+            getBlock().eval(actrec);
+        }
+    }
+    public void If.eval(ActivationRecord actrec) {
+        if (getExpr().eval(actrec) == 1) {
+            getBlock().eval(actrec);
+        } else if (hasElse()) {
+            getElse().eval(actrec);
+        }
     }
     public void FunctionCall.eval(ActivationRecord actrec) {
         if (getID().equals("print")) {
@@ -89,5 +105,26 @@ aspect Interpreter {
     }
     public int Div.eval(ActivationRecord actrec) {
         return getLeft().eval(actrec) / getRight().eval(actrec); 
+    }
+    public int Neg.eval(ActivationRecord actrec) {
+        return -getExpr().eval(actrec);
+    }
+    public int Equals.eval(ActivationRecord actrec) {
+        return getLeft().eval(actrec) == getRight().eval(actrec) ? 1 : 0; 
+    }
+    public int NotEq.eval(ActivationRecord actrec) {
+        return getLeft().eval(actrec) != getRight().eval(actrec) ? 1 : 0; 
+    }
+    public int LessThan.eval(ActivationRecord actrec) {
+        return getLeft().eval(actrec) < getRight().eval(actrec) ? 1 : 0; 
+    }
+    public int LessEq.eval(ActivationRecord actrec) {
+        return getLeft().eval(actrec) <= getRight().eval(actrec) ? 1 : 0; 
+    }
+    public int MoreThan.eval(ActivationRecord actrec) {
+        return getLeft().eval(actrec) > getRight().eval(actrec) ? 1 : 0; 
+    }
+    public int MoreEq.eval(ActivationRecord actrec) {
+        return getLeft().eval(actrec) >= getRight().eval(actrec) ? 1 : 0; 
     }
 }

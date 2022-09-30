@@ -1,4 +1,19 @@
 int main() {
-    print(42 == 42);
-    print(2 < 0);
+    int a;
+    if (42 == 42) a = 42;
+    if (42 != 42) a = 0;
+    print(a);
+
+    if (a >= 43) {
+        a = 42;
+    } else {
+        a = 21;
+    }
+    print(a);
+    
+    int b;
+    while (b < 10) {
+        b = b + 1;
+    }
+    print(b);
 }

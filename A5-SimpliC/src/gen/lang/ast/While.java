@@ -16,6 +16,15 @@ import java.util.HashSet;
  */
 public class While extends Stmt implements Cloneable {
   /**
+   * @aspect Interpreter
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:63
+   */
+  public void eval(ActivationRecord actrec) {
+        while (getExpr().eval(actrec) == 1) {
+            getBlock().eval(actrec);
+        }
+    }
+  /**
    * @aspect PrettyPrint
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/PrettyPrint.jrag:58
    */

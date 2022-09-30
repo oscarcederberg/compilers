@@ -20,9 +20,7 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:35
    */
   public int eval(ActivationRecord actrec) {
-        for (Stmt stmt : getBlock().getStmtList()) {
-            stmt.eval(actrec);
-        }
+        getBlock().eval(actrec);
         return 0;
     }
   /**
