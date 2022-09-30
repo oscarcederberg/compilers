@@ -1,11 +1,14 @@
 package lang;
 
 import java.io.File;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+import static org.junit.Assert.fail;
 
 import lang.ast.ErrorMessage;
 import lang.ast.Program;
@@ -30,14 +33,16 @@ public class TestInterpreter {
             Program program = (Program) Util.parse(new File(TEST_DIRECTORY, filename));
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             System.setOut(new PrintStream(baos));
+            
             if(!program.errors().isEmpty()) {
-                System.setOut(out);
                 StringBuilder sb = new StringBuilder();
                 for (ErrorMessage m : program.errors()) {
                     sb.append(m).append("\n");
                 }
                 String actual = sb.toString();
+                fail(actual);
             }
+
             program.eval();
             Util.compareOutput(baos.toString(), 
                     new File(TEST_DIRECTORY, Util.changeExtension(filename, ".out")),

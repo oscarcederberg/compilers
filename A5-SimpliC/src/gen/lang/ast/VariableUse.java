@@ -2,6 +2,7 @@
 package lang.ast;
 import java.io.PrintStream;
 import java.util.Set;
+import java.util.HashMap;
 import java.util.TreeSet;
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -14,6 +15,13 @@ import java.util.HashSet;
 
  */
 public class VariableUse extends Expr implements Cloneable {
+  /**
+   * @aspect Interpreter
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:72
+   */
+  public int eval(ActivationRecord actrec) {
+        return actrec.get(getID());
+    }
   /**
    * @aspect PrettyPrint
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/PrettyPrint.jrag:92

@@ -1,6 +1,20 @@
+import java.util.HashMap;
+
 aspect Interpreter {
     public class ActivationRecord {
-        
+        private HashMap<String, Integer> variables = new HashMap<String, Integer>();
+
+        public void put(String id, int value) {
+            this.variables.put(id, value);
+        }
+
+        public boolean contains(String id) {
+            return this.variables.containsKey(id);
+        }
+
+        public int get(String id) {
+            return this.variables.get(id);
+        }
     }
     
     public void Program.eval() {
@@ -22,7 +36,7 @@ aspect Interpreter {
         for (Stmt stmt : getBlock().getStmtList()) {
             stmt.eval(actrec);
         }
-        throw new RuntimeException();
+        return 0;
     }
 
     // abstract public void Stmt.eval(ActivationRecord actrec) {}
@@ -33,8 +47,14 @@ aspect Interpreter {
         int result;
         if (hasExpr()) {
             result = getExpr().eval(actrec);
-            System.out.println(result);
+            actrec.put(getIdDecl().getID(), result);
+        } else {
+            actrec.put(getIdDecl().getID(), 0);
         }
+    }
+    public void Assign.eval(ActivationRecord actrec) {
+        int result = getExpr().eval(actrec);
+        actrec.put(getID(), result);
     }
     public void FunctionCall.eval(ActivationRecord actrec) {
         if (getID().equals("print")) {
@@ -48,6 +68,12 @@ aspect Interpreter {
 
     public int Expr.eval(ActivationRecord actrec) {
         throw new RuntimeException();
+    }
+    public int VariableUse.eval(ActivationRecord actrec) {
+        return actrec.get(getID());
+    }
+    public int Numeral.eval(ActivationRecord actrec) {
+        return Integer.parseInt(getNUMERAL());
     }
     public int Add.eval(ActivationRecord actrec) {
         return getLeft().eval(actrec) + getRight().eval(actrec); 
@@ -63,8 +89,5 @@ aspect Interpreter {
     }
     public int Div.eval(ActivationRecord actrec) {
         return getLeft().eval(actrec) / getRight().eval(actrec); 
-    }
-    public int Numeral.eval(ActivationRecord actrec) {
-        return Integer.parseInt(getNUMERAL());
     }
 }
