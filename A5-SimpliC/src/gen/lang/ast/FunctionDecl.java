@@ -16,9 +16,12 @@ import java.util.HashSet;
 public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:15
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:21
    */
   public int eval(ActivationRecord actrec) {
+        for (Stmt stmt : getBlock().getStmtList()) {
+            stmt.eval(actrec);
+        }
         throw new RuntimeException();
     }
   /**

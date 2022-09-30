@@ -19,13 +19,18 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:6
    */
   public void eval() {
+        IdDecl main = unknownDecl();
 		for(FunctionDecl func : getFunctionDecls()) {
-			if(func.getIdDecl().getID().equals("main")) {
-				func.eval(new ActivationRecord());
-                return;
+			if(func.getIdDecl().getID().equals("main")){
+				main = func.getIdDecl();
 			}
 		}
-        throw new RuntimeException("main missing");
+
+        if(main.isUnknown()) {
+            throw new RuntimeException("main missing");
+        }
+
+        main.function().eval(new ActivationRecord());
     }
   /**
    * @aspect Visitor

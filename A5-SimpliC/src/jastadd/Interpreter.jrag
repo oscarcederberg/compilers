@@ -4,27 +4,67 @@ aspect Interpreter {
     }
     
     public void Program.eval() {
-        IdDecl main = lookup("main");
+        IdDecl main = unknownDecl();
+		for(FunctionDecl func : getFunctionDecls()) {
+			if(func.getIdDecl().getID().equals("main")){
+				main = func.getIdDecl();
+			}
+		}
+
         if(main.isUnknown()) {
             throw new RuntimeException("main missing");
         }
 
         main.function().eval(new ActivationRecord());
     }
+
     public int FunctionDecl.eval(ActivationRecord actrec) {
         for (Stmt stmt : getBlock().getStmtList()) {
             stmt.eval(actrec);
         }
+        throw new RuntimeException();
     }
+
+    // abstract public void Stmt.eval(ActivationRecord actrec) {}
     public void Stmt.eval(ActivationRecord actrec) {
         throw new RuntimeException();
     }
     public void VariableDecl.eval(ActivationRecord actrec) {
+        int result;
         if (hasExpr()) {
-            getExpr().eval(actrec);
+            result = getExpr().eval(actrec);
+            System.out.println(result);
         }
     }
+    public void FunctionCall.eval(ActivationRecord actrec) {
+        if (getID().equals("print")) {
+            int result;
+            if (hasExpr()) {
+                result = getExpr(0).eval(actrec);
+                System.out.println(result);
+            }
+        }
+    }
+
     public int Expr.eval(ActivationRecord actrec) {
         throw new RuntimeException();
+    }
+    public int Add.eval(ActivationRecord actrec) {
+        return getLeft().eval(actrec) + getRight().eval(actrec); 
+    }
+    public int Sub.eval(ActivationRecord actrec) {
+        return getLeft().eval(actrec) - getRight().eval(actrec); 
+    }
+    public int Mul.eval(ActivationRecord actrec) {
+        return getLeft().eval(actrec) * getRight().eval(actrec); 
+    }
+    public int Mod.eval(ActivationRecord actrec) {
+        return getLeft().eval(actrec) % getRight().eval(actrec); 
+    }
+    public int Div.eval(ActivationRecord actrec) {
+        return getLeft().eval(actrec) / getRight().eval(actrec); 
+    }
+    public int Numeral.eval(ActivationRecord actrec) {
+        return Integer.parseInt(getNUMERAL());
     }
 }

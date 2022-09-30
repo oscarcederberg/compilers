@@ -15,6 +15,19 @@ import java.util.HashSet;
  */
 public class FunctionCall extends Stmt implements Cloneable {
   /**
+   * @aspect Interpreter
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:39
+   */
+  public void eval(ActivationRecord actrec) {
+        if (getID().equals("print")) {
+            int result;
+            if (hasExpr()) {
+                result = getExpr(0).eval(actrec);
+                System.out.println(result);
+            }
+        }
+    }
+  /**
    * @aspect PrettyPrint
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/PrettyPrint.jrag:75
    */

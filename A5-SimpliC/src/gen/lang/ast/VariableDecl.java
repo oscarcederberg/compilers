@@ -15,6 +15,17 @@ import java.util.HashSet;
  */
 public class VariableDecl extends Stmt implements Cloneable {
   /**
+   * @aspect Interpreter
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:32
+   */
+  public void eval(ActivationRecord actrec) {
+        int result;
+        if (hasExpr()) {
+            result = getExpr().eval(actrec);
+            System.out.println(result);
+        }
+    }
+  /**
    * @aspect PrettyPrint
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/PrettyPrint.jrag:44
    */

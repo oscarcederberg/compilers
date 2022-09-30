@@ -15,6 +15,13 @@ import java.util.HashSet;
  */
 public class Numeral extends Expr implements Cloneable {
   /**
+   * @aspect Interpreter
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:67
+   */
+  public int eval(ActivationRecord actrec) {
+        return Integer.parseInt(getNUMERAL());
+    }
+  /**
    * @aspect PrettyPrint
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/PrettyPrint.jrag:105
    */

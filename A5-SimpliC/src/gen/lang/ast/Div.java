@@ -15,6 +15,13 @@ import java.util.HashSet;
  */
 public class Div extends BinOp implements Cloneable {
   /**
+   * @aspect Interpreter
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:64
+   */
+  public int eval(ActivationRecord actrec) {
+        return getLeft().eval(actrec) / getRight().eval(actrec); 
+    }
+  /**
    * @aspect PrettyPrint
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/PrettyPrint.jrag:123
    */
