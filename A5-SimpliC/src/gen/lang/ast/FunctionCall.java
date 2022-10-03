@@ -26,6 +26,17 @@ public class FunctionCall extends Stmt implements Cloneable {
                 result = getExpr(0).eval(actrec);
                 System.out.println(result);
             }
+        } else {
+            FunctionDecl function = decl().function();
+            ActivationRecord frame = new ActivationRecord();
+            
+            for (int i = 0; i < function.getNumVariableDecl(); i++) {
+                String id = function.getVariableDecl(i).getIdDecl().getID();
+                int value = getExpr(i).eval(actrec);
+                frame.put(id, value);
+            }
+
+            int result = function.eval(frame);
         }
     }
   /**

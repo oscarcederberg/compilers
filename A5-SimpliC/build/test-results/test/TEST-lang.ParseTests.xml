@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="lang.ParseTests" tests="20" skipped="0" failures="0" errors="0" timestamp="2022-10-03T15:28:23" hostname="COMFY" time="0.008">
+<testsuite name="lang.ParseTests" tests="20" skipped="0" failures="0" errors="0" timestamp="2022-10-03T15:40:08" hostname="COMFY" time="0.009">
   <properties/>
-  <testcase name="test4_ifelse" classname="lang.ParseTests" time="0.0"/>
-  <testcase name="test4_params" classname="lang.ParseTests" time="0.001"/>
+  <testcase name="test4_ifelse" classname="lang.ParseTests" time="0.001"/>
+  <testcase name="test4_params" classname="lang.ParseTests" time="0.0"/>
   <testcase name="test4_return" classname="lang.ParseTests" time="0.0"/>
   <testcase name="test3_div" classname="lang.ParseTests" time="0.001"/>
-  <testcase name="test3_mod" classname="lang.ParseTests" time="0.0"/>
+  <testcase name="test3_mod" classname="lang.ParseTests" time="0.001"/>
   <testcase name="test3_minus" classname="lang.ParseTests" time="0.0"/>
-  <testcase name="test4_iddeclassign" classname="lang.ParseTests" time="0.0"/>
+  <testcase name="test4_iddeclassign" classname="lang.ParseTests" time="0.001"/>
   <testcase name="test4_sample1" classname="lang.ParseTests" time="0.0"/>
-  <testcase name="test4_sample2" classname="lang.ParseTests" time="0.001"/>
+  <testcase name="test4_sample2" classname="lang.ParseTests" time="0.0"/>
   <testcase name="test4_sample3" classname="lang.ParseTests" time="0.0"/>
-  <testcase name="test4_while" classname="lang.ParseTests" time="0.001"/>
+  <testcase name="test4_while" classname="lang.ParseTests" time="0.0"/>
   <testcase name="test3_complex" classname="lang.ParseTests" time="0.0"/>
   <testcase name="test1" classname="lang.ParseTests" time="0.0"/>
   <testcase name="test2" classname="lang.ParseTests" time="0.001"/>

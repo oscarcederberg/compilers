@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="lang.TestInterpreter" tests="5" skipped="0" failures="0" errors="0" timestamp="2022-10-03T15:28:23" hostname="COMFY" time="0.01">
+<testsuite name="lang.TestInterpreter" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-10-03T15:40:08" hostname="COMFY" time="0.01">
   <properties/>
   <testcase name="runTest[functionuse.in]" classname="lang.TestInterpreter" time="0.001"/>
-  <testcase name="runTest[print.in]" classname="lang.TestInterpreter" time="0.002"/>
-  <testcase name="runTest[boolean.in]" classname="lang.TestInterpreter" time="0.001"/>
-  <testcase name="runTest[variable.in]" classname="lang.TestInterpreter" time="0.001"/>
-  <testcase name="runTest[uninitialized.in]" classname="lang.TestInterpreter" time="0.004"/>
+  <testcase name="runTest[print.in]" classname="lang.TestInterpreter" time="0.001"/>
+  <testcase name="runTest[boolean.in]" classname="lang.TestInterpreter" time="0.002"/>
+  <testcase name="runTest[fac.in]" classname="lang.TestInterpreter" time="0.001"/>
+  <testcase name="runTest[variable.in]" classname="lang.TestInterpreter" time="0.002"/>
+  <testcase name="runTest[uninitialized.in]" classname="lang.TestInterpreter" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
