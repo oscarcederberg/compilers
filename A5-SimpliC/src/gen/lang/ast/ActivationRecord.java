@@ -21,7 +21,19 @@ public class ActivationRecord extends java.lang.Object {
         private HashMap<String, Integer> variables = new HashMap<String, Integer>();
   /**
    * @aspect Interpreter
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:6
+   */
+  
+        private boolean returned = false;
+  /**
+   * @aspect Interpreter
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:7
+   */
+  
+        private int result = 0;
+  /**
+   * @aspect Interpreter
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:9
    */
   
 
@@ -30,7 +42,7 @@ public class ActivationRecord extends java.lang.Object {
         }
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:11
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:13
    */
   
 
@@ -39,12 +51,40 @@ public class ActivationRecord extends java.lang.Object {
         }
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:15
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:17
    */
   
 
         public int get(String id) {
             return this.variables.get(id);
+        }
+  /**
+   * @aspect Interpreter
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:21
+   */
+  
+
+        public boolean returned() {
+            return returned;
+        }
+  /**
+   * @aspect Interpreter
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:25
+   */
+  
+
+        public void finish(int value) {
+            returned = true;
+            result = value;
+        }
+  /**
+   * @aspect Interpreter
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:30
+   */
+  
+
+        public int result() {
+            return result;
         }
 
 }

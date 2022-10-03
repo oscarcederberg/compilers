@@ -17,7 +17,7 @@ import java.util.HashSet;
 public class NotEq extends BinOp implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:129
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:149
    */
   public int eval(ActivationRecord actrec) {
         return getLeft().eval(actrec) != getRight().eval(actrec) ? 1 : 0; 

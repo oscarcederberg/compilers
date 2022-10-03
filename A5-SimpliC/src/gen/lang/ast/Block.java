@@ -17,11 +17,12 @@ import java.util.HashSet;
 public class Block extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:40
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:55
    */
   public void eval(ActivationRecord actrec) {
         for (Stmt stmt : getStmtList()) {
             stmt.eval(actrec);
+            if (actrec.returned()) break;
         }
     }
   /**

@@ -16,6 +16,14 @@ import java.util.HashSet;
  */
 public class Return extends Stmt implements Cloneable {
   /**
+   * @aspect Interpreter
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:100
+   */
+  public void eval(ActivationRecord actrec) {
+        int result = getExpr().eval(actrec);
+        actrec.finish(result);
+    }
+  /**
    * @aspect PrettyPrint
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/PrettyPrint.jrag:85
    */

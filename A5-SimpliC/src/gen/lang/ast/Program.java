@@ -17,7 +17,7 @@ import java.util.HashSet;
 public class Program extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:20
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:35
    */
   public void eval() {
         IdDecl main = unknownDecl();

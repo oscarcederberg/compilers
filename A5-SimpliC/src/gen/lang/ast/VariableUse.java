@@ -17,7 +17,7 @@ import java.util.HashSet;
 public class VariableUse extends Expr implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:88
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:108
    */
   public int eval(ActivationRecord actrec) {
         return actrec.get(getID());

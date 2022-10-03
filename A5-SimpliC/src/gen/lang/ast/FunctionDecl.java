@@ -17,11 +17,11 @@ import java.util.HashSet;
 public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:35
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:50
    */
   public int eval(ActivationRecord actrec) {
         getBlock().eval(actrec);
-        return 0;
+        return actrec.result();
     }
   /**
    * @aspect Visitor

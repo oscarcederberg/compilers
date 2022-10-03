@@ -3,6 +3,8 @@ import java.util.HashMap;
 aspect Interpreter {
     public class ActivationRecord {
         private HashMap<String, Integer> variables = new HashMap<String, Integer>();
+        private boolean returned = false;
+        private int result = 0;
 
         public void put(String id, int value) {
             this.variables.put(id, value);
@@ -14,6 +16,19 @@ aspect Interpreter {
 
         public int get(String id) {
             return this.variables.get(id);
+        }
+
+        public boolean returned() {
+            return returned;
+        }
+
+        public void finish(int value) {
+            returned = true;
+            result = value;
+        }
+
+        public int result() {
+            return result;
         }
     }
     
@@ -34,12 +49,13 @@ aspect Interpreter {
 
     public int FunctionDecl.eval(ActivationRecord actrec) {
         getBlock().eval(actrec);
-        return 0;
+        return actrec.result();
     }
 
     public void Block.eval(ActivationRecord actrec) {
         for (Stmt stmt : getStmtList()) {
             stmt.eval(actrec);
+            if (actrec.returned()) break;
         }
     }
 
@@ -80,6 +96,10 @@ aspect Interpreter {
                 System.out.println(result);
             }
         }
+    }
+    public void Return.eval(ActivationRecord actrec) {
+        int result = getExpr().eval(actrec);
+        actrec.finish(result);
     }
 
     public int Expr.eval(ActivationRecord actrec) {
