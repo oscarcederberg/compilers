@@ -17,7 +17,7 @@ import java.util.HashSet;
 public class MoreEq extends BinOp implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:127
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:141
    */
   public int eval(ActivationRecord actrec) {
         return getLeft().eval(actrec) >= getRight().eval(actrec) ? 1 : 0; 

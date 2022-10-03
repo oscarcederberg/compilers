@@ -17,7 +17,7 @@ import java.util.HashSet;
 public class Add extends BinOp implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:94
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:108
    */
   public int eval(ActivationRecord actrec) {
         return getLeft().eval(actrec) + getRight().eval(actrec); 

@@ -17,7 +17,7 @@ import java.util.HashSet;
 public class Neg extends Expr implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:109
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:123
    */
   public int eval(ActivationRecord actrec) {
         return -getExpr().eval(actrec);

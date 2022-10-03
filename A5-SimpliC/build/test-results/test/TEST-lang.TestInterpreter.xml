@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="lang.TestInterpreter" tests="5" skipped="0" failures="1" errors="0" timestamp="2022-10-03T14:42:09" hostname="COMFY" time="0.03">
+<testsuite name="lang.TestInterpreter" tests="5" skipped="0" failures="1" errors="0" timestamp="2022-10-03T15:10:56" hostname="COMFY" time="0.009">
   <properties/>
-  <testcase name="runTest[print.in]" classname="lang.TestInterpreter" time="0.001"/>
-  <testcase name="runTest[boolean.in]" classname="lang.TestInterpreter" time="0.003"/>
-  <testcase name="runTest[variable.in]" classname="lang.TestInterpreter" time="0.002"/>
-  <testcase name="runTest[uninitialized.in]" classname="lang.TestInterpreter" time="0.001"/>
-  <testcase name="runTest[functioncall.in]" classname="lang.TestInterpreter" time="0.022">
+  <testcase name="runTest[functionuse.in]" classname="lang.TestInterpreter" time="0.002">
     <failure message="java.lang.RuntimeException" type="java.lang.RuntimeException">java.lang.RuntimeException
-	at lang.ast.Expr.eval(Expr.java:23)
+	at lang.ast.Stmt.eval(Stmt.java:23)
+	at lang.ast.Block.eval(Block.java:24)
+	at lang.ast.FunctionDecl.eval(FunctionDecl.java:23)
+	at lang.ast.FunctionUse.eval(FunctionUse.java:32)
 	at lang.ast.FunctionCall.eval(FunctionCall.java:26)
 	at lang.ast.Block.eval(Block.java:24)
 	at lang.ast.FunctionDecl.eval(FunctionDecl.java:23)
@@ -66,6 +65,10 @@
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
+  <testcase name="runTest[print.in]" classname="lang.TestInterpreter" time="0.002"/>
+  <testcase name="runTest[boolean.in]" classname="lang.TestInterpreter" time="0.002"/>
+  <testcase name="runTest[variable.in]" classname="lang.TestInterpreter" time="0.002"/>
+  <testcase name="runTest[uninitialized.in]" classname="lang.TestInterpreter" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -88,6 +88,20 @@ aspect Interpreter {
     public int VariableUse.eval(ActivationRecord actrec) {
         return actrec.get(getID());
     }
+    public int FunctionUse.eval(ActivationRecord actrec) {
+        FunctionDecl function = decl().function();
+        ActivationRecord frame = new ActivationRecord();
+        
+        for (int i = 0; i < function.getNumVariableDecl(); i++) {
+            String id = function.getVariableDecl(i).getIdDecl().getID();
+            int value = getExpr(i).eval(actrec);
+            frame.put(id, value);
+        }
+
+        int result = function.eval(frame);
+
+        return result;
+    }
     public int Numeral.eval(ActivationRecord actrec) {
         return Integer.parseInt(getNUMERAL());
     }
