@@ -1,0 +1,15 @@
+int main() {
+    int x = 5;
+    int sum = 0;
+
+    int i = 0;
+    while (i < x) {
+        i = i + 1;
+        int x = i;
+        sum = sum + x;
+        print(x);
+    }
+
+    print(sum);
+    print(x);
+}
