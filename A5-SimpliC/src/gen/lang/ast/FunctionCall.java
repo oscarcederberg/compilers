@@ -17,7 +17,7 @@ import java.util.HashSet;
 public class FunctionCall extends Stmt implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:91
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:90
    */
   public void eval(ActivationRecord actrec) {
         if (getID().equals("print")) {
@@ -31,7 +31,7 @@ public class FunctionCall extends Stmt implements Cloneable {
             ActivationRecord frame = new ActivationRecord();
             
             for (int i = 0; i < function.getNumVariableDecl(); i++) {
-                String id = function.getVariableDecl(i).getIdDecl().getID();
+                String id = function.getVariableDecl(i).getIdDecl().uniqueName();
                 int value = getExpr(i).eval(actrec);
                 frame.put(id, value);
             }

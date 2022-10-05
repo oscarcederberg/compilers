@@ -17,14 +17,14 @@ import java.util.HashSet;
 public class FunctionUse extends Expr implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:122
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:121
    */
   public int eval(ActivationRecord actrec) {
         FunctionDecl function = decl().function();
         ActivationRecord frame = new ActivationRecord();
         
         for (int i = 0; i < function.getNumVariableDecl(); i++) {
-            String id = function.getVariableDecl(i).getIdDecl().getID();
+            String id = function.getVariableDecl(i).getIdDecl().uniqueName();
             int value = getExpr(i).eval(actrec);
             frame.put(id, value);
         }

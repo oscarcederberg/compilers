@@ -457,5 +457,28 @@ protected boolean isUnknown_visited = false;
   protected boolean canDefine_function(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
+  /**
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:178
+   * @apilevel internal
+   */
+  public String Define_index(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getBlockNoTransform()) {
+      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:183
+      {
+              return "";
+          }
+    }
+    else {
+      return getParent().Define_index(this, _callerNode);
+    }
+  }
+  /**
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:178
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute index
+   */
+  protected boolean canDefine_index(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
 
 }

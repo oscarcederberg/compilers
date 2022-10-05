@@ -17,7 +17,7 @@ import java.util.HashSet;
 public class Equals extends BinOp implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:157
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:156
    */
   public int eval(ActivationRecord actrec) {
         return getLeft().eval(actrec) == getRight().eval(actrec) ? 1 : 0; 

@@ -20,12 +20,11 @@ public class VariableDecl extends Stmt implements Cloneable {
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:66
    */
   public void eval(ActivationRecord actrec) {
-        int result;
         if (hasExpr()) {
-            result = getExpr().eval(actrec);
-            actrec.put(getIdDecl().getID(), result);
+            int result = getExpr().eval(actrec);
+            actrec.put(getIdDecl().uniqueName(), result);
         } else {
-            actrec.put(getIdDecl().getID(), 0);
+            actrec.put(getIdDecl().uniqueName(), 0);
         }
     }
   /**

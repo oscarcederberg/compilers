@@ -75,28 +75,30 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
     super.flushAttrCache();
     isMultiDeclared_reset();
     isUnknown_reset();
+    uniqueName_reset();
     lookup_String_reset();
     type_reset();
     isFunction_reset();
     isVariable_reset();
     function_reset();
+    index_reset();
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:39
+   * @declaredat ASTNode:41
    */
   public void flushCollectionCache() {
     super.flushCollectionCache();
 
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:44
+   * @declaredat ASTNode:46
    */
   public IdDecl clone() throws CloneNotSupportedException {
     IdDecl node = (IdDecl) super.clone();
     return node;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:49
+   * @declaredat ASTNode:51
    */
   public IdDecl copy() {
     try {
@@ -116,7 +118,7 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:68
+   * @declaredat ASTNode:70
    */
   @Deprecated
   public IdDecl fullCopy() {
@@ -127,7 +129,7 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:78
+   * @declaredat ASTNode:80
    */
   public IdDecl treeCopyNoTransform() {
     IdDecl tree = (IdDecl) copy();
@@ -148,7 +150,7 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:98
+   * @declaredat ASTNode:100
    */
   public IdDecl treeCopy() {
     IdDecl tree = (IdDecl) copy();
@@ -275,6 +277,48 @@ protected boolean isUnknown_visited = false;
     isUnknown_visited = false;
     return isUnknown_value;
   }
+/** @apilevel internal */
+protected boolean uniqueName_visited = false;
+  /** @apilevel internal */
+  private void uniqueName_reset() {
+    uniqueName_computed = false;
+    
+    uniqueName_value = null;
+    uniqueName_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean uniqueName_computed = false;
+
+  /** @apilevel internal */
+  protected String uniqueName_value;
+
+  /**
+   * @attribute syn
+   * @aspect Interpreter
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:175
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:175")
+  public String uniqueName() {
+    ASTState state = state();
+    if (uniqueName_computed) {
+      return uniqueName_value;
+    }
+    if (uniqueName_visited) {
+      throw new RuntimeException("Circular definition of attribute IdDecl.uniqueName().");
+    }
+    uniqueName_visited = true;
+    state().enterLazyAttribute();
+    uniqueName_value = uniqueName_compute();
+    uniqueName_computed = true;
+    state().leaveLazyAttribute();
+    uniqueName_visited = false;
+    return uniqueName_value;
+  }
+  /** @apilevel internal */
+  private String uniqueName_compute() {
+          return  index() + getID();
+      }
   /**
    * @attribute inh
    * @aspect NameAnalysis
@@ -458,6 +502,44 @@ protected boolean function_visited = false;
 
   /** @apilevel internal */
   protected FunctionDecl function_value;
+
+  /**
+   * @attribute inh
+   * @aspect Interpreter
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:178
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:178")
+  public String index() {
+    ASTState state = state();
+    if (index_computed) {
+      return index_value;
+    }
+    if (index_visited) {
+      throw new RuntimeException("Circular definition of attribute IdDecl.index().");
+    }
+    index_visited = true;
+    state().enterLazyAttribute();
+    index_value = getParent().Define_index(this, null);
+    index_computed = true;
+    state().leaveLazyAttribute();
+    index_visited = false;
+    return index_value;
+  }
+/** @apilevel internal */
+protected boolean index_visited = false;
+  /** @apilevel internal */
+  private void index_reset() {
+    index_computed = false;
+    
+    index_value = null;
+    index_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean index_computed = false;
+
+  /** @apilevel internal */
+  protected String index_value;
 
   /** @apilevel internal */
   protected void collect_contributors_Program_errors(Program _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {

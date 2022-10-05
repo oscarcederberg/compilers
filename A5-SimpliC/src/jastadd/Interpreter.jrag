@@ -64,17 +64,16 @@ aspect Interpreter {
         throw new RuntimeException();
     }
     public void VariableDecl.eval(ActivationRecord actrec) {
-        int result;
         if (hasExpr()) {
-            result = getExpr().eval(actrec);
-            actrec.put(getIdDecl().getID(), result);
+            int result = getExpr().eval(actrec);
+            actrec.put(getIdDecl().uniqueName(), result);
         } else {
-            actrec.put(getIdDecl().getID(), 0);
+            actrec.put(getIdDecl().uniqueName(), 0);
         }
     }
     public void Assign.eval(ActivationRecord actrec) {
         int result = getExpr().eval(actrec);
-        actrec.put(getID(), result);
+        actrec.put(decl().uniqueName(), result);
     }
     public void While.eval(ActivationRecord actrec) {
         while (getExpr().eval(actrec) == 1) {
@@ -100,7 +99,7 @@ aspect Interpreter {
             ActivationRecord frame = new ActivationRecord();
             
             for (int i = 0; i < function.getNumVariableDecl(); i++) {
-                String id = function.getVariableDecl(i).getIdDecl().getID();
+                String id = function.getVariableDecl(i).getIdDecl().uniqueName();
                 int value = getExpr(i).eval(actrec);
                 frame.put(id, value);
             }
@@ -117,14 +116,14 @@ aspect Interpreter {
         throw new RuntimeException();
     }
     public int VariableUse.eval(ActivationRecord actrec) {
-        return actrec.get(getID());
+        return actrec.get(decl().uniqueName());
     }
     public int FunctionUse.eval(ActivationRecord actrec) {
         FunctionDecl function = decl().function();
         ActivationRecord frame = new ActivationRecord();
         
         for (int i = 0; i < function.getNumVariableDecl(); i++) {
-            String id = function.getVariableDecl(i).getIdDecl().getID();
+            String id = function.getVariableDecl(i).getIdDecl().uniqueName();
             int value = getExpr(i).eval(actrec);
             frame.put(id, value);
         }
@@ -171,5 +170,17 @@ aspect Interpreter {
     }
     public int MoreEq.eval(ActivationRecord actrec) {
         return getLeft().eval(actrec) >= getRight().eval(actrec) ? 1 : 0; 
+    }
+    
+    syn String IdDecl.uniqueName() {
+        return  index() + getID();
+    }
+    inh String IdDecl.index();
+    inh String Block.index();
+    eq Block.getStmt(int index).index() {
+        return index() + index + "_";
+    }
+    eq FunctionDecl.getBlock().index() {
+        return "";
     }
 }

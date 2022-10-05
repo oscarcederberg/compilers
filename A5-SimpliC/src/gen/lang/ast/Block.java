@@ -86,23 +86,24 @@ public class Block extends ASTNode<ASTNode> implements Cloneable {
     super.flushAttrCache();
     localLookup_String_int_reset();
     lookup_String_reset();
+    index_reset();
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:33
+   * @declaredat ASTNode:34
    */
   public void flushCollectionCache() {
     super.flushCollectionCache();
 
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:38
+   * @declaredat ASTNode:39
    */
   public Block clone() throws CloneNotSupportedException {
     Block node = (Block) super.clone();
     return node;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:43
+   * @declaredat ASTNode:44
    */
   public Block copy() {
     try {
@@ -122,7 +123,7 @@ public class Block extends ASTNode<ASTNode> implements Cloneable {
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:62
+   * @declaredat ASTNode:63
    */
   @Deprecated
   public Block fullCopy() {
@@ -133,7 +134,7 @@ public class Block extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:72
+   * @declaredat ASTNode:73
    */
   public Block treeCopyNoTransform() {
     Block tree = (Block) copy();
@@ -154,7 +155,7 @@ public class Block extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:92
+   * @declaredat ASTNode:93
    */
   public Block treeCopy() {
     Block tree = (Block) copy();
@@ -371,6 +372,44 @@ protected java.util.Set lookup_String_visited;
   protected java.util.Map lookup_String_values;
 
   /**
+   * @attribute inh
+   * @aspect Interpreter
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:179
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:179")
+  public String index() {
+    ASTState state = state();
+    if (index_computed) {
+      return index_value;
+    }
+    if (index_visited) {
+      throw new RuntimeException("Circular definition of attribute Block.index().");
+    }
+    index_visited = true;
+    state().enterLazyAttribute();
+    index_value = getParent().Define_index(this, null);
+    index_computed = true;
+    state().leaveLazyAttribute();
+    index_visited = false;
+    return index_value;
+  }
+/** @apilevel internal */
+protected boolean index_visited = false;
+  /** @apilevel internal */
+  private void index_reset() {
+    index_computed = false;
+    
+    index_value = null;
+    index_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean index_computed = false;
+
+  /** @apilevel internal */
+  protected String index_value;
+
+  /**
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/NameAnalysis.jrag:17
    * @apilevel internal
    */
@@ -394,6 +433,30 @@ protected java.util.Set lookup_String_visited;
    * @return {@code true} if this node has an equation for the inherited attribute lookup
    */
   protected boolean canDefine_lookup(ASTNode _callerNode, ASTNode _childNode, String s) {
+    return true;
+  }
+  /**
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:178
+   * @apilevel internal
+   */
+  public String Define_index(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getStmtListNoTransform()) {
+      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:180
+      int index = _callerNode.getIndexOfChild(_childNode);
+      {
+              return index() + index + "_";
+          }
+    }
+    else {
+      return getParent().Define_index(this, _callerNode);
+    }
+  }
+  /**
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:178
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute index
+   */
+  protected boolean canDefine_index(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
 
