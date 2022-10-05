@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Scanner;
 
 aspect Interpreter {
     public class ActivationRecord {
@@ -48,7 +49,11 @@ aspect Interpreter {
     }
 
     public int FunctionDecl.eval(ActivationRecord actrec) {
-        getBlock().eval(actrec);
+        if (getIdDecl().getID().equals("read")) {
+            actrec.finish(program().scanner().nextInt());
+        } else {
+            getBlock().eval(actrec);
+        }
         return actrec.result();
     }
 
@@ -187,4 +192,6 @@ aspect Interpreter {
     eq FunctionDecl.getBlock().index() {
         return "";
     }
+
+    syn Scanner Program.scanner() = new Scanner(System.in); 
 }

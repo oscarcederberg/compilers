@@ -1,6 +1,7 @@
 package lang.ast;
 
 import java.io.PrintStream;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.HashMap;
 import java.util.TreeSet;
@@ -10,30 +11,30 @@ import java.util.HashSet;
 /**
  * @ast class
  * @aspect Interpreter
- * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:4
+ * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:5
  */
 public class ActivationRecord extends java.lang.Object {
-  /**
-   * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:5
-   */
-  
-        private HashMap<String, Integer> variables = new HashMap<String, Integer>();
   /**
    * @aspect Interpreter
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:6
    */
   
-        private boolean returned = false;
+        private HashMap<String, Integer> variables = new HashMap<String, Integer>();
   /**
    * @aspect Interpreter
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:7
    */
   
+        private boolean returned = false;
+  /**
+   * @aspect Interpreter
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:8
+   */
+  
         private int result = 0;
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:9
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:10
    */
   
 
@@ -42,7 +43,7 @@ public class ActivationRecord extends java.lang.Object {
         }
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:13
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:14
    */
   
 
@@ -51,7 +52,7 @@ public class ActivationRecord extends java.lang.Object {
         }
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:17
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:18
    */
   
 
@@ -60,7 +61,7 @@ public class ActivationRecord extends java.lang.Object {
         }
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:21
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:22
    */
   
 
@@ -69,7 +70,7 @@ public class ActivationRecord extends java.lang.Object {
         }
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:25
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:26
    */
   
 
@@ -79,7 +80,7 @@ public class ActivationRecord extends java.lang.Object {
         }
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:30
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:31
    */
   
 

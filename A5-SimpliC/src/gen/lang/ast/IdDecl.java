@@ -1,6 +1,7 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.5 */
 package lang.ast;
 import java.io.PrintStream;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.HashMap;
 import java.util.TreeSet;
@@ -295,10 +296,10 @@ protected boolean uniqueName_visited = false;
   /**
    * @attribute syn
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:175
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:180
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:175")
+  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:180")
   public String uniqueName() {
     ASTState state = state();
     if (uniqueName_computed) {
@@ -507,10 +508,10 @@ protected boolean function_visited = false;
   /**
    * @attribute inh
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:179
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:184
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:179")
+  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:184")
   public String index() {
     ASTState state = state();
     if (index_computed) {

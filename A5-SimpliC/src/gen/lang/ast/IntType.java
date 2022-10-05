@@ -1,6 +1,7 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.5 */
 package lang.ast;
 import java.io.PrintStream;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.HashMap;
 import java.util.TreeSet;

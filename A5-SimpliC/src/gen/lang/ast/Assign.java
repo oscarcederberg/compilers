@@ -1,6 +1,7 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.5 */
 package lang.ast;
 import java.io.PrintStream;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.HashMap;
 import java.util.TreeSet;
@@ -17,7 +18,7 @@ import java.util.HashSet;
 public class Assign extends Stmt implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:74
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:79
    */
   public void eval(ActivationRecord actrec) {
         int result = getExpr().eval(actrec);

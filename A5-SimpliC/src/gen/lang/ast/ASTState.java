@@ -1,6 +1,7 @@
 package lang.ast;
 
 import java.io.PrintStream;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.HashMap;
 import java.util.TreeSet;

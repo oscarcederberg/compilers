@@ -1,6 +1,7 @@
 /* This file was generated with JastAdd2 (http://jastadd.org) version 2.3.5 */
 package lang.ast;
 import java.io.PrintStream;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.HashMap;
 import java.util.TreeSet;
@@ -17,10 +18,14 @@ import java.util.HashSet;
 public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:50
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:51
    */
   public int eval(ActivationRecord actrec) {
-        getBlock().eval(actrec);
+        if (getIdDecl().getID().equals("read")) {
+            actrec.finish(program().scanner().nextInt());
+        } else {
+            getBlock().eval(actrec);
+        }
         return actrec.result();
     }
   /**
@@ -458,18 +463,18 @@ protected boolean isUnknown_visited = false;
     return true;
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:179
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:184
    * @apilevel internal
    */
   public String Define_index(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getBlockNoTransform()) {
-      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:187
+      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:192
       {
               return "";
           }
     }
     else if (_callerNode == getVariableDeclListNoTransform()) {
-      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:184
+      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:189
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       {
               return "";
@@ -480,7 +485,7 @@ protected boolean isUnknown_visited = false;
     }
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:179
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:184
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute index
    */
