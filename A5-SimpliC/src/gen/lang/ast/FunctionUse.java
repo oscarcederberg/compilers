@@ -24,7 +24,7 @@ public class FunctionUse extends Expr implements Cloneable {
         ActivationRecord frame = new ActivationRecord();
         
         for (int i = 0; i < function.getNumVariableDecl(); i++) {
-            String id = function.getVariableDecl(i).getIdDecl().uniqueName();
+            String id = function.getVariableDecl(i).getIdDecl().getID();
             int value = getExpr(i).eval(actrec);
             frame.put(id, value);
         }

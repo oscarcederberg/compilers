@@ -317,6 +317,7 @@ protected boolean uniqueName_visited = false;
   }
   /** @apilevel internal */
   private String uniqueName_compute() {
+          //System.out.print(index() + getID() + "\n");
           return  index() + getID();
       }
   /**
@@ -506,10 +507,10 @@ protected boolean function_visited = false;
   /**
    * @attribute inh
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:178
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:179
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:178")
+  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:179")
   public String index() {
     ASTState state = state();
     if (index_computed) {

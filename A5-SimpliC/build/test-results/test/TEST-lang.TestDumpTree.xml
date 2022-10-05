@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="lang.TestDumpTree" tests="10" skipped="0" failures="0" errors="0" timestamp="2022-10-05T08:59:52" hostname="COMFY" time="0.049">
+<testsuite name="lang.TestDumpTree" tests="10" skipped="0" failures="0" errors="0" timestamp="2022-10-05T09:21:11" hostname="COMFY" time="0.06">
   <properties/>
-  <testcase name="runTest[step4_function_use.in]" classname="lang.TestDumpTree" time="0.017"/>
-  <testcase name="runTest[step4_sample3.in]" classname="lang.TestDumpTree" time="0.007"/>
+  <testcase name="runTest[step4_function_use.in]" classname="lang.TestDumpTree" time="0.021"/>
+  <testcase name="runTest[step4_sample3.in]" classname="lang.TestDumpTree" time="0.006"/>
   <testcase name="runTest[step4_while.in]" classname="lang.TestDumpTree" time="0.003"/>
   <testcase name="runTest[step4_iddeclassign.in]" classname="lang.TestDumpTree" time="0.003"/>
   <testcase name="runTest[step4_sample2.in]" classname="lang.TestDumpTree" time="0.005"/>
-  <testcase name="runTest[step4_call.in]" classname="lang.TestDumpTree" time="0.002"/>
+  <testcase name="runTest[step4_call.in]" classname="lang.TestDumpTree" time="0.001"/>
   <testcase name="runTest[step4_return.in]" classname="lang.TestDumpTree" time="0.002"/>
   <testcase name="runTest[step4_ifelse.in]" classname="lang.TestDumpTree" time="0.003"/>
   <testcase name="runTest[step4_params.in]" classname="lang.TestDumpTree" time="0.002"/>
-  <testcase name="runTest[step4_sample1.in]" classname="lang.TestDumpTree" time="0.004"/>
+  <testcase name="runTest[step4_sample1.in]" classname="lang.TestDumpTree" time="0.013"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

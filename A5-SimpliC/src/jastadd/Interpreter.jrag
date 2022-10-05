@@ -123,7 +123,7 @@ aspect Interpreter {
         ActivationRecord frame = new ActivationRecord();
         
         for (int i = 0; i < function.getNumVariableDecl(); i++) {
-            String id = function.getVariableDecl(i).getIdDecl().uniqueName();
+            String id = function.getVariableDecl(i).getIdDecl().getID();
             int value = getExpr(i).eval(actrec);
             frame.put(id, value);
         }
@@ -173,12 +173,16 @@ aspect Interpreter {
     }
     
     syn String IdDecl.uniqueName() {
+        //System.out.print(index() + getID() + "\n");
         return  index() + getID();
     }
     inh String IdDecl.index();
     inh String Block.index();
     eq Block.getStmt(int index).index() {
         return index() + index + "_";
+    }
+    eq FunctionDecl.getVariableDecl().index() {
+        return "";
     }
     eq FunctionDecl.getBlock().index() {
         return "";
