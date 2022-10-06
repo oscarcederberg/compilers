@@ -17,8 +17,8 @@ int gcd2(int a, int b) {
 // Test two different GCD algorithms and print the results.
 // The results should be equal when both inputs are positive.
 int main() {
-    int a = 250;
-    int b = 50;
+    int a = 24;
+    int b = 20;
     print(gcd1(a, b));
     print(gcd2(a, b));
     int diff = gcd1(a, b) - gcd2(a, b);
