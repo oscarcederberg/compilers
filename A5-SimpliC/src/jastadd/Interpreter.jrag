@@ -91,6 +91,9 @@ aspect Interpreter {
     }
     public void While.eval(ActivationRecord actrec) {
         while (getExpr().eval(actrec) == 1) {
+            if (actrec.returned()) {
+                break;
+            }
             getBlock().eval(actrec);
         }
     }

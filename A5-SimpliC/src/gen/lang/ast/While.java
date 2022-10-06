@@ -22,6 +22,9 @@ public class While extends Stmt implements Cloneable {
    */
   public void eval(ActivationRecord actrec) {
         while (getExpr().eval(actrec) == 1) {
+            if (actrec.returned()) {
+                break;
+            }
             getBlock().eval(actrec);
         }
     }

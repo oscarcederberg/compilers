@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class If extends Stmt implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:97
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:100
    */
   public void eval(ActivationRecord actrec) {
         if (getExpr().eval(actrec) == 1) {

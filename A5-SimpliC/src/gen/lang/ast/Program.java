@@ -36,7 +36,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
     }
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:197
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:200
    */
   static Scanner scanner = new Scanner(System.in);
   /**
@@ -319,7 +319,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_Program_
 
   /**
    * @aspect <NoAspect>
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:202
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:205
    */
   /** @apilevel internal */
 protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_FunctionDecl_functionCalls = null;
