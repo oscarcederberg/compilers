@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class Numeral extends Expr implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:144
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:145
    */
   public int eval(ActivationRecord actrec) {
         return Integer.parseInt(getNUMERAL());

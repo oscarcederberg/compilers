@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class FunctionCall extends Stmt implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:99
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:100
    */
   public void eval(ActivationRecord actrec) {
         if (getID().equals("print")) {
@@ -437,6 +437,20 @@ protected java.util.Set lookup_String_visited;
     return true;
   }
   /** @apilevel internal */
+  protected void collect_contributors_FunctionDecl_functionCalls(Program _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
+    // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:210
+    {
+      FunctionDecl target = (FunctionDecl) (enclosedFunction());
+      java.util.Set<ASTNode> contributors = _map.get(target);
+      if (contributors == null) {
+        contributors = new java.util.LinkedHashSet<ASTNode>();
+        _map.put((ASTNode) target, contributors);
+      }
+      contributors.add(this);
+    }
+    super.collect_contributors_FunctionDecl_functionCalls(_root, _map);
+  }
+  /** @apilevel internal */
   protected void collect_contributors_Program_errors(Program _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
     // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Errors.jrag:46
     if (decl().isUnknown()) {
@@ -475,6 +489,11 @@ protected java.util.Set lookup_String_visited;
       }
     }
     super.collect_contributors_Program_errors(_root, _map);
+  }
+  /** @apilevel internal */
+  protected void contributeTo_FunctionDecl_functionCalls(Set<FunctionDecl> collection) {
+    super.contributeTo_FunctionDecl_functionCalls(collection);
+    collection.add(decl().function());
   }
   /** @apilevel internal */
   protected void contributeTo_Program_errors(Set<ErrorMessage> collection) {

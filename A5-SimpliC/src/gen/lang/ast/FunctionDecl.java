@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:51
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:52
    */
   public int eval(ActivationRecord actrec) {
         if (getIdDecl().getID().equals("read")) {
@@ -101,17 +101,20 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    */
   public void flushCollectionCache() {
     super.flushCollectionCache();
-
+    FunctionDecl_functionCalls_visited = false;
+    FunctionDecl_functionCalls_computed = false;
+    
+    FunctionDecl_functionCalls_value = null;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:39
+   * @declaredat ASTNode:42
    */
   public FunctionDecl clone() throws CloneNotSupportedException {
     FunctionDecl node = (FunctionDecl) super.clone();
     return node;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:44
+   * @declaredat ASTNode:47
    */
   public FunctionDecl copy() {
     try {
@@ -131,7 +134,7 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:63
+   * @declaredat ASTNode:66
    */
   @Deprecated
   public FunctionDecl fullCopy() {
@@ -142,7 +145,7 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:73
+   * @declaredat ASTNode:76
    */
   public FunctionDecl treeCopyNoTransform() {
     FunctionDecl tree = (FunctionDecl) copy();
@@ -163,7 +166,7 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:93
+   * @declaredat ASTNode:96
    */
   public FunctionDecl treeCopy() {
     FunctionDecl tree = (FunctionDecl) copy();
@@ -467,18 +470,18 @@ protected boolean isUnknown_visited = false;
     return true;
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:188
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:189
    * @apilevel internal
    */
   public String Define_index(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getBlockNoTransform()) {
-      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:196
+      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:197
       {
               return "";
           }
     }
     else if (_callerNode == getVariableDeclListNoTransform()) {
-      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:193
+      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:194
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       {
               return "";
@@ -489,12 +492,75 @@ protected boolean isUnknown_visited = false;
     }
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:188
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:189
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute index
    */
   protected boolean canDefine_index(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
+  /**
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:203
+   * @apilevel internal
+   */
+  public FunctionDecl Define_enclosedFunction(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return this;
+  }
+  /**
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:203
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute enclosedFunction
+   */
+  protected boolean canDefine_enclosedFunction(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+/** @apilevel internal */
+protected boolean FunctionDecl_functionCalls_visited = false;
+  /**
+   * @attribute coll
+   * @aspect Interpreter
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:206
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.COLL)
+  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:206")
+  public Set<FunctionDecl> functionCalls() {
+    ASTState state = state();
+    if (FunctionDecl_functionCalls_computed) {
+      return FunctionDecl_functionCalls_value;
+    }
+    if (FunctionDecl_functionCalls_visited) {
+      throw new RuntimeException("Circular definition of attribute FunctionDecl.functionCalls().");
+    }
+    FunctionDecl_functionCalls_visited = true;
+    state().enterLazyAttribute();
+    FunctionDecl_functionCalls_value = functionCalls_compute();
+    FunctionDecl_functionCalls_computed = true;
+    state().leaveLazyAttribute();
+    FunctionDecl_functionCalls_visited = false;
+    return FunctionDecl_functionCalls_value;
+  }
+  /** @apilevel internal */
+  private Set<FunctionDecl> functionCalls_compute() {
+    ASTNode node = this;
+    while (node.getParent() != null) {
+      node = node.getParent();
+    }
+    Program root = (Program) node;
+    root.survey_FunctionDecl_functionCalls();
+    Set<FunctionDecl> _computedValue = new HashSet<FunctionDecl>();
+    if (root.contributorMap_FunctionDecl_functionCalls.containsKey(this)) {
+      for (ASTNode contributor : (java.util.Set<ASTNode>) root.contributorMap_FunctionDecl_functionCalls.get(this)) {
+        contributor.contributeTo_FunctionDecl_functionCalls(_computedValue);
+      }
+    }
+    return _computedValue;
+  }
+  /** @apilevel internal */
+  protected boolean FunctionDecl_functionCalls_computed = false;
+
+  /** @apilevel internal */
+  protected Set<FunctionDecl> FunctionDecl_functionCalls_value;
+
 
 }

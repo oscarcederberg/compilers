@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class Program extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:36
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:37
    */
   public void eval() {
         IdDecl main = unknownDecl();
@@ -107,16 +107,17 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
     
     Program_errors_value = null;
     contributorMap_Program_errors = null;
+    contributorMap_FunctionDecl_functionCalls = null;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:47
+   * @declaredat ASTNode:48
    */
   public Program clone() throws CloneNotSupportedException {
     Program node = (Program) super.clone();
     return node;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:52
+   * @declaredat ASTNode:53
    */
   public Program copy() {
     try {
@@ -136,7 +137,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:71
+   * @declaredat ASTNode:72
    */
   @Deprecated
   public Program fullCopy() {
@@ -147,7 +148,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:81
+   * @declaredat ASTNode:82
    */
   public Program treeCopyNoTransform() {
     Program tree = (Program) copy();
@@ -168,7 +169,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:101
+   * @declaredat ASTNode:102
    */
   public Program treeCopy() {
     Program tree = (Program) copy();
@@ -309,6 +310,21 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_Program_
     if (contributorMap_Program_errors == null) {
       contributorMap_Program_errors = new java.util.IdentityHashMap<ASTNode, java.util.Set<ASTNode>>();
       collect_contributors_Program_errors(this, contributorMap_Program_errors);
+    }
+  }
+
+  /**
+   * @aspect <NoAspect>
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:206
+   */
+  /** @apilevel internal */
+protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_FunctionDecl_functionCalls = null;
+
+  /** @apilevel internal */
+  protected void survey_FunctionDecl_functionCalls() {
+    if (contributorMap_FunctionDecl_functionCalls == null) {
+      contributorMap_FunctionDecl_functionCalls = new java.util.IdentityHashMap<ASTNode, java.util.Set<ASTNode>>();
+      collect_contributors_FunctionDecl_functionCalls(this, contributorMap_FunctionDecl_functionCalls);
     }
   }
 
@@ -571,10 +587,10 @@ protected boolean scanner_visited = false;
   /**
    * @attribute syn
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:200
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:201
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:200")
+  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:201")
   public Scanner scanner() {
     ASTState state = state();
     if (scanner_computed) {

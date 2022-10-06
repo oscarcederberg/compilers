@@ -499,6 +499,20 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
+   * @aspect <NoAspect>
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:206
+   */
+    /** @apilevel internal */
+  protected void collect_contributors_FunctionDecl_functionCalls(Program _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
+    for (int i = 0; i < getNumChild(); i++) {
+      getChild(i).collect_contributors_FunctionDecl_functionCalls(_root, _map);
+    }
+  }
+  /** @apilevel internal */
+  protected void contributeTo_FunctionDecl_functionCalls(Set<FunctionDecl> collection) {
+  }
+
+  /**
    * @attribute inh
    * @aspect TypeAnalysis
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/TypeAnalysis.jrag:3
@@ -959,11 +973,31 @@ protected boolean program_visited = false;
   }
 
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:196
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:197
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute index
    */
   protected boolean canDefine_index(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
+  public FunctionDecl Define_enclosedFunction(ASTNode _callerNode, ASTNode _childNode) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_enclosedFunction(self, _callerNode)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_enclosedFunction(self, _callerNode);
+  }
+
+  /**
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:205
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute enclosedFunction
+   */
+  protected boolean canDefine_enclosedFunction(ASTNode _callerNode, ASTNode _childNode) {
     return false;
   }
 public ASTNode rewrittenNode() { throw new Error("rewrittenNode is undefined for ASTNode"); }

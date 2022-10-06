@@ -18,7 +18,7 @@ import java.util.HashSet;
 public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:72
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:73
    */
   public void eval(ActivationRecord actrec) {
         throw new RuntimeException();
@@ -56,7 +56,7 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-
+    enclosedFunction_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:22
@@ -99,5 +99,43 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
    * @declaredat ASTNode:54
    */
   public abstract Stmt treeCopy();
+  /**
+   * @attribute inh
+   * @aspect Interpreter
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:204
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:204")
+  public FunctionDecl enclosedFunction() {
+    ASTState state = state();
+    if (enclosedFunction_computed) {
+      return enclosedFunction_value;
+    }
+    if (enclosedFunction_visited) {
+      throw new RuntimeException("Circular definition of attribute Stmt.enclosedFunction().");
+    }
+    enclosedFunction_visited = true;
+    state().enterLazyAttribute();
+    enclosedFunction_value = getParent().Define_enclosedFunction(this, null);
+    enclosedFunction_computed = true;
+    state().leaveLazyAttribute();
+    enclosedFunction_visited = false;
+    return enclosedFunction_value;
+  }
+/** @apilevel internal */
+protected boolean enclosedFunction_visited = false;
+  /** @apilevel internal */
+  private void enclosedFunction_reset() {
+    enclosedFunction_computed = false;
+    
+    enclosedFunction_value = null;
+    enclosedFunction_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean enclosedFunction_computed = false;
+
+  /** @apilevel internal */
+  protected FunctionDecl enclosedFunction_value;
+
 
 }

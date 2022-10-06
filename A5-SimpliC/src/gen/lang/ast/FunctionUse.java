@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class FunctionUse extends Expr implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:130
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:131
    */
   public int eval(ActivationRecord actrec) {
         FunctionDecl function = decl().function();
@@ -97,23 +97,24 @@ public class FunctionUse extends Expr implements Cloneable {
     super.flushAttrCache();
     decl_reset();
     lookup_String_reset();
+    enclosedFunction_reset();
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:38
+   * @declaredat ASTNode:39
    */
   public void flushCollectionCache() {
     super.flushCollectionCache();
 
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:43
+   * @declaredat ASTNode:44
    */
   public FunctionUse clone() throws CloneNotSupportedException {
     FunctionUse node = (FunctionUse) super.clone();
     return node;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:48
+   * @declaredat ASTNode:49
    */
   public FunctionUse copy() {
     try {
@@ -133,7 +134,7 @@ public class FunctionUse extends Expr implements Cloneable {
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:67
+   * @declaredat ASTNode:68
    */
   @Deprecated
   public FunctionUse fullCopy() {
@@ -144,7 +145,7 @@ public class FunctionUse extends Expr implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:77
+   * @declaredat ASTNode:78
    */
   public FunctionUse treeCopyNoTransform() {
     FunctionUse tree = (FunctionUse) copy();
@@ -165,7 +166,7 @@ public class FunctionUse extends Expr implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:97
+   * @declaredat ASTNode:98
    */
   public FunctionUse treeCopy() {
     FunctionUse tree = (FunctionUse) copy();
@@ -408,6 +409,58 @@ protected java.util.Set lookup_String_visited;
   /** @apilevel internal */
   protected java.util.Map lookup_String_values;
 
+  /**
+   * @attribute inh
+   * @aspect Interpreter
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:203
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:203")
+  public FunctionDecl enclosedFunction() {
+    ASTState state = state();
+    if (enclosedFunction_computed) {
+      return enclosedFunction_value;
+    }
+    if (enclosedFunction_visited) {
+      throw new RuntimeException("Circular definition of attribute FunctionUse.enclosedFunction().");
+    }
+    enclosedFunction_visited = true;
+    state().enterLazyAttribute();
+    enclosedFunction_value = getParent().Define_enclosedFunction(this, null);
+    enclosedFunction_computed = true;
+    state().leaveLazyAttribute();
+    enclosedFunction_visited = false;
+    return enclosedFunction_value;
+  }
+/** @apilevel internal */
+protected boolean enclosedFunction_visited = false;
+  /** @apilevel internal */
+  private void enclosedFunction_reset() {
+    enclosedFunction_computed = false;
+    
+    enclosedFunction_value = null;
+    enclosedFunction_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean enclosedFunction_computed = false;
+
+  /** @apilevel internal */
+  protected FunctionDecl enclosedFunction_value;
+
+  /** @apilevel internal */
+  protected void collect_contributors_FunctionDecl_functionCalls(Program _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
+    // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:213
+    {
+      FunctionDecl target = (FunctionDecl) (enclosedFunction());
+      java.util.Set<ASTNode> contributors = _map.get(target);
+      if (contributors == null) {
+        contributors = new java.util.LinkedHashSet<ASTNode>();
+        _map.put((ASTNode) target, contributors);
+      }
+      contributors.add(this);
+    }
+    super.collect_contributors_FunctionDecl_functionCalls(_root, _map);
+  }
   /** @apilevel internal */
   protected void collect_contributors_Program_errors(Program _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
     // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Errors.jrag:42
@@ -447,6 +500,11 @@ protected java.util.Set lookup_String_visited;
       }
     }
     super.collect_contributors_Program_errors(_root, _map);
+  }
+  /** @apilevel internal */
+  protected void contributeTo_FunctionDecl_functionCalls(Set<FunctionDecl> collection) {
+    super.contributeTo_FunctionDecl_functionCalls(collection);
+    collection.add(decl().function());
   }
   /** @apilevel internal */
   protected void contributeTo_Program_errors(Set<ErrorMessage> collection) {

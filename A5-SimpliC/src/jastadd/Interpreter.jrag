@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
 
 aspect Interpreter {
@@ -198,4 +199,17 @@ aspect Interpreter {
     }
 
     syn Scanner Program.scanner() = new Scanner(System.in); 
+
+    inh FunctionDecl FunctionUse.enclosedFunction();
+    inh FunctionDecl Stmt.enclosedFunction();
+    eq FunctionDecl.getChild().enclosedFunction() = this;
+	coll Set<FunctionDecl> FunctionDecl.functionCalls() [new HashSet<FunctionDecl>()];
+}
+
+aspect FunctionCallContributions {
+    FunctionCall contributes decl().function()
+        to FunctionDecl.functionCalls() for enclosedFunction();
+    
+    FunctionUse contributes decl().function()
+        to FunctionDecl.functionCalls() for enclosedFunction();
 }

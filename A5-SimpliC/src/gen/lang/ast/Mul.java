@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class Mul extends BinOp implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:153
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:154
    */
   public int eval(ActivationRecord actrec) {
         return getLeft().eval(actrec) * getRight().eval(actrec); 
