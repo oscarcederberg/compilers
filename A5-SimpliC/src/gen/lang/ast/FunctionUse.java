@@ -449,7 +449,7 @@ protected boolean enclosedFunction_visited = false;
 
   /** @apilevel internal */
   protected void collect_contributors_FunctionDecl_functionCalls(Program _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:213
+    // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:221
     {
       FunctionDecl target = (FunctionDecl) (enclosedFunction());
       java.util.Set<ASTNode> contributors = _map.get(target);

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="lang.TestDumpTree" tests="10" skipped="0" failures="0" errors="0" timestamp="2022-10-06T08:16:18" hostname="COMFY" time="0.059">
+<testsuite name="lang.TestDumpTree" tests="10" skipped="0" failures="0" errors="0" timestamp="2022-10-06T08:21:20" hostname="COMFY" time="0.059">
   <properties/>
-  <testcase name="runTest[step4_function_use.in]" classname="lang.TestDumpTree" time="0.024"/>
-  <testcase name="runTest[step4_sample3.in]" classname="lang.TestDumpTree" time="0.008"/>
-  <testcase name="runTest[step4_while.in]" classname="lang.TestDumpTree" time="0.003"/>
-  <testcase name="runTest[step4_iddeclassign.in]" classname="lang.TestDumpTree" time="0.005"/>
-  <testcase name="runTest[step4_sample2.in]" classname="lang.TestDumpTree" time="0.004"/>
-  <testcase name="runTest[step4_call.in]" classname="lang.TestDumpTree" time="0.002"/>
-  <testcase name="runTest[step4_return.in]" classname="lang.TestDumpTree" time="0.002"/>
-  <testcase name="runTest[step4_ifelse.in]" classname="lang.TestDumpTree" time="0.004"/>
+  <testcase name="runTest[step4_function_use.in]" classname="lang.TestDumpTree" time="0.02"/>
+  <testcase name="runTest[step4_sample3.in]" classname="lang.TestDumpTree" time="0.007"/>
+  <testcase name="runTest[step4_while.in]" classname="lang.TestDumpTree" time="0.002"/>
+  <testcase name="runTest[step4_iddeclassign.in]" classname="lang.TestDumpTree" time="0.002"/>
+  <testcase name="runTest[step4_sample2.in]" classname="lang.TestDumpTree" time="0.005"/>
+  <testcase name="runTest[step4_call.in]" classname="lang.TestDumpTree" time="0.001"/>
+  <testcase name="runTest[step4_return.in]" classname="lang.TestDumpTree" time="0.001"/>
+  <testcase name="runTest[step4_ifelse.in]" classname="lang.TestDumpTree" time="0.003"/>
   <testcase name="runTest[step4_params.in]" classname="lang.TestDumpTree" time="0.002"/>
-  <testcase name="runTest[step4_sample1.in]" classname="lang.TestDumpTree" time="0.003"/>
+  <testcase name="runTest[step4_sample1.in]" classname="lang.TestDumpTree" time="0.014"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

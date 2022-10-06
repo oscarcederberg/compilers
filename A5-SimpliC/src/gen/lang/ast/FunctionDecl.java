@@ -95,9 +95,10 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
   public void flushAttrCache() {
     super.flushAttrCache();
     isUnknown_reset();
+    reachable_reset();
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:34
+   * @declaredat ASTNode:35
    */
   public void flushCollectionCache() {
     super.flushCollectionCache();
@@ -107,14 +108,14 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
     FunctionDecl_functionCalls_value = null;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:42
+   * @declaredat ASTNode:43
    */
   public FunctionDecl clone() throws CloneNotSupportedException {
     FunctionDecl node = (FunctionDecl) super.clone();
     return node;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:47
+   * @declaredat ASTNode:48
    */
   public FunctionDecl copy() {
     try {
@@ -134,7 +135,7 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:66
+   * @declaredat ASTNode:67
    */
   @Deprecated
   public FunctionDecl fullCopy() {
@@ -145,7 +146,7 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:76
+   * @declaredat ASTNode:77
    */
   public FunctionDecl treeCopyNoTransform() {
     FunctionDecl tree = (FunctionDecl) copy();
@@ -166,7 +167,7 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:96
+   * @declaredat ASTNode:97
    */
   public FunctionDecl treeCopy() {
     FunctionDecl tree = (FunctionDecl) copy();
@@ -385,6 +386,73 @@ protected boolean isUnknown_visited = false;
     isUnknown_visited = false;
     return isUnknown_value;
   }
+/** @apilevel internal */
+protected ASTState.Cycle reachable_cycle = null;
+  /** @apilevel internal */
+  private void reachable_reset() {
+    reachable_computed = false;
+    reachable_initialized = false;
+    reachable_value = null;
+    reachable_cycle = null;
+  }
+  /** @apilevel internal */
+  protected boolean reachable_computed = false;
+
+  /** @apilevel internal */
+  protected Set<FunctionDecl> reachable_value;
+  /** @apilevel internal */
+  protected boolean reachable_initialized = false;
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
+  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:207")
+  public Set<FunctionDecl> reachable() {
+    if (reachable_computed) {
+      return reachable_value;
+    }
+    ASTState state = state();
+    if (!reachable_initialized) {
+      reachable_initialized = true;
+      reachable_value = new HashSet<FunctionDecl>();
+    }
+    if (!state.inCircle() || state.calledByLazyAttribute()) {
+      state.enterCircle();
+      do {
+        reachable_cycle = state.nextCycle();
+        Set<FunctionDecl> new_reachable_value = reachable_compute();
+        if (!AttributeValue.equals(reachable_value, new_reachable_value)) {
+          state.setChangeInCycle();
+        }
+        reachable_value = new_reachable_value;
+      } while (state.testAndClearChangeInCycle());
+      reachable_computed = true;
+      state.startLastCycle();
+      Set<FunctionDecl> $tmp = reachable_compute();
+
+      state.leaveCircle();
+    } else if (reachable_cycle != state.cycle()) {
+      reachable_cycle = state.cycle();
+      if (state.lastCycle()) {
+        reachable_computed = true;
+        Set<FunctionDecl> new_reachable_value = reachable_compute();
+        return new_reachable_value;
+      }
+      Set<FunctionDecl> new_reachable_value = reachable_compute();
+      if (!AttributeValue.equals(reachable_value, new_reachable_value)) {
+        state.setChangeInCycle();
+      }
+      reachable_value = new_reachable_value;
+    } else {
+    }
+    return reachable_value;
+  }
+  /** @apilevel internal */
+  private Set<FunctionDecl> reachable_compute() {
+          Set<FunctionDecl> result = new HashSet<FunctionDecl>(); 
+          for(FunctionDecl f : functionCalls()) { 
+                  result.add(f); 
+                  result.addAll(f.reachable());
+          } 
+          return result; 
+      }
   /**
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/TypeAnalysis.jrag:18
    * @apilevel internal

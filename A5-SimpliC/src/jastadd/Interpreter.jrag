@@ -204,6 +204,14 @@ aspect Interpreter {
     inh FunctionDecl Stmt.enclosedFunction();
     eq FunctionDecl.getChild().enclosedFunction() = this;
 	coll Set<FunctionDecl> FunctionDecl.functionCalls() [new HashSet<FunctionDecl>()];
+    syn Set<FunctionDecl> FunctionDecl.reachable() circular [new HashSet<FunctionDecl>()] {
+        Set<FunctionDecl> functions = new HashSet<FunctionDecl>(); 
+        for(FunctionDecl f : functionCalls()) { 
+                functions.add(f); 
+                functions.addAll(f.reachable());
+        } 
+        return functions; 
+    }
 }
 
 aspect FunctionCallContributions {
