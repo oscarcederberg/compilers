@@ -22,7 +22,11 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    */
   public int eval(ActivationRecord actrec) {
         if (getIdDecl().getID().equals("read")) {
-            actrec.finish(program().scanner().nextInt());
+            try {
+                actrec.finish(program().scanner().nextInt());
+            } catch (Exception e) {
+                actrec.finish(0);
+            }
         } else {
             getBlock().eval(actrec);
         }
@@ -463,18 +467,18 @@ protected boolean isUnknown_visited = false;
     return true;
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:184
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:188
    * @apilevel internal
    */
   public String Define_index(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getBlockNoTransform()) {
-      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:192
+      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:196
       {
               return "";
           }
     }
     else if (_callerNode == getVariableDeclListNoTransform()) {
-      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:189
+      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:193
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       {
               return "";
@@ -485,7 +489,7 @@ protected boolean isUnknown_visited = false;
     }
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:184
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:188
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute index
    */

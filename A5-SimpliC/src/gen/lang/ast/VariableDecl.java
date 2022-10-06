@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class VariableDecl extends Stmt implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:71
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:75
    */
   public void eval(ActivationRecord actrec) {
         if (hasExpr()) {

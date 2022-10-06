@@ -50,7 +50,11 @@ aspect Interpreter {
 
     public int FunctionDecl.eval(ActivationRecord actrec) {
         if (getIdDecl().getID().equals("read")) {
-            actrec.finish(program().scanner().nextInt());
+            try {
+                actrec.finish(program().scanner().nextInt());
+            } catch (Exception e) {
+                actrec.finish(0);
+            }
         } else {
             getBlock().eval(actrec);
         }
