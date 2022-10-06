@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class FunctionUse extends Expr implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:131
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:127
    */
   public int eval(ActivationRecord actrec) {
         FunctionDecl function = decl().function();
@@ -412,10 +412,10 @@ protected java.util.Set lookup_String_visited;
   /**
    * @attribute inh
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:203
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:199
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:203")
+  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:199")
   public FunctionDecl enclosedFunction() {
     ASTState state = state();
     if (enclosedFunction_computed) {
@@ -449,7 +449,7 @@ protected boolean enclosedFunction_visited = false;
 
   /** @apilevel internal */
   protected void collect_contributors_FunctionDecl_functionCalls(Program _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:221
+    // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:217
     {
       FunctionDecl target = (FunctionDecl) (enclosedFunction());
       java.util.Set<ASTNode> contributors = _map.get(target);

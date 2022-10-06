@@ -22,11 +22,15 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    */
   public int eval(ActivationRecord actrec) {
         if (getIdDecl().getID().equals("read")) {
+            String word = program().scanner.next();
             try {
-                actrec.finish(program().scanner().nextInt());
+                actrec.finish(Integer.parseInt(word));
             } catch (Exception e) {
                 actrec.finish(0);
             }
+        }else if (getIdDecl().getID().equals("print")) {
+            System.out.print(actrec.get("input") + "\n");
+            actrec.finish(0);
         } else {
             getBlock().eval(actrec);
         }
@@ -403,7 +407,7 @@ protected ASTState.Cycle reachable_cycle = null;
   /** @apilevel internal */
   protected boolean reachable_initialized = false;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:207")
+  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:203")
   public Set<FunctionDecl> reachable() {
     if (reachable_computed) {
       return reachable_value;
@@ -446,12 +450,12 @@ protected ASTState.Cycle reachable_cycle = null;
   }
   /** @apilevel internal */
   private Set<FunctionDecl> reachable_compute() {
-          Set<FunctionDecl> result = new HashSet<FunctionDecl>(); 
+          Set<FunctionDecl> functions = new HashSet<FunctionDecl>(); 
           for(FunctionDecl f : functionCalls()) { 
-                  result.add(f); 
-                  result.addAll(f.reachable());
+                  functions.add(f); 
+                  functions.addAll(f.reachable());
           } 
-          return result; 
+          return functions; 
       }
   /**
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/TypeAnalysis.jrag:18
@@ -538,18 +542,18 @@ protected ASTState.Cycle reachable_cycle = null;
     return true;
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:189
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:185
    * @apilevel internal
    */
   public String Define_index(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getBlockNoTransform()) {
-      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:197
+      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:193
       {
               return "";
           }
     }
     else if (_callerNode == getVariableDeclListNoTransform()) {
-      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:194
+      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:190
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       {
               return "";
@@ -560,7 +564,7 @@ protected ASTState.Cycle reachable_cycle = null;
     }
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:189
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:185
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute index
    */
@@ -568,7 +572,7 @@ protected ASTState.Cycle reachable_cycle = null;
     return true;
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:203
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:199
    * @apilevel internal
    */
   public FunctionDecl Define_enclosedFunction(ASTNode _callerNode, ASTNode _childNode) {
@@ -576,7 +580,7 @@ protected ASTState.Cycle reachable_cycle = null;
     return this;
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:203
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:199
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosedFunction
    */
@@ -588,10 +592,10 @@ protected boolean FunctionDecl_functionCalls_visited = false;
   /**
    * @attribute coll
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:206
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:202
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.COLL)
-  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:206")
+  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:202")
   public Set<FunctionDecl> functionCalls() {
     ASTState state = state();
     if (FunctionDecl_functionCalls_computed) {

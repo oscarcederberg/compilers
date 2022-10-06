@@ -35,6 +35,11 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
         main.function().eval(new ActivationRecord());
     }
   /**
+   * @aspect Interpreter
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:197
+   */
+  static Scanner scanner = new Scanner(System.in);
+  /**
    * @aspect Visitor
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Visitor.jrag:27
    */
@@ -95,10 +100,9 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
     boolType_reset();
     unknownDecl_reset();
     unknownFunction_reset();
-    scanner_reset();
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:38
+   * @declaredat ASTNode:37
    */
   public void flushCollectionCache() {
     super.flushCollectionCache();
@@ -110,14 +114,14 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
     contributorMap_FunctionDecl_functionCalls = null;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:48
+   * @declaredat ASTNode:47
    */
   public Program clone() throws CloneNotSupportedException {
     Program node = (Program) super.clone();
     return node;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:53
+   * @declaredat ASTNode:52
    */
   public Program copy() {
     try {
@@ -137,7 +141,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:72
+   * @declaredat ASTNode:71
    */
   @Deprecated
   public Program fullCopy() {
@@ -148,7 +152,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:82
+   * @declaredat ASTNode:81
    */
   public Program treeCopyNoTransform() {
     Program tree = (Program) copy();
@@ -169,7 +173,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:102
+   * @declaredat ASTNode:101
    */
   public Program treeCopy() {
     Program tree = (Program) copy();
@@ -315,7 +319,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_Program_
 
   /**
    * @aspect <NoAspect>
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:206
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:202
    */
   /** @apilevel internal */
 protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_FunctionDecl_functionCalls = null;
@@ -568,44 +572,6 @@ protected boolean unknownFunction_visited = false;
     state().leaveLazyAttribute();
     unknownFunction_visited = false;
     return unknownFunction_value;
-  }
-/** @apilevel internal */
-protected boolean scanner_visited = false;
-  /** @apilevel internal */
-  private void scanner_reset() {
-    scanner_computed = false;
-    
-    scanner_value = null;
-    scanner_visited = false;
-  }
-  /** @apilevel internal */
-  protected boolean scanner_computed = false;
-
-  /** @apilevel internal */
-  protected Scanner scanner_value;
-
-  /**
-   * @attribute syn
-   * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:201
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:201")
-  public Scanner scanner() {
-    ASTState state = state();
-    if (scanner_computed) {
-      return scanner_value;
-    }
-    if (scanner_visited) {
-      throw new RuntimeException("Circular definition of attribute Program.scanner().");
-    }
-    scanner_visited = true;
-    state().enterLazyAttribute();
-    scanner_value = new Scanner(System.in);
-    scanner_computed = true;
-    state().leaveLazyAttribute();
-    scanner_visited = false;
-    return scanner_value;
   }
   /**
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/NameAnalysis.jrag:17

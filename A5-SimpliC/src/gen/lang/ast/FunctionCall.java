@@ -18,27 +18,19 @@ import java.util.HashSet;
 public class FunctionCall extends Stmt implements Cloneable {
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:100
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:104
    */
   public void eval(ActivationRecord actrec) {
-        if (getID().equals("print")) {
-            int result;
-            if (hasExpr()) {
-                result = getExpr(0).eval(actrec);
-                System.out.println(result);
-            }
-        } else {
-            FunctionDecl function = decl().function();
-            ActivationRecord frame = new ActivationRecord();
-            
-            for (int i = 0; i < function.getNumVariableDecl(); i++) {
-                String id = function.getVariableDecl(i).getIdDecl().uniqueName();
-                int value = getExpr(i).eval(actrec);
-                frame.put(id, value);
-            }
-
-            int result = function.eval(frame);
+        FunctionDecl function = decl().function();
+        ActivationRecord frame = new ActivationRecord();
+        
+        for (int i = 0; i < function.getNumVariableDecl(); i++) {
+            String id = function.getVariableDecl(i).getIdDecl().uniqueName();
+            int value = getExpr(i).eval(actrec);
+            frame.put(id, value);
         }
+
+        int result = function.eval(frame);
     }
   /**
    * @aspect PrettyPrint
@@ -438,7 +430,7 @@ protected java.util.Set lookup_String_visited;
   }
   /** @apilevel internal */
   protected void collect_contributors_FunctionDecl_functionCalls(Program _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:218
+    // @declaredat /home/knos/repos/education/p021-oscar-kasper/A5-SimpliC/src/jastadd/Interpreter.jrag:214
     {
       FunctionDecl target = (FunctionDecl) (enclosedFunction());
       java.util.Set<ASTNode> contributors = _map.get(target);
