@@ -3,9 +3,18 @@ _start:
 call main
 call _exit
 
+f:
+pushq %rbp
+movq %rsp, %rbp
+movq $0, %rax
+movq %rbp, %rsp
+popq %rbp
+ret
+
 main:
 pushq %rbp
 movq %rsp, %rbp
+call f
 movq $0, %rax
 movq %rbp, %rsp
 popq %rbp

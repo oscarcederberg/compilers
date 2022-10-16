@@ -39,6 +39,9 @@ aspect CodeGen {
     public void Stmt.genCode(PrintStream out) {
         throw new RuntimeException();
     }
+    public void FunctionCall.genCode(PrintStream out) {
+        out.println("call " + decl().getID());
+    }
     public void Return.genCode(PrintStream out) {
         getExpr().genCode(out);
 		out.println("movq %rbp, %rsp");

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="lang.TestNameAnalysis" tests="11" skipped="0" failures="0" errors="0" timestamp="2022-10-16T15:34:16" hostname="COMFY" time="0.017">
+<testsuite name="lang.TestNameAnalysis" tests="11" skipped="0" failures="0" errors="0" timestamp="2022-10-16T17:54:46" hostname="COMFY" time="0.014">
   <properties/>
-  <testcase name="runTest[fromauto2.in]" classname="lang.TestNameAnalysis" time="0.003"/>
+  <testcase name="runTest[fromauto2.in]" classname="lang.TestNameAnalysis" time="0.0"/>
   <testcase name="runTest[fromgrader.in]" classname="lang.TestNameAnalysis" time="0.003"/>
   <testcase name="runTest[predefined_functions.in]" classname="lang.TestNameAnalysis" time="0.001"/>
-  <testcase name="runTest[duplicatedeclare.in]" classname="lang.TestNameAnalysis" time="0.002"/>
-  <testcase name="runTest[001.in]" classname="lang.TestNameAnalysis" time="0.001"/>
-  <testcase name="runTest[wrong.in]" classname="lang.TestNameAnalysis" time="0.001"/>
-  <testcase name="runTest[step4_sample3.in]" classname="lang.TestNameAnalysis" time="0.002"/>
-  <testcase name="runTest[fromauto.in]" classname="lang.TestNameAnalysis" time="0.001"/>
-  <testcase name="runTest[step4_sample2.in]" classname="lang.TestNameAnalysis" time="0.0"/>
+  <testcase name="runTest[duplicatedeclare.in]" classname="lang.TestNameAnalysis" time="0.001"/>
+  <testcase name="runTest[001.in]" classname="lang.TestNameAnalysis" time="0.0"/>
+  <testcase name="runTest[wrong.in]" classname="lang.TestNameAnalysis" time="0.0"/>
+  <testcase name="runTest[step4_sample3.in]" classname="lang.TestNameAnalysis" time="0.001"/>
+  <testcase name="runTest[fromauto.in]" classname="lang.TestNameAnalysis" time="0.002"/>
+  <testcase name="runTest[step4_sample2.in]" classname="lang.TestNameAnalysis" time="0.001"/>
   <testcase name="runTest[shadowing.in]" classname="lang.TestNameAnalysis" time="0.001"/>
-  <testcase name="runTest[step4_sample1.in]" classname="lang.TestNameAnalysis" time="0.0"/>
+  <testcase name="runTest[step4_sample1.in]" classname="lang.TestNameAnalysis" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

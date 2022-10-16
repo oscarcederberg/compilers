@@ -18,7 +18,7 @@ import java.util.HashSet;
 public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:49
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:52
    */
   public void genCode(PrintStream out) {
         throw new RuntimeException();

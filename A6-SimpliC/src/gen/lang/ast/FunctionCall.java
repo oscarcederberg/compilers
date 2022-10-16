@@ -17,6 +17,13 @@ import java.util.HashSet;
  */
 public class FunctionCall extends Stmt implements Cloneable {
   /**
+   * @aspect CodeGen
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:42
+   */
+  public void genCode(PrintStream out) {
+        out.println("call " + decl().getID());
+    }
+  /**
    * @aspect Interpreter
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:107
    */
