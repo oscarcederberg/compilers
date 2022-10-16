@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:20
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:58
    */
   public void genCode(PrintStream out) {
         out.println(getIdDecl().getID() + ":");

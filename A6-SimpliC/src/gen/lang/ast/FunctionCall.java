@@ -18,10 +18,18 @@ import java.util.HashSet;
 public class FunctionCall extends Stmt implements Cloneable {
   /**
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:42
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:80
    */
   public void genCode(PrintStream out) {
+        FunctionDecl function = decl().function();
+		int params = getNumExpr();
+        for (int i = params - 1; i >=  0; i--) {
+            getExpr(i).genCode(out);
+            out.println("push %rax");
+        }
+        
         out.println("call " + decl().getID());
+        out.println("addq $" + (params * 8) + ", %rsp");
     }
   /**
    * @aspect Interpreter

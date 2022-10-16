@@ -6,9 +6,23 @@ _start:
 call main
 call _exit
 
+f:
+pushq %rbp
+movq %rsp, %rbp
+movq $0, %rax
+movq %rbp, %rsp
+popq %rbp
+ret
+
 main:
 pushq %rbp
 movq %rsp, %rbp
+movq $2, %rax
+push %rax
+movq $1, %rax
+push %rax
+call f
+addq $16, %rsp
 movq $0, %rax
 movq %rbp, %rsp
 popq %rbp

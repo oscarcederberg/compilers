@@ -22,7 +22,9 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    */
   public void genCode(PrintStream out) {
         out.println(".global _start");
-        // etc.
+        out.println(".data");
+        out.println("buf: .skip 1024");
+        out.println(".text");
         out.println("_start:");
         // call main function
         out.println("call main");
@@ -35,7 +37,43 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
         out.println("movq %rax, %rdi   # exit code = 0");
         out.println("movq $60, %rax  # sys_exit");
         out.println("syscall");
-        // helper procedures (print/read)
+        // print
+        out.println("print:");
+        out.println("pushq %rbp");
+        out.println("movq %rsp, %rbp");
+        out.println("### Convert integer to string (itoa).");
+        out.println("movq 16(%rbp), %rax");
+        out.println("leaq buf(%rip), %rsi # RSI = write pointer (starts at end of buffer)");
+        out.println("addq $1023, %rsi");
+        out.println("movb $0x0A, (%rsi) # insert newline");
+        out.println("movq $1, %rcx # RCX = string length");
+        out.println("cmpq $0, %rax");
+        out.println("jge itoa_loop");
+        out.println("negq %rax # negate to make RAX positive");
+        out.println("itoa_loop: # do.. while (at least one iteration)");
+        out.println("movq $10, %rdi");
+        out.println("movq $0, %rdx");
+        out.println("idivq %rdi # divide RDX:RAX by 10");
+        out.println("addb $0x30, %dl");
+        out.println("decq %rsi # move string pointer");
+        out.println("movb %dl, (%rsi)");
+        out.println("incq %rcx # increment string length");
+        out.println("cmpq $0, %rax");
+        out.println("jg itoa_loop # produce more digits");
+        out.println("itoa_done:");
+        out.println("movq 16(%rbp), %rax");
+        out.println("cmpq $0, %rax");
+        out.println("jge print_end");
+        out.println("decq %rsi");
+        out.println("incq %rcx");
+        out.println("movb $0x2D, (%rsi)");
+        out.println("print_end:");
+        out.println("movq $1, %rdi");
+        out.println("movq %rcx, %rdx");
+        out.println("movq $1, %rax");
+        out.println("syscall");
+        out.println("popq %rbp");
+        out.println("ret");
     }
   /**
    * @aspect Interpreter

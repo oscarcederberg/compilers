@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class Block extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:33
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:71
    */
   public void genCode(PrintStream out) {
         for (Stmt stmt : getStmtList()) {
