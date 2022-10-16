@@ -1,0 +1,159 @@
+%class "LangParser";
+%package "lang.ast";
+
+%embed {:
+	static public class SyntaxError extends RuntimeException { public SyntaxError(String msg) {super(msg);}}
+	// Disable syntax error recovery
+	protected void recoverFromError(Symbol token, TokenStream in) {
+		throw new SyntaxError("Cannot recover from the syntax error");
+	}
+:};
+
+%terminals ID, NUMERAL, INT, LPAR, RPAR, LBRACE, RBRACE, SEMICOLON, COMMA;
+%terminals EQUALS, PLUS, MUL, MINUS, DIV, MOD;
+%terminals EQ, NOTEQ, LESSTHAN, LESSEQ, MORETHAN, MOREEQ;
+%terminals WHILE, IF, ELSE, RETURN;
+
+%typeof program = "Program";
+%typeof block = "Block";
+%typeof iddecl = "IdDecl";
+%typeof opt_functiondecl_list = "List";
+%typeof functiondecl_list = "List";
+%typeof functiondecl = "FunctionDecl";
+%typeof opt_stmt_list = "List";
+%typeof stmt_list = "List";
+%typeof stmt = "Stmt";
+%typeof opt_param_list = "List";
+%typeof param_list = "List";
+%typeof param = "VariableDecl";
+%typeof opt_arg_list = "List";
+%typeof arg_list = "List";
+%typeof variabledecl = "VariableDecl";
+%typeof variableuse = "VariableUse";
+%typeof declassign = "DeclAssign";
+%typeof assign = "Assign";
+%typeof while = "While";
+%typeof if = "If";
+%typeof else = "Else";
+%typeof functioncall = "FunctionCall";
+%typeof neg = "Neg";
+
+%typeof expr = "Expr";
+%typeof math_expr = "Expr";
+%typeof term = "Expr";
+%typeof factor = "Expr";
+%typeof exprfactor = "Expr";
+
+%typeof add	= "Add";
+%typeof mul = "Mul";
+%typeof mod = "Mod";
+%typeof div = "Div";
+
+%typeof numeralfactor = "Numeral";
+%typeof idfactor = "VariableUse";
+%typeof functionuse = "FunctionUse";
+
+%goal program;
+
+program = opt_functiondecl_list.l {: return new Program(l); :};
+
+block = LBRACE opt_stmt_list.l RBRACE {: return new Block(l); :};
+
+iddecl = ID.id {: return new IdDecl(id); :};
+
+opt_functiondecl_list = 
+	functiondecl_list.l {: return l; :}
+	|	{: return new List(); :}
+;
+
+functiondecl_list = 
+	functiondecl.d {:return new List().add(d); :}
+	| functiondecl_list.l functiondecl.d {: return l.add(d); :}
+;
+
+functiondecl = INT iddecl.id LPAR opt_param_list.pl RPAR block.b {: return new FunctionDecl(id, pl, b); :};
+
+opt_param_list = 
+	param_list.l {: return l; :}
+	|	{: return new List(); :}
+;
+
+param_list =
+	param.p {: return new List().add(p); :}
+	| param_list.l COMMA param.p {: return l.add(p); :}
+;
+
+param = INT iddecl.id {: return new VariableDecl(id, new Opt()); :};
+
+opt_arg_list = 
+	arg_list.l {: return l; :}
+	|	{: return new List(); :};
+
+arg_list =
+	expr.e {: return new List().add(e); :}
+	| arg_list.l COMMA expr.e {: return l.add(e); :}
+;
+
+opt_stmt_list =
+	stmt_list.l {: return l; :}
+	|	{: return new List(); :}
+;
+stmt_list =
+	stmt.s {: return new List().add(s); :}
+	| stmt_list.l stmt.s {: return l.add(s); :}
+;
+stmt = 
+	variabledecl.id {: return id; :}
+	| while.w {: return w; :}
+	| if.s {: return s; :}
+	| ID.id EQUALS expr.e SEMICOLON {: return new Assign(id, e); :}
+	| ID.id LPAR opt_arg_list.l RPAR SEMICOLON {: return new FunctionCall(id, l); :} 
+	| RETURN expr.e SEMICOLON {: return new Return(e); :}
+;
+
+variabledecl =
+	INT iddecl.id SEMICOLON {: return new VariableDecl(id, new Opt()); :}
+	| INT iddecl.id EQUALS expr.e SEMICOLON {: return new VariableDecl(id, new Opt(e)); :}
+;
+
+while =
+	WHILE LPAR expr.cond RPAR stmt.s {: return new While(cond, new Block(new List(s))); :}
+	| WHILE LPAR expr.cond RPAR block.l {: return new While(cond,l); :}
+;
+
+if =
+	IF LPAR expr.cond RPAR stmt.s {: return new If(cond, new Block(new List(s)), new Opt()); :}
+	| IF LPAR expr.cond RPAR block.l {: return new If(cond, l, new Opt()); :}
+	| IF LPAR expr.cond RPAR block.l ELSE block.e {: return new If(cond, l, new Opt(e)); :}
+;
+
+expr =
+	math_expr.e							{: return e; :}
+	| math_expr.l EQ math_expr.r		{: return new Equals(l, r); :}
+	| math_expr.l NOTEQ math_expr.r 	{: return new NotEq(l, r); :}
+	| math_expr.l LESSTHAN math_expr.r 	{: return new LessThan(l, r); :}
+	| math_expr.l LESSEQ math_expr.r 	{: return new LessEq(l, r); :}
+	| math_expr.l MORETHAN math_expr.r 	{: return new MoreThan(l, r); :}
+	| math_expr.l MOREEQ math_expr.r 	{: return new MoreEq(l, r); :}
+;
+
+math_expr =
+	math_expr.e PLUS term.t {: return new Add(e,t); :}
+	| math_expr.e MINUS term.t {: return new Sub(e,t); :} 
+	| term.t {: return t; :}
+;
+
+term = 
+	term.t MUL factor.f 	{: return new Mul(t,f); :}
+	| term.t MOD factor.f 	{: return new Mod(t,f); :}
+	| term.t DIV factor.f 	{: return new Div(t,f); :}
+ 	| factor.f 				{: return f; :}
+;
+
+factor =
+	ID.id {: return new VariableUse(id); :}
+	| NUMERAL.n {: return new Numeral(n); :}
+	| ID.id LPAR opt_arg_list.l RPAR {: return new FunctionUse(id, l); :}
+	| MINUS factor.f {: return new Neg(f); :}
+	| LPAR expr.e RPAR {: return e; :}
+;

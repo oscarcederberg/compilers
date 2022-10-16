@@ -1,0 +1,20 @@
+Program
+  List
+    FunctionDecl ID="a"
+      List
+        Assign ID="x"
+          Add
+            Numeral NUMERAL="5"
+            IdUse ID="y"
+        Assign ID="y"
+          Add
+            IdUse ID="x"
+            Numeral NUMERAL="5"
+        Assign ID="z"
+          Add
+            Add
+              Add
+                IdUse ID="x"
+                Numeral NUMERAL="5"
+              IdUse ID="y"
+            Numeral NUMERAL="5"

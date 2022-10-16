@@ -1,0 +1,27 @@
+//depth = 0
+int test(){
+    //depth = 1
+    if(a == b){
+        //depth = 2
+        int a = 0;
+    }
+    int a = 10;
+
+    if(a == b){
+        //depth = 2
+        int a = 25;
+        while(a == 25){
+            //depth = 3
+            if(a == 3){
+                //depth = 4
+                int b = 2;
+                if(b == 3){
+                    //depth = 5
+                }
+            }else{
+                //depth = 4
+            }
+            int a = 5;
+        }
+    }
+}

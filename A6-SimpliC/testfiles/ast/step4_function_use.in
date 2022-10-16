@@ -1,0 +1,7 @@
+int main(){
+    a = 5;
+    abc = test(a, 5) * 6 - test(5, 5);
+}
+int test(int a, int b){
+    abc = main();
+}

@@ -1,0 +1,38 @@
+Program
+  List
+    FunctionDecl
+      IdDecl ID="gcd1"
+      List
+        VariableDecl
+          IdDecl ID="a"
+          Opt
+        VariableDecl
+          IdDecl ID="b"
+          Opt
+      Block
+        List
+          While
+            NotEq
+              VariableUse ID="a"
+              VariableUse ID="b"
+            Block
+              List
+                If
+                  MoreThan
+                    VariableUse ID="a"
+                    VariableUse ID="b"
+                  Block
+                    List
+                      Assign ID="a"
+                        Sub
+                          VariableUse ID="a"
+                          VariableUse ID="b"
+                  Opt
+                    Block
+                      List
+                        Assign ID="b"
+                          Sub
+                            VariableUse ID="b"
+                            VariableUse ID="a"
+          Return
+            VariableUse ID="a"

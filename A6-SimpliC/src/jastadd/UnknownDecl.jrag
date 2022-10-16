@@ -1,0 +1,29 @@
+aspect UnknownDecl {
+	syn nta UnknownDecl Program.unknownDecl() = new UnknownDecl("<unknown>");
+	inh UnknownDecl ASTNode.unknownDecl();
+	eq Program.getChild().unknownDecl() = unknownDecl();
+	
+	syn nta UnknownFunction Program.unknownFunction() = new UnknownFunction(unknownDecl(), new List(), new Block(new List()));
+	inh UnknownFunction ASTNode.unknownFunction();
+	eq Program.getChild().unknownFunction() = unknownFunction();
+	
+	syn boolean IdDecl.isUnknown() = false;
+	eq UnknownDecl.isUnknown() = true;
+	
+	syn boolean FunctionDecl.isUnknown() = false;
+	eq UnknownFunction.isUnknown() = true;
+
+	inh boolean IdDecl.isFunction();
+	inh boolean IdDecl.isVariable();
+	inh FunctionDecl IdDecl.function();
+	
+	eq FunctionDecl.getIdDecl().isFunction() = true;
+	eq VariableDecl.getIdDecl().isFunction() = false;
+	eq Program.unknownDecl().isFunction() = false;
+	eq FunctionDecl.getIdDecl().isVariable() = false;
+	eq VariableDecl.getIdDecl().isVariable() = true;
+	eq Program.unknownDecl().isVariable() = false;
+	eq FunctionDecl.getIdDecl().function() = this;
+	eq VariableDecl.getIdDecl().function() = unknownFunction();
+	eq Program.unknownDecl().function() = unknownFunction();
+}

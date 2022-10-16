@@ -1,0 +1,72 @@
+import java.util.Set;
+import java.util.HashSet;
+
+aspect NameAnalysis {
+	inh IdDecl IdDecl.lookup(String s);
+	/*
+	 *		Variables
+	 */
+	syn IdDecl Assign.decl() = lookup(getID());
+	inh IdDecl Assign.lookup(String s);
+	syn IdDecl VariableUse.decl() = lookup(getID());
+	inh IdDecl VariableUse.lookup(String s);
+	
+	/*
+	 *		Functions
+	 */
+	inh IdDecl FunctionUse.lookup(String s);
+	inh IdDecl FunctionCall.lookup(String s);
+	syn IdDecl FunctionUse.decl() = lookup(getID());
+	syn IdDecl FunctionCall.decl() = lookup(getID());
+
+	eq Block.getStmt(int index).lookup(String s) {
+		IdDecl d = localLookup(s, index);
+		if (!d.isUnknown()) return d;
+		return lookup(s); // run lookup on parent
+	}
+
+	eq Program.getChild().lookup(String s) = unknownDecl();
+	inh IdDecl Block.lookup(String s);
+
+	eq Program.getFunctionDecl(int index).lookup(String s) {
+		//Has to be first for isMultideclared to work
+		for(FunctionDecl func : predefinedFunctions()){
+			if(func.getIdDecl().getID().equals(s)){
+				return func.getIdDecl();
+			}
+		}
+		for(VariableDecl decl : getFunctionDecl(index).getVariableDecls()){
+			if(decl.getIdDecl().getID().equals(s)){
+				return decl.getIdDecl();
+			}
+		}
+		for(FunctionDecl func : getFunctionDecls()) {
+			if(func.getIdDecl().getID().equals(s)){
+				return func.getIdDecl();
+			}
+		}
+		return unknownDecl();
+	}
+	
+	syn IdDecl Block.localLookup(String s, int index){
+        for(int i = 0 ; i <= index; i++) {
+			Stmt stmt = getStmt(i);
+			if(stmt instanceof VariableDecl){
+				VariableDecl d = (VariableDecl) stmt;
+				if(d.getIdDecl().getID().equals(s)){
+					return d.getIdDecl();
+				}
+			}
+		}
+		return unknownDecl();
+	}
+
+	syn boolean IdDecl.isMultiDeclared() = lookup(getID()) != this;
+
+	syn nta List<FunctionDecl> Program.predefinedFunctions() {
+		List<FunctionDecl> list = new List<FunctionDecl>();
+		list.add(new FunctionDecl(new IdDecl("print"), new List(new VariableDecl(new IdDecl("input"), new Opt())), new Block(new List())));
+		list.add(new FunctionDecl(new IdDecl("read"), new List(), new Block(new List())));
+		return list;
+	}
+}
