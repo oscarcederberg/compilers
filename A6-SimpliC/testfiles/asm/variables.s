@@ -9,12 +9,14 @@ call _exit
 f:
 pushq %rbp
 movq %rsp, %rbp
-subq $8, %rsp
-movq $50, %rax
+subq $16, %rsp
+movq $333, %rax
 movq %rax, -16(%rbp)
+movq $50, %rax
+movq %rax, -24(%rbp)
 movq 16(%rbp), %rax
 pushq %rax
-movq -16(%rbp), %rax
+movq -24(%rbp), %rax
 movq %rax, %rbx
 popq %rax
 addq %rbx, %rax
@@ -29,9 +31,11 @@ ret
 main:
 pushq %rbp
 movq %rsp, %rbp
-subq $8, %rsp
+subq $16, %rsp
 movq $150, %rax
 movq %rax, -8(%rbp)
+movq $666, %rax
+movq %rax, -16(%rbp)
 movq -8(%rbp), %rax
 push %rax
 call f

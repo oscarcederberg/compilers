@@ -12,6 +12,10 @@ movq %rsp, %rbp
 subq $24, %rsp
 movq $121, %rax
 movq %rax, -8(%rbp)
+movq $1, %rax
+push %rax
+call print
+addq $8, %rsp
 movq $12321, %rax
 movq %rax, -16(%rbp)
 movq $32123, %rax

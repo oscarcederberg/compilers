@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="lang.TestCodeGeneration" tests="9" skipped="0" failures="1" errors="0" timestamp="2022-10-17T16:58:10" hostname="COMFY" time="0.114">
+<testsuite name="lang.TestCodeGeneration" tests="9" skipped="0" failures="1" errors="0" timestamp="2022-10-17T17:28:21" hostname="COMFY" time="0.112">
   <properties/>
-  <testcase name="runTest[while.in]" classname="lang.TestCodeGeneration" time="0.022"/>
-  <testcase name="runTest[print.in]" classname="lang.TestCodeGeneration" time="0.011"/>
-  <testcase name="runTest[test_1.in]" classname="lang.TestCodeGeneration" time="0.011"/>
-  <testcase name="runTest[param.in]" classname="lang.TestCodeGeneration" time="0.01"/>
-  <testcase name="runTest[boolean.in]" classname="lang.TestCodeGeneration" time="0.01"/>
-  <testcase name="runTest[noparam.in]" classname="lang.TestCodeGeneration" time="0.009"/>
-  <testcase name="runTest[main.in]" classname="lang.TestCodeGeneration" time="0.012"/>
-  <testcase name="runTest[expr.in]" classname="lang.TestCodeGeneration" time="0.012"/>
+  <testcase name="runTest[while.in]" classname="lang.TestCodeGeneration" time="0.02"/>
+  <testcase name="runTest[print.in]" classname="lang.TestCodeGeneration" time="0.012"/>
+  <testcase name="runTest[test_1.in]" classname="lang.TestCodeGeneration" time="0.013"/>
+  <testcase name="runTest[param.in]" classname="lang.TestCodeGeneration" time="0.012"/>
+  <testcase name="runTest[boolean.in]" classname="lang.TestCodeGeneration" time="0.011"/>
+  <testcase name="runTest[noparam.in]" classname="lang.TestCodeGeneration" time="0.01"/>
+  <testcase name="runTest[main.in]" classname="lang.TestCodeGeneration" time="0.01"/>
+  <testcase name="runTest[expr.in]" classname="lang.TestCodeGeneration" time="0.01"/>
   <testcase name="runTest[variables.in]" classname="lang.TestCodeGeneration" time="0.011">
     <failure message="org.junit.ComparisonFailure: Output differs. expected:&lt;[2]00&#10;200&gt; but was:&lt;[3]00&#10;200&gt;" type="org.junit.ComparisonFailure">org.junit.ComparisonFailure: Output differs. expected:&lt;[2]00
 200&gt; but was:&lt;[3]00

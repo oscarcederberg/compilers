@@ -324,7 +324,7 @@ protected boolean address_visited = false;
           if (parameterIndex() != -1) 
               return (16 + 8 * parameterIndex()) + "(%rbp)";
           else
-              return "-" + (localIndex() * 8 - 8) + "(%rbp)";
+              return "-" + (8 * localIndex() - 8) + "(%rbp)";
       }
 /** @apilevel internal */
 protected boolean isUnknown_visited = false;
