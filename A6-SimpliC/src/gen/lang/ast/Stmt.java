@@ -63,17 +63,18 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
+    index_reset();
     enclosedFunction_reset();
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:22
+   * @declaredat ASTNode:23
    */
   public void flushCollectionCache() {
     super.flushCollectionCache();
 
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:27
+   * @declaredat ASTNode:28
    */
   public Stmt clone() throws CloneNotSupportedException {
     Stmt node = (Stmt) super.clone();
@@ -85,7 +86,7 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:38
+   * @declaredat ASTNode:39
    */
   @Deprecated
   public abstract Stmt fullCopy();
@@ -94,7 +95,7 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:46
+   * @declaredat ASTNode:47
    */
   public abstract Stmt treeCopyNoTransform();
   /**
@@ -103,9 +104,47 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:54
+   * @declaredat ASTNode:55
    */
   public abstract Stmt treeCopy();
+  /**
+   * @attribute inh
+   * @aspect CodeGen
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:194
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:194")
+  public String index() {
+    ASTState state = state();
+    if (index_computed) {
+      return index_value;
+    }
+    if (index_visited) {
+      throw new RuntimeException("Circular definition of attribute Stmt.index().");
+    }
+    index_visited = true;
+    state().enterLazyAttribute();
+    index_value = getParent().Define_index(this, null);
+    index_computed = true;
+    state().leaveLazyAttribute();
+    index_visited = false;
+    return index_value;
+  }
+/** @apilevel internal */
+protected boolean index_visited = false;
+  /** @apilevel internal */
+  private void index_reset() {
+    index_computed = false;
+    
+    index_value = null;
+    index_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean index_computed = false;
+
+  /** @apilevel internal */
+  protected String index_value;
+
   /**
    * @attribute inh
    * @aspect Interpreter

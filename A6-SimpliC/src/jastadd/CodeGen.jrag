@@ -88,6 +88,24 @@ aspect CodeGen {
         out.println("call " + decl().getID());
         out.println("addq $" + (params * 8) + ", %rsp");
     }
+    public void If.genCode(PrintStream out) {
+        String _then = enclosedFunction().getIdDecl().getID() + "_" + index() + "_then";
+        String _else = enclosedFunction().getIdDecl().getID() + "_" + index() + "_else";
+        String _fi = enclosedFunction().getIdDecl().getID() + "_" + index() + "_fi";
+        if (hasElse()) {
+            getExpr().genConditionalJump(out, _else);
+            out.println(_then + ":");
+            getBlock().genCode(out);
+            out.println("jmp " + _fi);
+            out.println(_else + ":");
+            getElse().genCode(out);
+        } else {
+            getExpr().genConditionalJump(out, _fi);
+            out.println(_then + ":");
+            getBlock().genCode(out);
+        }
+        out.println(_fi + ":");
+    }
     public void Return.genCode(PrintStream out) {
         getExpr().genCode(out);
 		out.println("movq %rbp, %rsp");
@@ -98,49 +116,36 @@ aspect CodeGen {
     public void Expr.genCode(PrintStream out) {
         throw new RuntimeException();
     }
+    public void BinOp.genCode(PrintStream out) {
+		getLeft().genCode(out);
+        out.println("pushq %rax");
+		getRight().genCode(out);
+        out.println("movq %rax, %rbx");
+		out.println("popq %rax");
+    }
     public void Numeral.genCode(PrintStream out) {
 		out.println("movq $" + getNUMERAL() + ", %rax");
 	}
     public void Add.genCode(PrintStream out) {
-		getLeft().genCode(out);
-        out.println("pushq %rax");
-		getRight().genCode(out);
-        out.println("movq %rax, %rbx");
-		out.println("popq %rax");
-		out.println("addq %rbx, %rax");
+		super.genCode(out);
+        out.println("addq %rbx, %rax");
     }
     public void Sub.genCode(PrintStream out) {
-		getLeft().genCode(out);
-        out.println("pushq %rax");
-		getRight().genCode(out);
-        out.println("movq %rax, %rbx");
-		out.println("popq %rax");
+		super.genCode(out);
 		out.println("subq %rbx, %rax");
     }
     public void Mul.genCode(PrintStream out) {
-		getLeft().genCode(out);
-        out.println("pushq %rax");
-		getRight().genCode(out);
-        out.println("movq %rax, %rbx");
-		out.println("popq %rax");
+		super.genCode(out);
 		out.println("imulq %rbx, %rax");
     }
     public void Mod.genCode(PrintStream out) {
-		getLeft().genCode(out);
-        out.println("pushq %rax");
-		getRight().genCode(out);
-        out.println("movq %rax, %rbx");
-		out.println("popq %rax");
+		super.genCode(out);
 		out.println("movq $0, %rdx");
 		out.println("idivq %rbx");
         out.println("movq %rdx, %rax");
     }
     public void Div.genCode(PrintStream out) {
-		getLeft().genCode(out);
-        out.println("pushq %rax");
-		getRight().genCode(out);
-        out.println("movq %rax, %rbx");
-		out.println("popq %rax");
+		super.genCode(out);
 		out.println("movq $0, %rdx");
 		out.println("idivq %rbx");
     }
@@ -148,4 +153,43 @@ aspect CodeGen {
 		getExpr().genCode(out);
 		out.println("neg %rax");
     }
+    public void Expr.genConditionalJump(PrintStream out, String label) {
+        throw new RuntimeException();
+    }
+    public void BinOp.genConditionalJump(PrintStream out, String label) {
+        genCode(out);
+        out.println(label);
+    }
+    public void Equals.genCode(PrintStream out) {
+		super.genCode(out);
+        out.println("cmpq %rbx, %rax");
+        out.print("jne ");
+    }
+    public void NotEq.genCode(PrintStream out) {
+		super.genCode(out);
+        out.println("cmpq %rbx, %rax");
+        out.print("je ");
+    }
+    public void LessThan.genCode(PrintStream out) {
+		super.genCode(out);
+        out.println("cmpq %rbx, %rax");
+        out.print("jge ");
+    }
+    public void LessEq.genCode(PrintStream out) {
+		super.genCode(out);
+        out.println("cmpq %rbx, %rax");
+        out.print("jg ");
+    }
+    public void MoreThan.genCode(PrintStream out) {
+		super.genCode(out);
+        out.println("cmpq %rbx, %rax");
+        out.print("jle ");
+    }
+    public void MoreEq.genCode(PrintStream out) {
+		super.genCode(out);
+        out.println("cmpq %rbx, %rax");
+        out.print("jl ");
+    }
+
+	inh String Stmt.index();
 }

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="lang.TestCodeGeneration" tests="5" skipped="0" failures="0" errors="0" timestamp="2022-10-17T09:48:50" hostname="COMFY" time="0.076">
+<testsuite name="lang.TestCodeGeneration" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-10-17T10:59:27" hostname="COMFY" time="0.082">
   <properties/>
-  <testcase name="runTest[print.in]" classname="lang.TestCodeGeneration" time="0.025"/>
+  <testcase name="runTest[print.in]" classname="lang.TestCodeGeneration" time="0.022"/>
   <testcase name="runTest[param.in]" classname="lang.TestCodeGeneration" time="0.013"/>
-  <testcase name="runTest[noparam.in]" classname="lang.TestCodeGeneration" time="0.017"/>
+  <testcase name="runTest[boolean.in]" classname="lang.TestCodeGeneration" time="0.013"/>
+  <testcase name="runTest[noparam.in]" classname="lang.TestCodeGeneration" time="0.013"/>
   <testcase name="runTest[main.in]" classname="lang.TestCodeGeneration" time="0.01"/>
   <testcase name="runTest[expr.in]" classname="lang.TestCodeGeneration" time="0.011"/>
   <system-out><![CDATA[]]></system-out>

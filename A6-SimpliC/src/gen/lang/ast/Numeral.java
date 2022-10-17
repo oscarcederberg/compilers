@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class Numeral extends Expr implements Cloneable {
   /**
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:101
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:126
    */
   public void genCode(PrintStream out) {
 		out.println("movq $" + getNUMERAL() + ", %rax");

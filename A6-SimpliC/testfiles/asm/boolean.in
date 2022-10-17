@@ -1,0 +1,8 @@
+int main() {
+    if (2 + 2 == 5) {
+        print(400);
+        return 1;
+    } else {
+        print(200);
+    }
+}

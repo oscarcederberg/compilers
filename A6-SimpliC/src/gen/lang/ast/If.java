@@ -17,6 +17,28 @@ import java.util.HashSet;
  */
 public class If extends Stmt implements Cloneable {
   /**
+   * @aspect CodeGen
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:91
+   */
+  public void genCode(PrintStream out) {
+        String _then = enclosedFunction().getIdDecl().getID() + "_" + index() + "_then";
+        String _else = enclosedFunction().getIdDecl().getID() + "_" + index() + "_else";
+        String _fi = enclosedFunction().getIdDecl().getID() + "_" + index() + "_fi";
+        if (hasElse()) {
+            getExpr().genConditionalJump(out, _else);
+            out.println(_then + ":");
+            getBlock().genCode(out);
+            out.println("jmp " + _fi);
+            out.println(_else + ":");
+            getElse().genCode(out);
+        } else {
+            getExpr().genConditionalJump(out, _fi);
+            out.println(_then + ":");
+            getBlock().genCode(out);
+        }
+        out.println(_fi + ":");
+    }
+  /**
    * @aspect Interpreter
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:100
    */
