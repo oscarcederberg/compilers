@@ -299,10 +299,10 @@ protected boolean address_visited = false;
   /**
    * @attribute syn
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:234
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:235
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:234")
+  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:235")
   public String address() {
     ASTState state = state();
     if (address_computed) {
@@ -324,7 +324,7 @@ protected boolean address_visited = false;
           if (parameterIndex() != -1) 
               return (16 + 8 * parameterIndex()) + "(%rbp)";
           else
-              return "-" + ((localIndex() - 1) * 8) + "(%rbp)";
+              return "-" + (localIndex() * 8) + "(%rbp)";
       }
 /** @apilevel internal */
 protected boolean isUnknown_visited = false;
@@ -444,10 +444,10 @@ protected java.util.Set lookup_String_visited;
   /**
    * @attribute inh
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:230
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:231
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:230")
+  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:231")
   public int parameterIndex() {
     ASTState state = state();
     if (parameterIndex_computed) {

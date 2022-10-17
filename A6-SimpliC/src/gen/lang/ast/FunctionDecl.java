@@ -513,12 +513,12 @@ protected ASTState.Cycle reachable_cycle = null;
           return functions; 
       }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:230
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:231
    * @apilevel internal
    */
   public int Define_parameterIndex(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getVariableDeclListNoTransform()) {
-      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:232
+      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:233
       int index = _callerNode.getIndexOfChild(_childNode);
       return index;
     }
@@ -527,7 +527,7 @@ protected ASTState.Cycle reachable_cycle = null;
     }
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:230
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:231
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute parameterIndex
    */

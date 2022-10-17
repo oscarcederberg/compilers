@@ -221,6 +221,7 @@ aspect CodeGen {
     syn int ASTNode.localIndex() = prevNode().localIndex();
     eq FunctionDecl.localIndex() = 0;
     eq IdDecl.localIndex() = prevNode().localIndex() + 1;
+    
     inh ASTNode ASTNode.prevNode();
     eq ASTNode.getChild(int i).prevNode() = prevNode(i);
     syn ASTNode ASTNode.lastNode() = prevNode(getNumChild());
@@ -235,6 +236,6 @@ aspect CodeGen {
         if (parameterIndex() != -1) 
             return (16 + 8 * parameterIndex()) + "(%rbp)";
         else
-            return "-" + ((localIndex() - 1) * 8) + "(%rbp)";
+            return "-" + (localIndex() * 8) + "(%rbp)";
     }
 }

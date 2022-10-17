@@ -674,7 +674,7 @@ protected boolean unknownFunction_visited = false;
     return true;
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:230
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:231
    * @apilevel internal
    */
   public int Define_parameterIndex(ASTNode _callerNode, ASTNode _childNode) {
@@ -682,7 +682,7 @@ protected boolean unknownFunction_visited = false;
     return -1;
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:230
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:231
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute parameterIndex
    */
