@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class LessEq extends BinOp implements Cloneable {
   /**
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:178
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:187
    */
   public void genCode(PrintStream out) {
 		super.genCode(out);

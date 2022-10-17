@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="lang.TestCodeGeneration" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-10-17T10:59:27" hostname="COMFY" time="0.082">
+<testsuite name="lang.TestCodeGeneration" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-10-17T11:19:16" hostname="COMFY" time="0.089">
   <properties/>
-  <testcase name="runTest[print.in]" classname="lang.TestCodeGeneration" time="0.022"/>
-  <testcase name="runTest[param.in]" classname="lang.TestCodeGeneration" time="0.013"/>
-  <testcase name="runTest[boolean.in]" classname="lang.TestCodeGeneration" time="0.013"/>
-  <testcase name="runTest[noparam.in]" classname="lang.TestCodeGeneration" time="0.013"/>
-  <testcase name="runTest[main.in]" classname="lang.TestCodeGeneration" time="0.01"/>
+  <testcase name="runTest[while.in]" classname="lang.TestCodeGeneration" time="0.02"/>
+  <testcase name="runTest[print.in]" classname="lang.TestCodeGeneration" time="0.011"/>
+  <testcase name="runTest[param.in]" classname="lang.TestCodeGeneration" time="0.011"/>
+  <testcase name="runTest[boolean.in]" classname="lang.TestCodeGeneration" time="0.012"/>
+  <testcase name="runTest[noparam.in]" classname="lang.TestCodeGeneration" time="0.01"/>
+  <testcase name="runTest[main.in]" classname="lang.TestCodeGeneration" time="0.012"/>
   <testcase name="runTest[expr.in]" classname="lang.TestCodeGeneration" time="0.011"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

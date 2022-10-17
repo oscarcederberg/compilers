@@ -18,7 +18,7 @@ import java.util.HashSet;
 public abstract class BinOp extends Expr implements Cloneable {
   /**
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:119
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:128
    */
   public void genCode(PrintStream out) {
 		getLeft().genCode(out);
@@ -29,7 +29,7 @@ public abstract class BinOp extends Expr implements Cloneable {
     }
   /**
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:159
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:168
    */
   public void genConditionalJump(PrintStream out, String label) {
         genCode(out);

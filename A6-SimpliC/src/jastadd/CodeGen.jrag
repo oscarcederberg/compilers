@@ -88,10 +88,19 @@ aspect CodeGen {
         out.println("call " + decl().getID());
         out.println("addq $" + (params * 8) + ", %rsp");
     }
+    public void While.genCode(PrintStream out) {
+        String _start = enclosedFunction().getIdDecl().getID() + "_" + index() + "start";
+        String _end = enclosedFunction().getIdDecl().getID() + "_" + index() + "end";
+        out.println(_start + ":");
+        getExpr().genConditionalJump(out, _end);
+        getBlock().genCode(out);
+        out.println("jmp " + _start);
+        out.println(_end + ":");
+    }
     public void If.genCode(PrintStream out) {
-        String _then = enclosedFunction().getIdDecl().getID() + "_" + index() + "_then";
-        String _else = enclosedFunction().getIdDecl().getID() + "_" + index() + "_else";
-        String _fi = enclosedFunction().getIdDecl().getID() + "_" + index() + "_fi";
+        String _then = enclosedFunction().getIdDecl().getID() + "_" + index() + "then";
+        String _else = enclosedFunction().getIdDecl().getID() + "_" + index() + "else";
+        String _fi = enclosedFunction().getIdDecl().getID() + "_" + index() + "fi";
         if (hasElse()) {
             getExpr().genConditionalJump(out, _else);
             out.println(_then + ":");

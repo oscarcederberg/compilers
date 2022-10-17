@@ -18,12 +18,12 @@ import java.util.HashSet;
 public class If extends Stmt implements Cloneable {
   /**
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:91
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:100
    */
   public void genCode(PrintStream out) {
-        String _then = enclosedFunction().getIdDecl().getID() + "_" + index() + "_then";
-        String _else = enclosedFunction().getIdDecl().getID() + "_" + index() + "_else";
-        String _fi = enclosedFunction().getIdDecl().getID() + "_" + index() + "_fi";
+        String _then = enclosedFunction().getIdDecl().getID() + "_" + index() + "then";
+        String _else = enclosedFunction().getIdDecl().getID() + "_" + index() + "else";
+        String _fi = enclosedFunction().getIdDecl().getID() + "_" + index() + "fi";
         if (hasElse()) {
             getExpr().genConditionalJump(out, _else);
             out.println(_then + ":");

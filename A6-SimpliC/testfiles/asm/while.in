@@ -1,0 +1,8 @@
+int main() {
+    while (2 + 2 == 5) {
+        print(400);
+        return 1;
+    }
+    print(200);
+    return 0;
+}
