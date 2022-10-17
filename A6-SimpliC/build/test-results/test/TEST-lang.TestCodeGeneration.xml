@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="lang.TestCodeGeneration" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-10-17T16:19:09" hostname="COMFY" time="0.098">
+<testsuite name="lang.TestCodeGeneration" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-10-17T16:31:20" hostname="COMFY" time="0.106">
   <properties/>
-  <testcase name="runTest[while.in]" classname="lang.TestCodeGeneration" time="0.024"/>
-  <testcase name="runTest[print.in]" classname="lang.TestCodeGeneration" time="0.011"/>
-  <testcase name="runTest[param.in]" classname="lang.TestCodeGeneration" time="0.011"/>
-  <testcase name="runTest[boolean.in]" classname="lang.TestCodeGeneration" time="0.011"/>
-  <testcase name="runTest[noparam.in]" classname="lang.TestCodeGeneration" time="0.01"/>
+  <testcase name="runTest[while.in]" classname="lang.TestCodeGeneration" time="0.023"/>
+  <testcase name="runTest[print.in]" classname="lang.TestCodeGeneration" time="0.012"/>
+  <testcase name="runTest[param.in]" classname="lang.TestCodeGeneration" time="0.012"/>
+  <testcase name="runTest[boolean.in]" classname="lang.TestCodeGeneration" time="0.015"/>
+  <testcase name="runTest[noparam.in]" classname="lang.TestCodeGeneration" time="0.011"/>
   <testcase name="runTest[main.in]" classname="lang.TestCodeGeneration" time="0.01"/>
   <testcase name="runTest[expr.in]" classname="lang.TestCodeGeneration" time="0.011"/>
   <testcase name="runTest[variables.in]" classname="lang.TestCodeGeneration" time="0.01"/>

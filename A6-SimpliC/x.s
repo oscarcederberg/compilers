@@ -6,14 +6,141 @@ _start:
 call main
 call _exit
 
-main:
+gcd1:
 pushq %rbp
 movq %rsp, %rbp
 subq $0, %rsp
-movq $200, %rax
+gcd1_0_start:
+movq 16(%rbp), %rax
+pushq %rax
+movq 24(%rbp), %rax
+movq %rax, %rbx
+popq %rax
+cmpq %rbx, %rax
+je gcd1_0_end
+movq 16(%rbp), %rax
+pushq %rax
+movq 24(%rbp), %rax
+movq %rax, %rbx
+popq %rax
+cmpq %rbx, %rax
+jle gcd1_0_0_else
+gcd1_0_0_then:
+movq 16(%rbp), %rax
+pushq %rax
+movq 24(%rbp), %rax
+movq %rax, %rbx
+popq %rax
+subq %rbx, %rax
+movq %rax, 16(%rbp)
+jmp gcd1_0_0_fi
+gcd1_0_0_else:
+movq 24(%rbp), %rax
+pushq %rax
+movq 16(%rbp), %rax
+movq %rax, %rbx
+popq %rax
+subq %rbx, %rax
+movq %rax, 24(%rbp)
+gcd1_0_0_fi:
+jmp gcd1_0_start
+gcd1_0_end:
+movq 16(%rbp), %rax
+movq %rbp, %rsp
+popq %rbp
+ret
+
+gcd2:
+pushq %rbp
+movq %rsp, %rbp
+subq $0, %rsp
+movq 24(%rbp), %rax
+pushq %rax
+movq $0, %rax
+movq %rax, %rbx
+popq %rax
+cmpq %rbx, %rax
+jne gcd2_0_fi
+gcd2_0_then:
+movq 16(%rbp), %rax
+movq %rbp, %rsp
+popq %rbp
+ret
+
+gcd2_0_fi:
+movq 16(%rbp), %rax
+pushq %rax
+movq 24(%rbp), %rax
+movq %rax, %rbx
+popq %rax
+movq $0, %rdx
+idivq %rbx
+movq %rdx, %rax
+push %rax
+movq 24(%rbp), %rax
+push %rax
+call gcd2
+addq $16, %rsp
+movq %rbp, %rsp
+popq %rbp
+ret
+
+main:
+pushq %rbp
+movq %rsp, %rbp
+subq $24, %rsp
+movq $0, -16(%rbp)
+movq $0, -24(%rbp)
+call read
+addq $0, %rsp
+movq %rax, -16(%rbp)
+call read
+addq $0, %rsp
+movq %rax, -24(%rbp)
+movq -24(%rbp), %rax
+push %rax
+movq -16(%rbp), %rax
+push %rax
+call gcd1
+addq $16, %rsp
 push %rax
 call print
 addq $8, %rsp
+movq -24(%rbp), %rax
+push %rax
+movq -16(%rbp), %rax
+push %rax
+call gcd2
+addq $16, %rsp
+push %rax
+call print
+addq $8, %rsp
+movq -24(%rbp), %rax
+push %rax
+movq -16(%rbp), %rax
+push %rax
+call gcd1
+addq $16, %rsp
+pushq %rax
+movq -24(%rbp), %rax
+push %rax
+movq -16(%rbp), %rax
+push %rax
+call gcd2
+addq $16, %rsp
+movq %rax, %rbx
+popq %rax
+subq %rbx, %rax
+movq %rax, -32(%rbp)
+movq -32(%rbp), %rax
+push %rax
+call print
+addq $8, %rsp
+movq $0, %rax
+movq %rbp, %rsp
+popq %rbp
+ret
+
 movq $0, %rax
 popq %rbp
 ret

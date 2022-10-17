@@ -69,6 +69,61 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
         out.println("syscall");
         out.println("popq %rbp");
         out.println("ret\n");
+        // read
+        out.println("read:");
+        out.println("pushq %rbp");
+        out.println("movq %rsp, %rbp");
+        out.println("### R9 = sign");
+        out.println("movq $1, %r9 # sign <- 1");
+        out.println("### R10 = sum");
+        out.println("movq $0, %r10 # sum <- 0");
+        out.println("skip_ws: # skip any leading whitespace");
+        out.println("movq $0, %rdi");
+        out.println("leaq buf(%rip), %rsi");
+        out.println("movq $1, %rdx");
+        out.println("movq $0, %rax");
+        out.println("syscall # get one char: sys_read(0, buf, 1)");
+        out.println("cmpq $0, %rax");
+        out.println("jle atoi_done # nchar <= 0");
+        out.println("movb (%rsi), %cl # c <- current char");
+        out.println("cmp $32, %cl");
+        out.println("je skip_ws # c == space");
+        out.println("cmp $13, %cl");
+        out.println("je skip_ws # c == CR");
+        out.println("cmp $10, %cl");
+        out.println("je skip_ws # c == NL");
+        out.println("cmp $9, %cl");
+        out.println("je skip_ws # c == tab");
+        out.println("cmp $45, %cl # check if negative");
+        out.println("jne atoi_loop");
+        out.println("movq $-1, %r9 # sign <- -1");
+        out.println("movq $0, %rdi");
+        out.println("leaq buf(%rip), %rsi");
+        out.println("movq $1, %rdx");
+        out.println("movq $0, %rax");
+        out.println("syscall # get one char: sys_read(0, buf, 1)");
+        out.println("atoi_loop:");
+        out.println("cmpq $0, %rax # while (nchar > 0)");
+        out.println("jle atoi_done # leave loop if nchar <= 0");
+        out.println("movzbq (%rsi), %rcx # move byte, zero extend to quad-word");
+        out.println("cmpq $0x30, %rcx");
+        out.println("jl atoi_done # character is not numeric");
+        out.println("cmpq $0x39, %rcx");
+        out.println("jg atoi_done # character is not numeric");
+        out.println("imulq $10, %r10 # multiply sum by 10");
+        out.println("subq $0x30, %rcx # value of character");
+        out.println("addq %rcx, %r10 # add to sum");
+        out.println("movq $0, %rdi");
+        out.println("leaq buf(%rip), %rsi");
+        out.println("movq $1, %rdx");
+        out.println("movq $0, %rax");
+        out.println("syscall # get one char: sys_read(0, buf, 1)");
+        out.println("jmp atoi_loop # loop back");
+        out.println("atoi_done:");
+        out.println("imulq %r9, %r10 # sum *= sign");
+        out.println("movq %r10, %rax # put result value in RAX");
+        out.println("popq %rbp");
+        out.println("ret\n");
         // call sys_exit
         out.println("_exit:");
         out.println("movq %rax, %rdi   # exit code = 0");
@@ -674,7 +729,7 @@ protected boolean unknownFunction_visited = false;
     return true;
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:231
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:297
    * @apilevel internal
    */
   public int Define_parameterIndex(ASTNode _callerNode, ASTNode _childNode) {
@@ -682,7 +737,7 @@ protected boolean unknownFunction_visited = false;
     return -1;
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:231
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:297
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute parameterIndex
    */
@@ -854,7 +909,7 @@ protected boolean unknownFunction_visited = false;
     return true;
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:219
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:285
    * @apilevel internal
    */
   public String Define_index(ASTNode _callerNode, ASTNode _childNode) {
@@ -864,7 +919,7 @@ protected boolean unknownFunction_visited = false;
         }
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:219
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:285
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute index
    */

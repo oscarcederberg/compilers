@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class VariableDecl extends Stmt implements Cloneable {
   /**
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:81
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:136
    */
   public void genCode(PrintStream out) {
         if(hasExpr()) {
