@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class Mul extends BinOp implements Cloneable {
   /**
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:146
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:149
    */
   public void genCode(PrintStream out) {
 		super.genCode(out);

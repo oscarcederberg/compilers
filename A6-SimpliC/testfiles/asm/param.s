@@ -9,6 +9,15 @@ call _exit
 f:
 pushq %rbp
 movq %rsp, %rbp
+movq 16(%rbp), %rax
+pushq %rax
+movq 24(%rbp), %rax
+movq %rax, %rbx
+popq %rax
+addq %rbx, %rax
+push %rax
+call print
+addq $8, %rsp
 movq $0, %rax
 movq %rbp, %rsp
 popq %rbp

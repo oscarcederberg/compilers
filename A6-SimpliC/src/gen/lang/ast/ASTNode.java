@@ -500,7 +500,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
 
   /**
    * @aspect <NoAspect>
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:205
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:202
    */
     /** @apilevel internal */
   protected void collect_contributors_FunctionDecl_functionCalls(Program _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
@@ -761,6 +761,26 @@ protected boolean program_visited = false;
     return false;
   }
   /** @apilevel internal */
+  public String Define_address(ASTNode _callerNode, ASTNode _childNode) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_address(self, _callerNode)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_address(self, _callerNode);
+  }
+
+  /**
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:210
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute address
+   */
+  protected boolean canDefine_address(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
   public UnknownType Define_unknownType(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
@@ -941,6 +961,26 @@ protected boolean program_visited = false;
     return false;
   }
   /** @apilevel internal */
+  public String Define_index(ASTNode _callerNode, ASTNode _childNode) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_index(self, _callerNode)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_index(self, _callerNode);
+  }
+
+  /**
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:190
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute index
+   */
+  protected boolean canDefine_index(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
   public Program Define_program(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
@@ -961,26 +1001,6 @@ protected boolean program_visited = false;
     return false;
   }
   /** @apilevel internal */
-  public String Define_index(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_index(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_index(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:196
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute index
-   */
-  protected boolean canDefine_index(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
   public FunctionDecl Define_enclosedFunction(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
@@ -993,7 +1013,7 @@ protected boolean program_visited = false;
   }
 
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:204
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:201
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosedFunction
    */

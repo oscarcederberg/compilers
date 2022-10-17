@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="lang.TestInterpreter" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-10-17T11:19:16" hostname="COMFY" time="0.017">
+<testsuite name="lang.TestInterpreter" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-10-17T14:42:04" hostname="COMFY" time="0.01">
   <properties/>
-  <testcase name="runTest[functionuse.in]" classname="lang.TestInterpreter" time="0.002"/>
+  <testcase name="runTest[functionuse.in]" classname="lang.TestInterpreter" time="0.001"/>
   <testcase name="runTest[print.in]" classname="lang.TestInterpreter" time="0.001"/>
   <testcase name="runTest[boolean.in]" classname="lang.TestInterpreter" time="0.002"/>
-  <testcase name="runTest[fac.in]" classname="lang.TestInterpreter" time="0.002"/>
-  <testcase name="runTest[gcd.in]" classname="lang.TestInterpreter" time="0.005"/>
-  <testcase name="runTest[variable.in]" classname="lang.TestInterpreter" time="0.002"/>
-  <testcase name="runTest[uninitialized.in]" classname="lang.TestInterpreter" time="0.002"/>
+  <testcase name="runTest[fac.in]" classname="lang.TestInterpreter" time="0.001"/>
+  <testcase name="runTest[gcd.in]" classname="lang.TestInterpreter" time="0.001"/>
+  <testcase name="runTest[variable.in]" classname="lang.TestInterpreter" time="0.001"/>
+  <testcase name="runTest[uninitialized.in]" classname="lang.TestInterpreter" time="0.001"/>
   <testcase name="runTest[shadowing.in]" classname="lang.TestInterpreter" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

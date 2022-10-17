@@ -190,10 +190,7 @@ aspect Interpreter {
     eq Block.getStmt(int index).index() {
         return index() + index + "_";
     }
-    eq FunctionDecl.getVariableDecl().index() {
-        return "";
-    }
-    eq FunctionDecl.getBlock().index() {
+    eq Program.getChild().index() {
         return "";
     }
 

@@ -445,7 +445,7 @@ protected java.util.Set lookup_String_visited;
   }
   /** @apilevel internal */
   protected void collect_contributors_FunctionDecl_functionCalls(Program _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:217
+    // @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:214
     {
       FunctionDecl target = (FunctionDecl) (enclosedFunction());
       java.util.Set<ASTNode> contributors = _map.get(target);

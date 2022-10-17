@@ -412,10 +412,10 @@ protected java.util.Set lookup_String_visited;
   /**
    * @attribute inh
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:202
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:199
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:202")
+  @ASTNodeAnnotation.Source(aspect="Interpreter", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:199")
   public FunctionDecl enclosedFunction() {
     ASTState state = state();
     if (enclosedFunction_computed) {
@@ -449,7 +449,7 @@ protected boolean enclosedFunction_visited = false;
 
   /** @apilevel internal */
   protected void collect_contributors_FunctionDecl_functionCalls(Program _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:220
+    // @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:217
     {
       FunctionDecl target = (FunctionDecl) (enclosedFunction());
       java.util.Set<ASTNode> contributors = _map.get(target);

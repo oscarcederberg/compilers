@@ -17,6 +17,13 @@ import java.util.HashSet;
  */
 public class VariableUse extends Expr implements Cloneable {
   /**
+   * @aspect CodeGen
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:128
+   */
+  public void genCode(PrintStream out) {
+		out.println("movq " + decl().address() + ", %rax");
+    }
+  /**
    * @aspect Interpreter
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:127
    */

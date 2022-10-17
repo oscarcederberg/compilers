@@ -125,6 +125,12 @@ aspect CodeGen {
     public void Expr.genCode(PrintStream out) {
         throw new RuntimeException();
     }
+    public void VariableUse.genCode(PrintStream out) {
+		out.println("movq " + decl().address() + ", %rax");
+    }
+    public void Numeral.genCode(PrintStream out) {
+		out.println("movq $" + getNUMERAL() + ", %rax");
+	}
     public void BinOp.genCode(PrintStream out) {
 		getLeft().genCode(out);
         out.println("pushq %rax");
@@ -132,9 +138,6 @@ aspect CodeGen {
         out.println("movq %rax, %rbx");
 		out.println("popq %rax");
     }
-    public void Numeral.genCode(PrintStream out) {
-		out.println("movq $" + getNUMERAL() + ", %rax");
-	}
     public void Add.genCode(PrintStream out) {
 		super.genCode(out);
         out.println("addq %rbx, %rax");
@@ -201,4 +204,8 @@ aspect CodeGen {
     }
 
 	inh String Stmt.index();
+
+    inh String IdDecl.address();
+    eq Program.getChild().address() = "";
+    eq FunctionDecl.getVariableDecl(int index).address() = (16 + 8 * index) + "(%rbp)";
 }

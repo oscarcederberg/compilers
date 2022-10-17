@@ -95,7 +95,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
     }
   /**
    * @aspect Interpreter
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:200
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:197
    */
   static Scanner scanner = new Scanner(System.in);
   /**
@@ -378,7 +378,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_Program_
 
   /**
    * @aspect <NoAspect>
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:205
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:202
    */
   /** @apilevel internal */
 protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_FunctionDecl_functionCalls = null;
@@ -674,6 +674,22 @@ protected boolean unknownFunction_visited = false;
     return true;
   }
   /**
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:208
+   * @apilevel internal
+   */
+  public String Define_address(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return "";
+  }
+  /**
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:208
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute address
+   */
+  protected boolean canDefine_address(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/TypeAnalysis.jrag:3
    * @apilevel internal
    */
@@ -835,6 +851,24 @@ protected boolean unknownFunction_visited = false;
    * @return {@code true} if this node has an equation for the inherited attribute function
    */
   protected boolean canDefine_function(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:206
+   * @apilevel internal
+   */
+  public String Define_index(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    {
+            return "";
+        }
+  }
+  /**
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:206
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute index
+   */
+  protected boolean canDefine_index(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**

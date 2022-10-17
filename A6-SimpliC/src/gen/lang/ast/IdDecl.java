@@ -78,6 +78,7 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
     isUnknown_reset();
     uniqueName_reset();
     lookup_String_reset();
+    address_reset();
     type_reset();
     isFunction_reset();
     isVariable_reset();
@@ -85,21 +86,21 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
     index_reset();
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:41
+   * @declaredat ASTNode:42
    */
   public void flushCollectionCache() {
     super.flushCollectionCache();
 
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:46
+   * @declaredat ASTNode:47
    */
   public IdDecl clone() throws CloneNotSupportedException {
     IdDecl node = (IdDecl) super.clone();
     return node;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:51
+   * @declaredat ASTNode:52
    */
   public IdDecl copy() {
     try {
@@ -119,7 +120,7 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:70
+   * @declaredat ASTNode:71
    */
   @Deprecated
   public IdDecl fullCopy() {
@@ -130,7 +131,7 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:80
+   * @declaredat ASTNode:81
    */
   public IdDecl treeCopyNoTransform() {
     IdDecl tree = (IdDecl) copy();
@@ -151,7 +152,7 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:100
+   * @declaredat ASTNode:101
    */
   public IdDecl treeCopy() {
     IdDecl tree = (IdDecl) copy();
@@ -356,6 +357,44 @@ protected java.util.Set lookup_String_visited;
   }
   /** @apilevel internal */
   protected java.util.Map lookup_String_values;
+
+  /**
+   * @attribute inh
+   * @aspect CodeGen
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:208
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:208")
+  public String address() {
+    ASTState state = state();
+    if (address_computed) {
+      return address_value;
+    }
+    if (address_visited) {
+      throw new RuntimeException("Circular definition of attribute IdDecl.address().");
+    }
+    address_visited = true;
+    state().enterLazyAttribute();
+    address_value = getParent().Define_address(this, null);
+    address_computed = true;
+    state().leaveLazyAttribute();
+    address_visited = false;
+    return address_value;
+  }
+/** @apilevel internal */
+protected boolean address_visited = false;
+  /** @apilevel internal */
+  private void address_reset() {
+    address_computed = false;
+    
+    address_value = null;
+    address_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean address_computed = false;
+
+  /** @apilevel internal */
+  protected String address_value;
 
   /**
    * @attribute inh

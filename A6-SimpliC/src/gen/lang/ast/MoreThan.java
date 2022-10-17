@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class MoreThan extends BinOp implements Cloneable {
   /**
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:192
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:195
    */
   public void genCode(PrintStream out) {
 		super.genCode(out);
