@@ -1,0 +1,12 @@
+int f(int a) {
+    int b = 50;
+    print(a + b);
+    return 0;
+}
+
+int main() {
+    int a = 150;
+    f(a);
+    a = 200;
+    print(a);
+}

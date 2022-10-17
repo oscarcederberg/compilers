@@ -17,6 +17,18 @@ import java.util.HashSet;
  */
 public class VariableDecl extends Stmt implements Cloneable {
   /**
+   * @aspect CodeGen
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:81
+   */
+  public void genCode(PrintStream out) {
+        if(hasExpr()) {
+			getExpr().genCode(out);
+			out.println("movq %rax, " + getIdDecl().address());
+		} else {
+			out.println("movq $0, " + getIdDecl().address());
+		}
+    }
+  /**
    * @aspect Interpreter
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:80
    */

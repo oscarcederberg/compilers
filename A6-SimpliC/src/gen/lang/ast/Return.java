@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class Return extends Stmt implements Cloneable {
   /**
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:118
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:131
    */
   public void genCode(PrintStream out) {
         getExpr().genCode(out);

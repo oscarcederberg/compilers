@@ -75,10 +75,12 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
   public void flushAttrCache() {
     super.flushAttrCache();
     isMultiDeclared_reset();
+    localIndex_reset();
+    address_reset();
     isUnknown_reset();
     uniqueName_reset();
     lookup_String_reset();
-    address_reset();
+    parameterIndex_reset();
     type_reset();
     isFunction_reset();
     isVariable_reset();
@@ -86,21 +88,21 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
     index_reset();
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:42
+   * @declaredat ASTNode:44
    */
   public void flushCollectionCache() {
     super.flushCollectionCache();
 
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:47
+   * @declaredat ASTNode:49
    */
   public IdDecl clone() throws CloneNotSupportedException {
     IdDecl node = (IdDecl) super.clone();
     return node;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:52
+   * @declaredat ASTNode:54
    */
   public IdDecl copy() {
     try {
@@ -120,7 +122,7 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:71
+   * @declaredat ASTNode:73
    */
   @Deprecated
   public IdDecl fullCopy() {
@@ -131,7 +133,7 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:81
+   * @declaredat ASTNode:83
    */
   public IdDecl treeCopyNoTransform() {
     IdDecl tree = (IdDecl) copy();
@@ -152,7 +154,7 @@ public class IdDecl extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:101
+   * @declaredat ASTNode:103
    */
   public IdDecl treeCopy() {
     IdDecl tree = (IdDecl) copy();
@@ -243,6 +245,87 @@ protected boolean isMultiDeclared_visited = false;
     isMultiDeclared_visited = false;
     return isMultiDeclared_value;
   }
+/** @apilevel internal */
+protected boolean localIndex_visited = false;
+  /** @apilevel internal */
+  private void localIndex_reset() {
+    localIndex_computed = false;
+    localIndex_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean localIndex_computed = false;
+
+  /** @apilevel internal */
+  protected int localIndex_value;
+
+  /**
+   * @attribute syn
+   * @aspect CodeGen
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:223
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:221")
+  public int localIndex() {
+    ASTState state = state();
+    if (localIndex_computed) {
+      return localIndex_value;
+    }
+    if (localIndex_visited) {
+      throw new RuntimeException("Circular definition of attribute ASTNode.localIndex().");
+    }
+    localIndex_visited = true;
+    state().enterLazyAttribute();
+    localIndex_value = prevNode().localIndex() + 1;
+    localIndex_computed = true;
+    state().leaveLazyAttribute();
+    localIndex_visited = false;
+    return localIndex_value;
+  }
+/** @apilevel internal */
+protected boolean address_visited = false;
+  /** @apilevel internal */
+  private void address_reset() {
+    address_computed = false;
+    
+    address_value = null;
+    address_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean address_computed = false;
+
+  /** @apilevel internal */
+  protected String address_value;
+
+  /**
+   * @attribute syn
+   * @aspect CodeGen
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:234
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:234")
+  public String address() {
+    ASTState state = state();
+    if (address_computed) {
+      return address_value;
+    }
+    if (address_visited) {
+      throw new RuntimeException("Circular definition of attribute IdDecl.address().");
+    }
+    address_visited = true;
+    state().enterLazyAttribute();
+    address_value = address_compute();
+    address_computed = true;
+    state().leaveLazyAttribute();
+    address_visited = false;
+    return address_value;
+  }
+  /** @apilevel internal */
+  private String address_compute() {
+          if (parameterIndex() != -1) 
+              return (16 + 8 * parameterIndex()) + "(%rbp)";
+          else
+              return "-" + ((localIndex() - 1) * 8) + "(%rbp)";
+      }
 /** @apilevel internal */
 protected boolean isUnknown_visited = false;
   /** @apilevel internal */
@@ -361,40 +444,38 @@ protected java.util.Set lookup_String_visited;
   /**
    * @attribute inh
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:208
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:230
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:208")
-  public String address() {
+  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:230")
+  public int parameterIndex() {
     ASTState state = state();
-    if (address_computed) {
-      return address_value;
+    if (parameterIndex_computed) {
+      return parameterIndex_value;
     }
-    if (address_visited) {
-      throw new RuntimeException("Circular definition of attribute IdDecl.address().");
+    if (parameterIndex_visited) {
+      throw new RuntimeException("Circular definition of attribute IdDecl.parameterIndex().");
     }
-    address_visited = true;
+    parameterIndex_visited = true;
     state().enterLazyAttribute();
-    address_value = getParent().Define_address(this, null);
-    address_computed = true;
+    parameterIndex_value = getParent().Define_parameterIndex(this, null);
+    parameterIndex_computed = true;
     state().leaveLazyAttribute();
-    address_visited = false;
-    return address_value;
+    parameterIndex_visited = false;
+    return parameterIndex_value;
   }
 /** @apilevel internal */
-protected boolean address_visited = false;
+protected boolean parameterIndex_visited = false;
   /** @apilevel internal */
-  private void address_reset() {
-    address_computed = false;
-    
-    address_value = null;
-    address_visited = false;
+  private void parameterIndex_reset() {
+    parameterIndex_computed = false;
+    parameterIndex_visited = false;
   }
   /** @apilevel internal */
-  protected boolean address_computed = false;
+  protected boolean parameterIndex_computed = false;
 
   /** @apilevel internal */
-  protected String address_value;
+  protected int parameterIndex_value;
 
   /**
    * @attribute inh

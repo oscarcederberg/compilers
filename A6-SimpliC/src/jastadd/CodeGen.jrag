@@ -11,11 +11,6 @@ aspect CodeGen {
         for (FunctionDecl decl: getFunctionDeclList()) {
             decl.genCode(out);
         }
-        // call sys_exit
-        out.println("_exit:");
-        out.println("movq %rax, %rdi   # exit code = 0");
-        out.println("movq $60, %rax  # sys_exit");
-        out.println("syscall");
         // print
         out.println("print:");
         out.println("pushq %rbp");
@@ -52,13 +47,19 @@ aspect CodeGen {
         out.println("movq $1, %rax");
         out.println("syscall");
         out.println("popq %rbp");
-        out.println("ret");
+        out.println("ret\n");
+        // call sys_exit
+        out.println("_exit:");
+        out.println("movq %rax, %rdi   # exit code = 0");
+        out.println("movq $60, %rax  # sys_exit");
+        out.println("syscall");
     }
 
     public void FunctionDecl.genCode(PrintStream out) {
         out.println(getIdDecl().getID() + ":");
         out.println("pushq %rbp");
         out.println("movq %rsp, %rbp");
+        out.println("subq $" + getBlock().numLocals() * 8 + ", %rsp");
         getBlock().genCode(out);
         
         // implicit return for main
@@ -76,6 +77,18 @@ aspect CodeGen {
 
     public void Stmt.genCode(PrintStream out) {
         throw new RuntimeException();
+    }
+    public void VariableDecl.genCode(PrintStream out) {
+        if(hasExpr()) {
+			getExpr().genCode(out);
+			out.println("movq %rax, " + getIdDecl().address());
+		} else {
+			out.println("movq $0, " + getIdDecl().address());
+		}
+    }
+    public void Assign.genCode(PrintStream out) {
+        getExpr().genCode(out);
+		out.println("movq %rax, " + decl().address());
     }
     public void FunctionCall.genCode(PrintStream out) {
         FunctionDecl function = decl().function();
@@ -205,7 +218,23 @@ aspect CodeGen {
 
 	inh String Stmt.index();
 
-    inh String IdDecl.address();
-    eq Program.getChild().address() = "";
-    eq FunctionDecl.getVariableDecl(int index).address() = (16 + 8 * index) + "(%rbp)";
+    syn int ASTNode.localIndex() = prevNode().localIndex();
+    eq FunctionDecl.localIndex() = 0;
+    eq IdDecl.localIndex() = prevNode().localIndex() + 1;
+    inh ASTNode ASTNode.prevNode();
+    eq ASTNode.getChild(int i).prevNode() = prevNode(i);
+    syn ASTNode ASTNode.lastNode() = prevNode(getNumChild());
+    syn ASTNode ASTNode.prevNode(int i) = i>0 ? getChild(i-1).lastNode() : this;
+    syn int ASTNode.numLocals() = lastNode().localIndex() - localIndex();
+
+    inh int IdDecl.parameterIndex();
+    eq Program.getChild().parameterIndex() = -1;
+    eq FunctionDecl.getVariableDecl(int index).parameterIndex() = index;
+
+    syn String IdDecl.address() {
+        if (parameterIndex() != -1) 
+            return (16 + 8 * parameterIndex()) + "(%rbp)";
+        else
+            return "-" + ((localIndex() - 1) * 8) + "(%rbp)";
+    }
 }

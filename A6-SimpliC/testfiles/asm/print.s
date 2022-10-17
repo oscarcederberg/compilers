@@ -9,6 +9,7 @@ call _exit
 main:
 pushq %rbp
 movq %rsp, %rbp
+subq $0, %rsp
 movq $200, %rax
 push %rax
 call print
@@ -17,10 +18,6 @@ movq $0, %rax
 popq %rbp
 ret
 
-_exit:
-movq %rax, %rdi   # exit code = 0
-movq $60, %rax  # sys_exit
-syscall
 print:
 pushq %rbp
 movq %rsp, %rbp
@@ -57,3 +54,8 @@ movq $1, %rax
 syscall
 popq %rbp
 ret
+
+_exit:
+movq %rax, %rdi   # exit code = 0
+movq $60, %rax  # sys_exit
+syscall

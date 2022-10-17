@@ -386,6 +386,11 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
    * @declaredat ASTNode:299
    */
   public void flushAttrCache() {
+    localIndex_reset();
+    lastNode_reset();
+    prevNode_int_reset();
+    numLocals_reset();
+    prevNode_reset();
     unknownType_reset();
     intType_reset();
     boolType_reset();
@@ -394,12 +399,12 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
     program_reset();
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:308
+   * @declaredat ASTNode:313
    */
   public void flushCollectionCache() {
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:311
+   * @declaredat ASTNode:316
    */
   public ASTNode<T> clone() throws CloneNotSupportedException {
     ASTNode node = (ASTNode) super.clone();
@@ -407,7 +412,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
     return node;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:317
+   * @declaredat ASTNode:322
    */
   public ASTNode<T> copy() {
     try {
@@ -427,7 +432,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:336
+   * @declaredat ASTNode:341
    */
   @Deprecated
   public ASTNode<T> fullCopy() {
@@ -438,7 +443,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:346
+   * @declaredat ASTNode:351
    */
   public ASTNode<T> treeCopyNoTransform() {
     ASTNode tree = (ASTNode) copy();
@@ -459,7 +464,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:366
+   * @declaredat ASTNode:371
    */
   public ASTNode<T> treeCopy() {
     ASTNode tree = (ASTNode) copy();
@@ -477,7 +482,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   /**
    * Performs a full traversal of the tree using getChild to trigger rewrites
    * @apilevel low-level
-   * @declaredat ASTNode:383
+   * @declaredat ASTNode:388
    */
   public void doFullTraversal() {
     for (int i = 0; i < getNumChild(); i++) {
@@ -511,6 +516,190 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   /** @apilevel internal */
   protected void contributeTo_FunctionDecl_functionCalls(Set<FunctionDecl> collection) {
   }
+
+/** @apilevel internal */
+protected boolean localIndex_visited = false;
+  /** @apilevel internal */
+  private void localIndex_reset() {
+    localIndex_computed = false;
+    localIndex_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean localIndex_computed = false;
+
+  /** @apilevel internal */
+  protected int localIndex_value;
+
+  /**
+   * @attribute syn
+   * @aspect CodeGen
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:221
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:221")
+  public int localIndex() {
+    ASTState state = state();
+    if (localIndex_computed) {
+      return localIndex_value;
+    }
+    if (localIndex_visited) {
+      throw new RuntimeException("Circular definition of attribute ASTNode.localIndex().");
+    }
+    localIndex_visited = true;
+    state().enterLazyAttribute();
+    localIndex_value = prevNode().localIndex();
+    localIndex_computed = true;
+    state().leaveLazyAttribute();
+    localIndex_visited = false;
+    return localIndex_value;
+  }
+/** @apilevel internal */
+protected boolean lastNode_visited = false;
+  /** @apilevel internal */
+  private void lastNode_reset() {
+    lastNode_computed = false;
+    
+    lastNode_value = null;
+    lastNode_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean lastNode_computed = false;
+
+  /** @apilevel internal */
+  protected ASTNode lastNode_value;
+
+  /**
+   * @attribute syn
+   * @aspect CodeGen
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:226
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:226")
+  public ASTNode lastNode() {
+    ASTState state = state();
+    if (lastNode_computed) {
+      return lastNode_value;
+    }
+    if (lastNode_visited) {
+      throw new RuntimeException("Circular definition of attribute ASTNode.lastNode().");
+    }
+    lastNode_visited = true;
+    state().enterLazyAttribute();
+    lastNode_value = prevNode(getNumChild());
+    lastNode_computed = true;
+    state().leaveLazyAttribute();
+    lastNode_visited = false;
+    return lastNode_value;
+  }
+/** @apilevel internal */
+protected java.util.Set prevNode_int_visited;
+  /** @apilevel internal */
+  private void prevNode_int_reset() {
+    prevNode_int_values = null;
+    prevNode_int_visited = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map prevNode_int_values;
+
+  /**
+   * @attribute syn
+   * @aspect CodeGen
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:227
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:227")
+  public ASTNode prevNode(int i) {
+    Object _parameters = i;
+    if (prevNode_int_visited == null) prevNode_int_visited = new java.util.HashSet(4);
+    if (prevNode_int_values == null) prevNode_int_values = new java.util.HashMap(4);
+    ASTState state = state();
+    if (prevNode_int_values.containsKey(_parameters)) {
+      return (ASTNode) prevNode_int_values.get(_parameters);
+    }
+    if (prevNode_int_visited.contains(_parameters)) {
+      throw new RuntimeException("Circular definition of attribute ASTNode.prevNode(int).");
+    }
+    prevNode_int_visited.add(_parameters);
+    state().enterLazyAttribute();
+    ASTNode prevNode_int_value = i>0 ? getChild(i-1).lastNode() : this;
+    prevNode_int_values.put(_parameters, prevNode_int_value);
+    state().leaveLazyAttribute();
+    prevNode_int_visited.remove(_parameters);
+    return prevNode_int_value;
+  }
+/** @apilevel internal */
+protected boolean numLocals_visited = false;
+  /** @apilevel internal */
+  private void numLocals_reset() {
+    numLocals_computed = false;
+    numLocals_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean numLocals_computed = false;
+
+  /** @apilevel internal */
+  protected int numLocals_value;
+
+  /**
+   * @attribute syn
+   * @aspect CodeGen
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:228
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:228")
+  public int numLocals() {
+    ASTState state = state();
+    if (numLocals_computed) {
+      return numLocals_value;
+    }
+    if (numLocals_visited) {
+      throw new RuntimeException("Circular definition of attribute ASTNode.numLocals().");
+    }
+    numLocals_visited = true;
+    state().enterLazyAttribute();
+    numLocals_value = lastNode().localIndex() - localIndex();
+    numLocals_computed = true;
+    state().leaveLazyAttribute();
+    numLocals_visited = false;
+    return numLocals_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect CodeGen
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:224
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:224")
+  public ASTNode prevNode() {
+    ASTState state = state();
+    if (prevNode_computed) {
+      return prevNode_value;
+    }
+    if (prevNode_visited) {
+      throw new RuntimeException("Circular definition of attribute ASTNode.prevNode().");
+    }
+    prevNode_visited = true;
+    state().enterLazyAttribute();
+    prevNode_value = getParent().Define_prevNode(this, null);
+    prevNode_computed = true;
+    state().leaveLazyAttribute();
+    prevNode_visited = false;
+    return prevNode_value;
+  }
+/** @apilevel internal */
+protected boolean prevNode_visited = false;
+  /** @apilevel internal */
+  private void prevNode_reset() {
+    prevNode_computed = false;
+    
+    prevNode_value = null;
+    prevNode_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean prevNode_computed = false;
+
+  /** @apilevel internal */
+  protected ASTNode prevNode_value;
 
   /**
    * @attribute inh
@@ -740,6 +929,22 @@ protected boolean program_visited = false;
   /** @apilevel internal */
   protected Program program_value;
 
+  /**
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:224
+   * @apilevel internal
+   */
+  public ASTNode Define_prevNode(ASTNode _callerNode, ASTNode _childNode) {
+    int i = this.getIndexOfChild(_callerNode);
+    return prevNode(i);
+  }
+  /**
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:224
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute prevNode
+   */
+  protected boolean canDefine_prevNode(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
   /** @apilevel internal */
   public IdDecl Define_lookup(ASTNode _callerNode, ASTNode _childNode, String s) {
     ASTNode self = this;
@@ -761,23 +966,23 @@ protected boolean program_visited = false;
     return false;
   }
   /** @apilevel internal */
-  public String Define_address(ASTNode _callerNode, ASTNode _childNode) {
+  public int Define_parameterIndex(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_address(self, _callerNode)) {
+    while (parent != null && !parent.canDefine_parameterIndex(self, _callerNode)) {
       _callerNode = self;
       self = parent;
       parent = self.getParent();
     }
-    return parent.Define_address(self, _callerNode);
+    return parent.Define_parameterIndex(self, _callerNode);
   }
 
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:210
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:232
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute address
+   * @return {@code true} if this node has an equation for the inherited attribute parameterIndex
    */
-  protected boolean canDefine_address(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_parameterIndex(ASTNode _callerNode, ASTNode _childNode) {
     return false;
   }
   /** @apilevel internal */

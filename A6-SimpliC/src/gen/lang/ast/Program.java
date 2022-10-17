@@ -32,11 +32,6 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
         for (FunctionDecl decl: getFunctionDeclList()) {
             decl.genCode(out);
         }
-        // call sys_exit
-        out.println("_exit:");
-        out.println("movq %rax, %rdi   # exit code = 0");
-        out.println("movq $60, %rax  # sys_exit");
-        out.println("syscall");
         // print
         out.println("print:");
         out.println("pushq %rbp");
@@ -73,7 +68,12 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
         out.println("movq $1, %rax");
         out.println("syscall");
         out.println("popq %rbp");
-        out.println("ret");
+        out.println("ret\n");
+        // call sys_exit
+        out.println("_exit:");
+        out.println("movq %rax, %rdi   # exit code = 0");
+        out.println("movq $60, %rax  # sys_exit");
+        out.println("syscall");
     }
   /**
    * @aspect Interpreter
@@ -674,19 +674,19 @@ protected boolean unknownFunction_visited = false;
     return true;
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:208
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:230
    * @apilevel internal
    */
-  public String Define_address(ASTNode _callerNode, ASTNode _childNode) {
+  public int Define_parameterIndex(ASTNode _callerNode, ASTNode _childNode) {
     int childIndex = this.getIndexOfChild(_callerNode);
-    return "";
+    return -1;
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:208
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:230
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute address
+   * @return {@code true} if this node has an equation for the inherited attribute parameterIndex
    */
-  protected boolean canDefine_address(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_parameterIndex(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
@@ -854,7 +854,7 @@ protected boolean unknownFunction_visited = false;
     return true;
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:206
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:219
    * @apilevel internal
    */
   public String Define_index(ASTNode _callerNode, ASTNode _childNode) {
@@ -864,7 +864,7 @@ protected boolean unknownFunction_visited = false;
         }
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:206
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:219
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute index
    */
