@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class MoreEq extends BinOp implements Cloneable {
   /**
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:279
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:280
    */
   public void genCode(PrintStream out) {
 		super.genCode(out);

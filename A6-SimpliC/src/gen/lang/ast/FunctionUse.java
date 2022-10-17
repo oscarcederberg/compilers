@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class FunctionUse extends Expr implements Cloneable {
   /**
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:199
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:200
    */
   public void genCode(PrintStream out) {
         FunctionDecl function = decl().function();

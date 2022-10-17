@@ -9,5 +9,4 @@ int main() {
     f(a);
     a = 200;
     print(a);
-    return 0;
 }

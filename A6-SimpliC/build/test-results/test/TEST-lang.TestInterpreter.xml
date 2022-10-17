@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="lang.TestInterpreter" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-10-17T16:31:20" hostname="COMFY" time="0.011">
+<testsuite name="lang.TestInterpreter" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-10-17T16:58:11" hostname="COMFY" time="0.008">
   <properties/>
   <testcase name="runTest[functionuse.in]" classname="lang.TestInterpreter" time="0.001"/>
   <testcase name="runTest[print.in]" classname="lang.TestInterpreter" time="0.001"/>
-  <testcase name="runTest[boolean.in]" classname="lang.TestInterpreter" time="0.002"/>
+  <testcase name="runTest[boolean.in]" classname="lang.TestInterpreter" time="0.001"/>
   <testcase name="runTest[fac.in]" classname="lang.TestInterpreter" time="0.001"/>
   <testcase name="runTest[gcd.in]" classname="lang.TestInterpreter" time="0.001"/>
   <testcase name="runTest[variable.in]" classname="lang.TestInterpreter" time="0.001"/>

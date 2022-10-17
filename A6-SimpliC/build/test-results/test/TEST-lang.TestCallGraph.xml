@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="lang.TestCallGraph" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-10-17T16:31:20" hostname="COMFY" time="0.047">
+<testsuite name="lang.TestCallGraph" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-10-17T16:58:10" hostname="COMFY" time="0.044">
   <properties/>
-  <testcase name="runTest[fac.in]" classname="lang.TestCallGraph" time="0.044"/>
+  <testcase name="runTest[fac.in]" classname="lang.TestCallGraph" time="0.041"/>
   <testcase name="runTest[gcd.in]" classname="lang.TestCallGraph" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

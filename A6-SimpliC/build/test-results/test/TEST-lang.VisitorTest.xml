@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="lang.VisitorTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2022-10-17T16:31:20" hostname="COMFY" time="0.003">
+<testsuite name="lang.VisitorTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2022-10-17T16:58:11" hostname="COMFY" time="0.001">
   <properties/>
-  <testcase name="msn_01" classname="lang.VisitorTest" time="0.001"/>
+  <testcase name="msn_01" classname="lang.VisitorTest" time="0.0"/>
   <testcase name="msn_02" classname="lang.VisitorTest" time="0.001"/>
-  <testcase name="msn_03" classname="lang.VisitorTest" time="0.001"/>
+  <testcase name="msn_03" classname="lang.VisitorTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

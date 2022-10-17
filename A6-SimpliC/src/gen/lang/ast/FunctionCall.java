@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class FunctionCall extends Stmt implements Cloneable {
   /**
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:148
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:149
    */
   public void genCode(PrintStream out) {
         FunctionDecl function = decl().function();

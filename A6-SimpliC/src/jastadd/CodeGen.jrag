@@ -120,6 +120,7 @@ aspect CodeGen {
         // implicit return for main
 		if(getIdDecl().getID().equals("main")) {
             out.println("movq $0, %rax");
+            out.println("movq %rbp, %rsp");
             out.println("popq %rbp");
             out.println("ret\n");
         }
@@ -302,6 +303,6 @@ aspect CodeGen {
         if (parameterIndex() != -1) 
             return (16 + 8 * parameterIndex()) + "(%rbp)";
         else
-            return "-" + (localIndex() * 8) + "(%rbp)";
+            return "-" + (localIndex() * 8 - 8) + "(%rbp)";
     }
 }

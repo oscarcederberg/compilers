@@ -18,14 +18,14 @@ import java.util.HashSet;
 public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:193
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:194
    */
   public void genCode(PrintStream out) {
         throw new RuntimeException();
     }
   /**
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:247
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:248
    */
   public void genConditionalJump(PrintStream out, String label) {
         throw new RuntimeException();

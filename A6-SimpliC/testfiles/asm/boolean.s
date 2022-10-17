@@ -40,6 +40,7 @@ call print
 addq $8, %rsp
 main_0_fi:
 movq $0, %rax
+movq %rbp, %rsp
 popq %rbp
 ret
 

@@ -30,6 +30,7 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
         // implicit return for main
 		if(getIdDecl().getID().equals("main")) {
             out.println("movq $0, %rax");
+            out.println("movq %rbp, %rsp");
             out.println("popq %rbp");
             out.println("ret\n");
         }
@@ -389,10 +390,10 @@ protected boolean localIndex_visited = false;
   /**
    * @attribute syn
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:288
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:289
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:287")
+  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:288")
   public int localIndex() {
     ASTState state = state();
     if (localIndex_computed) {
@@ -513,12 +514,12 @@ protected ASTState.Cycle reachable_cycle = null;
           return functions; 
       }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:297
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:298
    * @apilevel internal
    */
   public int Define_parameterIndex(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getVariableDeclListNoTransform()) {
-      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:299
+      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:300
       int index = _callerNode.getIndexOfChild(_childNode);
       return index;
     }
@@ -527,7 +528,7 @@ protected ASTState.Cycle reachable_cycle = null;
     }
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:297
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:298
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute parameterIndex
    */

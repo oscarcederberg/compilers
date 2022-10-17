@@ -9,32 +9,22 @@ call _exit
 main:
 pushq %rbp
 movq %rsp, %rbp
-subq $0, %rsp
-main_0_start:
-movq $2, %rax
-pushq %rax
-movq $2, %rax
-movq %rax, %rbx
-popq %rax
-addq %rbx, %rax
-pushq %rax
-movq $5, %rax
-movq %rax, %rbx
-popq %rax
-cmpq %rbx, %rax
-jne main_0_end
-movq $400, %rax
+subq $24, %rsp
+movq $121, %rax
+movq %rax, -8(%rbp)
+movq $12321, %rax
+movq %rax, -16(%rbp)
+movq $32123, %rax
+movq %rax, -24(%rbp)
+movq -16(%rbp), %rax
 push %rax
 call print
 addq $8, %rsp
-movq $1, %rax
-movq %rbp, %rsp
-popq %rbp
-ret
-
-jmp main_0_start
-main_0_end:
-movq $200, %rax
+movq -24(%rbp), %rax
+push %rax
+call print
+addq $8, %rsp
+movq -8(%rbp), %rax
 push %rax
 call print
 addq $8, %rsp

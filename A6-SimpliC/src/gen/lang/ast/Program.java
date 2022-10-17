@@ -729,7 +729,7 @@ protected boolean unknownFunction_visited = false;
     return true;
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:297
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:298
    * @apilevel internal
    */
   public int Define_parameterIndex(ASTNode _callerNode, ASTNode _childNode) {
@@ -737,7 +737,7 @@ protected boolean unknownFunction_visited = false;
     return -1;
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:297
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:298
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute parameterIndex
    */
@@ -909,7 +909,7 @@ protected boolean unknownFunction_visited = false;
     return true;
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:285
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:286
    * @apilevel internal
    */
   public String Define_index(ASTNode _callerNode, ASTNode _childNode) {
@@ -919,7 +919,7 @@ protected boolean unknownFunction_visited = false;
         }
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:285
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:286
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute index
    */

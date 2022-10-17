@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class Block extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:127
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:128
    */
   public void genCode(PrintStream out) {
         for (Stmt stmt : getStmtList()) {
@@ -446,7 +446,7 @@ protected boolean index_visited = false;
     return true;
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:285
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:286
    * @apilevel internal
    */
   public String Define_index(ASTNode _callerNode, ASTNode _childNode) {
@@ -462,7 +462,7 @@ protected boolean index_visited = false;
     }
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:285
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:286
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute index
    */

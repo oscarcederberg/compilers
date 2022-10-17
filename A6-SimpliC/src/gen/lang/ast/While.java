@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class While extends Stmt implements Cloneable {
   /**
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:159
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:160
    */
   public void genCode(PrintStream out) {
         String _start = enclosedFunction().getIdDecl().getID() + "_" + index() + "start";
