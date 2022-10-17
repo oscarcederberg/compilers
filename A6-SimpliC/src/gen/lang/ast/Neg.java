@@ -17,6 +17,14 @@ import java.util.HashSet;
  */
 public class Neg extends Expr implements Cloneable {
   /**
+   * @aspect CodeGen
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:147
+   */
+  public void genCode(PrintStream out) {
+		getExpr().genCode(out);
+		out.println("neg %rax");
+    }
+  /**
    * @aspect Interpreter
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:162
    */

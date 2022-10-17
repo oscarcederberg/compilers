@@ -17,6 +17,18 @@ import java.util.HashSet;
  */
 public class Add extends BinOp implements Cloneable {
   /**
+   * @aspect CodeGen
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:104
+   */
+  public void genCode(PrintStream out) {
+		getLeft().genCode(out);
+        out.println("pushq %rax");
+		getRight().genCode(out);
+        out.println("movq %rax, %rbx");
+		out.println("popq %rax");
+		out.println("addq %rbx, %rax");
+    }
+  /**
    * @aspect Interpreter
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:147
    */

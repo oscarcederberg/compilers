@@ -101,4 +101,51 @@ aspect CodeGen {
     public void Numeral.genCode(PrintStream out) {
 		out.println("movq $" + getNUMERAL() + ", %rax");
 	}
+    public void Add.genCode(PrintStream out) {
+		getLeft().genCode(out);
+        out.println("pushq %rax");
+		getRight().genCode(out);
+        out.println("movq %rax, %rbx");
+		out.println("popq %rax");
+		out.println("addq %rbx, %rax");
+    }
+    public void Sub.genCode(PrintStream out) {
+		getLeft().genCode(out);
+        out.println("pushq %rax");
+		getRight().genCode(out);
+        out.println("movq %rax, %rbx");
+		out.println("popq %rax");
+		out.println("subq %rbx, %rax");
+    }
+    public void Mul.genCode(PrintStream out) {
+		getLeft().genCode(out);
+        out.println("pushq %rax");
+		getRight().genCode(out);
+        out.println("movq %rax, %rbx");
+		out.println("popq %rax");
+		out.println("imulq %rbx, %rax");
+    }
+    public void Mod.genCode(PrintStream out) {
+		getLeft().genCode(out);
+        out.println("pushq %rax");
+		getRight().genCode(out);
+        out.println("movq %rax, %rbx");
+		out.println("popq %rax");
+		out.println("movq $0, %rdx");
+		out.println("idivq %rbx");
+        out.println("movq %rdx, %rax");
+    }
+    public void Div.genCode(PrintStream out) {
+		getLeft().genCode(out);
+        out.println("pushq %rax");
+		getRight().genCode(out);
+        out.println("movq %rax, %rbx");
+		out.println("popq %rax");
+		out.println("movq $0, %rdx");
+		out.println("idivq %rbx");
+    }
+    public void Neg.genCode(PrintStream out) {
+		getExpr().genCode(out);
+		out.println("neg %rax");
+    }
 }
