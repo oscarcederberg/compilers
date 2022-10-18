@@ -261,7 +261,7 @@ protected boolean localIndex_visited = false;
   /**
    * @attribute syn
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:290
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:288
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
   @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:286")
@@ -275,7 +275,7 @@ protected boolean localIndex_visited = false;
     }
     localIndex_visited = true;
     state().enterLazyAttribute();
-    localIndex_value = prevNode().localIndex() + 1;
+    localIndex_value = parameterIndex() == -1 ? prevNode().localIndex() + 1 : prevNode().localIndex();
     localIndex_computed = true;
     state().leaveLazyAttribute();
     localIndex_visited = false;
@@ -299,10 +299,10 @@ protected boolean address_visited = false;
   /**
    * @attribute syn
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:301
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:299
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:301")
+  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:299")
   public String address() {
     ASTState state = state();
     if (address_computed) {
@@ -444,10 +444,10 @@ protected java.util.Set lookup_String_visited;
   /**
    * @attribute inh
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:297
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:295
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:297")
+  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:295")
   public int parameterIndex() {
     ASTState state = state();
     if (parameterIndex_computed) {

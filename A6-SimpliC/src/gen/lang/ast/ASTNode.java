@@ -607,10 +607,10 @@ protected boolean lastNode_visited = false;
   /**
    * @attribute syn
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:294
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:292
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:294")
+  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:292")
   public ASTNode lastNode() {
     ASTState state = state();
     if (lastNode_computed) {
@@ -640,10 +640,10 @@ protected java.util.Set prevNode_int_visited;
   /**
    * @attribute syn
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:295
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:293
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:295")
+  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:293")
   public ASTNode prevNode(int i) {
     Object _parameters = i;
     if (prevNode_int_visited == null) prevNode_int_visited = new java.util.HashSet(4);
@@ -666,10 +666,10 @@ protected java.util.Set prevNode_int_visited;
   /**
    * @attribute inh
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:292
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:290
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:292")
+  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:290")
   public ASTNode prevNode() {
     ASTState state = state();
     if (prevNode_computed) {
@@ -930,7 +930,7 @@ protected boolean program_visited = false;
   protected Program program_value;
 
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:292
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:290
    * @apilevel internal
    */
   public ASTNode Define_prevNode(ASTNode _callerNode, ASTNode _childNode) {
@@ -938,7 +938,7 @@ protected boolean program_visited = false;
     return prevNode(i);
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:292
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:290
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute prevNode
    */
@@ -966,26 +966,6 @@ protected boolean program_visited = false;
     return false;
   }
   /** @apilevel internal */
-  public int Define_localIndex(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_localIndex(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_localIndex(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:289
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute localIndex
-   */
-  protected boolean canDefine_localIndex(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
   public int Define_parameterIndex(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
@@ -998,7 +978,7 @@ protected boolean program_visited = false;
   }
 
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:299
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:297
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute parameterIndex
    */

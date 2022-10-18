@@ -284,10 +284,8 @@ aspect CodeGen {
     syn int ASTNode.numLocals() = lastNode().localIndex() - localIndex();
     
     syn int ASTNode.localIndex() = prevNode().localIndex();
-    inh int Block.localIndex();
-    eq Program.getChild().localIndex() = prevNode().localIndex();
-    eq FunctionDecl.getBlock().localIndex() = 0;
-    eq IdDecl.localIndex() = prevNode().localIndex() + 1;
+    eq FunctionDecl.localIndex() = 0;
+    eq IdDecl.localIndex() = parameterIndex() == -1 ? prevNode().localIndex() + 1 : prevNode().localIndex();
 
     inh ASTNode ASTNode.prevNode();
     eq ASTNode.getChild(int i).prevNode() = prevNode(i);

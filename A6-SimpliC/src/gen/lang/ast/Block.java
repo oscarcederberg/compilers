@@ -96,25 +96,24 @@ public class Block extends ASTNode<ASTNode> implements Cloneable {
     super.flushAttrCache();
     localLookup_String_int_reset();
     lookup_String_reset();
-    localIndex_reset();
     index_reset();
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:35
+   * @declaredat ASTNode:34
    */
   public void flushCollectionCache() {
     super.flushCollectionCache();
 
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:40
+   * @declaredat ASTNode:39
    */
   public Block clone() throws CloneNotSupportedException {
     Block node = (Block) super.clone();
     return node;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:45
+   * @declaredat ASTNode:44
    */
   public Block copy() {
     try {
@@ -134,7 +133,7 @@ public class Block extends ASTNode<ASTNode> implements Cloneable {
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:64
+   * @declaredat ASTNode:63
    */
   @Deprecated
   public Block fullCopy() {
@@ -145,7 +144,7 @@ public class Block extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:74
+   * @declaredat ASTNode:73
    */
   public Block treeCopyNoTransform() {
     Block tree = (Block) copy();
@@ -166,7 +165,7 @@ public class Block extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:94
+   * @declaredat ASTNode:93
    */
   public Block treeCopy() {
     Block tree = (Block) copy();
@@ -381,42 +380,6 @@ protected java.util.Set lookup_String_visited;
   }
   /** @apilevel internal */
   protected java.util.Map lookup_String_values;
-
-  /**
-   * @attribute inh
-   * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:287
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:287")
-  public int localIndex() {
-    ASTState state = state();
-    if (localIndex_computed) {
-      return localIndex_value;
-    }
-    if (localIndex_visited) {
-      throw new RuntimeException("Circular definition of attribute Block.localIndex().");
-    }
-    localIndex_visited = true;
-    state().enterLazyAttribute();
-    localIndex_value = getParent().Define_localIndex(this, null);
-    localIndex_computed = true;
-    state().leaveLazyAttribute();
-    localIndex_visited = false;
-    return localIndex_value;
-  }
-/** @apilevel internal */
-protected boolean localIndex_visited = false;
-  /** @apilevel internal */
-  private void localIndex_reset() {
-    localIndex_computed = false;
-    localIndex_visited = false;
-  }
-  /** @apilevel internal */
-  protected boolean localIndex_computed = false;
-
-  /** @apilevel internal */
-  protected int localIndex_value;
 
   /**
    * @attribute inh
