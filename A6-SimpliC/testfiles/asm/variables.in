@@ -1,13 +1,14 @@
 int f(int a) {
     int c = 333;
-    int b = 50;
+    int b = 80;
     print(a + b);
     return 0;
 }
 
 int main() {
-    int a = 150;
+    int a = 120;
     int b = 666;
+    int c = 1337;
     f(a);
     a = 200;
     print(a);

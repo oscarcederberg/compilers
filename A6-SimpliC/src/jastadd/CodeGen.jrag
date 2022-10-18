@@ -167,19 +167,16 @@ aspect CodeGen {
         out.println(_end + ":");
     }
     public void If.genCode(PrintStream out) {
-        String _then = enclosedFunction().getIdDecl().getID() + "_" + index() + "then";
         String _else = enclosedFunction().getIdDecl().getID() + "_" + index() + "else";
         String _fi = enclosedFunction().getIdDecl().getID() + "_" + index() + "fi";
         if (hasElse()) {
             getExpr().genConditionalJump(out, _else);
-            out.println(_then + ":");
             getBlock().genCode(out);
             out.println("jmp " + _fi);
             out.println(_else + ":");
             getElse().genCode(out);
         } else {
             getExpr().genConditionalJump(out, _fi);
-            out.println(_then + ":");
             getBlock().genCode(out);
         }
         out.println(_fi + ":");
@@ -284,16 +281,18 @@ aspect CodeGen {
     }
 
 	inh String Stmt.index();
-
-    syn int ASTNode.localIndex() = prevNode().localIndex();
-    eq FunctionDecl.localIndex() = 0;
-    eq IdDecl.localIndex() = prevNode().localIndex() + 1;
+    syn int ASTNode.numLocals() = lastNode().localIndex() - localIndex();
     
+    syn int ASTNode.localIndex() = prevNode().localIndex();
+    inh int Block.localIndex();
+    eq Program.getChild().localIndex() = prevNode().localIndex();
+    eq FunctionDecl.getBlock().localIndex() = 0;
+    eq IdDecl.localIndex() = prevNode().localIndex() + 1;
+
     inh ASTNode ASTNode.prevNode();
     eq ASTNode.getChild(int i).prevNode() = prevNode(i);
     syn ASTNode ASTNode.lastNode() = prevNode(getNumChild());
     syn ASTNode ASTNode.prevNode(int i) = i>0 ? getChild(i-1).lastNode() : this;
-    syn int ASTNode.numLocals() = lastNode().localIndex() - localIndex();
 
     inh int IdDecl.parameterIndex();
     eq Program.getChild().parameterIndex() = -1;
@@ -303,6 +302,6 @@ aspect CodeGen {
         if (parameterIndex() != -1) 
             return (16 + 8 * parameterIndex()) + "(%rbp)";
         else
-            return "-" + (8 * localIndex() - 8) + "(%rbp)";
+            return "-" + (8 * localIndex()) + "(%rbp)";
     }
 }

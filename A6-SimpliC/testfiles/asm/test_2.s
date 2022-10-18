@@ -6,20 +6,39 @@ _start:
 call main
 call _exit
 
-f:
+main:
 pushq %rbp
 movq %rsp, %rbp
-subq $16, %rsp
-movq $333, %rax
+subq $0, %rsp
+movq $10, %rax
 movq %rax, -8(%rbp)
-movq $80, %rax
+movq $0, %rax
 movq %rax, -16(%rbp)
-movq 16(%rbp), %rax
+main_2_start:
+movq -8(%rbp), %rax
 pushq %rax
+movq $0, %rax
+movq %rax, %rbx
+popq %rax
+cmpq %rbx, %rax
+jle main_2_end
 movq -16(%rbp), %rax
+pushq %rax
+movq -8(%rbp), %rax
 movq %rax, %rbx
 popq %rax
 addq %rbx, %rax
+movq %rax, -16(%rbp)
+movq -8(%rbp), %rax
+pushq %rax
+movq $1, %rax
+movq %rax, %rbx
+popq %rax
+subq %rbx, %rax
+movq %rax, -8(%rbp)
+jmp main_2_start
+main_2_end:
+movq -16(%rbp), %rax
 push %rax
 call print
 addq $8, %rsp
@@ -28,26 +47,6 @@ movq %rbp, %rsp
 popq %rbp
 ret
 
-main:
-pushq %rbp
-movq %rsp, %rbp
-subq $24, %rsp
-movq $120, %rax
-movq %rax, -8(%rbp)
-movq $666, %rax
-movq %rax, -16(%rbp)
-movq $1337, %rax
-movq %rax, -24(%rbp)
-movq -8(%rbp), %rax
-push %rax
-call f
-addq $8, %rsp
-movq $200, %rax
-movq %rax, -8(%rbp)
-movq -8(%rbp), %rax
-push %rax
-call print
-addq $8, %rsp
 movq $0, %rax
 movq %rbp, %rsp
 popq %rbp

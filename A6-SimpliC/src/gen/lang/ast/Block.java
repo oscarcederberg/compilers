@@ -96,24 +96,25 @@ public class Block extends ASTNode<ASTNode> implements Cloneable {
     super.flushAttrCache();
     localLookup_String_int_reset();
     lookup_String_reset();
+    localIndex_reset();
     index_reset();
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:34
+   * @declaredat ASTNode:35
    */
   public void flushCollectionCache() {
     super.flushCollectionCache();
 
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:39
+   * @declaredat ASTNode:40
    */
   public Block clone() throws CloneNotSupportedException {
     Block node = (Block) super.clone();
     return node;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:44
+   * @declaredat ASTNode:45
    */
   public Block copy() {
     try {
@@ -133,7 +134,7 @@ public class Block extends ASTNode<ASTNode> implements Cloneable {
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:63
+   * @declaredat ASTNode:64
    */
   @Deprecated
   public Block fullCopy() {
@@ -144,7 +145,7 @@ public class Block extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:73
+   * @declaredat ASTNode:74
    */
   public Block treeCopyNoTransform() {
     Block tree = (Block) copy();
@@ -165,7 +166,7 @@ public class Block extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:93
+   * @declaredat ASTNode:94
    */
   public Block treeCopy() {
     Block tree = (Block) copy();
@@ -383,6 +384,42 @@ protected java.util.Set lookup_String_visited;
 
   /**
    * @attribute inh
+   * @aspect CodeGen
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:287
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:287")
+  public int localIndex() {
+    ASTState state = state();
+    if (localIndex_computed) {
+      return localIndex_value;
+    }
+    if (localIndex_visited) {
+      throw new RuntimeException("Circular definition of attribute Block.localIndex().");
+    }
+    localIndex_visited = true;
+    state().enterLazyAttribute();
+    localIndex_value = getParent().Define_localIndex(this, null);
+    localIndex_computed = true;
+    state().leaveLazyAttribute();
+    localIndex_visited = false;
+    return localIndex_value;
+  }
+/** @apilevel internal */
+protected boolean localIndex_visited = false;
+  /** @apilevel internal */
+  private void localIndex_reset() {
+    localIndex_computed = false;
+    localIndex_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean localIndex_computed = false;
+
+  /** @apilevel internal */
+  protected int localIndex_value;
+
+  /**
+   * @attribute inh
    * @aspect Interpreter
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/Interpreter.jrag:189
    */
@@ -446,7 +483,7 @@ protected boolean index_visited = false;
     return true;
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:286
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:283
    * @apilevel internal
    */
   public String Define_index(ASTNode _callerNode, ASTNode _childNode) {
@@ -462,7 +499,7 @@ protected boolean index_visited = false;
     }
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:286
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:283
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute index
    */

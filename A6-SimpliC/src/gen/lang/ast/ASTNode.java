@@ -386,10 +386,10 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
    * @declaredat ASTNode:299
    */
   public void flushAttrCache() {
+    numLocals_reset();
     localIndex_reset();
     lastNode_reset();
     prevNode_int_reset();
-    numLocals_reset();
     prevNode_reset();
     unknownType_reset();
     intType_reset();
@@ -518,6 +518,42 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
 /** @apilevel internal */
+protected boolean numLocals_visited = false;
+  /** @apilevel internal */
+  private void numLocals_reset() {
+    numLocals_computed = false;
+    numLocals_visited = false;
+  }
+  /** @apilevel internal */
+  protected boolean numLocals_computed = false;
+
+  /** @apilevel internal */
+  protected int numLocals_value;
+
+  /**
+   * @attribute syn
+   * @aspect CodeGen
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:284
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:284")
+  public int numLocals() {
+    ASTState state = state();
+    if (numLocals_computed) {
+      return numLocals_value;
+    }
+    if (numLocals_visited) {
+      throw new RuntimeException("Circular definition of attribute ASTNode.numLocals().");
+    }
+    numLocals_visited = true;
+    state().enterLazyAttribute();
+    numLocals_value = lastNode().localIndex() - localIndex();
+    numLocals_computed = true;
+    state().leaveLazyAttribute();
+    numLocals_visited = false;
+    return numLocals_value;
+  }
+/** @apilevel internal */
 protected boolean localIndex_visited = false;
   /** @apilevel internal */
   private void localIndex_reset() {
@@ -533,10 +569,10 @@ protected boolean localIndex_visited = false;
   /**
    * @attribute syn
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:288
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:286
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:288")
+  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:286")
   public int localIndex() {
     ASTState state = state();
     if (localIndex_computed) {
@@ -626,42 +662,6 @@ protected java.util.Set prevNode_int_visited;
     state().leaveLazyAttribute();
     prevNode_int_visited.remove(_parameters);
     return prevNode_int_value;
-  }
-/** @apilevel internal */
-protected boolean numLocals_visited = false;
-  /** @apilevel internal */
-  private void numLocals_reset() {
-    numLocals_computed = false;
-    numLocals_visited = false;
-  }
-  /** @apilevel internal */
-  protected boolean numLocals_computed = false;
-
-  /** @apilevel internal */
-  protected int numLocals_value;
-
-  /**
-   * @attribute syn
-   * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:296
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:296")
-  public int numLocals() {
-    ASTState state = state();
-    if (numLocals_computed) {
-      return numLocals_value;
-    }
-    if (numLocals_visited) {
-      throw new RuntimeException("Circular definition of attribute ASTNode.numLocals().");
-    }
-    numLocals_visited = true;
-    state().enterLazyAttribute();
-    numLocals_value = lastNode().localIndex() - localIndex();
-    numLocals_computed = true;
-    state().leaveLazyAttribute();
-    numLocals_visited = false;
-    return numLocals_value;
   }
   /**
    * @attribute inh
@@ -966,6 +966,26 @@ protected boolean program_visited = false;
     return false;
   }
   /** @apilevel internal */
+  public int Define_localIndex(ASTNode _callerNode, ASTNode _childNode) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_localIndex(self, _callerNode)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_localIndex(self, _callerNode);
+  }
+
+  /**
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:289
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute localIndex
+   */
+  protected boolean canDefine_localIndex(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
   public int Define_parameterIndex(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
@@ -978,7 +998,7 @@ protected boolean program_visited = false;
   }
 
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:300
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:299
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute parameterIndex
    */

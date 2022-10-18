@@ -117,12 +117,11 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-    localIndex_reset();
     isUnknown_reset();
     reachable_reset();
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:36
+   * @declaredat ASTNode:35
    */
   public void flushCollectionCache() {
     super.flushCollectionCache();
@@ -132,14 +131,14 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
     FunctionDecl_functionCalls_value = null;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:44
+   * @declaredat ASTNode:43
    */
   public FunctionDecl clone() throws CloneNotSupportedException {
     FunctionDecl node = (FunctionDecl) super.clone();
     return node;
   }
   /** @apilevel internal 
-   * @declaredat ASTNode:49
+   * @declaredat ASTNode:48
    */
   public FunctionDecl copy() {
     try {
@@ -159,7 +158,7 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
    * @deprecated Please use treeCopy or treeCopyNoTransform instead
-   * @declaredat ASTNode:68
+   * @declaredat ASTNode:67
    */
   @Deprecated
   public FunctionDecl fullCopy() {
@@ -170,7 +169,7 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:78
+   * @declaredat ASTNode:77
    */
   public FunctionDecl treeCopyNoTransform() {
     FunctionDecl tree = (FunctionDecl) copy();
@@ -191,7 +190,7 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
    * The copy is dangling, i.e. has no parent.
    * @return dangling copy of the subtree at this node
    * @apilevel low-level
-   * @declaredat ASTNode:98
+   * @declaredat ASTNode:97
    */
   public FunctionDecl treeCopy() {
     FunctionDecl tree = (FunctionDecl) copy();
@@ -375,42 +374,6 @@ public class FunctionDecl extends ASTNode<ASTNode> implements Cloneable {
     return (Block) getChildNoTransform(2);
   }
 /** @apilevel internal */
-protected boolean localIndex_visited = false;
-  /** @apilevel internal */
-  private void localIndex_reset() {
-    localIndex_computed = false;
-    localIndex_visited = false;
-  }
-  /** @apilevel internal */
-  protected boolean localIndex_computed = false;
-
-  /** @apilevel internal */
-  protected int localIndex_value;
-
-  /**
-   * @attribute syn
-   * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:289
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGen", declaredAt="/home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:288")
-  public int localIndex() {
-    ASTState state = state();
-    if (localIndex_computed) {
-      return localIndex_value;
-    }
-    if (localIndex_visited) {
-      throw new RuntimeException("Circular definition of attribute ASTNode.localIndex().");
-    }
-    localIndex_visited = true;
-    state().enterLazyAttribute();
-    localIndex_value = 0;
-    localIndex_computed = true;
-    state().leaveLazyAttribute();
-    localIndex_visited = false;
-    return localIndex_value;
-  }
-/** @apilevel internal */
 protected boolean isUnknown_visited = false;
   /** @apilevel internal */
   private void isUnknown_reset() {
@@ -514,12 +477,33 @@ protected ASTState.Cycle reachable_cycle = null;
           return functions; 
       }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:298
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:287
+   * @apilevel internal
+   */
+  public int Define_localIndex(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getBlockNoTransform()) {
+      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:289
+      return 0;
+    }
+    else {
+      return getParent().Define_localIndex(this, _callerNode);
+    }
+  }
+  /**
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:287
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute localIndex
+   */
+  protected boolean canDefine_localIndex(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:297
    * @apilevel internal
    */
   public int Define_parameterIndex(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getVariableDeclListNoTransform()) {
-      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:300
+      // @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:299
       int index = _callerNode.getIndexOfChild(_childNode);
       return index;
     }
@@ -528,7 +512,7 @@ protected ASTState.Cycle reachable_cycle = null;
     }
   }
   /**
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:298
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:297
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute parameterIndex
    */

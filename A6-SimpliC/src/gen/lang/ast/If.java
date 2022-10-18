@@ -21,19 +21,16 @@ public class If extends Stmt implements Cloneable {
    * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:169
    */
   public void genCode(PrintStream out) {
-        String _then = enclosedFunction().getIdDecl().getID() + "_" + index() + "then";
         String _else = enclosedFunction().getIdDecl().getID() + "_" + index() + "else";
         String _fi = enclosedFunction().getIdDecl().getID() + "_" + index() + "fi";
         if (hasElse()) {
             getExpr().genConditionalJump(out, _else);
-            out.println(_then + ":");
             getBlock().genCode(out);
             out.println("jmp " + _fi);
             out.println(_else + ":");
             getElse().genCode(out);
         } else {
             getExpr().genConditionalJump(out, _fi);
-            out.println(_then + ":");
             getBlock().genCode(out);
         }
         out.println(_fi + ":");

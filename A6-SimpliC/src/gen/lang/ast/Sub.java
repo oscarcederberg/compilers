@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class Sub extends BinOp implements Cloneable {
   /**
    * @aspect CodeGen
-   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:225
+   * @declaredat /home/knos/repos/education/p021-oscar-kasper/A6-SimpliC/src/jastadd/CodeGen.jrag:222
    */
   public void genCode(PrintStream out) {
 		super.genCode(out);

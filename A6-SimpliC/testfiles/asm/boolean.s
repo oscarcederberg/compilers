@@ -22,7 +22,6 @@ movq %rax, %rbx
 popq %rax
 cmpq %rbx, %rax
 jne main_0_else
-main_0_then:
 movq $400, %rax
 push %rax
 call print
