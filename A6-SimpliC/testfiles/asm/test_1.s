@@ -11,24 +11,24 @@ pushq %rbp
 movq %rsp, %rbp
 subq $24, %rsp
 movq $121, %rax
-movq %rax, -16(%rbp)
+movq %rax, -8(%rbp)
 movq $1, %rax
 push %rax
 call print
 addq $8, %rsp
 movq $12321, %rax
-movq %rax, -24(%rbp)
+movq %rax, -16(%rbp)
 movq $32123, %rax
-movq %rax, -32(%rbp)
+movq %rax, -24(%rbp)
+movq -16(%rbp), %rax
+push %rax
+call print
+addq $8, %rsp
 movq -24(%rbp), %rax
 push %rax
 call print
 addq $8, %rsp
-movq -32(%rbp), %rax
-push %rax
-call print
-addq $8, %rsp
-movq -16(%rbp), %rax
+movq -8(%rbp), %rax
 push %rax
 call print
 addq $8, %rsp

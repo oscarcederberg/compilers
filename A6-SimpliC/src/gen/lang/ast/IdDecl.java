@@ -275,7 +275,7 @@ protected boolean localIndex_visited = false;
     }
     localIndex_visited = true;
     state().enterLazyAttribute();
-    localIndex_value = parameterIndex() == -1 ? prevNode().localIndex() + 1 : prevNode().localIndex();
+    localIndex_value = parameterIndex() == -1 && !isFunction() ? prevNode().localIndex() + 1 : 0;
     localIndex_computed = true;
     state().leaveLazyAttribute();
     localIndex_visited = false;

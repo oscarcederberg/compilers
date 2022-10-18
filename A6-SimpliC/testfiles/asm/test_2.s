@@ -11,34 +11,34 @@ pushq %rbp
 movq %rsp, %rbp
 subq $16, %rsp
 movq $10, %rax
-movq %rax, -16(%rbp)
+movq %rax, -8(%rbp)
 movq $0, %rax
-movq %rax, -24(%rbp)
+movq %rax, -16(%rbp)
 main_2_start:
-movq -16(%rbp), %rax
+movq -8(%rbp), %rax
 pushq %rax
 movq $0, %rax
 movq %rax, %rbx
 popq %rax
 cmpq %rbx, %rax
 jle main_2_end
-movq -24(%rbp), %rax
-pushq %rax
 movq -16(%rbp), %rax
+pushq %rax
+movq -8(%rbp), %rax
 movq %rax, %rbx
 popq %rax
 addq %rbx, %rax
-movq %rax, -24(%rbp)
-movq -16(%rbp), %rax
+movq %rax, -16(%rbp)
+movq -8(%rbp), %rax
 pushq %rax
 movq $1, %rax
 movq %rax, %rbx
 popq %rax
 subq %rbx, %rax
-movq %rax, -16(%rbp)
+movq %rax, -8(%rbp)
 jmp main_2_start
 main_2_end:
-movq -24(%rbp), %rax
+movq -16(%rbp), %rax
 push %rax
 call print
 addq $8, %rsp
